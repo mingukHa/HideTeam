@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{8EFF301C-DF92-6FAD-B6A6-171182E6008B}</ProjectGuid>
+    <ProjectGuid>{41C0B8A8-7BAB-1019-E53B-F0FFDF0BA13F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -61,20 +61,20 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.34f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\QA_Office\Scripts\Elevator.cs" />
-    <Compile Include="Assets\QA_Office\Scripts\Door.cs" />
+    <Compile Include="Assets\YJ\QA_Office\Scripts\Door.cs" />
+    <Compile Include="Assets\YJ\QA_Office\Scripts\Elevator.cs" />
+    <Compile Include="Assets\YJ\QA_Office\Scripts\ElevatorManager.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
-    <Compile Include="Assets\QA_Office\Scripts\Clock.cs" />
-    <Compile Include="Assets\QA_Office\Scripts\ElevatorManager.cs" />
+    <Compile Include="Assets\YJ\QA_Office\Scripts\Clock.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\QA_Office\ReadMe.txt" />
-    <None Include="Assets\Military_Pistol_01\Docs\READ_ME_RH_WP_Unmask_Transform_01.txt" />
-    <None Include="Assets\Military_Pistol_01\Docs\Military_Pistol_Unity_Info.txt" />
-    <None Include="Assets\Rifle_01_v25\Docs\READ_ME_RH_WP_Unmask_Transform_01.txt" />
-    <None Include="Assets\BeautifulSky\ReadMe.txt" />
-    <None Include="Assets\Rifle_01_v25\Docs\Military_Rifle_Unity_Info.txt" />
-    <None Include="Assets\QA_Office\Shaders\QAtmo_3dText.shader" />
+    <None Include="Assets\YJ\QA_Office\ReadMe.txt" />
+    <None Include="Assets\YJ\Military_Pistol_01\Docs\READ_ME_RH_WP_Unmask_Transform_01.txt" />
+    <None Include="Assets\YJ\Military_Pistol_01\Docs\Military_Pistol_Unity_Info.txt" />
+    <None Include="Assets\YJ\Rifle_01_v25\Docs\READ_ME_RH_WP_Unmask_Transform_01.txt" />
+    <None Include="Assets\YJ\BeautifulSky\ReadMe.txt" />
+    <None Include="Assets\YJ\Rifle_01_v25\Docs\Military_Rifle_Unity_Info.txt" />
+    <None Include="Assets\YJ\QA_Office\Shaders\QAtmo_3dText.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -1243,10 +1243,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{9C16297A-D411-6A9C-0345-472A8E458687}</Project>
-      <Name>Assembly-CSharp-firstpass</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
