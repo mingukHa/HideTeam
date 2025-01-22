@@ -33,6 +33,9 @@
 *build
 *log
 *usersetting
+*QA_Office
+Assets/YJ/QA_Office 1/*
+
 
 # 임시 파일 및 크래시 리포트 제외
 *.pidb.meta
