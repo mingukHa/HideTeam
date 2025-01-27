@@ -2,22 +2,28 @@ using UnityEngine;
 
 public class NPCFSM : MonoBehaviour
 {
-    protected enum State { Idle, Look, Walk, Run ,Talk}
+    protected enum State { Idle, Look, Walk, Run, Talk, Dead }
     protected State currentState = State.Idle;
 
     protected Animator animator;
+    private Rigidbody[] rigidbodies;
+    private bool isRagdollActivated = false; // 레그돌 활성화 여부 확인용
 
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
+        rigidbodies = GetComponentsInChildren<Rigidbody>();
+
+        // 레그돌 초기 비활성화
+        SetRagdollState(false);
         ChangeState(State.Idle);
     }
 
     protected virtual void Update()
     {
+        // 상태 업데이트
         switch (currentState)
         {
-            
             case State.Idle:
                 IdleBehavior();
                 break;
@@ -33,17 +39,52 @@ public class NPCFSM : MonoBehaviour
             case State.Talk:
                 TalkBehavior();
                 break;
+            case State.Dead:
+                DeadBehavior();
+                break;
+        }
+
+        // F 키로 Dead 상태 전환
+        if (Input.GetKeyDown(KeyCode.F) && currentState != State.Dead)
+        {
+            ChangeState(State.Dead); // Dead 상태로 전환
+        }
+
+        // Dead 모션이 끝났는지 확인
+        if (currentState == State.Dead && !isRagdollActivated)
+        {
+            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+            if (stateInfo.IsName("Dead") && stateInfo.normalizedTime >= 1.0f) // Dead 모션이 끝났을 때
+            {
+                ActivateRagdoll(); // 레그돌 활성화
+                isRagdollActivated = true; // 레그돌이 활성화되었음을 표시
+            }
         }
     }
 
     protected virtual void ChangeState(State newState)
     {
         currentState = newState;
+
+        if (newState == State.Dead)
+        {
+            isRagdollActivated = false; // Dead 상태 초기화
+            animator.ResetTrigger("Idle");
+            animator.ResetTrigger("Look");
+            animator.ResetTrigger("Walk");
+            animator.ResetTrigger("Run");
+            animator.ResetTrigger("Talk");
+            animator.ResetTrigger("Dead");
+            animator.SetTrigger("Dead");
+            return;
+        }
+
         animator.ResetTrigger("Idle");
         animator.ResetTrigger("Look");
         animator.ResetTrigger("Walk");
         animator.ResetTrigger("Run");
         animator.ResetTrigger("Talk");
+        animator.ResetTrigger("Dead");
 
         switch (newState)
         {
@@ -65,10 +106,27 @@ public class NPCFSM : MonoBehaviour
         }
     }
 
+    // 레그돌 활성화
+    private void ActivateRagdoll()
+    {
+        animator.enabled = false; // 애니메이터 비활성화
+        SetRagdollState(true);    // 레그돌 활성화
+    }
+
+    // 레그돌 상태 설정
+    private void SetRagdollState(bool state)
+    {
+        foreach (var rb in rigidbodies)
+        {
+            rb.isKinematic = !state; // 물리 활성화
+        }
+    }
+
     // 각 상태의 기본 행동
     protected virtual void IdleBehavior() { }
     protected virtual void LookBehavior() { }
     protected virtual void WalkBehavior() { }
     protected virtual void RunBehavior() { }
     protected virtual void TalkBehavior() { }
+    protected virtual void DeadBehavior() { }
 }
