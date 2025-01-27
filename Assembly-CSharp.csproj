@@ -61,30 +61,31 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.34f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\HMG\Script\ControllerChangeScript\lookAroundState.cs" />
+    <Compile Include="Assets\HMG\Script\ControllerChangeScript\RunState.cs" />
     <Compile Include="Assets\KHS\Scripts\NPCData.cs" />
     <Compile Include="Assets\KHS\Scripts\NPCStats.cs" />
     <Compile Include="Assets\KHS\Scripts\EnumList.cs" />
-    <Compile Include="Assets\HMG\Script\FSM_Modul\lookAroundState.cs" />
-    <Compile Include="Assets\HMG\Script\FSM_Modul\IState.cs" />
+    <Compile Include="Assets\HMG\Script\OneController\FSW_NomalNPC.cs" />
     <Compile Include="Assets\KHS\Scripts\TestPlayerControl.cs" />
     <Compile Include="Assets\HMG\Script\ReturnScript\SceneRecorderManager.cs" />
     <Compile Include="Assets\YJ\QA_Office\Scripts\Door.cs" />
+    <Compile Include="Assets\HMG\Script\ControllerChangeScript\NPC.cs" />
+    <Compile Include="Assets\HMG\Script\ControllerChangeScript\WalkingState.cs" />
     <Compile Include="Assets\YJ\QA_Office\Scripts\Elevator.cs" />
-    <Compile Include="Assets\HMG\Script\FSM_Modul\NPC.cs" />
     <Compile Include="Assets\KHS\Scripts\MarkerManager.cs" />
-    <Compile Include="Assets\HMG\Script\FSM_Modul\RunState.cs" />
     <Compile Include="Assets\YJ\QA_Office\Scripts\ElevatorManager.cs" />
-    <Compile Include="Assets\HMG\Script\FSM_Modul\WalkingState.cs" />
     <Compile Include="Assets\KHS\Scripts\NPC.cs" />
     <Compile Include="Assets\KHS\Scripts\DetMarkerFunc.cs" />
     <Compile Include="Assets\KHS\Scripts\GuardVision.cs" />
     <Compile Include="Assets\HMG\Script\ReturnScript\SceneData.cs" />
     <Compile Include="Assets\KHS\Scripts\AIModule.cs" />
     <Compile Include="Assets\YJ\QA_Office\Scripts\Clock.cs" />
+    <Compile Include="Assets\HMG\Script\ControllerChangeScript\FSM.cs" />
     <Compile Include="Assets\KHS\Scripts\ShoulderViewCam.cs" />
     <Compile Include="Assets\KHS\Scripts\EventTrigger.cs" />
-    <Compile Include="Assets\HMG\Script\FSM_Modul\FSM.cs" />
     <Compile Include="Assets\KHS\Scripts\GuardBehavior.cs" />
+    <Compile Include="Assets\HMG\Script\ControllerChangeScript\IState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\YJ\QA_Office\ReadMe.txt" />
