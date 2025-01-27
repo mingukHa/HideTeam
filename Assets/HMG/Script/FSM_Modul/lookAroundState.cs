@@ -9,13 +9,13 @@ public class LookAroundState : IState
         this.animatorController = animator;
     }
 
-    public void EnterState(NPC npc)
+    public void EnterState(NomalNPC npc)
     {
         Debug.Log($"{npc.name} 상태 전환: 두리번거리기");
         npc.AssignAnimator(animatorController); // 두리번거리기 애니메이터 설정
     }
 
-    public void UpdateState(NPC npc)
+    public void UpdateState(NomalNPC npc)
     {
         if (npc.ShouldStartWalking)
         {
@@ -23,7 +23,7 @@ public class LookAroundState : IState
         }
     }
 
-    public void ExitState(NPC npc)
+    public void ExitState(NomalNPC npc)
     {
         Debug.Log($"{npc.name} 상태 종료: 두리번거리기");
     }

@@ -9,13 +9,13 @@ public class RunState : IState
         this.animatorController = animator;
     }
 
-    public void EnterState(NPC npc)
+    public void EnterState(NomalNPC npc)
     {
         Debug.Log($"{npc.name} 상태 전환: 달리기");
         npc.AssignAnimator(animatorController); // 달리기 애니메이터 설정
     }
 
-    public void UpdateState(NPC npc)
+    public void UpdateState(NomalNPC npc)
     {
         npc.Move(npc.runSpeed); // 달리기 속도로 이동
         if (!npc.IsInHurry)
@@ -24,7 +24,7 @@ public class RunState : IState
         }
     }
 
-    public void ExitState(NPC npc)
+    public void ExitState(NomalNPC npc)
     {
         Debug.Log($"{npc.name} 상태 종료: 달리기");
     }

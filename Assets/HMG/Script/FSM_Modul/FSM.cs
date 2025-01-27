@@ -5,7 +5,7 @@ public class FSM //상태 변경 스크립트
 {
     private IState currentState;
 
-    public void ChangeState(IState newState, NPC npc)
+    public void ChangeState(IState newState, NomalNPC npc)
     {
         if (newState == null)
         {
@@ -18,7 +18,7 @@ public class FSM //상태 변경 스크립트
         currentState.EnterState(npc); // 새 상태 시작
     }
 
-    public void Update(NPC npc)
+    public void Update(NomalNPC npc)
     {
         currentState?.UpdateState(npc);
     }

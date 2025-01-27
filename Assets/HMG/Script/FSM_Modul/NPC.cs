@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NPC : MonoBehaviour
+public class NomalNPC : MonoBehaviour
 {
     public string npcName; //NPC의 이름 지정
     public float walkSpeed = 2f;
@@ -74,8 +74,8 @@ public class NPC : MonoBehaviour
         }
     }
     //A스타 사용 할거임
-    //public void Move(float speed)
-    //{
-    //    transform.Translate(Vector3.forward * speed * Time.deltaTime);
-    //}
+    public void Move(float speed)
+    {
+        transform.Translate(Vector3.forward * speed * Time.deltaTime);
+    }
 }
