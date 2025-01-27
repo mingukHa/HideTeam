@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class GuardVision : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class GuardVision : MonoBehaviour
 
     public bool istargetSituationDetected = false; // 플레이어가 발각되었는지 여부
     public Transform targetSituation; // 반응해야하는 타겟 Transform
+    public NormalGuardController nGController;
 
     private List<Material> bodyMat;
     private float detectionTime = 2f; // 발각까지 걸리는 시간
@@ -23,7 +25,7 @@ public class GuardVision : MonoBehaviour
     private void Awake()
     {
         bodyMat = GetComponentInChildren<MeshRenderer>().materials.ToList();
-        
+        nGController = GetComponent<NormalGuardController>();
     }
 
     private void Update()
@@ -74,6 +76,7 @@ public class GuardVision : MonoBehaviour
             {
                 Debug.Log("플레이어 발각됨!");
                 // 추가 처리: 알람 발동, 경비 상태 변화 등
+                nGController.ChangeState(AIConState.SuspectDetected, targetSituation);
                 foreach (Material mat in bodyMat)
                 {
                     mat.EnableKeyword("_EMISSION");
@@ -89,6 +92,7 @@ public class GuardVision : MonoBehaviour
         {
             if (currentDetectionTime <= 0f)
             {
+                nGController.ChangeState(AIConState.Idle, targetSituation);
                 foreach (Material mat in bodyMat)
                 {
                     mat.DisableKeyword("_EMISSION");

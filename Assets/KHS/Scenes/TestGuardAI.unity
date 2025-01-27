@@ -696,6 +696,7 @@ GameObject:
   - component: {fileID: 994280698}
   - component: {fileID: 994280699}
   - component: {fileID: 994280700}
+  - component: {fileID: 994280701}
   m_Layer: 0
   m_Name: Guard
   m_TagString: Untagged
@@ -753,7 +754,24 @@ MonoBehaviour:
     m_Bits: 4
   istargetSituationDetected: 0
   targetSituation: {fileID: 72189468}
+  nGController: {fileID: 0}
   currentDetectionTime: 0
+--- !u!114 &994280701
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994280697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8814f16fc87f0bc46824f3240671fc2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentState: 0
+  patrolRoute: {fileID: 11400000, guid: 4024b495998ef6c458e3f60d890fe203, type: 2}
+  patrolSpeed: 2
+  chaseSpeed: 4
 --- !u!1 &1046064726
 GameObject:
   m_ObjectHideFlags: 0
