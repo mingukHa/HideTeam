@@ -64,10 +64,12 @@
     <Compile Include="Assets\KHS\Scripts\NPCData.cs" />
     <Compile Include="Assets\KHS\Scripts\NPCStats.cs" />
     <Compile Include="Assets\KHS\Scripts\EnumList.cs" />
+    <Compile Include="Assets\HMG\Asset\Fighter Pack Bundle\Heavy Fighter Mecanim Animation Pack\Code\CameraControl.cs" />
     <Compile Include="Assets\HMG\Script\OneController\BaseFSM.cs" />
     <Compile Include="Assets\KHS\Scripts\TestPlayerControl.cs" />
     <Compile Include="Assets\HMG\Script\ReturnScript\SceneRecorderManager.cs" />
     <Compile Include="Assets\YJ\QA_Office\Scripts\Door.cs" />
+    <Compile Include="Assets\HMG\Asset\Fighter Pack Bundle\Heavy Fighter Mecanim Animation Pack\Code\FighterAnimationDemo.cs" />
     <Compile Include="Assets\YJ\QA_Office\Scripts\Elevator.cs" />
     <Compile Include="Assets\KHS\Scripts\MarkerManager.cs" />
     <Compile Include="Assets\YJ\QA_Office\Scripts\ElevatorManager.cs" />
@@ -94,6 +96,7 @@
     <None Include="Assets\YJ\Military_Pistol_01\Docs\READ_ME_RH_WP_Unmask_Transform_01.txt" />
     <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-auth-unity\maven-metadata.xml" />
     <None Include="Assets\Firebase\Plugins\iOS\Firebase.Auth.dll" />
+    <None Include="Assets\HMG\Asset\Fighter Pack Bundle\_www.unityassetcollection.com.txt" />
     <None Include="Assets\YJ\Military_Pistol_01\Docs\Military_Pistol_Unity_Info.txt" />
     <None Include="Assets\Firebase\Plugins\iOS\Firebase.Database.dll" />
     <None Include="Assets\YJ\Rifle_01_v25\Docs\READ_ME_RH_WP_Unmask_Transform_01.txt" />
