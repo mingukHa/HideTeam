@@ -23,6 +23,7 @@ public class GuardVision : MonoBehaviour
     private void Awake()
     {
         bodyMat = GetComponentInChildren<MeshRenderer>().materials.ToList();
+        
     }
 
     private void Update()
