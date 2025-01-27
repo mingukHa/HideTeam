@@ -61,12 +61,25 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.34f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\HMG\ReturnScript\SceneData.cs" />
+    <Compile Include="Assets\KHS\Scripts\NPCStats.cs" />
+    <Compile Include="Assets\HMG\Script\FSM_Modul\lookAroundState.cs" />
+    <Compile Include="Assets\HMG\Script\FSM_Modul\IState.cs" />
+    <Compile Include="Assets\KHS\Scripts\TestPlayerControl.cs" />
+    <Compile Include="Assets\HMG\Script\ReturnScript\SceneRecorderManager.cs" />
     <Compile Include="Assets\YJ\QA_Office\Scripts\Door.cs" />
     <Compile Include="Assets\YJ\QA_Office\Scripts\Elevator.cs" />
+    <Compile Include="Assets\HMG\Script\FSM_Modul\NPC.cs" />
+    <Compile Include="Assets\KHS\Scripts\MarkerManager.cs" />
+    <Compile Include="Assets\HMG\Script\FSM_Modul\RunState.cs" />
     <Compile Include="Assets\YJ\QA_Office\Scripts\ElevatorManager.cs" />
+    <Compile Include="Assets\HMG\Script\FSM_Modul\WalkingState.cs" />
+    <Compile Include="Assets\KHS\Scripts\DetMarkerFunc.cs" />
+    <Compile Include="Assets\KHS\Scripts\GuardVision.cs" />
+    <Compile Include="Assets\HMG\Script\ReturnScript\SceneData.cs" />
     <Compile Include="Assets\YJ\QA_Office\Scripts\Clock.cs" />
-    <Compile Include="Assets\HMG\ReturnScript\SceneRecorderManager.cs" />
+    <Compile Include="Assets\KHS\Scripts\ShoulderViewCam.cs" />
+    <Compile Include="Assets\HMG\Script\FSM_Modul\FSM.cs" />
+    <Compile Include="Assets\KHS\Scripts\GuardBehavior.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\YJ\QA_Office\ReadMe.txt" />
@@ -86,6 +99,7 @@
     <None Include="Assets\YJ\Rifle_01_v25\Docs\READ_ME_RH_WP_Unmask_Transform_01.txt" />
     <None Include="Assets\Firebase\Plugins\Firebase.Platform.dll" />
     <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-database-unity\maven-metadata.xml" />
+    <None Include="Assets\HMG\Asset\BodyGuards\ReadMe.txt.txt" />
     <None Include="Assets\Firebase\Plugins\Google.MiniJson.dll" />
     <None Include="Assets\YJ\BeautifulSky\ReadMe.txt" />
     <None Include="Assets\Firebase\Plugins\iOS\Firebase.App.dll" />
@@ -565,6 +579,22 @@
       <HintPath>Library\PackageCache\com.unity.ext.nunit\net40\unity-custom\nunit.framework.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="Firebase.App">
+      <HintPath>Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Firebase.TaskExtension">
+      <HintPath>Assets\Firebase\Plugins\Firebase.TaskExtension.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Firebase.Auth">
+      <HintPath>Assets\Firebase\Plugins\Firebase.Auth.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Firebase.Database">
+      <HintPath>Assets\Firebase\Plugins\Firebase.Database.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
@@ -573,28 +603,12 @@
       <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil\Mono.Cecil.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Firebase.App">
-      <HintPath>Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Firebase.Database">
-      <HintPath>Assets\Firebase\Plugins\Firebase.Database.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Firebase.TaskExtension">
-      <HintPath>Assets\Firebase\Plugins\Firebase.TaskExtension.dll</HintPath>
+    <Reference Include="Firebase.Platform">
+      <HintPath>Assets\Firebase\Plugins\Firebase.Platform.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Google.MiniJson">
       <HintPath>Assets\Firebase\Plugins\Google.MiniJson.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Firebase.Auth">
-      <HintPath>Assets\Firebase\Plugins\Firebase.Auth.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Firebase.Platform">
-      <HintPath>Assets\Firebase\Plugins\Firebase.Platform.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">
