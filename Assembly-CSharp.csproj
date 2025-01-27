@@ -61,20 +61,21 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\6000.0.34f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\YJ\QA_Office\Scripts\Door.cs" />
-    <Compile Include="Assets\YJ\QA_Office\Scripts\Elevator.cs" />
-    <Compile Include="Assets\YJ\QA_Office\Scripts\ElevatorManager.cs" />
+    <Compile Include="Assets\YJ\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\YJ\Assets\QA_Office\Scripts\Door.cs" />
+    <Compile Include="Assets\YJ\Assets\QA_Office\Scripts\Clock.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
-    <Compile Include="Assets\YJ\QA_Office\Scripts\Clock.cs" />
+    <Compile Include="Assets\YJ\Assets\QA_Office\Scripts\ElevatorManager.cs" />
+    <Compile Include="Assets\YJ\Assets\QA_Office\Scripts\Elevator.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\YJ\QA_Office\ReadMe.txt" />
-    <None Include="Assets\YJ\Military_Pistol_01\Docs\READ_ME_RH_WP_Unmask_Transform_01.txt" />
-    <None Include="Assets\YJ\Military_Pistol_01\Docs\Military_Pistol_Unity_Info.txt" />
-    <None Include="Assets\YJ\Rifle_01_v25\Docs\READ_ME_RH_WP_Unmask_Transform_01.txt" />
-    <None Include="Assets\YJ\BeautifulSky\ReadMe.txt" />
-    <None Include="Assets\YJ\Rifle_01_v25\Docs\Military_Rifle_Unity_Info.txt" />
-    <None Include="Assets\YJ\QA_Office\Shaders\QAtmo_3dText.shader" />
+    <None Include="Assets\YJ\Assets\QA_Office\ReadMe.txt" />
+    <None Include="Assets\YJ\Assets\Military_Pistol_01\Docs\READ_ME_RH_WP_Unmask_Transform_01.txt" />
+    <None Include="Assets\YJ\Assets\Military_Pistol_01\Docs\Military_Pistol_Unity_Info.txt" />
+    <None Include="Assets\YJ\Assets\Rifle_01_v25\Docs\READ_ME_RH_WP_Unmask_Transform_01.txt" />
+    <None Include="Assets\YJ\Assets\BeautifulSky\ReadMe.txt" />
+    <None Include="Assets\YJ\Assets\Rifle_01_v25\Docs\Military_Rifle_Unity_Info.txt" />
+    <None Include="Assets\YJ\Assets\QA_Office\Shaders\QAtmo_3dText.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
