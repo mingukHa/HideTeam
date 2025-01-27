@@ -32,6 +32,7 @@
 *obj
 *build
 *log
+*Firebase
 *usersetting
 *QA_Office
 Assets/YJ/QA_Office 1/*
@@ -48,6 +49,7 @@ crashlytics-build.properties
 /[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
 
 # Firebase, Plugins 제외
+Assets/Firebase.meta/
 Assets/Firebase/
 Assets/Plugins/
 Assets/ExternalDependencyManager/
