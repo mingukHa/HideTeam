@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class NPCFSM : MonoBehaviour
@@ -8,6 +9,7 @@ public class NPCFSM : MonoBehaviour
     protected Animator animator;
     private Rigidbody[] rigidbodies;
     public bool isDead = false;
+    private bool isTalking = false;
     private bool isRagdollActivated = false; // 레그돌 활성화 여부 확인용
     
     protected virtual void Start()
@@ -129,14 +131,31 @@ public class NPCFSM : MonoBehaviour
     protected virtual void WalkBehavior() { }
     protected virtual void RunBehavior() { }
     protected virtual void TalkBehavior()
-    {       
-        Vector3 direction = (player.position - transform.position).normalized;
-        direction.y = 0;
-        Quaternion lookRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+    {
+        StartCoroutine(TalkView());
     }
     protected virtual void DeadBehavior()
     {
         isDead = true;
+    }
+    private IEnumerator TalkView()
+    {
+        if (isTalking) yield break; // 이미 실행 중이면 중단
+
+        isTalking = true; // 코루틴 실행 시작
+
+        while (true)
+        {
+            if (player == null) break; // 플레이어가 없으면 종료
+
+            Vector3 direction = (player.position - transform.position).normalized;
+            direction.y = 0;
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+
+            yield return null; // 한 프레임 대기 후 반복
+        }
+
+        isTalking = false; // 코루틴 종료 시 다시 실행 가능하도록 변경
     }
 }
