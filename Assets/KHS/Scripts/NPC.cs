@@ -6,6 +6,6 @@ public class NPC : MonoBehaviour
 
     private void Start()
     {
-        Debug.Log(q)
+        Debug.Log("q");
     }
 }
