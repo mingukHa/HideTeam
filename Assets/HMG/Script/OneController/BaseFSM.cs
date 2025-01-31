@@ -4,16 +4,17 @@ public class NPCFSM : MonoBehaviour
 {
     protected enum State { Idle, Look, Walk, Run, Talk, Dead }
     protected State currentState = State.Idle;
-
+    private Transform player;
     protected Animator animator;
     private Rigidbody[] rigidbodies;
+    public bool isDead = false;
     private bool isRagdollActivated = false; // 레그돌 활성화 여부 확인용
-
+    
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
         rigidbodies = GetComponentsInChildren<Rigidbody>();
-
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         // 레그돌 초기 비활성화
         SetRagdollState(false);
         ChangeState(State.Idle);
@@ -127,6 +128,15 @@ public class NPCFSM : MonoBehaviour
     protected virtual void LookBehavior() { }
     protected virtual void WalkBehavior() { }
     protected virtual void RunBehavior() { }
-    protected virtual void TalkBehavior() { }
-    protected virtual void DeadBehavior() { }
+    protected virtual void TalkBehavior()
+    {       
+        Vector3 direction = (player.position - transform.position).normalized;
+        direction.y = 0;
+        Quaternion lookRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
+    }
+    protected virtual void DeadBehavior()
+    {
+        isDead = true;
+    }
 }
