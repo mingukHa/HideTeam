@@ -1,16 +1,10 @@
-public enum Faction
+public enum AIConState
 {
-    Civilians,
-    Guards,
-    BankEmployees,
-    SecurityTechnicians,
-}
-
-public enum AITriggerCondition
-{
+    Idle,
     SuspectDetected,
     SuspiciousNoiseHeard,
     SuspiciousSituationDetected,
+    SuspectMissing,
     FallenPersonFound,
     AlertHeard,
     Relaxed
