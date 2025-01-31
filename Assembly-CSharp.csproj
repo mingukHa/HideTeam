@@ -84,6 +84,7 @@
     <Compile Include="Assets\HMG\Script\FirebaseChat\FireBaseInit.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\KHS\Scripts\Class\ScriptableObject\Event.cs" />
+    <Compile Include="Assets\HMG\Script\Object\DoorOpen.cs" />
     <Compile Include="Assets\YJ\QA_Office\Scripts\Door.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
