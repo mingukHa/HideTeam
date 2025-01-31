@@ -7,14 +7,22 @@ using TMPro; // UI 출력용
 public class NPCChatTest : MonoBehaviour
 {
     private DatabaseReference dbReference;
-    public TextMeshProUGUI dialogueText; // NPC 대사를 표시할 UI
+    public TextMeshPro dialogueText; // NPC 대사를 표시할 UI
+    public string npcID; // Firebase에서 가져올 NPC ID
 
     void Start()
     {
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
     }
-
-    public void LoadNPCDialogue(string npcID)
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Debug.Log($"NPC {npcID}와 대화 시작...");
+            LoadNPCDialogue(npcID, 0);
+        }
+    }
+    public void LoadNPCDialogue(string npcID , int number)
     {
         dbReference.Child("NPC_Dialogues").Child(npcID).GetValueAsync()
             .ContinueWithOnMainThread(task =>
@@ -32,7 +40,7 @@ public class NPCChatTest : MonoBehaviour
                         if (data != null && data.dialogues.Length > 0)
                         {
                             // 첫 번째 대사 출력
-                            dialogueText.text = data.dialogues[0];                            
+                            dialogueText.text = data.dialogues[number];                            
                         }
                         else
                         {

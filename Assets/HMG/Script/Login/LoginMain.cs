@@ -17,5 +17,6 @@ public class LoginMain : MonoBehaviour
     private void Start()
     {
         database = FirebaseDatabase.DefaultInstance.RootReference;
+
     }
 }
