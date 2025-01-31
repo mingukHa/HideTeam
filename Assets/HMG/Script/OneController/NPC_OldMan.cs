@@ -1,10 +1,15 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class NPC_OldMan : NPCFSM
 {
+    private NPCChatTest chat;
+    private string npc = "NPC3";
     protected override void Start()
     {
-        base.Start(); 
+        base.Start();
+        chat = GetComponent<NPCChatTest>();
+
     }
 
     protected override void Update()
@@ -46,7 +51,16 @@ public class NPC_OldMan : NPCFSM
     {
         if (other.CompareTag("Player"))
         {
-            ChangeState(State.Look);
+           
+            ChangeState(State.Talk);
+            chat.LoadNPCDialogue(npc, 0);
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            ChangeState(State.Idle);
         }
     }
 }

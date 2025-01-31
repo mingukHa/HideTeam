@@ -9,10 +9,12 @@ public class NPCChatTest : MonoBehaviour
     private DatabaseReference dbReference;
     public TextMeshPro dialogueText; // NPC 대사를 표시할 UI
     public string npcID; // Firebase에서 가져올 NPC ID
-
+    private BoxCollider chatColider;
+    private bool Chating = false;
     void Start()
     {
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
+        chatColider = GetComponent<BoxCollider>();
     }
     private void Update()
     {
@@ -22,6 +24,7 @@ public class NPCChatTest : MonoBehaviour
             LoadNPCDialogue(npcID, 0);
         }
     }
+   
     public void LoadNPCDialogue(string npcID , int number)
     {
         dbReference.Child("NPC_Dialogues").Child(npcID).GetValueAsync()

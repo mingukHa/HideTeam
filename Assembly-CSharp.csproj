@@ -112,6 +112,7 @@
     <Compile Include="Assets\HMG\Script\ReturnScript\SceneData.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
+    <Compile Include="Assets\HMG\Script\FirebaseChat\TextCameraVeiw.cs" />
     <Compile Include="Assets\HMG\Script\FirebaseChat\NPCChatTest.cs" />
     <Compile Include="Assets\KHS\Scripts\Class\NPCData.cs" />
     <Compile Include="Assets\YJ\QA_Office\Scripts\Clock.cs" />
