@@ -7,22 +7,23 @@ public class ESCMenu : MonoBehaviour
     [SerializeField] private GameObject EscMenu;
     [SerializeField] private Button ReturnGame;
     [SerializeField] private Button Sound;
+    [SerializeField] private GameObject SoundBar;
     [SerializeField] private Button RobbyReturn;
     [SerializeField] private Button GameOff;
     [SerializeField] private GameObject EscMain;
     
     private static bool isPaused = false;
-   
+    private bool SoundBerOnOff = false;
     private void Start()
     {
         ReturnGame.onClick.AddListener(Returngame);
         RobbyReturn.onClick.AddListener(Lobbygame);
         GameOff.onClick.AddListener(QuitGame);
+        Sound.onClick.AddListener(Soundbar);
     }
 
     private void Update()
     {
-        // ESC 키를 눌렀을 때 메뉴 토글
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (!isPaused)
@@ -35,7 +36,19 @@ public class ESCMenu : MonoBehaviour
             }
         }
     }
-
+    private void Soundbar()
+    {
+        if (SoundBerOnOff == false)
+        {
+            SoundBerOnOff = true;
+            SoundBar.SetActive(true);
+        }
+        else
+        {
+            SoundBerOnOff = false;
+            SoundBar.SetActive(false);
+        }
+    }
     private void PauseGame()
     {
         isPaused = true;
