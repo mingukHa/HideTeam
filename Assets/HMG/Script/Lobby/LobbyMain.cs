@@ -15,6 +15,7 @@ public class LobbyMain : MonoBehaviour
     private Button Chapter1CloseButton;
     [SerializeField]
     private Button Chapter1StartButton;
+    
     private void Start()
     {
         // 저장된 플레이어 이름 불러오기
@@ -25,6 +26,7 @@ public class LobbyMain : MonoBehaviour
         Chapter1StartButton.onClick.AddListener(() => Chapter1Start());
 
     }
+    
     private void OnChapter1()
     {
         Chapter1.SetActive(true);
