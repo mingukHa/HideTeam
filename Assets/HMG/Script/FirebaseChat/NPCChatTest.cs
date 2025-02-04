@@ -7,7 +7,7 @@ using TMPro; // UI 출력용
 public class NPCChatTest : MonoBehaviour
 {
     private DatabaseReference dbReference;
-    public TextMeshPro dialogueText; // NPC 대사를 표시할 UI
+    public TextMeshProUGUI dialogueText; // NPC 대사를 표시할 UI
     public string npcID; // Firebase에서 가져올 NPC ID
     private BoxCollider chatColider;
     private bool Chating = false;

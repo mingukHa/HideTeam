@@ -3,13 +3,15 @@ using UnityEngine;
 
 public class NPC_OldMan : NPCFSM
 {
+    [SerializeField] private GameObject select;
     private NPCChatTest chat;
+
     private string npc = "NPC3";
     protected override void Start()
     {
         base.Start();
         chat = GetComponent<NPCChatTest>();
-
+        select.SetActive(false);
     }
 
     protected override void Update()
@@ -51,7 +53,7 @@ public class NPC_OldMan : NPCFSM
     {
         if (other.CompareTag("Player"))
         {
-           
+            select.SetActive(true);
             ChangeState(State.Talk);
             chat.LoadNPCDialogue(npc, 0);
         }
@@ -61,6 +63,8 @@ public class NPC_OldMan : NPCFSM
         if (other.CompareTag("Player"))
         {
             ChangeState(State.Idle);
+            select.SetActive(false);
+            chat.LoadNPCDialogue("NULL", 0);
         }
     }
 }
