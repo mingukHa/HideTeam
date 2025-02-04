@@ -20,7 +20,8 @@ public class LoginMain : MonoBehaviour
     private Button Acount;
     [SerializeField]
     private Button Exit;
-
+    [SerializeField]
+    private TextMeshProUGUI logintext;
     private DatabaseReference database;
 
     private void Start()
@@ -91,17 +92,17 @@ public class LoginMain : MonoBehaviour
                     }
                     else
                     {
-                        Debug.LogWarning("비밀번호가 일치하지 않습니다.");
+                         logintext.text = "비밀번호가 일치하지 않습니다.";
                     }
                 }
                 else
                 {
-                    Debug.LogError("데이터 형식 오류: 'password' 키를 찾을 수 없습니다.");
+                    logintext.text = "데이터 오류";
                 }
             }
             else
             {
-                Debug.LogWarning("사용자를 찾을 수 없습니다.");
+                logintext.text = "사용자를 찾을 수 없습니다.";
             }
         });
     }
