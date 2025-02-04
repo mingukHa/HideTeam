@@ -2,7 +2,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using Firebase.Database;
 using TMPro;
-
+using Firebase;
+using System.Collections;
+using Firebase.Extensions;
+using UnityEngine.SceneManagement;
 public class LoginMain : MonoBehaviour
 {
     [SerializeField]
@@ -10,13 +13,98 @@ public class LoginMain : MonoBehaviour
     [SerializeField]
     private TMP_InputField PW;
     [SerializeField]
+    private GameObject AcountUI;
+    [SerializeField]
     private Button LoginButton;
+    [SerializeField]
+    private Button Acount;
+    [SerializeField]
+    private Button Exit;
 
     private DatabaseReference database;
 
     private void Start()
     {
         database = FirebaseDatabase.DefaultInstance.RootReference;
+        StartCoroutine(InitializeFirebase());
+        LoginButton.onClick.AddListener(() =>  Login(ID.text, PW.text));
+        Acount.onClick.AddListener(() => OnAcountUI(true));
+    }
+    private IEnumerator InitializeFirebase()
+    {
+        Debug.Log("Firebase 초기화 중...");
+        var dependencyTask = FirebaseApp.CheckAndFixDependenciesAsync();
+        yield return new WaitUntil(() => dependencyTask.IsCompleted);
 
+        if (dependencyTask.Result == DependencyStatus.Available)
+        {
+            Debug.Log("Firebase 초기화 성공!");
+            database = FirebaseDatabase.DefaultInstance.RootReference;
+
+            if (database != null)
+                Debug.Log("Firebase Database 초기화 성공!");
+            else
+                Debug.LogError("Firebase Database 초기화 실패!");
+        }
+        else
+        {
+            Debug.LogError($"Firebase 초기화 실패: {dependencyTask.Result}");
+            yield break;
+        }
+    }
+    private void Login(string username, string password)
+    {
+        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+        {
+            Debug.LogWarning("아이디와 비밀번호를 입력하세요.");
+            return;
+        }
+
+        if (database == null)
+        {
+            Debug.LogError("Firebase Database가 초기화되지 않았습니다.");
+            return;
+        }
+
+        database.Child("users").Child(username).GetValueAsync().ContinueWithOnMainThread(task =>
+        {
+            if (task.IsFaulted)
+            {
+                Debug.LogError($"데이터베이스 접근 실패: {task.Exception}");
+                return;
+            }
+
+            if (task.Result.Exists)
+            {
+                var userData = task.Result.Value as System.Collections.Generic.Dictionary<string, object>;
+
+                if (userData != null && userData.ContainsKey("password"))
+                {
+                    string storedPassword = userData["password"].ToString();
+
+                    if (storedPassword == password)
+                    {
+                        Debug.Log("로그인 성공!");
+                        SceneManager.LoadScene("MainScene"); // 로그인 성공 시 다음 씬으로 이동
+                    }
+                    else
+                    {
+                        Debug.LogWarning("비밀번호가 일치하지 않습니다.");
+                    }
+                }
+                else
+                {
+                    Debug.LogError("데이터 형식 오류: 'password' 키를 찾을 수 없습니다.");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("사용자를 찾을 수 없습니다.");
+            }
+        });
+    }
+    private void OnAcountUI(bool Acount)
+    {
+        AcountUI.SetActive(Acount);
     }
 }
