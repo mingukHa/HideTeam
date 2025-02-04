@@ -1,5 +1,6 @@
 ﻿using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LobbyMain : MonoBehaviour
@@ -29,5 +30,9 @@ public class LobbyMain : MonoBehaviour
     private void OffChapter1()
     {
         Chapter1.SetActive(false);
+    }
+    private void Chapter1Start()
+    {
+        SceneManager.LoadScene("MainScene");
     }
 }
