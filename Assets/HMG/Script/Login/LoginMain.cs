@@ -36,6 +36,7 @@ public class LoginMain : MonoBehaviour
         LoginButton.onClick.AddListener(() =>  Login(ID.text, PW.text));
         Acount.onClick.AddListener(() => OnAcountUI(true));
         Sound.onClick.AddListener(OnSoindUI);
+        Exit.onClick.AddListener(GameOff);
     }
     private IEnumerator InitializeFirebase()
     {
@@ -124,6 +125,14 @@ public class LoginMain : MonoBehaviour
             SoundbarOnOff = false;
             SoundBar.SetActive(false);
         }
+    }
+    private void GameOff()
+    {
+        Application.Quit();
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
     }
     private void OnAcountUI(bool Acount)
     {
