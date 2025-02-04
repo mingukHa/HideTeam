@@ -84,8 +84,10 @@ public class LoginMain : MonoBehaviour
 
                     if (storedPassword == password)
                     {
+                        PlayerPrefs.SetString("username", username); //플레이어 이름 저장
+                        PlayerPrefs.Save(); //플레이어 이름 저장
                         Debug.Log("로그인 성공!");
-                        SceneManager.LoadScene("MainScene"); // 로그인 성공 시 다음 씬으로 이동
+                        SceneManager.LoadScene("LobbyScene"); // 로그인 성공 시 다음 씬으로 이동
                     }
                     else
                     {
