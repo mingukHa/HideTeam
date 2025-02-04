@@ -1,15 +1,9 @@
 {
   "NPC_Dialogues": {
-    "NULL": {
-      "dialogues": [
-        ""
-      ]
-    },
     "NPC1": {
       "dialogues": [
         "안녕하세요, 무엇을 도와드릴까요?",
         "저를 따라오세요"
-
       ]
     },
     "NPC2": {
@@ -22,6 +16,31 @@
         "젊은이 이것 좀 도와주시게",
         "맞짱까벌라"
       ]
+    },
+    "NULL": {
+      "dialogues": [
+        ""
+      ]
+    }
+  },
+  "users": {
+    "asd": {
+      "password": "asd"
+    },
+    "asdd": {
+      "password": "asd"
+    },
+    "ccc": {
+      "password": "ccc"
+    },
+    "rrr": {
+      "password": "rrr"
+    },
+    "xxxx": {
+      "password": "xxxx"
+    },
+    "zzz": {
+      "password": "zzz"
     }
   }
 }
