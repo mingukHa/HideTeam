@@ -1,6 +1,7 @@
 public enum AIConState
 {
     Idle,
+    Patrol,
     SuspectDetected,
     SuspiciousNoiseHeard,
     SuspiciousSituationDetected,

@@ -25,7 +25,6 @@ public class TestPlayerControl : MonoBehaviour
     private void Update()
     {
         PlayerBasicMove();
-        NPCInteraction();
     }
 
     private void PlayerBasicMove()
@@ -51,31 +50,6 @@ public class TestPlayerControl : MonoBehaviour
         {
             // 이동
             characterController.Move(moveDirection * moveSpeed * Time.deltaTime);
-        }
-    }
-    private void NPCInteraction()
-    {
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            if(npcTr != null)
-            {
-                npcTr.GetComponent<NPCStats>().StunAnimPlay();
-            }
-            else
-            {
-                Debug.Log("대상없음");
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            if (npcTr != null)
-            {
-                npcTr.GetComponent<NPCStats>().EscapeStun();
-            }
-            else
-            {
-                Debug.Log("대상없음");
-            }
         }
     }
 }
