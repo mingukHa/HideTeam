@@ -22,6 +22,11 @@ public class LoginMain : MonoBehaviour
     private Button Exit;
     [SerializeField]
     private TextMeshProUGUI logintext;
+    [SerializeField]
+    private Button Sound;
+    [SerializeField]
+    private GameObject SoundBar;
+    private bool SoundbarOnOff = false;
     private DatabaseReference database;
 
     private void Start()
@@ -30,6 +35,7 @@ public class LoginMain : MonoBehaviour
         StartCoroutine(InitializeFirebase());
         LoginButton.onClick.AddListener(() =>  Login(ID.text, PW.text));
         Acount.onClick.AddListener(() => OnAcountUI(true));
+        Sound.onClick.AddListener(OnSoindUI);
     }
     private IEnumerator InitializeFirebase()
     {
@@ -105,6 +111,19 @@ public class LoginMain : MonoBehaviour
                 logintext.text = "사용자를 찾을 수 없습니다.";
             }
         });
+    }
+    private void OnSoindUI()
+    {
+        if (SoundbarOnOff == false)
+        {
+            SoundbarOnOff = true;
+            SoundBar.SetActive(true);
+        }
+        else
+        {
+            SoundbarOnOff = false;
+            SoundBar.SetActive(false);
+        }
     }
     private void OnAcountUI(bool Acount)
     {
