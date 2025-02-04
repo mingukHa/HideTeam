@@ -312,9 +312,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 360051725}
-  - component: {fileID: 360051726}
   - component: {fileID: 360051727}
   - component: {fileID: 360051728}
+  - component: {fileID: 360051730}
+  - component: {fileID: 360051729}
   m_Layer: 0
   m_Name: NPCs
   m_TagString: Untagged
@@ -338,19 +339,6 @@ Transform:
   - {fileID: 733275138}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &360051726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 360051724}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1266548e3237bb3469be0a2cf2ce3440, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isStunned: 0
 --- !u!136 &360051727
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -399,8 +387,50 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &360051729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360051724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e703989aee42644a982b8b6e17bd648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcID: Civilian_A
+  currentState: 0
+  aiModules:
+  - {fileID: 11400000, guid: 0814c1c0536d31c498e90bb7deb6d174, type: 2}
+  events: []
+--- !u!114 &360051730
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360051724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 262627ee4b9f31d458b83d6012cd828a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  data: {fileID: 0}
+  viewRadius: 10
+  viewAngle: 90
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 1
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 4
+  detectionTime: 2
+  currentDetectionTime: 0
+  istargetSituationDetected: 0
+  targetSituation: {fileID: 72189468}
 --- !u!1 &661209749
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,9 +724,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 994280698}
-  - component: {fileID: 994280699}
-  - component: {fileID: 994280700}
   - component: {fileID: 994280701}
+  - component: {fileID: 994280702}
   m_Layer: 0
   m_Name: Guard
   m_TagString: Untagged
@@ -720,42 +749,6 @@ Transform:
   - {fileID: 1133890747}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -73.869, z: 0}
---- !u!114 &994280699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 994280697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c9857f884bfd5644b376c9c21dbe2b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &994280700
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 994280697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 614ae8a9fb1771b40805665fa2baf1db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  viewRadius: 10
-  viewAngle: 90
-  targetMask:
-    serializedVersion: 2
-    m_Bits: 1
-  obstructionMask:
-    serializedVersion: 2
-    m_Bits: 4
-  istargetSituationDetected: 0
-  targetSituation: {fileID: 72189468}
-  nGController: {fileID: 0}
-  currentDetectionTime: 0
 --- !u!114 &994280701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -768,10 +761,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8814f16fc87f0bc46824f3240671fc2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentState: 0
+  data: {fileID: 0}
+  viewRadius: 10
+  viewAngle: 100
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 1
+  obstructionMask:
+    serializedVersion: 2
+    m_Bits: 4
+  detectionTime: 2
+  currentDetectionTime: 0
+  istargetSituationDetected: 0
+  targetSituation: {fileID: 72189468}
   patrolRoute: {fileID: 11400000, guid: 4024b495998ef6c458e3f60d890fe203, type: 2}
   patrolSpeed: 2
+  rotationSpeed: 2
+  lookAroundDelay: 1
   chaseSpeed: 4
+--- !u!114 &994280702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994280697}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e703989aee42644a982b8b6e17bd648, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcID: GuardA
+  currentState: 0
+  aiModules:
+  - {fileID: 11400000, guid: 0814c1c0536d31c498e90bb7deb6d174, type: 2}
+  - {fileID: 11400000, guid: 5305cdc466111ff4d80d962ddc43d657, type: 2}
+  - {fileID: 11400000, guid: e7aded7086fe0504e9e04ae0408dbd96, type: 2}
+  events: []
 --- !u!1 &1046064726
 GameObject:
   m_ObjectHideFlags: 0
