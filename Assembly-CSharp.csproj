@@ -72,6 +72,7 @@
     <Compile Include="Assets\KHS\Scripts\Class\ScriptableObject\AIModule.cs" />
     <Compile Include="Assets\HMG\Asset\Fighter Pack Bundle\Heavy Fighter Mecanim Animation Pack\Code\CameraControl.cs" />
     <Compile Include="Assets\KHS\Scripts\Interface\IFaction.cs" />
+    <Compile Include="Assets\HMG\Script\UI\SoundBar.cs" />
     <Compile Include="Assets\HMG\Script\OneController\BaseFSM.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_ExampleScript_01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMPro_InstructionOverlay.cs" />
