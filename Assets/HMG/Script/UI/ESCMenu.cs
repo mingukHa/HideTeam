@@ -8,37 +8,65 @@ public class ESCMenu : MonoBehaviour
     [SerializeField] private Button ReturnGame;
     [SerializeField] private Button Sound;
     [SerializeField] private Button RobbyReturn;
-
-    private bool EscMenuOnOff = false;
+    [SerializeField] private Button GameOff;
+    [SerializeField] private GameObject EscMain;
+    
+    private static bool isPaused = false;
+   
     private void Start()
     {
-        ReturnGame.onClick.AddListener(() => Returngame());
-        RobbyReturn.onClick.AddListener(() => Lobbygame());
+        ReturnGame.onClick.AddListener(Returngame);
+        RobbyReturn.onClick.AddListener(Lobbygame);
+        GameOff.onClick.AddListener(QuitGame);
     }
+
     private void Update()
     {
+        // ESC 키를 눌렀을 때 메뉴 토글
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!EscMenuOnOff)
+            if (!isPaused)
             {
-                EscMenuOnOff = true;
-                EscMenu.SetActive(true);
+                PauseGame();
             }
             else
             {
-                EscMenuOnOff = false;
-                EscMenu.SetActive(false);
+                ResumeGame();
             }
         }
     }
 
+    private void PauseGame()
+    {
+        isPaused = true;
+        EscMenu.SetActive(true);
+        Time.timeScale = 0; // 게임 일시정지
+    }
+
+    private void ResumeGame()
+    {
+        isPaused = false;
+        EscMenu.SetActive(false);
+        Time.timeScale = 1; // 게임 재개
+    }
+
+    private void QuitGame()
+    {
+        Application.Quit();
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+    }
+
     private void Returngame()
     {
-        EscMenuOnOff = false;
-        EscMenu.SetActive(false);
+        ResumeGame(); // 게임 재개
     }
+
     private void Lobbygame()
     {
+        ResumeGame(); 
         SceneManager.LoadScene("LobbyScene");
     }
 }
