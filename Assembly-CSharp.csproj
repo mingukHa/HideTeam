@@ -128,6 +128,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
     <Compile Include="Assets\KHS\Scripts\ShoulderViewCam.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
+    <Compile Include="Assets\HMG\Script\Lobby\Chapter1Progress.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\KHS\Scripts\NormalGuardController.cs" />
     <Compile Include="Assets\KHS\Scripts\GuardBehavior.cs" />
