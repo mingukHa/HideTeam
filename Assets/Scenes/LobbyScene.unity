@@ -1713,6 +1713,7 @@ MonoBehaviour:
   Chapter1: {fileID: 1568913826}
   Chapter1OpenButton: {fileID: 1244376984}
   Chapter1CloseButton: {fileID: 1762344378}
+  Chapter1StartButton: {fileID: 440510168}
 --- !u!4 &1013865069
 Transform:
   m_ObjectHideFlags: 0
@@ -2542,7 +2543,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1568913827
 RectTransform:
   m_ObjectHideFlags: 0
