@@ -38,8 +38,8 @@ public class SoundManager : MonoBehaviour
             BGMPlay(bgmList[0]);
 
         //MainScene ¿ë
-        //else if (name0.name == bgmList[1].name)
-        //    BGMPlay(bgmList[1]);
+        else if (name0.name == bgmList[1].name)
+            BGMPlay(bgmList[1]);
 
         if (PlayerPrefs.HasKey("MasterVolume"))
         {
