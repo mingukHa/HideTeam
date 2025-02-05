@@ -36,7 +36,7 @@
 *usersetting
 *QA_Office
 Assets/YJ/QA_Office 1/*
-
+!QA_Office_1/*
 
 # 임시 파일 및 크래시 리포트 제외
 *.pidb.meta
@@ -50,8 +50,10 @@ crashlytics-build.properties
 
 # Firebase, Plugins 제외
 Assets/Firebase.meta/
+Assets/YJ/Assets/QA_Office 1/
 Assets/Firebase/
 Assets/Plugins/
 Assets/ExternalDependencyManager/
 Assets/Editor Default Resources/
 ProjectSettings/EditorBuildSettings.asset
+
