@@ -1,75 +1,107 @@
+Ôªøusing System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ReturnManager : MonoBehaviour
 {
-    private SceneDataStack sceneDataStack = new SceneDataStack(); // Ω∫≈√ µ•¿Ã≈Õ ¿˙¿Â
+    private SceneDataStack sceneDataStack = new SceneDataStack();
     private GameObject Player;
+    private CharacterController playerController;
+    [SerializeField]
+    private GameObject Post;
 
+    public PlayerController Mouse;
     private Vector3 Playerposition;
     private Vector3 Npcposition;
     private Quaternion Npcquaternion;
     private Quaternion Playerquaternion;
     private Animator npcAnimator;
+    
     private Animator playerAnimator;
+
     private void Awake()
     {
         Player = GameObject.FindWithTag("Player");
-             
-    }
-    private void Start()
-    {
+        playerController = Player.GetComponent<CharacterController>();
         npcAnimator = GetComponent<Animator>();
-        playerAnimator = GetComponent<Animator>();
     }
+
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.T))
         {
-            ReturnLong();
-            Debug.Log("Ω∫≈√ø° ¿˙¿Âµ ");
+            StartCoroutine(ReturnStack(3f)); // 1Ï¥à ÎèôÏïà Îç∞Ïù¥ÌÑ∞ Ï†ÄÏû•
         }
+
         if (Input.GetKeyDown(KeyCode.R))
         {
             SceneData popedScene = sceneDataStack.PopSceneData();
-            ReturnPlay(popedScene);
-        }
-    }
-    public void ReturnPlay(SceneData popedScene) //∏Æ≈œ ¿Áª˝
-    {        
-        if (popedScene != null)
-        {
-            // NPCøÕ Player ¿ßƒ° π◊ »∏¿¸ ∫πø¯
-            transform.position = popedScene.NpcPosition;
-            transform.rotation = popedScene.NpcRotation;
-            Player.transform.position = popedScene.PlayerPosition;
-            Player.transform.rotation = popedScene.PlayerRotation;
-            npcAnimator.Play(popedScene.NpcAnimation);
-            playerAnimator.Play(popedScene.PlayerAnimation);
-        }
-        else
-        {
-            Debug.Log("Ω∫≈√¿Ã ∫ÒæÓ ¿÷¿Ω!");
+
+            if (popedScene != null)
+            {
+                StartCoroutine(ReturnPlay());
+            }
+            else
+            {
+                Debug.Log("Ïä§ÌÉùÏù¥ ÎπÑÏñ¥ ÏûàÏùå! ÏúÑÏπòÎ•º Î≥µÏõêÌï† Ïàò ÏóÜÏùå.");
+            }
         }
     }
 
-    public void ReturnLong() //∏Æ≈œ ¡§∫∏ ≥≤±‚±‚
+    public IEnumerator ReturnPlay()
     {
-        // «ˆ¿Á ¿ßƒ° π◊ »∏¿¸ ¿˙¿Â
-        Npcposition = transform.position;
-        Playerposition = Player.transform.position;
-        Npcquaternion = transform.rotation;
-        Playerquaternion = Player.transform.rotation;
-        string npcAnimation = GetCurrentAnimation(npcAnimator);
-        string playerAnimation = GetCurrentAnimation(playerAnimator);
+        Debug.Log("Îπ†Î•∏ Ïû¨ÏÉù ÏãúÏûë");
 
-        SceneData scene1 = new SceneData(Npcposition, Playerposition, Npcquaternion, Playerquaternion, npcAnimation, playerAnimation, 3f, 3f);
+        while (sceneDataStack.GetSceneCount() > 0)
+        {
+            SceneData popedScene = sceneDataStack.PopSceneData();
 
-        sceneDataStack.PushSceneData(scene1);
+            if (popedScene != null)
+            {
+                Post.SetActive(true);
+                Mouse.enabled = true;
+                // ÌîåÎ†àÏù¥Ïñ¥ Î∞è NPC ÏúÑÏπò, ÌöåÏ†Ñ Î≥µÏõê
+                playerController.enabled = false;
+                transform.position = popedScene.NpcPosition;
+                transform.rotation = popedScene.NpcRotation;
+                Player.transform.position = popedScene.PlayerPosition;
+                Player.transform.rotation = popedScene.PlayerRotation;
+
+                // NPC Ïï†ÎãàÎ©îÏù¥ÏÖò Ïã§Ìñâ
+                npcAnimator.Play(popedScene.NpcAnimation);
+
+                Debug.Log($"Ïû¨ÏÉù: Player ÏúÑÏπò: {popedScene.PlayerPosition}, NPC ÏúÑÏπò: {popedScene.NpcPosition}");
+
+                yield return null; // ÏßÄÏ†ïÎêú ÏÜçÎèÑÎ°ú Î∞òÎ≥µ
+            }
+        }
+        SceneManager.LoadScene("MGRealTest");
+        playerController.enabled = true;
     }
-    private string GetCurrentAnimation(Animator animator) //æ÷¥œ∏ﬁ¿Ãº« ¡§∫∏ πﬁ±‚
+
+
+    public IEnumerator ReturnStack(float MaxTime)
     {
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0); //ø°¥œ∏ﬁ¿Ã≈Õ πﬁæ∆ø¿±‚
-        Debug.Log($"{animator.GetCurrentAnimatorClipInfo(0)[0].clip.name}");
-        return animator.GetCurrentAnimatorClipInfo(0).Length > 0 ? animator.GetCurrentAnimatorClipInfo(0)[0].clip.name : "No Animation";
+        Debug.Log("Î¶¨ÌÑ¥ ÏΩîÎ£®Ìã¥ Ïã§Ìñâ");
+        float CurrentTime = 0f;
+
+        while (CurrentTime < MaxTime) 
+        {
+            CurrentTime += Time.deltaTime; 
+
+            Npcposition = transform.position;
+            Playerposition = Player.transform.position;
+            Npcquaternion = transform.rotation;
+            Playerquaternion = Player.transform.rotation;
+
+            SceneData scene1 = new SceneData(Npcposition, Playerposition, Npcquaternion, Playerquaternion, "Talk", "Walk"/*ÌîåÎ†àÏù¥Ïñ¥ Ïï†ÎãàÎ©îÏù¥ÏÖò*/, MaxTime, MaxTime);
+            sceneDataStack.PushSceneData(scene1);
+
+            Debug.Log("Ïä§ÌÉùÏóê Ï†ÄÏû•Îê®! Player ÏúÑÏπò: " + Playerposition + ", NPC ÏúÑÏπò: " + Npcposition);
+
+            yield return null; // Îß§ ÌîÑÎ†àÏûÑ ÎåÄÍ∏∞
+        }
+
+        Debug.Log("Î¶¨ÌÑ¥ ÏΩîÎ£®Ìã¥ Ï¢ÖÎ£å");
     }
 }
