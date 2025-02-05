@@ -544,7 +544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a475577ec0468f41964a8e853af055c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gaugeRect: {fileID: 207950859}
+  image: {fileID: 207950861}
   maxValue: 50
 --- !u!224 &305485298 stripped
 RectTransform:

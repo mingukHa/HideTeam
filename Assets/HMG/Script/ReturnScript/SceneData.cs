@@ -24,6 +24,6 @@ public class SceneData
         PlayerPosition = playerposition;
         PlayerRotation = playerrotation;
         PlayerAnimation = playeranimation;
-        PlayerDuration = duration;
+        PlayerDuration = playerduration;
     }
 }
