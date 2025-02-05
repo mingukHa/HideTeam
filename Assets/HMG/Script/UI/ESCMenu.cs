@@ -62,6 +62,8 @@ public class ESCMenu : MonoBehaviour
         EscMenu.SetActive(false);
         Time.timeScale = 1; // 게임 재개
     }
+    
+
 
     private void QuitGame()
     {
