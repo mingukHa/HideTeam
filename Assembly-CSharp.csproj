@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{41C0B8A8-7BAB-1019-E53B-F0FFDF0BA13F}</ProjectGuid>
+    <ProjectGuid>{8EFF301C-DF92-6FAD-B6A6-171182E6008B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -73,15 +73,13 @@
     <Compile Include="Assets\KHS\Scripts\ModuleFunction\NormalGuardController.cs" />
     <Compile Include="Assets\HMG\Script\Login\LoginMain.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
+    <Compile Include="Assets\QA_Office\Scripts\Elevator.cs" />
     <Compile Include="Assets\KHS\Scripts\Class\ScriptableObject\AIModule.cs" />
     <Compile Include="Assets\YJ\Assets\Synty\AnimationBaseLocomotion\Samples\Scripts\SampleObjectLockOn.cs" />
     <Compile Include="Assets\YJ\Scripts\RootMotionController.cs" />
     <Compile Include="Assets\HMG\Script\ReturnScript\ReturnManager.cs" />
     <Compile Include="Assets\KHS\Scripts\NextStep\Command\DetectCommand.cs" />
-    <Compile Include="Assets\YJ\Assets\QA_Office 1\Scripts\Door.cs" />
-    <Compile Include="Assets\YJ\Assets\QA_Office 1\Scripts\Clock.cs" />
     <Compile Include="Assets\KHS\Scripts\NextStep\Class\IdleState.cs" />
-    <Compile Include="Assets\YJ\Assets\QA_Office 1\Scripts\ElevatorManager.cs" />
     <Compile Include="Assets\HMG\Asset\Fighter Pack Bundle\Heavy Fighter Mecanim Animation Pack\Code\CameraControl.cs" />
     <Compile Include="Assets\KHS\Scripts\Interface\IFaction.cs" />
     <Compile Include="Assets\KHS\Scripts\NextStep\Interface\ICommand.cs" />
@@ -109,6 +107,7 @@
     <Compile Include="Assets\HMG\Asset\Fighter Pack Bundle\Heavy Fighter Mecanim Animation Pack\Code\FighterAnimationDemo.cs" />
     <Compile Include="Assets\KHS\Scripts\Class\ScriptableObject\PatrolRoute.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
+    <Compile Include="Assets\QA_Office\Scripts\Door.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\KHS\Scripts\ModuleFunction\TNPCController.cs" />
     <Compile Include="Assets\KHS\Scripts\Class\FactionNPC.cs" />
@@ -130,14 +129,15 @@
     <Compile Include="Assets\HMG\Script\ReturnScript\SceneData.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
-    <Compile Include="Assets\HMG\Script\FirebaseChat\TextCameraVeiw.cs" />
     <Compile Include="Assets\HMG\Script\FirebaseChat\NPCChatTest.cs" />
+    <Compile Include="Assets\HMG\Script\FirebaseChat\TextCameraVeiw.cs" />
     <Compile Include="Assets\KHS\Scripts\Class\NPCData.cs" />
+    <Compile Include="Assets\QA_Office\Scripts\Clock.cs" />
     <Compile Include="Assets\KHS\Scripts\NextStep\Class\PatrolState.cs" />
-    <Compile Include="Assets\YJ\Assets\QA_Office 1\Scripts\Elevator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
     <Compile Include="Assets\KHS\Scripts\Class\NamedNPC.cs" />
+    <Compile Include="Assets\QA_Office\Scripts\ElevatorManager.cs" />
     <Compile Include="Assets\HMG\Script\Login\LoginAcount.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
@@ -154,7 +154,7 @@
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
-    <None Include="Assets\YJ\Assets\QA_Office 1\ReadMe.txt" />
+    <None Include="Assets\QA_Office\ReadMe.txt" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Roboto-Bold - License.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile-2-Pass.shader" />
     <None Include="Assets\Firebase\Plugins\x86_64\FirebaseCppDatabase.dll" />
@@ -204,7 +204,7 @@
     <None Include="Assets\YJ\Assets\Rifle_01_v25\Docs\Military_Rifle_Unity_Info.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
-    <None Include="Assets\YJ\Assets\QA_Office 1\Shaders\QAtmo_3dText.shader" />
+    <None Include="Assets\QA_Office\Shaders\QAtmo_3dText.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -679,22 +679,6 @@
       <HintPath>Library\PackageCache\com.unity.ext.nunit\net40\unity-custom\nunit.framework.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Firebase.App">
-      <HintPath>Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Firebase.TaskExtension">
-      <HintPath>Assets\Firebase\Plugins\Firebase.TaskExtension.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Firebase.Auth">
-      <HintPath>Assets\Firebase\Plugins\Firebase.Auth.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Firebase.Database">
-      <HintPath>Assets\Firebase\Plugins\Firebase.Database.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
       <Private>False</Private>
@@ -703,12 +687,28 @@
       <HintPath>Library\PackageCache\com.unity.nuget.mono-cecil\Mono.Cecil.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Firebase.Platform">
-      <HintPath>Assets\Firebase\Plugins\Firebase.Platform.dll</HintPath>
+    <Reference Include="Firebase.App">
+      <HintPath>Assets\Firebase\Plugins\Firebase.App.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Firebase.Database">
+      <HintPath>Assets\Firebase\Plugins\Firebase.Database.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Firebase.TaskExtension">
+      <HintPath>Assets\Firebase\Plugins\Firebase.TaskExtension.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Google.MiniJson">
       <HintPath>Assets\Firebase\Plugins\Google.MiniJson.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Firebase.Auth">
+      <HintPath>Assets\Firebase\Plugins\Firebase.Auth.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Firebase.Platform">
+      <HintPath>Assets\Firebase\Plugins\Firebase.Platform.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="netstandard">
