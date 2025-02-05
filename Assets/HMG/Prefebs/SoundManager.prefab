@@ -52,7 +52,7 @@ MonoBehaviour:
   bgmSound: {fileID: 6143746756276143741}
   sfxSound: {fileID: 6143746756276143741}
   bgmList:
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 33b665880364f444796139ec76c432e4, type: 3}
   sfxList:
   - {fileID: 0}
 --- !u!82 &6143746756276143741
