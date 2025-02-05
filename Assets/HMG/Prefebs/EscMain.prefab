@@ -624,7 +624,7 @@ RectTransform:
   m_Father: {fileID: 6749038905130358783}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -699,7 +699,7 @@ RectTransform:
   m_Father: {fileID: 1142029608217769424}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 54.7, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2552,7 +2552,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &3847588700593499593
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2757,7 +2757,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &724411784189285169
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2803,11 +2803,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2930270740729246749, guid: 623ba2d67e42eab4dbf4fffefc1c59ab, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3835220887228017440, guid: 623ba2d67e42eab4dbf4fffefc1c59ab, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5709621826615817691, guid: 623ba2d67e42eab4dbf4fffefc1c59ab, type: 3}
+      propertyPath: m_Value
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5709621826615817691, guid: 623ba2d67e42eab4dbf4fffefc1c59ab, type: 3}
+      propertyPath: m_MinValue
+      value: 0.001
       objectReference: {fileID: 0}
     - target: {fileID: 5709621826615817691, guid: 623ba2d67e42eab4dbf4fffefc1c59ab, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2819,19 +2827,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7339105674179040029, guid: 623ba2d67e42eab4dbf4fffefc1c59ab, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7395489355157854791, guid: 623ba2d67e42eab4dbf4fffefc1c59ab, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7749293210486026484, guid: 623ba2d67e42eab4dbf4fffefc1c59ab, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7799894829438315858, guid: 623ba2d67e42eab4dbf4fffefc1c59ab, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8167064728769375701, guid: 623ba2d67e42eab4dbf4fffefc1c59ab, type: 3}
+      propertyPath: m_Value
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8167064728769375701, guid: 623ba2d67e42eab4dbf4fffefc1c59ab, type: 3}
+      propertyPath: m_MinValue
+      value: 0.001
       objectReference: {fileID: 0}
     - target: {fileID: 8167064728769375701, guid: 623ba2d67e42eab4dbf4fffefc1c59ab, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -2840,6 +2856,14 @@ PrefabInstance:
     - target: {fileID: 8167064728769375701, guid: 623ba2d67e42eab4dbf4fffefc1c59ab, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: SFXSoundVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 8481520039882047272, guid: 623ba2d67e42eab4dbf4fffefc1c59ab, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8481520039882047272, guid: 623ba2d67e42eab4dbf4fffefc1c59ab, type: 3}
+      propertyPath: m_MinValue
+      value: 0.001
       objectReference: {fileID: 0}
     - target: {fileID: 8481520039882047272, guid: 623ba2d67e42eab4dbf4fffefc1c59ab, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
