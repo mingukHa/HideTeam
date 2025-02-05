@@ -37,6 +37,6 @@ public class LobbyMain : MonoBehaviour
     }
     private void Chapter1Start()
     {
-        SceneManager.LoadScene("MGRealTest");
+        SceneManager.LoadScene("MainScene");
     }
 }
