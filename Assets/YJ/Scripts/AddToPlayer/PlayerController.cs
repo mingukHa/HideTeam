@@ -114,9 +114,15 @@ public class PlayerController : MonoBehaviour
             disguiser.ChangeAppearance(currentNPC); // NPC 정보를 사용해 변장 실행
         }
 
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            disguiser.ResetToDefaultCharacter();
+            disguiser.ResetToDefaultCharacter(); // 기본 복장으로 돌아감
         }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            // NPC 무력화 로직 추가
+            anim.SetTrigger("Neutralize");
+        }    
     }
 }
