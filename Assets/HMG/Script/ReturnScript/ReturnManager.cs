@@ -72,7 +72,7 @@ public class ReturnManager : MonoBehaviour
                 
             }
         }
-        SceneManager.LoadScene("MGRealTest");     
+        SceneManager.LoadScene("MainScene");     
     }
     public void PlayerOff()
     {
