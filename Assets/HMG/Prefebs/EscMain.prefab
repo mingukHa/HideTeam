@@ -2552,7 +2552,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3847588700593499593
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2588,7 +2588,7 @@ MonoBehaviour:
   EscMenu: {fileID: 7919305018321022308}
   ReturnGame: {fileID: 6184018823720693069}
   Sound: {fileID: 3484363686647445118}
-  SoundBar: {fileID: 7148574218733858903}
+  SoundBar: {fileID: 4877820214639670115}
   RobbyReturn: {fileID: 2770029875727595807}
   GameOff: {fileID: 5839474546665937576}
   EscMain: {fileID: 7260802162977242596}
@@ -2757,7 +2757,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &724411784189285169
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2920,6 +2920,11 @@ RectTransform:
 --- !u!4 &3625586986594990185 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8590951830888736950, guid: 623ba2d67e42eab4dbf4fffefc1c59ab, type: 3}
+  m_PrefabInstance: {fileID: 5001701535312810207}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4877820214639670115 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 493393404320392124, guid: 623ba2d67e42eab4dbf4fffefc1c59ab, type: 3}
   m_PrefabInstance: {fileID: 5001701535312810207}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &6889369934882520572 stripped
