@@ -18,11 +18,11 @@ public class NPCChatTest : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            Debug.Log($"NPC {npcID}와 대화 시작...");
-            LoadNPCDialogue(npcID, 0);
-        }
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    Debug.Log($"NPC {npcID}와 대화 시작...");
+        //    LoadNPCDialogue(npcID, 0);
+        //}
     }
    
     public void LoadNPCDialogue(string npcID , int number)
