@@ -33,7 +33,7 @@ public class SoundManager : MonoBehaviour
     private void OnSceneLoaded(Scene name0, LoadSceneMode name1)
     {
         //LoginScene이란 이름이 동일한 경우 해당 BGM 발생
-        //bgmList[0]에 들어갈 bgm이름 LoginScene으로 설정
+        //bgmList[0]에 들어갈 bgm이름 LobbyScene으로 설정
         if (name0.name == bgmList[0].name)
             BGMPlay(bgmList[0]);
 
@@ -43,7 +43,7 @@ public class SoundManager : MonoBehaviour
 
         if (PlayerPrefs.HasKey("MasterVolume"))
         {
-            MasterSlider masterSliderObject = FindAnyObjectByType<MasterSlider>();
+            MasterSlider masterSliderObject = FindAnyObjectByType<MasterSlider>(FindObjectsInactive.Include);
             if (masterSliderObject)
             {
                 masterSlider = masterSliderObject.GetComponentInChildren<Slider>();
@@ -62,7 +62,7 @@ public class SoundManager : MonoBehaviour
         if (PlayerPrefs.HasKey("BGMVolume"))
         {
             //BGMSlider 스크립트를 가지고있는 오브젝트를 찾는다.
-            BGMSlider bgmSliderObject = FindAnyObjectByType<BGMSlider>();
+            BGMSlider bgmSliderObject = FindAnyObjectByType<BGMSlider>(FindObjectsInactive.Include);
 
             if (bgmSliderObject)
             {
@@ -88,7 +88,7 @@ public class SoundManager : MonoBehaviour
         if (PlayerPrefs.HasKey("SFXVolume"))
         {
             //SFXSlider 스크립트를 가지고있는 오브젝트를 찾는다.
-            SFXSlider sfxSliderObject = FindAnyObjectByType<SFXSlider>();
+            SFXSlider sfxSliderObject = FindAnyObjectByType<SFXSlider>(FindObjectsInactive.Include);
 
             if (sfxSliderObject)
             {
