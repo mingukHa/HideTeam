@@ -38,8 +38,8 @@ public class SoundManager : MonoBehaviour
             BGMPlay(bgmList[0]);
 
         //MainScene ¿ë
-        else if (name0.name == bgmList[1].name)
-            BGMPlay(bgmList[1]);
+        //else if (name0.name == bgmList[1].name)
+        //    BGMPlay(bgmList[1]);
 
         if (PlayerPrefs.HasKey("MasterVolume"))
         {
@@ -115,7 +115,7 @@ public class SoundManager : MonoBehaviour
     public void MasterSoundVolume(float val)
     {
         float volume = Mathf.Log10(val) * 20;
-        mixer.SetFloat("MasterVolume", volume);
+        mixer.SetFloat("Mastersound", volume);
         PlayerPrefs.SetFloat("MasterVolume", val);
         PlayerPrefs.Save();
     }
