@@ -38,7 +38,7 @@ public class RagdollGraber : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, 2f);
         foreach (var col in colliders)
         {
-            if (col.attachedRigidbody != null && col.attachedRigidbody.CompareTag("Ragdoll"))
+            if (col.attachedRigidbody != null && col.attachedRigidbody.CompareTag("Ragdoll")) // Ragdoll 태그를 비교해서 래그돌 판정
             {
                 ragdollRigidbody = col.attachedRigidbody;
                 AttachRagdoll();
@@ -52,8 +52,8 @@ public class RagdollGraber : MonoBehaviour
         // Fixed Joint 추가
         joint = ragdollRigidbody.gameObject.AddComponent<FixedJoint>();
         joint.connectedBody = holdPoint.GetComponent<Rigidbody>();
-        joint.breakForce = 500; // 너무 강한 충격을 받으면 Joint 해제
-        joint.breakTorque = 500;
+        joint.breakForce = 5000; // 너무 강한 충격을 받으면 Joint 해제
+        joint.breakTorque = 5000;
     }
 
     private void ReleaseRagdoll()
