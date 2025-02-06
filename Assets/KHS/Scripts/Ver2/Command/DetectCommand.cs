@@ -2,21 +2,28 @@ using UnityEngine;
 
 public class DetectCommand : ICommand
 {
-    private TNPCController npc;
+    private TNPCController _npcController;
+    private bool _isFinished;
 
     public DetectCommand(TNPCController npc)
     {
-        this.npc = npc;
+        _npcController = npc;
+        _isFinished = false;
     }
 
     public void Execute()
     {
-        Debug.Log("탐지 시작");
-        npc.StartDetection();
+        Debug.Log("DetectCommand : Executed Call");
+        _isFinished = _npcController.HasDetectedTarget();  // TNPCController에서 타겟 감지 여부를 가져옴
     }
+
+    public bool IsFinished()
+    {
+        return _isFinished;
+    }
+
     public void End()
     {
-        Debug.Log("탐지 종료");
-        npc.EndDetection();
+        Debug.Log("DetectTargetAction : Ended");
     }
 }
