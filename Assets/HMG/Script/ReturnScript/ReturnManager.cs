@@ -1,38 +1,47 @@
 ﻿using System.Collections;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ReturnManager : MonoBehaviour
 {
     private SceneDataStack sceneDataStack = new SceneDataStack();
-    private GameObject player;
-    private CharacterController playerController;
-    private RootMotionController rootMotionController;
-    public GameObject fadeOut;
-    [SerializeField] private GameObject postEffect;
-    [SerializeField] private PlayerController mouseController;
+    private GameObject Player;
+    public FadeOut fadeout;
+    [SerializeField]
+    private GameObject Post;
+    [SerializeField]
+    private PlayerController mouse;
+    private CharacterController PlayerControllers;
+
+    private Vector3 Playerposition;
+    private Vector3 Npcposition;
+    private Quaternion Npcquaternion;
+    private Quaternion Playerquaternion;
+
+    private Animator npcAnimator;
+    private Animator playerAnimator;
 
     private void Awake()
     {
-        player = GameObject.FindWithTag("Player");
-        if (player != null)
-        {
-            rootMotionController = player.GetComponent<RootMotionController>();
-            playerController = player.GetComponent<CharacterController>();
-        }
+        Player = GameObject.FindWithTag("Player");
+        PlayerControllers = Player.GetComponent<CharacterController>();
+        npcAnimator = GetComponent<Animator>();
+
+
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            StartCoroutine(StartNPCRecording()); //테스트용임 콜백으로 변경 해야함
+            StartCoroutine(ReturnStack(3f));
         }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            if (sceneDataStack.GetSceneCount() > 0)
+            SceneData popReturn = sceneDataStack.PopSceneData();
+
+            if (popReturn != null)
             {
                 PlayerOff();
                 StartCoroutine(ReturnPlay());
@@ -44,62 +53,53 @@ public class ReturnManager : MonoBehaviour
         }
     }
 
-    // 모든 NPC가 ReturnStack()을 실행하도록 명령
-    public IEnumerator StartNPCRecording()
-    {
-        Debug.Log("모든 NPC에게 ReturnStack() 실행 명령");
-
-        
-        GameObject[] npcObjects = GameObject.FindGameObjectsWithTag("NPC");
-        Debug.Log($"{npcObjects.Length}");
-        NPCReturnHandler[] npcs = System.Array.ConvertAll(npcObjects, obj => obj.GetComponent<NPCReturnHandler>()).Where(npc => npc != null).ToArray();
-
-        foreach (NPCReturnHandler npc in npcs)
-        {
-            StartCoroutine(npc.ReturnStack(3f));
-        }
-
-        yield return new WaitForSeconds(3f);
-    }
-
-    // 씬 복구 실행
     public IEnumerator ReturnPlay()
     {
+
         while (sceneDataStack.GetSceneCount() > 0)
         {
             SceneData popReturn = sceneDataStack.PopSceneData();
-
+            float FadeTime = popReturn.Duration;
             if (popReturn != null)
             {
-                postEffect.SetActive(true);
-
+                Post.SetActive(true);
                 transform.position = popReturn.NpcPosition;
                 transform.rotation = popReturn.NpcRotation;
-                player.transform.position = popReturn.PlayerPosition;
-                player.transform.rotation = popReturn.PlayerRotation;
+                Player.transform.position = popReturn.PlayerPosition;
+                Player.transform.rotation = popReturn.PlayerRotation;
 
                 yield return null;
+
             }
         }
-
         SceneManager.LoadScene("MainScene");
     }
-
-    // 플레이어 움직임 비활성화
     public void PlayerOff()
     {
-        if (playerController != null)
-            playerController.enabled = false;
-        if (mouseController != null)
-            mouseController.enabled = false;
-        if (rootMotionController != null)
-            rootMotionController.enabled = false;
-
+        PlayerControllers.enabled = false;
+        mouse.enabled = false;
     }
 
-    // SceneDataStack을 다른 스크립트에서 접근할 수 있도록 제공
-    public SceneDataStack GetSceneDataStack()
+    public IEnumerator ReturnStack(float MaxTime)
     {
-        return sceneDataStack;
+        Debug.Log("리턴 코루틴 실행");
+        float CurrentTime = 0f;
+
+        while (CurrentTime < MaxTime)
+        {
+            CurrentTime += Time.deltaTime;
+
+            Npcposition = transform.position;
+            Playerposition = Player.transform.position;
+            Npcquaternion = transform.rotation;
+            Playerquaternion = Player.transform.rotation;
+
+            SceneData Return = new SceneData(Npcposition, Playerposition, Npcquaternion, Playerquaternion, "Talk", "Walk"/*플레이어 애니메이션*/, MaxTime);
+            sceneDataStack.PushSceneData(Return);
+
+            yield return null;
+        }
+
+        Debug.Log("리턴 코루틴 종료");
     }
 }

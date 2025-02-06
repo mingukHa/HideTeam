@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{8EFF301C-DF92-6FAD-B6A6-171182E6008B}</ProjectGuid>
+    <ProjectGuid>{41C0B8A8-7BAB-1019-E53B-F0FFDF0BA13F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -64,18 +64,20 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver2\Command\DetectCommand.cs" />
     <Compile Include="Assets\HMG\Script\UI\ESCMenu.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Command\MoveCommand.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver2\Command\PatrolCommand.cs" />
     <Compile Include="Assets\KHS\Scripts\ModuleFunction\NormalGuardController.cs" />
     <Compile Include="Assets\HMG\Script\Login\LoginMain.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver2\Class\DetectingState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\KHS\Scripts\Class\ScriptableObject\AIModule.cs" />
     <Compile Include="Assets\YJ\Assets\Synty\AnimationBaseLocomotion\Samples\Scripts\SampleObjectLockOn.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver2\Interface\ICommand.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver3\Controller\ENPCController.cs" />
     <Compile Include="Assets\HMG\Script\ReturnScript\ReturnManager.cs" />
+    <Compile Include="Assets\YJ\Assets\QA_Office 1\Scripts\Door.cs" />
+    <Compile Include="Assets\YJ\Assets\QA_Office 1\Scripts\Clock.cs" />
+    <Compile Include="Assets\YJ\Assets\QA_Office 1\Scripts\ElevatorManager.cs" />
     <Compile Include="Assets\HMG\Asset\Fighter Pack Bundle\Heavy Fighter Mecanim Animation Pack\Code\CameraControl.cs" />
     <Compile Include="Assets\KHS\Scripts\Interface\IFaction.cs" />
     <Compile Include="Assets\HMG\Script\UI\SoundBar.cs" />
@@ -85,15 +87,11 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\HMG\Script\UI\FadeOut.cs" />
     <Compile Include="Assets\KHS\Scripts\Class\AIConState.cs" />
-    <Compile Include="Assets\YJ\Assets\QA_Office\Scripts\Door.cs" />
     <Compile Include="Assets\YJ\Assets\Synty\AnimationBaseLocomotion\Samples\Scripts\SampleCameraController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\HMG\Script\Lobby\LobbyMain.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver2\Class\ChasingState.cs" />
     <Compile Include="Assets\YJ\Scripts\AddToNPCs\NPCIdentifier.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
-    <Compile Include="Assets\YJ\Assets\QA_Office\Scripts\Clock.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver2\StateController.cs" />
     <Compile Include="Assets\KHS\Scripts\TestPlayerControl.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\HMG\Script\FirebaseChat\FireBaseInit.cs" />
@@ -111,9 +109,9 @@
     <Compile Include="Assets\KHS\Scripts\Ver3\Class\ENPCClassType.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
-    <Compile Include="Assets\KHS\Scripts\ModuleFunction\TNPCController.cs" />
     <Compile Include="Assets\KHS\Scripts\Class\FactionNPC.cs" />
     <Compile Include="Assets\KHS\Scripts\MarkerManager.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Function Module\NPCStateMachine.cs" />
     <Compile Include="Assets\KHS\Scripts\Interface\IName.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
@@ -133,24 +131,24 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver3\Enum\EFaction.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Class\CommandInvoker.cs" />
     <Compile Include="Assets\HMG\Script\Object\vault door.cs" />
     <Compile Include="Assets\HMG\Script\FirebaseChat\TextCameraVeiw.cs" />
     <Compile Include="Assets\HMG\Script\FirebaseChat\NPCChatTest.cs" />
     <Compile Include="Assets\KHS\Scripts\Class\NPCData.cs" />
     <Compile Include="Assets\YJ\Scripts\AddToPlayer\PlayerDisguiser.cs" />
     <Compile Include="Assets\KJH\Scripts\MasterSlider.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Class\ChaseState.cs" />
+    <Compile Include="Assets\YJ\Assets\QA_Office 1\Scripts\Elevator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
     <Compile Include="Assets\KHS\Scripts\Class\NamedNPC.cs" />
     <Compile Include="Assets\YJ\Scripts\AddToPlayer\RagdollGrabber.cs" />
-    <Compile Include="Assets\YJ\Assets\QA_Office\Scripts\ElevatorManager.cs" />
     <Compile Include="Assets\HMG\Script\Login\LoginAcount.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver2\Class\PatrolState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
     <Compile Include="Assets\KJH\Scripts\BGMSlider.cs" />
     <Compile Include="Assets\YJ\Assets\Synty\AnimationBaseLocomotion\Samples\Scripts\InputSystem\InputReader.cs" />
-    <Compile Include="Assets\YJ\Assets\QA_Office\Scripts\Elevator.cs" />
     <Compile Include="Assets\YJ\Assets\Synty\AnimationBaseLocomotion\Samples\Scripts\SamplePlayerAnimationController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
     <Compile Include="Assets\KJH\Scripts\SoundManager.cs" />
@@ -162,13 +160,14 @@
     <Compile Include="Assets\YJ\Scripts\AddToCamera\CameraController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\YJ\Scripts\AddToPlayer\RootMotionController.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Function Module\TNPCController.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver2\Command\ChaseCommand.cs" />
     <Compile Include="Assets\KHS\Scripts\ModuleFunction\NPCController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
-    <None Include="Assets\YJ\Assets\QA_Office\ReadMe.txt" />
+    <None Include="Assets\YJ\Assets\QA_Office 1\ReadMe.txt" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Roboto-Bold - License.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile-2-Pass.shader" />
     <None Include="Assets\Firebase\Plugins\x86_64\FirebaseCppDatabase.dll" />
@@ -218,7 +217,7 @@
     <None Include="Assets\YJ\Assets\Rifle_01_v25\Docs\Military_Rifle_Unity_Info.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
-    <None Include="Assets\YJ\Assets\QA_Office\Shaders\QAtmo_3dText.shader" />
+    <None Include="Assets\YJ\Assets\QA_Office 1\Shaders\QAtmo_3dText.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -1463,12 +1462,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
-      <Project>{9C16297A-D411-6A9C-0345-472A8E458687}</Project>
-      <Name>Assembly-CSharp-firstpass</Name>
-    </ProjectReference>
     <ProjectReference Include="Kamgam.PowerPivot.csproj">
-      <Project>{2924B474-7CFC-49A1-2162-8508F23B8240}</Project>
+      <Project>{7CDA17E7-1B30-EFAC-1032-5F2FF8504E64}</Project>
       <Name>Kamgam.PowerPivot</Name>
     </ProjectReference>
   </ItemGroup>
