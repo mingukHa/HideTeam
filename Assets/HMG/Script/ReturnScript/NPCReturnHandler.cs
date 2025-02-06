@@ -6,24 +6,14 @@ public class NPCReturnHandler : MonoBehaviour
     private Vector3 npcPosition;
     private Quaternion npcRotation;
     private GameObject player;
-    
+    public ReturnManager returnManager;
     public float recordTime = 3f; // 기본 저장 시간
     private SceneDataStack sceneDataStack;
 
     private void Start()
     {
         player = GameObject.FindWithTag("Player");
-
-        // 씬의 ReturnManager가 존재하면 SceneDataStack을 가져옴
-        ReturnManager returnManager = FindObjectOfType<ReturnManager>();
-        if (returnManager != null)
-        {
-            sceneDataStack = returnManager.GetSceneDataStack();
-        }
-        else
-        {
-            Debug.LogError("ReturnManager를 찾을 수 없습니다!");
-        }
+        sceneDataStack = returnManager.GetSceneDataStack();
     }
 
     public IEnumerator ReturnStack(float maxTime)
