@@ -1,25 +1,15 @@
-using System.Collections.Generic;
+using UnityEngine;
 
 public abstract class NPCState
 {
-    protected TNPCController npc;
-    protected List<ICommand> actions = new List<ICommand>();
+    protected TNPCController _npcController;
 
     public NPCState(TNPCController npc)
     {
-        this.npc = npc;
+        _npcController = npc;
     }
 
-    public virtual void Enter()
-    {
-        foreach (var action in actions)
-            action.Execute();   // 상태에 진입하면 행동 실행
-    }
-    public virtual void Exit()
-    {
-        foreach (var action in actions)
-            action.End();       // 상태에서 나가면 행동 종료
-    }
-
+    public virtual void Enter() { }
+    public virtual void Exit() { }
     public abstract void Update();
 }

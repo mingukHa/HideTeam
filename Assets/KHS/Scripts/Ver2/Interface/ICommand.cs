@@ -1,5 +1,7 @@
+using UnityEngine;
 public interface ICommand
 {
-    void Execute();
-    void End();
+    public void Execute();
+    public bool IsFinished();
+    public void End();
 }
