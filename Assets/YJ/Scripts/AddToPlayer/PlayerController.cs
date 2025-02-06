@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class PlayerController : MonoBehaviour
     private float mouseSensitivity = 5f;
     private bool isMoving = false;
     private bool isCrouching = false;
+
+    public Image eImage;
+    public Slider eSlider;
 
     private void Start()
     {
@@ -37,6 +41,8 @@ public class PlayerController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // NPCIdentifier가 있는 오브젝트와 충돌 시, currentNPC 설정
+        eImage.gameObject.SetActive(true);
+        eSlider.gameObject.SetActive(true);
         NPCIdentifier npc = other.GetComponent<NPCIdentifier>();
         if (npc != null)
         {
@@ -111,7 +117,7 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerAction()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKey(KeyCode.E))
         {
             disguiser.ChangeAppearance(currentNPC); // NPC 정보를 사용해 변장 실행
         }
