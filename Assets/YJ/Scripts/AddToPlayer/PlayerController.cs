@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour
             gun.SetActive(true);
         }
 
-        Time.timeScale = 0.2f; // 슬로우 모션 적용
+        Time.timeScale = 0.6f; // 슬로우 모션 적용
         anim.SetTrigger("Suicide");
 
         // 애니메이션 재생 후 자의적 루프(자살) 로직 추가할 자리
