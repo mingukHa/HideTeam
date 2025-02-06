@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -25,7 +26,7 @@ public class ReturnManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            StartCoroutine(StartNPCRecording());
+            StartCoroutine(StartNPCRecording()); //테스트용임 콜백으로 변경 해야함
         }
 
         if (Input.GetKeyDown(KeyCode.R))
@@ -48,7 +49,10 @@ public class ReturnManager : MonoBehaviour
         Debug.Log("모든 NPC에게 ReturnStack() 실행 명령");
 
         // 씬 내 모든 NPC를 찾음
-        NPCReturnHandler[] npcs = FindObjectsOfType<NPCReturnHandler>();
+        //NPCReturnHandler[] npcs = FindObjectsOfType<NPCReturnHandler>();
+        GameObject[] npcObjects = GameObject.FindGameObjectsWithTag("NPC");
+        Debug.Log($"{npcObjects.Length}");
+        NPCReturnHandler[] npcs = System.Array.ConvertAll(npcObjects, obj => obj.GetComponent<NPCReturnHandler>()).Where(npc => npc != null).ToArray();
 
         foreach (NPCReturnHandler npc in npcs)
         {
