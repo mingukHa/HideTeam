@@ -33,7 +33,7 @@ public class SoundManager : MonoBehaviour
     private void OnSceneLoaded(Scene name0, LoadSceneMode name1)
     {
         //LoginScene이란 이름이 동일한 경우 해당 BGM 발생
-        //bgmList[0]에 들어갈 bgm이름 LobbyScene으로 설정
+        //bgmList[0]에 들어갈 bgm이름 LoginScene으로 설정
         if (name0.name == bgmList[0].name)
             BGMPlay(bgmList[0]);
 
