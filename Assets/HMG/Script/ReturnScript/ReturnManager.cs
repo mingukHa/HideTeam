@@ -6,12 +6,13 @@ public class ReturnManager : MonoBehaviour
 {
     private SceneDataStack sceneDataStack = new SceneDataStack();
     private GameObject Player;
-    public FadeOut fadeout;
+    public GameObject fadeout;
     [SerializeField]
     private GameObject Post;
     [SerializeField]
     private PlayerController mouse;
     private CharacterController PlayerControllers;
+    private RootMotionController RootMotionController;
 
     private Vector3 Playerposition;
     private Vector3 Npcposition;
@@ -26,7 +27,7 @@ public class ReturnManager : MonoBehaviour
         Player = GameObject.FindWithTag("Player");
         PlayerControllers = Player.GetComponent<CharacterController>();
         npcAnimator = GetComponent<Animator>();
-
+        RootMotionController = Player.GetComponent<RootMotionController>();
 
     }
 
@@ -78,6 +79,7 @@ public class ReturnManager : MonoBehaviour
     {
         PlayerControllers.enabled = false;
         mouse.enabled = false;
+        RootMotionController.enabled = false;
     }
 
     public IEnumerator ReturnStack(float MaxTime)
