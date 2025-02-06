@@ -56,6 +56,14 @@ public class NPC_OldMan : NPCFSM
             select.SetActive(true);
             ChangeState(State.Talk);
             chat.LoadNPCDialogue(npc, 0);
+            if(Input.GetKeyDown(KeyCode.Keypad1))
+            {
+
+            }
+            if(Input.GetKeyDown(KeyCode.Keypad1))
+            {
+
+            }
         }
     }
     private void OnTriggerExit(Collider other)
