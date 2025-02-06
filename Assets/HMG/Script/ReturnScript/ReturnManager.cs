@@ -48,8 +48,7 @@ public class ReturnManager : MonoBehaviour
     {
         Debug.Log("모든 NPC에게 ReturnStack() 실행 명령");
 
-        // 씬 내 모든 NPC를 찾음
-        //NPCReturnHandler[] npcs = FindObjectsOfType<NPCReturnHandler>();
+        
         GameObject[] npcObjects = GameObject.FindGameObjectsWithTag("NPC");
         Debug.Log($"{npcObjects.Length}");
         NPCReturnHandler[] npcs = System.Array.ConvertAll(npcObjects, obj => obj.GetComponent<NPCReturnHandler>()).Where(npc => npc != null).ToArray();
