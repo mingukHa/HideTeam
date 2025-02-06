@@ -38,12 +38,12 @@ public class SoundManager : MonoBehaviour
             BGMPlay(bgmList[0]);
 
         //MainScene 용
-        //else if (name0.name == bgmList[1].name)
-        //    BGMPlay(bgmList[1]);
+        else if (name0.name == bgmList[1].name)
+            BGMPlay(bgmList[1]);
 
         if (PlayerPrefs.HasKey("MasterVolume"))
         {
-            MasterSlider masterSliderObject = FindAnyObjectByType<MasterSlider>();
+            MasterSlider masterSliderObject = FindAnyObjectByType<MasterSlider>(FindObjectsInactive.Include);
             if (masterSliderObject)
             {
                 masterSlider = masterSliderObject.GetComponentInChildren<Slider>();
@@ -62,7 +62,7 @@ public class SoundManager : MonoBehaviour
         if (PlayerPrefs.HasKey("BGMVolume"))
         {
             //BGMSlider 스크립트를 가지고있는 오브젝트를 찾는다.
-            BGMSlider bgmSliderObject = FindAnyObjectByType<BGMSlider>();
+            BGMSlider bgmSliderObject = FindAnyObjectByType<BGMSlider>(FindObjectsInactive.Include);
 
             if (bgmSliderObject)
             {
@@ -88,7 +88,7 @@ public class SoundManager : MonoBehaviour
         if (PlayerPrefs.HasKey("SFXVolume"))
         {
             //SFXSlider 스크립트를 가지고있는 오브젝트를 찾는다.
-            SFXSlider sfxSliderObject = FindAnyObjectByType<SFXSlider>();
+            SFXSlider sfxSliderObject = FindAnyObjectByType<SFXSlider>(FindObjectsInactive.Include);
 
             if (sfxSliderObject)
             {
