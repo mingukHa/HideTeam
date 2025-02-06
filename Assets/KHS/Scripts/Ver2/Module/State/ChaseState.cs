@@ -7,7 +7,7 @@ public class ChaseState : NPCState
     public override void Enter()
     {
         Debug.Log(_npcController.npcName + " is now CHASING.");
-        _npcController.Invoker.AddCommand(new MoveCommand(_npcController, _npcController.GetTargetPosition()));
+        _npcController.Invoker.AddCommand(new MoveCommand(_npcController));
     }
 
     public override void Update()
