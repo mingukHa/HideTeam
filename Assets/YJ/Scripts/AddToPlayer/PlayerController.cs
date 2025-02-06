@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -7,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     private NPCIdentifier currentNPC;
     private PlayerDisguiser disguiser;
+    public GameObject gun = null;
 
     private float mouseX = 0;
     private float mouseSensitivity = 5f;
@@ -123,6 +125,34 @@ public class PlayerController : MonoBehaviour
         {
             // NPC 무력화 로직 추가
             anim.SetTrigger("Neutralize");
-        }    
+        }
+
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            StartCoroutine(SuicideCoroutine());
+        }
+    }
+
+    private IEnumerator SuicideCoroutine()
+    {
+        disguiser.ResetToDefaultCharacter(); // 기본 복장으로 돌아감
+
+        if (gun != null)
+        {
+            gun.SetActive(true);
+        }
+
+        Time.timeScale = 0.6f; // 슬로우 모션 적용
+        anim.SetTrigger("Suicide");
+
+        // 애니메이션 재생 후 자의적 루프(자살) 로직 추가할 자리
+
+        // 애니메이션 길이를 가져옴
+        float animLength = anim.GetCurrentAnimatorStateInfo(0).length;
+
+        // 애니메이션 길이만큼 대기 (시간 스케일 영향을 받지 않도록 WaitForSecondsRealtime 사용)
+        yield return new WaitForSecondsRealtime(animLength);
+
+        Time.timeScale = 1f; // 원래 속도로 복원
     }
 }

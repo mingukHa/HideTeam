@@ -841,9 +841,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1494913014518266548}
   - component: {fileID: 4114980980613155399}
-  - component: {fileID: 3875772623481058109}
-  - component: {fileID: 8608094859911301553}
-  - component: {fileID: 2613244973115576219}
+  - component: {fileID: 5393717357128334016}
+  - component: {fileID: 8854715031110905653}
   m_Layer: 0
   m_Name: BigBoss
   m_TagString: Player
@@ -859,7 +858,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5553665155426236381}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -891,20 +890,8 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &3875772623481058109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5553665155426236381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6d59278e8dc4b8141bfbe41e944fa85b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!143 &8608094859911301553
-CharacterController:
+--- !u!136 &5393717357128334016
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -918,17 +905,15 @@ CharacterController:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
+  m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Height: 2
+  serializedVersion: 2
   m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
+  m_Height: 2
+  m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &2613244973115576219
+--- !u!114 &8854715031110905653
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -937,12 +922,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 5553665155426236381}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8506afa3bb19cb4bbbccf004204552c, type: 3}
+  m_Script: {fileID: 11500000, guid: ea1b2bf2b41a8034a97a5b305155994b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterController: {fileID: 8608094859911301553}
-  animator: {fileID: 4114980980613155399}
-  gravity: 9.81
+  nPCAvatar: {fileID: 9000000, guid: 195afb37342435b47ac9cd8006ce4efe, type: 3}
+  nPCName: PChar_BigBoss
 --- !u!1 &5646127347234271398
 GameObject:
   m_ObjectHideFlags: 0
