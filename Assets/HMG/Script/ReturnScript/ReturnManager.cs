@@ -8,7 +8,7 @@ public class ReturnManager : MonoBehaviour
     private SceneDataStack sceneDataStack = new SceneDataStack();
     private GameObject player;
     private CharacterController playerController;
-
+    private RootMotionController rootMotionController;
     public GameObject fadeOut;
     [SerializeField] private GameObject postEffect;
     [SerializeField] private PlayerController mouseController;
@@ -18,6 +18,7 @@ public class ReturnManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         if (player != null)
         {
+            rootMotionController = player.GetComponent<RootMotionController>();
             playerController = player.GetComponent<CharacterController>();
         }
     }
@@ -89,9 +90,11 @@ public class ReturnManager : MonoBehaviour
     {
         if (playerController != null)
             playerController.enabled = false;
-
         if (mouseController != null)
             mouseController.enabled = false;
+        if (rootMotionController != null)
+            rootMotionController.enabled = false;
+
     }
 
     // SceneDataStack을 다른 스크립트에서 접근할 수 있도록 제공
