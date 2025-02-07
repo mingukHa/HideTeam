@@ -16,14 +16,6 @@ public class NamedNPCController : TNPCController
     private int currentWaypointIndex = 0;
     private bool isWaited = false;
 
-    private void Start()
-    {
-        currentRoute = testRoutine[0];
-    }
-    public bool EventTargetRemove(int _eventIdx)
-    {
-        return eventTriggers[_eventIdx];
-    }
     public void ChangeRoutine(int _nextRouteIdx)
     {
         currentRoute = testRoutine[_nextRouteIdx];
@@ -48,10 +40,30 @@ public class NamedNPCController : TNPCController
         // 웨이포인트 도착 처리
         if (Vector3.Distance(transform.position, targetPosition) < 0.1f && !isWaited)
         {
-            StartCoroutine(WaitingCallRoutine());
+            if (currentWaypointIndex == 0)
+            {
+                if (!eventTriggers[0])
+                    Debug.Log("휴대폰 흘깃이는 애니메이션 재생");
+                else
+                {
+                    Debug.Log("휴대폰 확인 후 휴대폰 집어넣는 애니메이션 재생");
+                }
+                StartCoroutine(WaitingCallRoutine());
+            }
+            else if (currentWaypointIndex == 2)
+            {
+                Debug.Log("흡연 애니메이션 재생");
+                StartCoroutine(WaitingCallRoutine());
+            }
+            else
+            {
+                currentWaypointIndex = (currentWaypointIndex + 1) % currentRoute.waypoints.Count;
+            }
+
             if (isWaited)
                 return true;
         }
+
         return false;
     }
     private IEnumerator WaitingCallRoutine()
@@ -64,19 +76,10 @@ public class NamedNPCController : TNPCController
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-        if (currentWaypointIndex % 2 == 0)
+        if (currentWaypointIndex % currentRoute.waypoints.Count == 0)
         {
-            if (!eventTriggers[0])
-                Debug.Log("휴대폰 흘깃이는 애니메이션 재생");
-            else
-            {
-                Debug.Log("휴대폰 확인 후 휴대폰 집어넣는 애니메이션 재생");
+            if (eventTriggers[0])
                 yield break;
-            }
-        }
-        else
-        {
-            Debug.Log("흡연 애니메이션 재생");
         }
         // 다음 웨이포인트로 이동
         currentWaypointIndex = (currentWaypointIndex + 1) % currentRoute.waypoints.Count;

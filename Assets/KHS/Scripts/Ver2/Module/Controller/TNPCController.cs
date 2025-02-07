@@ -34,6 +34,8 @@ public class TNPCController : MonoBehaviour
         stateMachine = GetComponent<NPCStateMachine>();
         Invoker = GetComponent<CommandInvoker>();
         npcType = GetComponent<NPCType>();
+
+        Debug.Log($"{gameObject.name} - Awake() ½ÇÇàµÊ, npcType: {npcType}");
     }
     private void Start()
     {
