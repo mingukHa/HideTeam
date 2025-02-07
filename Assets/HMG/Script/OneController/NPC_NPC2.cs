@@ -54,18 +54,21 @@ public class NPC_NPC2 : NPCFSM
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (isDead == false)
         {
-            select.SetActive(true);
-            ChangeState(State.Talk);
-            chat.LoadNPCDialogue(npc, 0);
-            if (Input.GetKeyDown(KeyCode.Keypad1))
+            if (other.CompareTag("Player"))
             {
+                select.SetActive(true);
+                ChangeState(State.Talk);
+                chat.LoadNPCDialogue(npc, 0);
+                if (Input.GetKeyDown(KeyCode.Keypad1))
+                {
 
-            }
-            if (Input.GetKeyDown(KeyCode.Keypad2))
-            {
+                }
+                if (Input.GetKeyDown(KeyCode.Keypad2))
+                {
 
+                }
             }
         }
     }
