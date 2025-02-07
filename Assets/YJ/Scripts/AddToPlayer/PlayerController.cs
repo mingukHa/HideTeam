@@ -19,8 +19,14 @@ public class PlayerController : MonoBehaviour
     public Image eImage;    //E키 이미지
     public Slider eSlider;  //E키 게이지
 
+    public Image rImage;    //R키 이미지
+    public Slider rSlider;  //R키 게이지
+
     private float eholdTime = 0f;   //E키 누른 시간
     private float eGoalholdTime = 1f;   //E키 눌러야하는 시간
+
+    private float rholdTime = 0f;   //E키 누른 시간
+    private float rGoalholdTime = 1f;   //E키 눌러야하는 시간
 
     private void Start()
     {
@@ -43,9 +49,15 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // 만약 other 오브젝트의 태그가 "NPC"가 아니면 반환 (실행 X)
+        if (!other.gameObject.CompareTag("NPC")) return;
+
         // NPCIdentifier가 있는 오브젝트와 충돌 시, currentNPC 설정
         eImage.gameObject.SetActive(true);
         eSlider.gameObject.SetActive(true);
+        rImage.gameObject.SetActive(true);
+        rSlider.gameObject.SetActive(true);
+
         NPCIdentifier npc = other.GetComponent<NPCIdentifier>();
         if (npc != null)
         {
@@ -55,8 +67,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (!other.gameObject.CompareTag("NPC")) return;
+
         eImage.gameObject.SetActive(false);
         eSlider.gameObject.SetActive(false);
+        rImage.gameObject.SetActive(false);
+        rSlider.gameObject.SetActive(false);
         // NPCIdentifier가 있는 오브젝트에서 벗어나면 currentNPC 해제
         if (other.GetComponent<NPCIdentifier>() == currentNPC)
         {
@@ -139,9 +155,21 @@ public class PlayerController : MonoBehaviour
             eSlider.value = 0f; //슬라이더 게이지 초기화
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKey(KeyCode.R))
         {
-            disguiser.ResetToDefaultCharacter(); // 기본 복장으로 돌아감
+            rholdTime += Time.deltaTime; //누른 시간 증가
+            rSlider.value = rholdTime / rGoalholdTime;  //시간만큼 슬라이더 게이지
+
+            if (rholdTime >= rGoalholdTime)
+            {
+                disguiser.ResetToDefaultCharacter(); // 기본 복장으로 돌아감
+                rholdTime = 0f; //다시 초기화
+            }
+        }
+        else
+        {
+            rholdTime = 0f; //키에서 손 떼면 0초로 초기화
+            rSlider.value = 0f; //슬라이더 게이지 초기화
         }
 
         if (Input.GetKeyDown(KeyCode.F))
