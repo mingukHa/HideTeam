@@ -13,12 +13,16 @@ public class NPCFSM : MonoBehaviour
     private bool isTalking = false;
     private bool isRagdollActivated = false; // 레그돌 활성화 여부 확인용
     private Quaternion initrotation;
+    private NPCChatTest NPCChatTest;
+    
+    public BoxCollider BoxCollider;
 
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
         rigidbodies = GetComponentsInChildren<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        NPCChatTest = GetComponent<NPCChatTest>();
         // 레그돌 초기 비활성화
         SetRagdollState(false);
         ChangeState(State.Idle);
@@ -49,24 +53,24 @@ public class NPCFSM : MonoBehaviour
             case State.Dead:
                 DeadBehavior();
                 break;
-        }
+        }        //// F 키로 Dead 상태 전환
+        //if (Input.GetKeyDown(KeyCode.F) && currentState != State.Dead)
+        //{
+        //    ChangeState(State.Dead); // Dead 상태로 전환
+        //}
 
-        // F 키로 Dead 상태 전환
-        if (Input.GetKeyDown(KeyCode.F) && currentState != State.Dead)
-        {
-            ChangeState(State.Dead); // Dead 상태로 전환
-        }
+        //// Dead 모션이 끝났는지 확인
+        //if (currentState == State.Dead && !isRagdollActivated)
+        //{
+        //    AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        //    if (stateInfo.IsName("Dead") && stateInfo.normalizedTime >= 1.0f) // Dead 모션이 끝났을 때
+        //    {
+        //        ActivateRagdoll(); // 레그돌 활성화
+        //        isRagdollActivated = true; // 레그돌이 활성화되었음을 표시
+        //    }
+        //}
 
-        // Dead 모션이 끝났는지 확인
-        if (currentState == State.Dead && !isRagdollActivated)
-        {
-            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-            if (stateInfo.IsName("Dead") && stateInfo.normalizedTime >= 1.0f) // Dead 모션이 끝났을 때
-            {
-                ActivateRagdoll(); // 레그돌 활성화
-                isRagdollActivated = true; // 레그돌이 활성화되었음을 표시
-            }
-        }
+
     }
 
     protected virtual void ChangeState(State newState)
@@ -144,17 +148,46 @@ public class NPCFSM : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        if (isDead == false)
+        {
+            if (other.CompareTag("Player"))
+               {
+               Debug.Log("바라보기 코루틴 시작");
+               StartCoroutine(TalkView());
+                }
+        }
+    }
+    private void OnTriggerStay(Collider other)
+    {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("바라보기 코루틴 시작");
-            StartCoroutine(TalkView());
+            // F 키로 Dead 상태 전환
+            if (Input.GetKeyDown(KeyCode.F) && currentState != State.Dead)
+            {
+                ChangeState(State.Dead); // Dead 상태로 전환
+                NPCChatTest.enabled = false;
+                
+            }
+
+            // Dead 모션이 끝났는지 확인
+            if (currentState == State.Dead && !isRagdollActivated)
+            {
+                AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+                if (stateInfo.IsName("Dead") && stateInfo.normalizedTime >= 1.0f) // Dead 모션이 끝났을 때
+                {
+                    ActivateRagdoll(); // 레그돌 활성화
+                    isRagdollActivated = true; // 레그돌이 활성화되었음을 표시
+                    
+                    //StopCoroutine(TalkView());
+                }
+            }
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-
+            
             StopCoroutine(TalkView());
             transform.rotation = initrotation;
             isTalking = false;

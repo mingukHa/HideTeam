@@ -38,7 +38,7 @@ public class ReturnManager : MonoBehaviour
             StartCoroutine(ReturnStack(3f));
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             SceneData popReturn = sceneDataStack.PopSceneData();
 
@@ -56,7 +56,7 @@ public class ReturnManager : MonoBehaviour
 
     public IEnumerator ReturnPlay()
     {
-
+        yield return new WaitForSeconds(0.4f);
         while (sceneDataStack.GetSceneCount() > 0)
         {
             SceneData popReturn = sceneDataStack.PopSceneData();
