@@ -18,6 +18,10 @@
 *.csproj
 
 # 사용자별 파일 제외
+# Visual Studio project files
+*.csproj
+*.sln
+*.user
 .vs/
 .gradle/
 *.suo
