@@ -61,7 +61,7 @@ public class NPC_OldMan : NPCFSM
             {
 
             }
-            if(Input.GetKeyDown(KeyCode.Keypad1))
+            if(Input.GetKeyDown(KeyCode.Keypad2))
             {
 
             }
