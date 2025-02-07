@@ -163,6 +163,7 @@
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\Class\CommandInvoker.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\YJ\Scripts\AddToPlayer\RootMotionController.cs" />
+    <Compile Include="Assets\KJH\Scripts\PlayerCanvasFollow.cs" />
     <Compile Include="Assets\HMG\Script\OneController\NPC_NPC2.cs" />
     <Compile Include="Assets\KHS\Scripts\ModuleFunction\NPCController.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\ChaseState.cs" />

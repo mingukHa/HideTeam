@@ -49,10 +49,10 @@ public class NPC_OldMan : NPCFSM
     {
         base.DeadBehavior();
         npcchatbox.SetActive(false);
-        chat.LoadNPCDialogue("NULL", 0);
+        chat.LoadNPCDialogue("NULL", 0); //죽은자는 말이 없다
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other) //대화 시작
     {
         if (isDead == false)
         {
@@ -61,19 +61,24 @@ public class NPC_OldMan : NPCFSM
                 select.SetActive(true);
                 ChangeState(State.Talk);
                 chat.LoadNPCDialogue(npc, 0);
-                if (Input.GetKeyDown(KeyCode.Keypad1))
-                {
-
-                }
-                if (Input.GetKeyDown(KeyCode.Keypad2))
-                {
-
-                }
             }
         }
     }
-
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerStay(Collider other) //대화 선택지
+    {
+        if (isDead == false)
+        {
+            if (Input.GetKey(KeyCode.O))
+            {
+                chat.LoadNPCDialogue(npc, 2);
+            }
+            if (Input.GetKey(KeyCode.P))
+            {
+                chat.LoadNPCDialogue(npc, 1);
+            }
+        }
+    }
+    private void OnTriggerExit(Collider other) //대화 종료
     {
         if (other.CompareTag("Player"))
         {

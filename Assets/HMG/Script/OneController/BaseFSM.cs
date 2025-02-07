@@ -162,7 +162,7 @@ public class NPCFSM : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             // F 키로 Dead 상태 전환
-            if (Input.GetKeyDown(KeyCode.F) && currentState != State.Dead)
+            if (Input.GetKey(KeyCode.F) && currentState != State.Dead)
             {
                 ChangeState(State.Dead); // Dead 상태로 전환
                 NPCChatTest.enabled = false;
