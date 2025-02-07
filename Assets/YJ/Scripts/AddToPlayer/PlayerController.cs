@@ -52,6 +52,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        eImage.gameObject.SetActive(false);
+        eSlider.gameObject.SetActive(false);
         // NPCIdentifier가 있는 오브젝트에서 벗어나면 currentNPC 해제
         if (other.GetComponent<NPCIdentifier>() == currentNPC)
         {
