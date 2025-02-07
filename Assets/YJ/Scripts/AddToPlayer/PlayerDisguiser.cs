@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerDisguiser : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PlayerDisguiser : MonoBehaviour
 
     private Animator anim;
     private GameObject currentCharacter; // 현재 활성화된 캐릭터 추적
+
 
     private void Start()
     {

@@ -61,11 +61,10 @@
     <Analyzer Include="C:\UnityEditor\6000.0.34f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.UIToolkit.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\KHS\Scripts\Ver2\Module\Command\MoveCommand.cs" />
     <Compile Include="Assets\YJ\QA_Office 1\Scripts\Clock.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver2\Command\DetectCommand.cs" />
     <Compile Include="Assets\HMG\Script\UI\ESCMenu.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver2\Command\MoveCommand.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\KHS\Scripts\ModuleFunction\NormalGuardController.cs" />
@@ -74,7 +73,6 @@
     <Compile Include="Assets\KHS\Scripts\Class\ScriptableObject\AIModule.cs" />
     <Compile Include="Assets\YJ\Assets\Synty\AnimationBaseLocomotion\Samples\Scripts\SampleObjectLockOn.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver2\Interface\ICommand.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver3\Controller\ENPCController.cs" />
     <Compile Include="Assets\HMG\Script\ReturnScript\ReturnManager.cs" />
     <Compile Include="Assets\HMG\Asset\Fighter Pack Bundle\Heavy Fighter Mecanim Animation Pack\Code\CameraControl.cs" />
     <Compile Include="Assets\KHS\Scripts\Interface\IFaction.cs" />
@@ -85,10 +83,13 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\HMG\Script\UI\FadeOut.cs" />
     <Compile Include="Assets\KHS\Scripts\Class\AIConState.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Module\Command\DetectCommand.cs" />
     <Compile Include="Assets\YJ\Assets\Synty\AnimationBaseLocomotion\Samples\Scripts\SampleCameraController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\HMG\Script\Lobby\LobbyMain.cs" />
     <Compile Include="Assets\YJ\Scripts\AddToNPCs\NPCIdentifier.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Module\Command\ChaseCommand.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Module\Controller\NPCType.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
     <Compile Include="Assets\KHS\Scripts\TestPlayerControl.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
@@ -104,13 +105,11 @@
     <Compile Include="Assets\HMG\Asset\Fighter Pack Bundle\Heavy Fighter Mecanim Animation Pack\Code\FighterAnimationDemo.cs" />
     <Compile Include="Assets\KHS\Scripts\Class\ScriptableObject\PatrolRoute.cs" />
     <Compile Include="Assets\YJ\QA_Office 1\Scripts\ElevatorManager.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver2\Class\NPCState.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver3\Class\ENPCClassType.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\NPCState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\KHS\Scripts\Class\FactionNPC.cs" />
     <Compile Include="Assets\KHS\Scripts\MarkerManager.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver2\Function Module\NPCStateMachine.cs" />
     <Compile Include="Assets\KHS\Scripts\Interface\IName.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SimpleScript.cs" />
@@ -119,6 +118,7 @@
     <Compile Include="Assets\HMG\Script\ReturnScript\NPCReturnHandler.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_DigitValidator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_FrameRateCounter.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Module\Controller\TNPCController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\KJH\Scripts\SceneButton.cs" />
@@ -128,16 +128,15 @@
     <Compile Include="Assets\HMG\Script\ReturnScript\SceneData.cs" />
     <Compile Include="Assets\YJ\Scripts\AddToPlayer\PlayerController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver3\Enum\EFaction.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver2\Class\CommandInvoker.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\IdleState.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\NPCStateMachine.cs" />
     <Compile Include="Assets\HMG\Script\Object\vault door.cs" />
     <Compile Include="Assets\HMG\Script\FirebaseChat\NPCChatTest.cs" />
     <Compile Include="Assets\HMG\Script\FirebaseChat\TextCameraVeiw.cs" />
     <Compile Include="Assets\KHS\Scripts\Class\NPCData.cs" />
     <Compile Include="Assets\YJ\Scripts\AddToPlayer\PlayerDisguiser.cs" />
     <Compile Include="Assets\KJH\Scripts\MasterSlider.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver2\Class\ChaseState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
     <Compile Include="Assets\KHS\Scripts\Class\NamedNPC.cs" />
@@ -153,15 +152,14 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
     <Compile Include="Assets\KHS\Scripts\ShoulderViewCam.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver2\Class\IdleState.cs" />
     <Compile Include="Assets\YJ\QA_Office 1\Scripts\Elevator.cs" />
     <Compile Include="Assets\HMG\Script\Lobby\Chapter1Progress.cs" />
     <Compile Include="Assets\YJ\Scripts\AddToCamera\CameraController.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Module\Class\CommandInvoker.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\YJ\Scripts\AddToPlayer\RootMotionController.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver2\Function Module\TNPCController.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver2\Command\ChaseCommand.cs" />
     <Compile Include="Assets\KHS\Scripts\ModuleFunction\NPCController.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\ChaseState.cs" />
     <Compile Include="Assets\YJ\QA_Office 1\Scripts\Door.cs" />
   </ItemGroup>
   <ItemGroup>

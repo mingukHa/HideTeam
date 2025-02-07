@@ -56,4 +56,5 @@ Assets/Plugins/
 Assets/ExternalDependencyManager/
 Assets/Editor Default Resources/
 ProjectSettings/EditorBuildSettings.asset
+Assembly-CSharp.csproj/
 
