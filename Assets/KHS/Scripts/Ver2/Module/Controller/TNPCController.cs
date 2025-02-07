@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class TNPCController : MonoBehaviour
@@ -23,8 +21,9 @@ public class TNPCController : MonoBehaviour
     public LayerMask obstructionMask; // 장애물 레이어 (벽 등)
     public float detectionTime = 2f; // 발각까지 걸리는 시간
     public float currentDetectionTime = 0f;
-    public bool istargetSituationDetected = false; // 타겟 상황이 인지되었는지 여부
+    public bool istargetSituationDetected = false;
     public Transform targetSituation; // 반응해야하는 타겟 Transform
+    public Vector3 _target = Vector3.zero;
 
 
     private void Awake()
@@ -35,24 +34,30 @@ public class TNPCController : MonoBehaviour
     private void Start()
     {
         stateMachine.ChangeState(new IdleState(this));
+        _target = targetSituation.transform.position;
         
     }
 
-    public void MoveToTarget(Vector3 target)
+    public bool MoveToTarget(Vector3 _target)
     {
-        if (target == null) return;
+        if (targetSituation == null) return true;
 
-        Vector3 directionToTarget = (target - transform.position).normalized;
+        Vector3 directionToTarget = (_target - transform.position).normalized;
         Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime * 100f);
 
-        transform.position = Vector3.MoveTowards(transform.position, target, walkSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, _target, walkSpeed * Time.deltaTime);
+        if (Vector3.Distance(transform.position, _target) <= 0.5f)
+            return true;
+        else
+            return false;
     }
 
     public bool HasDetectedTarget()
     {
-        Debug.Log("HDT호출됨");
+        Debug.Log("탐지중...");
         istargetSituationDetected = false;
+        bool tempReturn = false;
 
         // 시야 범위 안의 모든 대상 확인
         Collider[] targetsInViewRadius = Physics.OverlapSphere(transform.position, viewRadius, targetMask);
@@ -73,6 +78,7 @@ public class TNPCController : MonoBehaviour
                     if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
                     {
                         Debug.DrawLine(transform.position, targetSituation.position, Color.red); // 디버그용 시야 선
+                        _target = targetSituation.position;
                         istargetSituationDetected = true;
                     }
                     else
@@ -89,7 +95,7 @@ public class TNPCController : MonoBehaviour
             {
                 Debug.Log("플레이어 발각됨!");
                 // 추가 처리: 알람 발동, 경비 상태 변화 등
-
+                tempReturn = true;
                 currentDetectionTime = detectionTime;
             }
             else
@@ -100,11 +106,15 @@ public class TNPCController : MonoBehaviour
         else
         {
             currentDetectionTime -= Time.deltaTime;
-            if (currentDetectionTime < 0)
-                currentDetectionTime = 0;
-        }
 
-        return istargetSituationDetected;
+            if (currentDetectionTime <= 0)
+            {
+                Debug.Log("플레이어 놓침!");
+                currentDetectionTime = 0;
+                tempReturn = false;
+            }
+        }
+        return tempReturn;
     }
 
     public Vector3 GetTargetPosition()
