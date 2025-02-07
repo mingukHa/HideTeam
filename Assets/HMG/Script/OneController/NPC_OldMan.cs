@@ -70,11 +70,11 @@ public class NPC_OldMan : NPCFSM
 
         if (other.CompareTag("Player"))
         {
-            if (Input.GetKey(KeyCode.O))
+            if (Input.GetKey(KeyCode.Alpha1))
             {
                 chat.LoadNPCDialogue(npc, 2);
             }
-            if (Input.GetKey(KeyCode.P))
+            if (Input.GetKey(KeyCode.Alpha2))
             {
                 chat.LoadNPCDialogue(npc, 1);
             }
