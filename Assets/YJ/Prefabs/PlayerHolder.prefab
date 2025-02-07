@@ -3844,6 +3844,8 @@ MonoBehaviour:
   gun: {fileID: 6584539960838153434}
   eImage: {fileID: 0}
   eSlider: {fileID: 0}
+  rImage: {fileID: 0}
+  rSlider: {fileID: 0}
 --- !u!114 &7822336729101549202
 MonoBehaviour:
   m_ObjectHideFlags: 0
