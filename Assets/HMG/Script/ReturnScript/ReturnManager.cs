@@ -35,7 +35,7 @@ public class ReturnManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            StartCoroutine(ReturnStack(3f));
+            StartCoroutine(ReturnStack(1f));
         }
 
         if (Input.GetKeyDown(KeyCode.K))
@@ -45,6 +45,7 @@ public class ReturnManager : MonoBehaviour
             if (popReturn != null)
             {
                 PlayerOff();
+                npcAnimator.Play("Talk");
                 StartCoroutine(ReturnPlay());
             }
             else

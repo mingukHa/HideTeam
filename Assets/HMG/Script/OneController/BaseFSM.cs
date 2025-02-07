@@ -15,7 +15,7 @@ public class NPCFSM : MonoBehaviour
     private bool isRagdollActivated = false; // 레그돌 활성화 여부 확인용
     private Quaternion initrotation;
     private NPCChatTest NPCChatTest;
-    public BoxCollider BoxCollider;
+    public SphereCollider BoxCollider;
 
     protected virtual void Start()
     {
