@@ -9,12 +9,12 @@ public class NPCFSM : MonoBehaviour
     private Transform player;
     protected Animator animator;
     private Rigidbody[] rigidbodies;
-    public bool isDead = false;
-    private bool isTalking = false;
+    public bool isDead = false; //죽음 상태
+    private bool isTalking = false; //대화 상태
+    private bool isText = false; //죽으면 채팅 끄기 
     private bool isRagdollActivated = false; // 레그돌 활성화 여부 확인용
     private Quaternion initrotation;
     private NPCChatTest NPCChatTest;
-    
     public BoxCollider BoxCollider;
 
     protected virtual void Start()
