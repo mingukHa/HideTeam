@@ -6,7 +6,7 @@ public class NPC_OldMan : NPCFSM
     [SerializeField] private GameObject select;
     private NPCChatTest chat;
     public GameObject npcchatbox;
-
+    public ReturnManager returnManager;
     private string npc = "NPC3";
     protected override void Start()
     {
@@ -73,6 +73,7 @@ public class NPC_OldMan : NPCFSM
             if (Input.GetKey(KeyCode.Alpha1))
             {
                 chat.LoadNPCDialogue(npc, 2);
+                returnManager.ReturnStack(2f);
             }
             if (Input.GetKey(KeyCode.Alpha2))
             {
