@@ -149,8 +149,8 @@ public class NPCFSM : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (isDead == false)
-        { 
-          if (other.CompareTag("Player"))
+        {
+            if (other.CompareTag("Player"))
                {
                Debug.Log("바라보기 코루틴 시작");
                StartCoroutine(TalkView());
@@ -177,7 +177,8 @@ public class NPCFSM : MonoBehaviour
                 {
                     ActivateRagdoll(); // 레그돌 활성화
                     isRagdollActivated = true; // 레그돌이 활성화되었음을 표시
-                    BoxCollider.enabled = false;
+                    
+                    //StopCoroutine(TalkView());
                 }
             }
         }
@@ -186,7 +187,7 @@ public class NPCFSM : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-
+            
             StopCoroutine(TalkView());
             transform.rotation = initrotation;
             isTalking = false;
