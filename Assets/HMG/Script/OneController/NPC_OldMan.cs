@@ -48,6 +48,7 @@ public class NPC_OldMan : NPCFSM
     {
         base.DeadBehavior();
         npcchatbox.SetActive(false);
+        chat.LoadNPCDialogue("NULL", 0);
     }
 
     private void OnTriggerEnter(Collider other)
