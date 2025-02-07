@@ -24,6 +24,6 @@ public class DetectCommand : ICommand
 
     public void End()
     {
-        Debug.Log("DetectTargetAction : Ended");
+        Debug.Log("DetectCommand : Ended");
     }
 }
