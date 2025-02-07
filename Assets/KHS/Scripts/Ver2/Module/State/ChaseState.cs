@@ -6,16 +6,21 @@ public class ChaseState : NPCState
 
     public override void Enter()
     {
-        Debug.Log(_npcController.npcName + " is now CHASING.");
-        _npcController.Invoker.AddCommand(new MoveCommand(_npcController));
+        NPCType npcType = _npcController.npcType;
+        if (npcType.GetComponent<DefaultNPC>())
+        {
+            Debug.Log(_npcController.npcName + " is now CHASING.");
+            _npcController.Invoker.AddCommand(new MoveCommand(_npcController));
+        }
+        if (npcType.GetComponent<GuardNPC>())
+        {
+            Debug.Log(_npcController.npcName + " is now CHASING.");
+            _npcController.Invoker.AddCommand(new MoveCommand(_npcController.GetComponent<GuardController>()));
+        }
     }
 
     public override void Update()
     {
-        _npcController.Invoker.ExecuteCommands();
-        if (_npcController.HasDetectedTarget() == false)
-        {
-            _npcController.stateMachine.ChangeState(new IdleState(_npcController));
-        }
+        _npcController.StartCoroutine(JudgeCoroutine(_npcController.HasDetectedTarget() == false, new IdleState(_npcController)));
     }
 }

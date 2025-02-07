@@ -1,7 +1,10 @@
 using UnityEngine;
 
+[RequireComponent(typeof(NPCStateMachine)),RequireComponent(typeof(CommandInvoker))]
 public class TNPCController : MonoBehaviour
 {
+    public NPCType npcType;
+
     [Header("NPC 정보")]
     public string npcName = string.Empty;
     public NPCStateMachine stateMachine;
@@ -30,12 +33,13 @@ public class TNPCController : MonoBehaviour
     {
         stateMachine = GetComponent<NPCStateMachine>();
         Invoker = GetComponent<CommandInvoker>();
+        npcType = GetComponent<NPCType>();
     }
     private void Start()
     {
         stateMachine.ChangeState(new IdleState(this));
         _target = targetSituation.transform.position;
-        
+
     }
 
     public bool MoveToTarget(Vector3 _target)
@@ -107,7 +111,7 @@ public class TNPCController : MonoBehaviour
         {
             currentDetectionTime -= Time.deltaTime;
 
-            if (currentDetectionTime <= 0)
+            if (currentDetectionTime < 0)
             {
                 Debug.Log("플레이어 놓침!");
                 currentDetectionTime = 0;
