@@ -7,12 +7,12 @@ public class ChaseState : NPCState
     public override void Enter()
     {
         NPCType npcType = _npcController.npcType;
-        if (npcType.GetComponent<DefaultNPC>())
+        if (npcType is DefaultNPC)
         {
             Debug.Log(_npcController.npcName + " is now CHASING.");
             _npcController.Invoker.AddCommand(new MoveCommand(_npcController));
         }
-        if (npcType.GetComponent<GuardNPC>())
+        if (npcType is GuardNPC)
         {
             Debug.Log(_npcController.npcName + " is now CHASING.");
             _npcController.Invoker.AddCommand(new MoveCommand(_npcController.GetComponent<GuardController>()));
