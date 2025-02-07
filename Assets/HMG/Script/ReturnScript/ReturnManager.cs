@@ -35,7 +35,7 @@ public class ReturnManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.T))
         {
-            StartCoroutine(ReturnStack(1f));
+            StartCoroutine(ReturnStack(2f));
         }
 
         if (Input.GetKeyDown(KeyCode.K))

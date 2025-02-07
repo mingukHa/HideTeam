@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{2353C182-7C2B-F320-2617-EB49143782B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kamgam.PowerPivot", "Kamgam.PowerPivot.csproj", "{4858AC55-33D6-C550-2A0E-B3D435DA93EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kamgam.PowerPivot", "Kamgam.PowerPivot.csproj", "{2924B474-7CFC-49A1-2162-8508F23B8240}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.Player.csproj", "{B68C4D23-CFBD-D96E-0CCF-2CB7AD316C61}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp.Player", "Assembly-CSharp.Player.csproj", "{B68C4D23-CFBD-D96E-0CCF-2CB7AD316C61}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +19,10 @@ Global
 		{2353C182-7C2B-F320-2617-EB49143782B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2353C182-7C2B-F320-2617-EB49143782B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2353C182-7C2B-F320-2617-EB49143782B5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4858AC55-33D6-C550-2A0E-B3D435DA93EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4858AC55-33D6-C550-2A0E-B3D435DA93EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4858AC55-33D6-C550-2A0E-B3D435DA93EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4858AC55-33D6-C550-2A0E-B3D435DA93EC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2924B474-7CFC-49A1-2162-8508F23B8240}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2924B474-7CFC-49A1-2162-8508F23B8240}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2924B474-7CFC-49A1-2162-8508F23B8240}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2924B474-7CFC-49A1-2162-8508F23B8240}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B68C4D23-CFBD-D96E-0CCF-2CB7AD316C61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B68C4D23-CFBD-D96E-0CCF-2CB7AD316C61}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B68C4D23-CFBD-D96E-0CCF-2CB7AD316C61}.Release|Any CPU.ActiveCfg = Release|Any CPU
