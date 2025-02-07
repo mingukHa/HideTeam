@@ -2650,6 +2650,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 6584539960838153434}
+  eImage: {fileID: 0}
+  eSlider: {fileID: 0}
 --- !u!114 &7822336729101549202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7479,7 +7481,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 217570679599314622}
-  - component: {fileID: 1558776290445002331}
   m_Layer: 0
   m_Name: PChar_Suitman
   m_TagString: Untagged
@@ -7504,28 +7505,6 @@ Transform:
   - {fileID: 6625008989152512829}
   m_Father: {fileID: 8458969453532913975}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &1558776290445002331
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8049245499363119288}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 7aea2d469d67de44f9dd680a5088c739, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8080864609171685717
 GameObject:
   m_ObjectHideFlags: 0
