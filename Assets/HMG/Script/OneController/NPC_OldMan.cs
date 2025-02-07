@@ -66,6 +66,7 @@ public class NPC_OldMan : NPCFSM
             }
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
