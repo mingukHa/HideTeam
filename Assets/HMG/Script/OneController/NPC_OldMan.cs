@@ -64,9 +64,11 @@ public class NPC_OldMan : NPCFSM
             }
         }
     }
-    private void OnTriggerStay(Collider other) //대화 선택지
+    protected override void OnTriggerStay(Collider other)
     {
-        if (isDead == false)
+        base.OnTriggerStay(other); 
+
+        if (other.CompareTag("Player"))
         {
             if (Input.GetKey(KeyCode.O))
             {
@@ -78,6 +80,7 @@ public class NPC_OldMan : NPCFSM
             }
         }
     }
+
     private void OnTriggerExit(Collider other) //대화 종료
     {
         if (other.CompareTag("Player"))
@@ -87,4 +90,5 @@ public class NPC_OldMan : NPCFSM
             chat.LoadNPCDialogue("NULL", 0);
         }
     }
+    
 }

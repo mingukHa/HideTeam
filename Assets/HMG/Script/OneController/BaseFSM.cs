@@ -11,7 +11,7 @@ public class NPCFSM : MonoBehaviour
     private Rigidbody[] rigidbodies;
     public bool isDead = false; //죽음 상태
     private bool isTalking = false; //대화 상태
-    private bool isText = false; //죽으면 채팅 끄기 
+    //private bool isText = false; //죽으면 채팅 끄기 
     private bool isRagdollActivated = false; // 레그돌 활성화 여부 확인용
     private Quaternion initrotation;
     private NPCChatTest NPCChatTest;
@@ -157,7 +157,7 @@ public class NPCFSM : MonoBehaviour
                 }
         }
     }
-    private void OnTriggerStay(Collider other)
+    protected virtual void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -166,9 +166,9 @@ public class NPCFSM : MonoBehaviour
             {
                 ChangeState(State.Dead); // Dead 상태로 전환
                 NPCChatTest.enabled = false;
+                isTalking = false;
                 
             }
-
             // Dead 모션이 끝났는지 확인
             if (currentState == State.Dead && !isRagdollActivated)
             {
