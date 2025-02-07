@@ -16,8 +16,11 @@ public class PlayerController : MonoBehaviour
     private bool isMoving = false;
     private bool isCrouching = false;
 
-    public Image eImage;
-    public Slider eSlider;
+    public Image eImage;    //E키 이미지
+    public Slider eSlider;  //E키 게이지
+
+    private float eholdTime = 0f;   //E키 누른 시간
+    private float eGoalholdTime = 1f;   //E키 눌러야하는 시간
 
     private void Start()
     {
@@ -121,7 +124,19 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.E))
         {
-            disguiser.ChangeAppearance(currentNPC); // NPC 정보를 사용해 변장 실행
+            eholdTime += Time.deltaTime; //누른 시간 증가
+            eSlider.value = eholdTime / eGoalholdTime;  //시간만큼 슬라이더 게이지
+
+            if(eholdTime >= eGoalholdTime)
+            {
+                disguiser.ChangeAppearance(currentNPC); // NPC 정보를 사용해 변장 실행
+                eholdTime = 0f; //다시 초기화
+            }
+        }
+        else
+        {
+            eholdTime = 0f; //키에서 손 떼면 0초로 초기화
+            eSlider.value = 0f; //슬라이더 게이지 초기화
         }
 
         if (Input.GetKeyDown(KeyCode.R))
