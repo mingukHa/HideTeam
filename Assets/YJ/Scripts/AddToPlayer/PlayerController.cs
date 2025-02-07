@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     private float rholdTime = 0f;   //E키 누른 시간
     private float rGoalholdTime = 1f;   //E키 눌러야하는 시간
 
+    private bool isDisguised = false;
+
     private void Start()
     {
         anim = GetComponent<Animator>();
@@ -55,8 +57,6 @@ public class PlayerController : MonoBehaviour
         // NPCIdentifier가 있는 오브젝트와 충돌 시, currentNPC 설정
         eImage.gameObject.SetActive(true);
         eSlider.gameObject.SetActive(true);
-        rImage.gameObject.SetActive(true);
-        rSlider.gameObject.SetActive(true);
 
         NPCIdentifier npc = other.GetComponent<NPCIdentifier>();
         if (npc != null)
@@ -71,8 +71,7 @@ public class PlayerController : MonoBehaviour
 
         eImage.gameObject.SetActive(false);
         eSlider.gameObject.SetActive(false);
-        rImage.gameObject.SetActive(false);
-        rSlider.gameObject.SetActive(false);
+
         // NPCIdentifier가 있는 오브젝트에서 벗어나면 currentNPC 해제
         if (other.GetComponent<NPCIdentifier>() == currentNPC)
         {
@@ -146,6 +145,7 @@ public class PlayerController : MonoBehaviour
             if(eholdTime >= eGoalholdTime)
             {
                 disguiser.ChangeAppearance(currentNPC); // NPC 정보를 사용해 변장 실행
+                isDisguised = true;
                 eholdTime = 0f; //다시 초기화
             }
         }
@@ -155,8 +155,10 @@ public class PlayerController : MonoBehaviour
             eSlider.value = 0f; //슬라이더 게이지 초기화
         }
 
-        if (Input.GetKey(KeyCode.R))
+        if (isDisguised && Input.GetKey(KeyCode.R))
         {
+            rImage.gameObject.SetActive(true);
+            rSlider.gameObject.SetActive(true);
             rholdTime += Time.deltaTime; //누른 시간 증가
             rSlider.value = rholdTime / rGoalholdTime;  //시간만큼 슬라이더 게이지
 
@@ -164,10 +166,13 @@ public class PlayerController : MonoBehaviour
             {
                 disguiser.ResetToDefaultCharacter(); // 기본 복장으로 돌아감
                 rholdTime = 0f; //다시 초기화
+                isDisguised = false;
             }
         }
         else
         {
+            rImage.gameObject.SetActive(false);
+            rSlider.gameObject.SetActive(false);
             rholdTime = 0f; //키에서 손 떼면 0초로 초기화
             rSlider.value = 0f; //슬라이더 게이지 초기화
         }
