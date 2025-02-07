@@ -30,14 +30,14 @@ public class PlayerController : MonoBehaviour
 
     private bool isDisguised = false;
 
-    private ReturnManager returnManager;
+   
 
     private void Start()
     {
         anim = GetComponent<Animator>();
         tr = GetComponent<Transform>();
         disguiser = GetComponent<PlayerDisguiser>();
-        returnManager = GetComponent<ReturnManager>();
+       
     }
 
     private void Update()
@@ -189,6 +189,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K))
         {
             StartCoroutine(SuicideCoroutine());
+            
         }
     }
 
