@@ -17,6 +17,6 @@ public class WaitState : NPCState
 
     public override void Update()
     {
-        _npcController.StartCoroutine(JudgeCoroutine(_npcController.GetComponent<NamedNPCController>().EventTargetRemove(0), new IdleState(_npcController)));
+        _npcController.StartCoroutine(JudgeCoroutine(!_npcController.GetComponent<NamedNPCController>().Routine(), new IdleState(_npcController)));
     }
 }
