@@ -5,7 +5,7 @@ public class NPC_OldMan : NPCFSM
 {
     [SerializeField] private GameObject select;
     private NPCChatTest chat;
-
+    public GameObject npcchatbox;
     private string npc = "NPC3";
     protected override void Start()
     {
@@ -47,6 +47,7 @@ public class NPC_OldMan : NPCFSM
     protected override void DeadBehavior()
     {
         base.DeadBehavior();
+        npcchatbox.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
