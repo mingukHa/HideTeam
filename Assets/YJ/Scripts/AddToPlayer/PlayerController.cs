@@ -22,22 +22,23 @@ public class PlayerController : MonoBehaviour
     public Image rImage;    //R키 이미지
     public Slider rSlider;  //R키 게이지
 
+    public Image fImage;    //K키 이미지
+
     private float eholdTime = 0f;   //E키 누른 시간
     private float eGoalholdTime = 1f;   //E키 눌러야하는 시간
 
-    private float rholdTime = 0f;   //E키 누른 시간
-    private float rGoalholdTime = 1f;   //E키 눌러야하는 시간
+    private float rholdTime = 0f;   //R키 누른 시간
+    private float rGoalholdTime = 1f;   //R키 눌러야하는 시간
 
     private bool isDisguised = false;
 
-   
+    private NPCIdentifier disguisedNPC = null;  //변장한 NPC를 추적
 
     private void Start()
     {
         anim = GetComponent<Animator>();
         tr = GetComponent<Transform>();
         disguiser = GetComponent<PlayerDisguiser>();
-       
     }
 
     private void Update()
@@ -52,19 +53,75 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    // 만약 other 오브젝트의 태그가 "NPC"가 아니면 반환 (실행 X)
+    //    if (!other.gameObject.CompareTag("NPC")) return;
+
+    //    NPCIdentifier npc = other.GetComponent<NPCIdentifier>();    
+    //    NPCFSM npcFSM = other.GetComponent<NPCFSM>(); // NPCFSM 가져오기
+
+    //    if (npcFSM != null && npcFSM.isDead)
+    //    {
+    //        Debug.Log("죽은 NPC와 상호작용");
+    //        // NPCIdentifier가 있는 오브젝트와 충돌 시, currentNPC 설정
+    //        eImage.gameObject.SetActive(true);
+    //        eSlider.gameObject.SetActive(true);
+    //        fImage.gameObject.SetActive(false);
+
+    //        if (npc != null)
+    //        {
+    //            currentNPC = npc;
+    //        }
+    //    }
+    //    else
+    //    {
+    //        // NPC가 살아있을 때 fImage 활성화
+    //        fImage.gameObject.SetActive(true);
+    //        currentNPC = npc; // NPC를 currentNPC에 설정
+    //    }
+    //}
+
+    //실시간으로 UI가 변해야하므로 Stay로 변경
+    private void OnTriggerStay(Collider other)
     {
-        // 만약 other 오브젝트의 태그가 "NPC"가 아니면 반환 (실행 X)
+        // "NPC" 태그를 가진 오브젝트와만 처리
         if (!other.gameObject.CompareTag("NPC")) return;
 
-        // NPCIdentifier가 있는 오브젝트와 충돌 시, currentNPC 설정
-        eImage.gameObject.SetActive(true);
-        eSlider.gameObject.SetActive(true);
-
         NPCIdentifier npc = other.GetComponent<NPCIdentifier>();
+        NPCFSM npcFSM = other.GetComponent<NPCFSM>(); // NPCFSM 가져오기
+
         if (npc != null)
         {
-            currentNPC = npc;
+            // 변장 상태에서, 변장한 NPC와 동일한 NPC에 대해 상호작용 차단
+            if (isDisguised && npc == disguisedNPC)
+            {
+                eImage.gameObject.SetActive(false);
+                eSlider.gameObject.SetActive(false); // E키 UI 비활성화
+                return; // 변장한 NPC와는 상호작용할 수 없으므로 여기서 종료
+            }
+            else
+            {
+                currentNPC = npc; // 변장하지 않았다면, 현재 NPC 설정
+            }
+        }
+
+        if (npcFSM != null)
+        {
+            if (npcFSM.isDead)
+            {
+                // 죽은 NPC와 상호작용 시 E키 활성화
+                eImage.gameObject.SetActive(true);
+                eSlider.gameObject.SetActive(true);
+                fImage.gameObject.SetActive(false); // 죽은 NPC일 때 F키 관련 UI 비활성화
+            }
+            else
+            {
+                // 살아있는 NPC와 상호작용 시 E키 비활성화
+                eImage.gameObject.SetActive(false);
+                eSlider.gameObject.SetActive(false);
+                fImage.gameObject.SetActive(true); // 살아있는 NPC일 때 F키 관련 UI 활성화
+            }
         }
     }
 
@@ -72,14 +129,23 @@ public class PlayerController : MonoBehaviour
     {
         if (!other.gameObject.CompareTag("NPC")) return;
 
-        eImage.gameObject.SetActive(false);
-        eSlider.gameObject.SetActive(false);
+        //NPCFSM npcFSM = other.GetComponent<NPCFSM>();
+
+        //if (npcFSM != null && npcFSM.isDead)
+        //{
+            Debug.Log("죽은 NPC에서 멀어짐");
+            eImage.gameObject.SetActive(false);
+            eSlider.gameObject.SetActive(false);
+        //}
 
         // NPCIdentifier가 있는 오브젝트에서 벗어나면 currentNPC 해제
-        if (other.GetComponent<NPCIdentifier>() == currentNPC)
-        {
+        //if (other.GetComponent<NPCIdentifier>() == currentNPC)
+        //{
             currentNPC = null;
-        }
+        //}
+
+        // NPC가 떠나면 fImage 비활성화
+        //fImage.gameObject.SetActive(false);
     }
 
     private bool InputMouse(ref float _mouseX)
@@ -140,25 +206,35 @@ public class PlayerController : MonoBehaviour
 
     private void PlayerAction()
     {
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.E) && !isDisguised && currentNPC != null)
         {
-            eholdTime += Time.deltaTime; //누른 시간 증가
-            eSlider.value = eholdTime / eGoalholdTime;  //시간만큼 슬라이더 게이지
+            // currentNPC에서 NPCFSM 컴포넌트를 가져옴
+            NPCFSM npcFSM = currentNPC.GetComponent<NPCFSM>();
 
-            if(eholdTime >= eGoalholdTime)
+            if (npcFSM != null && npcFSM.isDead)
             {
-                disguiser.ChangeAppearance(currentNPC); // NPC 정보를 사용해 변장 실행
-                isDisguised = true;
-                eholdTime = 0f; //다시 초기화
+                // NPC가 죽었을 때 실행할 로직
+                Debug.Log("죽은 NPC와 상호작용");
+
+                eholdTime += Time.deltaTime; // 누른 시간 증가
+                eSlider.value = eholdTime / eGoalholdTime;  // 시간만큼 슬라이더 게이지
+
+                if (eholdTime >= eGoalholdTime)
+                {
+                    disguiser.ChangeAppearance(currentNPC); // NPC 정보를 사용해 변장 실행
+                    isDisguised = true;
+                    disguisedNPC = currentNPC; // 변장한 NPC 추적
+                    eholdTime = 0f; // 다시 초기화
+                }
             }
         }
         else
         {
-            eholdTime = 0f; //키에서 손 떼면 0초로 초기화
-            eSlider.value = 0f; //슬라이더 게이지 초기화
+            eholdTime = 0f; // 키에서 손 떼면 0초로 초기화
+            eSlider.value = 0f; // 슬라이더 게이지 초기화
         }
 
-        if (isDisguised && Input.GetKey(KeyCode.R))
+        if (Input.GetKey(KeyCode.R) && isDisguised)
         {
             rImage.gameObject.SetActive(true);
             rSlider.gameObject.SetActive(true);
@@ -180,16 +256,21 @@ public class PlayerController : MonoBehaviour
             rSlider.value = 0f; //슬라이더 게이지 초기화
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && currentNPC != null)
         {
-            // NPC 무력화 로직 추가
-            anim.SetTrigger("Neutralize");
+            //NPC가 살아있을 때만 작동
+            NPCFSM npcFSM = currentNPC.GetComponent<NPCFSM>();
+
+            if (npcFSM != null && !npcFSM.isDead)
+            {
+                // NPC 무력화 로직 추가
+                anim.SetTrigger("Neutralize");
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.K))
         {
             StartCoroutine(SuicideCoroutine());
-            
         }
     }
 
