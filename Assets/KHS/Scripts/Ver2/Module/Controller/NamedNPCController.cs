@@ -8,6 +8,7 @@ public class NamedNPCController : TNPCController
     public List<bool> eventTriggers;
     public List<PatrolRoute> testRoutine;
     public PatrolRoute currentRoute;
+    public int currentRouteIdx = 0;
 
     [Header("루틴 동작 속성")]
     public float patrolSpeed = 2f;
@@ -19,6 +20,13 @@ public class NamedNPCController : TNPCController
     public void ChangeRoutine(int _nextRouteIdx)
     {
         currentRoute = testRoutine[_nextRouteIdx];
+    }
+    public bool RoutineCheck()
+    {
+        if (eventTriggers[0] == true)
+            return true;
+        else
+            return false;
     }
     public bool Routine()
     {
@@ -47,22 +55,24 @@ public class NamedNPCController : TNPCController
                 else
                 {
                     Debug.Log("휴대폰 확인 후 휴대폰 집어넣는 애니메이션 재생");
+                    
+                    return true;
                 }
-                StartCoroutine(WaitingCallRoutine());
             }
             else if (currentWaypointIndex == 2)
             {
                 Debug.Log("흡연 애니메이션 재생");
-                StartCoroutine(WaitingCallRoutine());
             }
             else
             {
                 currentWaypointIndex = (currentWaypointIndex + 1) % currentRoute.waypoints.Count;
             }
 
-            if (isWaited)
-                return true;
+            StartCoroutine(WaitingCallRoutine());
         }
+
+        if (isWaited)
+            return true;
 
         return false;
     }

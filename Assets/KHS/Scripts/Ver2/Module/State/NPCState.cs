@@ -15,6 +15,7 @@ public abstract class NPCState
     public virtual void Exit() { }
     public virtual void Execute()
     {
+        Debug.Log($"{_npcController.npcName} - Executing Commands in {this.GetType().Name}");
         _npcController.Invoker.ExecuteCommands();
     }
     public virtual IEnumerator JudgeCoroutine(bool _stateCheck, NPCState _nextState)
