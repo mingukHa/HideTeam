@@ -37,7 +37,7 @@ public class TNPCController : MonoBehaviour
 
         Debug.Log($"{gameObject.name} - Awake() ½ÇÇàµÊ, npcType: {npcType}");
     }
-    private void Start()
+    public virtual void Start()
     {
         stateMachine.ChangeState(new IdleState(this));
         _target = targetSituation.transform.position;

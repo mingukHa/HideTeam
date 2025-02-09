@@ -18,6 +18,7 @@ public class NPCStateMachine : MonoBehaviour
     public void Update()
     {
         if (_currentState != null)
+            Debug.Log(_currentState);
             _currentState.Update();
     }
 }

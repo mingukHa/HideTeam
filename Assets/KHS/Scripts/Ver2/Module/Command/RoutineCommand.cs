@@ -14,6 +14,8 @@ public class RoutineCommand : ICommand
     public void Execute()
     {
         Debug.Log("RoutineCommand : Executed Call");
+        bool routineStatus = _npcController.Routine();
+        Debug.Log($"RoutineCommand : Routine Status = {routineStatus}");
         _isFinished = _npcController.Routine();
 
     }
