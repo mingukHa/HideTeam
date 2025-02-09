@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "74140463491",
+    "firebase_url": "https://hide-c9b61-default-rtdb.firebaseio.com",
+    "project_id": "hide-c9b61",
+    "storage_bucket": "hide-c9b61.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:74140463491:android:27a5b46bb7fa4cb0a586b6",
+        "android_client_info": {
+          "package_name": "com.company.Hide"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDYvJc381ubDatSBDVmWzfEqePHl_QXpIo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
