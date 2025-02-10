@@ -75,4 +75,11 @@ public class GuardController : TNPCController
         agent.isStopped = false; //  회전 후 이동 재개
         NextWaypoint(); //  이제야 다음 웨이포인트로 이동
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Door"))
+        {
+            Animator.SetTrigger("DoorOpen");
+        }
+    }
 }
