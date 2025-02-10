@@ -1,46 +1,57 @@
-using System.Collections;
+ï»¿using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(GuardNPC))]
 public class GuardController : TNPCController
 {
-    [Header("¼øÂû ¼³Á¤")]
+    [Header("ìˆœì°° ì„¤ì •")]
     public PatrolRoute patrolRoute;
     public float patrolSpeed = 2f;
-    public float lookAroundDelay = 1f; // È¸Àü ÈÄ ´ë±â ½Ã°£
-
+    public float lookAroundDelay = 1f; // íšŒì „ í›„ ëŒ€ê¸° ì‹œê°„
+    private Animator Animator;
     private int currentWaypointIndex = 0;
     private bool isLookingAround = false;
+    private NavMeshAgent agent;
+
+    private void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        agent.SetDestination(patrolRoute.waypoints[currentWaypointIndex]);
+        Animator = GetComponent<Animator>();
+        agent.autoBraking = false;
+        agent.speed = patrolSpeed;
+    }
+
+    private void Update()
+    {
+        Patrol();
+    }
 
     public bool Patrol()
     {
-        if (patrolRoute == null || patrolRoute.waypoints.Count == 0) return true;
-
-        Vector3 targetPosition = patrolRoute.waypoints[currentWaypointIndex];
-        Vector3 directionToTarget = (targetPosition - transform.position).normalized;
-
-        // ¿þÀÌÆ÷ÀÎÆ® ¹æÇâÀ¸·Î È¸Àü
-        if (!isLookingAround)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime * 100f);
-        }
-
-        // ¿þÀÌÆ÷ÀÎÆ®·Î ÀÌµ¿
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, patrolSpeed * Time.deltaTime);
-
-        // ¿þÀÌÆ÷ÀÎÆ® µµÂø Ã³¸®
-        if (Vector3.Distance(transform.position, targetPosition) < 0.1f && !isLookingAround)
+        if (!agent.pathPending && agent.remainingDistance < 0.1f && !isLookingAround)
         {
             StartCoroutine(LookAroundRoutine());
         }
         return false;
     }
-    private IEnumerator LookAroundRoutine()
-    {
-        isLookingAround = true;
 
-        for (int i = 0; i < 2; i++) // 2¹ø È¸Àü
+    private void NextWaypoint()
+    {
+        Animator.SetTrigger("Walk");
+        
+        currentWaypointIndex = (currentWaypointIndex + 1) % patrolRoute.waypoints.Count;
+        agent.SetDestination(patrolRoute.waypoints[currentWaypointIndex]);
+    }
+
+    public IEnumerator LookAroundRoutine()
+    {
+        Animator.SetTrigger("Look");
+        isLookingAround = true;
+        agent.isStopped = true; //  íšŒì „ ì¤‘ ì´ë™ ì •ì§€
+
+        for (int i = 0; i < 2; i++) // 2ë²ˆ íšŒì „
         {
             float randomYaw = Random.Range(-60f, 60f);
             Quaternion newRotation = Quaternion.Euler(0, transform.eulerAngles.y + randomYaw, 0);
@@ -50,17 +61,18 @@ public class GuardController : TNPCController
 
             while (elapsedTime < 1f)
             {
-                transform.rotation = Quaternion.Slerp(startRotation, newRotation, elapsedTime);
+                float t = elapsedTime / 1f; //  `t` ê°’ì„ 0~1ë¡œ ì •ê·œí™”
+                transform.rotation = Quaternion.Slerp(startRotation, newRotation, t);
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
 
             transform.rotation = newRotation;
-            yield return new WaitForSeconds(lookAroundDelay); // ÀÏÁ¤ ½Ã°£ ´ë±â
+            yield return new WaitForSeconds(lookAroundDelay); // ì¼ì • ì‹œê°„ ëŒ€ê¸°
         }
 
-        // ´ÙÀ½ ¿þÀÌÆ÷ÀÎÆ®·Î ÀÌµ¿
-        currentWaypointIndex = (currentWaypointIndex + 1) % patrolRoute.waypoints.Count;
         isLookingAround = false;
+        agent.isStopped = false; //  íšŒì „ í›„ ì´ë™ ìž¬ê°œ
+        NextWaypoint(); //  ì´ì œì•¼ ë‹¤ìŒ ì›¨ì´í¬ì¸íŠ¸ë¡œ ì´ë™
     }
 }

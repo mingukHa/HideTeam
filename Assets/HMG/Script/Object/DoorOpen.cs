@@ -17,6 +17,8 @@ public class DoorController : MonoBehaviour
     {
         Player = GameObject.FindWithTag("Player");
         PlayerAnimator = Player.GetComponent<Animator>();
+            
+
     }
     void Start()
     {
@@ -134,8 +136,8 @@ public class DoorController : MonoBehaviour
    {
        if (other.CompareTag("NPC"))
        {
-            CloseDoor();
-       }
+            Invoke("CloseDoor", 3f);
+        }
         else if (other.CompareTag("Player"))
         {
             DoorOpenUI.SetActive(false);

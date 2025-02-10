@@ -6,6 +6,7 @@ TagManager:
   tags:
   - NPC
   - Ragdoll
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Muse Animate Handles
   - Muse Animate Thumbnail
   - Muse Animate Environment
-  - 
+  - Door
   - 
   - 
   - 

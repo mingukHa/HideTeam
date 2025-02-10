@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: TestPatrolRoute
   m_EditorClassIdentifier: 
   waypoints:
-  - {x: 6.92, y: 0, z: -0.14}
-  - {x: 3.17, y: 0, z: -6.17}
-  - {x: 18.46, y: 0, z: -1.18}
-  - {x: 20.25, y: 0, z: 12.07}
+  - {x: -45.965, y: 3.331, z: 29.324}
+  - {x: -54.46, y: 5.84, z: 24.38}
+  - {x: -74.82, y: 5.84, z: 26.75}
