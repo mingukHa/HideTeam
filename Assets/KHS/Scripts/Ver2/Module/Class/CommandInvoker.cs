@@ -7,6 +7,7 @@ public class CommandInvoker : MonoBehaviour
 
     public void AddCommand(ICommand command)
     {
+        Debug.Log($"Command Ãß°¡µÊ: {command.GetType().Name}");
         commandQueue.Enqueue(command);
     }
 
@@ -15,6 +16,7 @@ public class CommandInvoker : MonoBehaviour
         if (commandQueue.Count > 0)
         {
             ICommand command = commandQueue.Peek();
+            Debug.Log($"Command ½ÇÇàµÊ: {command.GetType().Name}");
             command.Execute();
             if (command.IsFinished())
             {
