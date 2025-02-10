@@ -14,6 +14,8 @@ public class WaitState2 : NPCState2
         NamedNPCController2 _namedNPCController = _npcController.GetComponent<NamedNPCController2>();
         Debug.Log("Adding RoutineCommand2 to Invoker.");
         _npcController.Invoker.AddCommand(new RoutineChangeCommand2(_namedNPCController));
+        _npcController.Invoker.AddCommand(new MoveToNavMeshCommand(_namedNPCController)); // 새로운 루틴에서 이동 실행
+
     }
 
     public override void Update()
