@@ -145,7 +145,7 @@ public class PlayerController : MonoBehaviour
         //}
 
         // NPC가 떠나면 fImage 비활성화
-        //fImage.gameObject.SetActive(false);
+        fImage.gameObject.SetActive(false);
     }
 
     private bool InputMouse(ref float _mouseX)
