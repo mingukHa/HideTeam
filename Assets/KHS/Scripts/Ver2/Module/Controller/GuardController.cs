@@ -16,13 +16,17 @@ public class GuardController : TNPCController
 
     private void Awake()
     {
+        Animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
         agent.SetDestination(patrolRoute.waypoints[currentWaypointIndex]);
-        Animator = GetComponent<Animator>();
         agent.autoBraking = false;
         agent.speed = patrolSpeed;
+    }   
+    public override void Start()
+    {
+        base.Start();
+        Animator.SetTrigger("Walk");
     }
-
     private void Update()
     {
         Patrol();
@@ -79,6 +83,7 @@ public class GuardController : TNPCController
     {
         if(other.CompareTag("Door"))
         {
+            SoundManager.instance.SFXPlay("DoorSound");
             Animator.SetTrigger("DoorOpen");
         }
     }

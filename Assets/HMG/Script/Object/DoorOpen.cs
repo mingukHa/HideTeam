@@ -44,7 +44,11 @@ public class DoorController : MonoBehaviour
         }
         
     }
-    // 플레이어나 NPC가 바라보는 방향을 기준으로 문 열기
+
+    public void dooropensound()
+    {
+        SoundManager.instance.SFXPlay("DoorSound");
+    }
     public void OpenDoorBasedOnView(Transform entity)
     {
         if (entity == null) return;
