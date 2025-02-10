@@ -99,6 +99,7 @@ public class DoorController : MonoBehaviour
     // 문 애니메이션 처리
     private IEnumerator AnimateDoor(Quaternion targetRotation)
     {
+        yield return new WaitForSeconds(0.2f);
         float elapsedTime = 0;
         Quaternion startingRotation = transform.rotation;
 
@@ -123,9 +124,9 @@ public class DoorController : MonoBehaviour
         {
             Debug.Log("문열기 활성화");
             playerdooropen = true;
+            //e키 ui 활성화
         }
-        
-        
+                
     }
    
     private void OnTriggerExit(Collider other)
@@ -137,6 +138,7 @@ public class DoorController : MonoBehaviour
         else if (other.CompareTag("Player"))
         {
             playerdooropen = false;
+            Invoke("CloseDoor", 2f);
         }
     }
     
