@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 
 [RequireComponent(typeof(NPCStateMachine2)), RequireComponent(typeof(CommandInvoker))]
@@ -28,6 +29,7 @@ public abstract class NPCController : MonoBehaviour
     public List<Transform> targetTr; // 반응해야하는 타겟 Transform
     public List<Vector3> targetVec;
 
+    public NavMeshAgent agent;
 
     private void Awake()
     {
@@ -35,6 +37,8 @@ public abstract class NPCController : MonoBehaviour
         stateMachine = GetComponent<NPCStateMachine2>();
         Invoker = GetComponent<CommandInvoker>();
         npcType = GetComponent<NPCType2>();
+
+        agent = GetComponent<NavMeshAgent>();
 
         Debug.Log($"{gameObject.name} - NPCController Awake() 실행됨, npcType: {npcType}");
     }

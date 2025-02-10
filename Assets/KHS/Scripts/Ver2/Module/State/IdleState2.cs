@@ -18,9 +18,9 @@ public class IdleState2 : NPCState2
             Debug.Log(_npcController.npcName + " is now IDLE2 as NamedNPC2.");
             NamedNPCController2 _namedNPCController = _npcController.GetComponent<NamedNPCController2>();
             Debug.Log("Adding RoutineCommand2 to Invoker.");
-            _npcController.Invoker.AddCommand(new RoutineCommand2(_namedNPCController));
+            //_npcController.Invoker.AddCommand(new RoutineCommand2(_namedNPCController));
+            _npcController.Invoker.AddCommand(new MoveToNavMeshCommand(_namedNPCController));
         }
-
     }
     public override void Update()
     {

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(NamedNPC2))]
 public class NamedNPCController2 : NPCController
@@ -18,6 +19,9 @@ public class NamedNPCController2 : NPCController
         stateMachine.ChangeState(new IdleState2(this));
         UpdateTargetInfo();
         InitRoutine();
+
+        agent.speed = routineSpeed;
+        agent.stoppingDistance = 0.1f;
     }
     public void InitRoutine()
     {
