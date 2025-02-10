@@ -7,6 +7,7 @@ public class DoorController : MonoBehaviour
     public bool isOpen = false; // 문 상태 (열림/닫힘)
     public float openAngle = 90f; // 문이 열릴 각도
     public float animationTime = 1f; // 문 열림/닫힘 애니메이션 시간
+    public GameObject DoorOpenUI;
     private GameObject Player;
     private Animator PlayerAnimator;
     private Quaternion closedRotation; // 닫힌 상태의 회전값
@@ -124,7 +125,7 @@ public class DoorController : MonoBehaviour
         {
             Debug.Log("문열기 활성화");
             playerdooropen = true;
-            //e키 ui 활성화
+            DoorOpenUI.SetActive(true);
         }
                 
     }
@@ -137,6 +138,7 @@ public class DoorController : MonoBehaviour
        }
         else if (other.CompareTag("Player"))
         {
+            DoorOpenUI.SetActive(false);
             playerdooropen = false;
             Invoke("CloseDoor", 2f);
         }
