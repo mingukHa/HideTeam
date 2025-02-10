@@ -121,17 +121,30 @@ public class SoundManager : MonoBehaviour
     }
 
     //효과음 플레이, 속성값
-    public void SFXPlay(string sfxName)
+    public void SFXPlay(string sfxName, GameObject targetObject)
     {
         //이름으로 찾기
         AudioClip clip = System.Array.Find(
-            sfxList, sound => sound.name == sfxName);
+            sfxList, sound => sound.name == sfxName);   //이름으로 찾기
 
         if (clip != null)
         {
+            AudioSource audiosource = targetObject.GetComponent<AudioSource>();  // 문 오브젝트에서 AudioSource를 찾음
+
+            if (audiosource == null) // 만약 문에 AudioSource가 없다면 추가
+            {
+                audiosource = targetObject.AddComponent<AudioSource>();
+            }
+
             GameObject go = new GameObject(sfxName + "Sound");                  //사운드파일 가져옴
-            AudioSource audiosource = go.AddComponent<AudioSource>();           //AudioSource컴퍼넌트 추가
-            audiosource.outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0]; //SFX 믹퍼 추가
+            audiosource.outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0]; //SFX 믹서 추가
+
+            // 3D 효과 설정
+            audiosource.spatialBlend = 1f;         // 1: 3D 사운드, 0: 2D 사운드
+            audiosource.minDistance = 1f;          // 최소 거리 (풀 볼륨)
+            audiosource.maxDistance = 20f;         // 최대 거리 (감쇠 시작)
+            audiosource.rolloffMode = AudioRolloffMode.Linear;  // 선형 감쇠
+
             audiosource.clip = clip;    //clip 파일
             audiosource.volume = 1f;    //volume값
             audiosource.Play();         //그걸 실행
