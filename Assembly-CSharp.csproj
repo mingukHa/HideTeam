@@ -10,7 +10,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{41C0B8A8-7BAB-1019-E53B-F0FFDF0BA13F}</ProjectGuid>
+    <ProjectGuid>{8EFF301C-DF92-6FAD-B6A6-171182E6008B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -76,10 +76,7 @@
     <Compile Include="Assets\KHS\Scripts\Module\Command\PatrolCommand.cs" />
     <Compile Include="Assets\KHS\Scripts\Module\Controller\NamedNPCController.cs" />
     <Compile Include="Assets\HMG\Script\ReturnScript\ReturnManager.cs" />
-    <Compile Include="Assets\YJ\Assets\QA_Office 1\Scripts\Door.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\Controller\NamedNPCController2.cs" />
-    <Compile Include="Assets\YJ\Assets\QA_Office 1\Scripts\Clock.cs" />
-    <Compile Include="Assets\YJ\Assets\QA_Office 1\Scripts\ElevatorManager.cs" />
     <Compile Include="Assets\KHS\Scripts\Module\NPCType\GuardNPC.cs" />
     <Compile Include="Assets\HMG\Asset\Fighter Pack Bundle\Heavy Fighter Mecanim Animation Pack\Code\CameraControl.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\NPCState2.cs" />
@@ -93,6 +90,7 @@
     <Compile Include="Assets\HMG\Script\UI\FadeOut.cs" />
     <Compile Include="Assets\KHS\Scripts\Module\Command\ChaseCommand.cs" />
     <Compile Include="Assets\KHS\Scripts\Functions\ShoulderViewCam.cs" />
+    <Compile Include="Assets\YJ\Assets\QA_Office\Scripts\Door.cs" />
     <Compile Include="Assets\YJ\Assets\Synty\AnimationBaseLocomotion\Samples\Scripts\SampleCameraController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexJitter.cs" />
     <Compile Include="Assets\KHS\Scripts\Functions\MarkerManager.cs" />
@@ -102,6 +100,7 @@
     <Compile Include="Assets\YJ\Scripts\AddToNPCs\NPCIdentifier.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\Command\RoutineCommand2.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
+    <Compile Include="Assets\YJ\Assets\QA_Office\Scripts\Clock.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Scripts\WFX_LightFlicker.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\Command\MoveToNavMeshCommand.cs" />
@@ -155,7 +154,6 @@
     <Compile Include="Assets\KHS\Scripts\Module\NPCType\NPCType.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\Command\RoutineChangeCommand2.cs" />
     <Compile Include="Assets\KHS\Scripts\Functions\DetMarkerFunc.cs" />
-    <Compile Include="Assets\YJ\Assets\QA_Office 1\Scripts\Elevator.cs" />
     <Compile Include="Assets\KHS\Scripts\Module\State\NPCState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
@@ -163,6 +161,7 @@
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\WFX_Demo_DeleteAfterDelay.cs" />
     <Compile Include="Assets\HMG\Script\NavMesh\NevMeshTest.cs" />
     <Compile Include="Assets\KHS\Scripts\Module\Command\MoveCommand.cs" />
+    <Compile Include="Assets\YJ\Assets\QA_Office\Scripts\ElevatorManager.cs" />
     <Compile Include="Assets\HMG\Script\Login\LoginAcount.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ObjectSpin.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_PhoneNumberValidator.cs" />
@@ -170,6 +169,7 @@
     <Compile Include="Assets\HMG\Script\Minimap\MiniMap.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\WFX_Demo_New.cs" />
     <Compile Include="Assets\YJ\Assets\Synty\AnimationBaseLocomotion\Samples\Scripts\InputSystem\InputReader.cs" />
+    <Compile Include="Assets\YJ\Assets\QA_Office\Scripts\Elevator.cs" />
     <Compile Include="Assets\YJ\Assets\Synty\AnimationBaseLocomotion\Samples\Scripts\SamplePlayerAnimationController.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\CFX_Demo_Translate.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
@@ -197,7 +197,7 @@
     <None Include="Assets\JMO Assets\WarFX\Shaders\WFX_S Multiply Soft.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\JMO Assets\WarFX\Shaders\WFX_S Multiply Soft Scroll.shader" />
-    <None Include="Assets\YJ\Assets\QA_Office 1\ReadMe.txt" />
+    <None Include="Assets\YJ\Assets\QA_Office\ReadMe.txt" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Roboto-Bold - License.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile-2-Pass.shader" />
     <None Include="Assets\Firebase\Plugins\x86_64\FirebaseCppDatabase.dll" />
@@ -263,7 +263,7 @@
     <None Include="Assets\YJ\Assets\Rifle_01_v25\Docs\Military_Rifle_Unity_Info.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
     <None Include="Assets\TextMesh Pro\Examples &amp; Extras\Fonts\Bangers - OFL.txt" />
-    <None Include="Assets\YJ\Assets\QA_Office 1\Shaders\QAtmo_3dText.shader" />
+    <None Include="Assets\YJ\Assets\QA_Office\Shaders\QAtmo_3dText.shader" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -1508,16 +1508,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
+      <Project>{9C16297A-D411-6A9C-0345-472A8E458687}</Project>
+      <Name>Assembly-CSharp-firstpass</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.AI.Navigation.Samples.Initialization.Editor.csproj">
-      <Project>{25D7ADF1-74BB-C276-11EA-6CB1B6B46958}</Project>
+      <Project>{D48DDD80-3AA4-916E-8FD2-4E6119C3B4F5}</Project>
       <Name>Unity.AI.Navigation.Samples.Initialization.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Kamgam.PowerPivot.csproj">
-      <Project>{7CDA17E7-1B30-EFAC-1032-5F2FF8504E64}</Project>
+      <Project>{2924B474-7CFC-49A1-2162-8508F23B8240}</Project>
       <Name>Kamgam.PowerPivot</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.AI.Navigation.Samples.csproj">
-      <Project>{36DC9D55-6C39-88AD-BA63-2205EFBE2805}</Project>
+      <Project>{17C92499-42A3-1E0D-E6FE-FBEC2D6EFD2B}</Project>
       <Name>Unity.AI.Navigation.Samples</Name>
     </ProjectReference>
   </ItemGroup>
