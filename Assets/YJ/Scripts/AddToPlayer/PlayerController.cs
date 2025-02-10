@@ -191,7 +191,7 @@ public class PlayerController : MonoBehaviour
             isCrouching = !isCrouching; // 상태 전환
             anim.SetBool("Crouch", isCrouching); // 애니메이터의 Crouch 파라미터 설정
         }
-
+        
         // 뛰기(Sprint)
         if (Input.GetKey(KeyCode.LeftShift))
         {

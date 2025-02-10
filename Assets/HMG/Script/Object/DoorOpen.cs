@@ -1,20 +1,46 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEditor.Animations;
 
 public class DoorController : MonoBehaviour
 {
     public bool isOpen = false; // 문 상태 (열림/닫힘)
     public float openAngle = 90f; // 문이 열릴 각도
     public float animationTime = 1f; // 문 열림/닫힘 애니메이션 시간
-
+    private GameObject Player;
+    private Animator PlayerAnimator;
     private Quaternion closedRotation; // 닫힌 상태의 회전값
     private Quaternion openRotation; // 열린 상태의 회전값
-
+    private bool playerdooropen = false;
+    private void Awake()
+    {
+        Player = GameObject.FindWithTag("Player");
+        PlayerAnimator = Player.GetComponent<Animator>();
+    }
     void Start()
     {
         closedRotation = transform.rotation;
     }
-
+    private void Update()
+    {
+        if (playerdooropen == true)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                if (isOpen == false)
+                {
+                    PlayerAnimator.SetTrigger("DoorOpen");
+                    OpenDoorBasedOnView(Player.transform);
+                }
+                else
+                {
+                    CloseDoor();
+                }
+            }
+           
+        }
+        
+    }
     // 플레이어나 NPC가 바라보는 방향을 기준으로 문 열기
     public void OpenDoorBasedOnView(Transform entity)
     {
@@ -89,18 +115,29 @@ public class DoorController : MonoBehaviour
     // 플레이어나 NPC가 문 가까이에 왔을 때 실행
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player") || other.CompareTag("NPC"))
+        if (other.CompareTag("NPC"))
         {
             OpenDoorBasedOnView(other.transform);
         }
-    }
-
-    // 문을 떠날 때 닫기
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player") || other.CompareTag("NPC"))
+        else if (other.CompareTag("Player"))
         {
+            Debug.Log("문열기 활성화");
+            playerdooropen = true;
+        }
+        
+        
+    }
+   
+    private void OnTriggerExit(Collider other)
+   {
+       if (other.CompareTag("NPC"))
+       {
             CloseDoor();
+       }
+        else if (other.CompareTag("Player"))
+        {
+            playerdooropen = false;
         }
     }
+    
 }

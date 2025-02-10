@@ -73,7 +73,7 @@ public class NPC_OldMan : NPCFSM
             if (Input.GetKey(KeyCode.Alpha1))
             {
                 chat.LoadNPCDialogue(npc, 2);
-                returnManager.ReturnStack(2f);
+                //returnManager.ReturnStack(2f);
             }
             if (Input.GetKey(KeyCode.Alpha2))
             {
