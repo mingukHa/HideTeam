@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     private NPCIdentifier currentNPC;
     private PlayerDisguiser disguiser;
     private CarAlarm carAlarm;
+    private TrashBin trashBin;
+
     public GameObject gun = null;
     public GameObject cigarette = null;
 
@@ -20,7 +22,6 @@ public class PlayerController : MonoBehaviour
     private bool isMoving = false;
     private bool isCrouching = false;
     private bool isStarted = false;
-    private bool isCar = false;
 
     public Image eImage;    //E키 이미지
     public Slider eSlider;  //E키 게이지
@@ -99,6 +100,11 @@ public class PlayerController : MonoBehaviour
                 CarKey.SetActive(true);
             }
         }
+
+        if (other.CompareTag("TrashBin"))
+        {
+            trashBin = other.GetComponent<TrashBin>();
+        }
     }
 
     //실시간으로 UI가 변해야하므로 Stay로 변경
@@ -150,6 +156,11 @@ public class PlayerController : MonoBehaviour
         {
             CarKey.SetActive(false);
             carAlarm = null;  // carAlarm을 null로 설정하여, 차량과 상호작용 불가하도록 만듦
+        }
+
+        if (other.CompareTag("TrashBin"))
+        {
+            trashBin = null;
         }
 
         if (!other.gameObject.CompareTag("NPC")) return;
@@ -265,6 +276,12 @@ public class PlayerController : MonoBehaviour
             EventManager.Trigger(GameEventType.Carkick);
             Debug.Log("차킥 이벤트 발생");
             carAlarm.ActivateAlarm(); // 도난방지 알람 실행
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && trashBin != null)
+        {
+            anim.SetTrigger("isMessUp");
+            trashBin.MessUpTrashBin();
         }
 
         if (Input.GetKey(KeyCode.R) && isDisguised)

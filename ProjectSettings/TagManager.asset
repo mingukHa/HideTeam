@@ -8,6 +8,7 @@ TagManager:
   - Ragdoll
   - Door
   - Car
+  - TrashBin
   layers:
   - Default
   - TransparentFX
