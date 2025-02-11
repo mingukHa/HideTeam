@@ -1,42 +1,38 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
+using System.Collections;
+using Unity.VisualScripting;
 using static EventManager;
+using UnityEngine.AI;
 
-public class NPC_OldMan : NPCFSM
+public class NPC_PldMan : NPCFSM
 {
     [SerializeField] private GameObject select;
     private NPCChatTest chat;
     public GameObject npcchatbox;
-    public ReturnManager returnManager;
     private string npc = "NPC3";
+    private int currentWaypointIndex;
+    private bool isLookingAround = false;
     private NavMeshAgent agent;
+    public Transform GarbagePos;
     private void OnEnable()
     {
-        EventManager.Subscribe(GameEventType.Carkick, StartTalking);
-        EventManager.Subscribe(GameEventType.policeTalk, StartLaughing);
+        EventManager.Subscribe(GameEventType.OldManHelp, StartOldManHelp);
     }
-
-   
-    private void StartTalking()
+    private void StartOldManHelp()
     {
-        
-    }
-    private void StartLaughing()
-    {
-        //이런 행동을 할거임
+        Debug.Log("할배 방해 준비 중");
+        //작성 해야함
     }
     protected override void Start()
     {
         base.Start();
         chat = GetComponent<NPCChatTest>();
         select.SetActive(false);
-        
     }
 
     protected override void Update()
     {
-        base.Update(); 
+        base.Update();
     }
 
     protected override void IdleBehavior()
@@ -68,10 +64,10 @@ public class NPC_OldMan : NPCFSM
     {
         base.DeadBehavior();
         npcchatbox.SetActive(false);
-        chat.LoadNPCDialogue("NULL", 0); //죽은자는 말이 없다
+        chat.LoadNPCDialogue("NULL", 0);
     }
 
-    private void OnTriggerEnter(Collider other) //대화 시작
+    private void OnTriggerEnter(Collider other)
     {
         if (isDead == false)
         {
@@ -80,32 +76,21 @@ public class NPC_OldMan : NPCFSM
                 select.SetActive(true);
                 ChangeState(State.Talk);
                 chat.LoadNPCDialogue(npc, 0);
-            }
-        }
-    }
-    protected override void OnTriggerStay(Collider other)
-    {
-        base.OnTriggerStay(other); 
-
-        if (other.CompareTag("Player"))
-        {
-            if (Input.GetKey(KeyCode.Alpha1))
-            {
-                chat.LoadNPCDialogue(npc, 2);
-                EventManager.Trigger(GameEventType.Carkick);
-                
-
-            }
-            if (Input.GetKey(KeyCode.Alpha2))
-            {
-                chat.LoadNPCDialogue(npc, 1); 
-                EventManager.Trigger(GameEventType.Garbage);
-                //EventManager.Unsubscribe(GameEventType.Talk, StartTalking); 다시는 안 쓸 이벤트는 해제
+                if (Input.GetKeyDown(KeyCode.Keypad1))
+                {
+                    chat.LoadNPCDialogue(npc, 1);
+                    EventManager.Trigger(GameEventType.OldManHelp);
+                }
+                if (Input.GetKeyDown(KeyCode.Keypad2))
+                {
+                    chat.LoadNPCDialogue(npc, 2);
+                    EventManager.Trigger(GameEventType.OldManoutside);
+                }
             }
         }
     }
 
-    private void OnTriggerExit(Collider other) //대화 종료
+    private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -114,5 +99,5 @@ public class NPC_OldMan : NPCFSM
             chat.LoadNPCDialogue("NULL", 0);
         }
     }
-    
 }
+
