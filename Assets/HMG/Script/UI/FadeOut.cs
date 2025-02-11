@@ -8,7 +8,7 @@ public class FadeOut : MonoBehaviour
     private void Start()
     {
         fadeImage.gameObject.SetActive(true);
-        StartCoroutine(FadeIn(FadeInTime)); // 씬 시작 시 페이드 인 (1초)
+        StartCoroutine(FadeIn(FadeInTime)); 
     }
 
     public IEnumerator FadeIn(float duration)
