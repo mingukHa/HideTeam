@@ -19,12 +19,12 @@ public class WaitCommand : ICommand
         {
             npcController.animator.SetTrigger("Look");
         }
-
         elapsedTime += Time.deltaTime;
-        if(elapsedTime >= waitTime)
+        if (elapsedTime >= waitTime)
         {
             finished = true;
         }
+
     }
 
     public bool IsFinished()

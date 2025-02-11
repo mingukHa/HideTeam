@@ -12,18 +12,19 @@ public class RoutineState : NPCState2
     public override void Enter()
     {
         Debug.Log($"{_npcController.npcName}이 루틴 상태에 진입");
-        routineInvoker.ExcuteRoutine();
+        
     }
 
     public override void Update()
     {
-        NPCType2 npcType = _npcController.npcType;
-
-        if (npcType is NamedNPC2)
+        if (!routineInvoker.RoutineEnd()) // 루틴이 끝나지 않았다면 실행
         {
-            NamedController namedController = _npcController.GetComponent<NamedController>();
-            Debug.Log("네임드 코루틴 진입 체크");
-            _npcController.StartCoroutine(JudgeCoroutine(namedController.CurrentRoutineEnd(), new WaitState(namedController)));
+            Debug.Log("루틴 스테이트 업데이트 체크");
+            routineInvoker.ExcuteRoutine();
+        }
+        else
+        {
+            _npcController.stateMachine.ChangeState(new WaitState(_npcController));
         }
     }
 }

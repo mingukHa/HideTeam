@@ -18,6 +18,7 @@ public class RoutineInvoker : MonoBehaviour
     public void LoadRoutine(NPCRoutine routine)
     {
         routineCommands.Clear();
+        routineFinished = false;
         foreach (var action in routine.actions)
         {
             switch (action.actionType)
@@ -41,7 +42,7 @@ public class RoutineInvoker : MonoBehaviour
 
     public void ExcuteRoutine()
     {
-        if (routineCommands.Count == 0)
+        if (routineFinished || routineCommands.Count == 0)
             return;
 
         if(currentCommandIndex < routineCommands.Count)
@@ -57,8 +58,8 @@ public class RoutineInvoker : MonoBehaviour
         }
         else
         {
-            currentCommandIndex = 0;
             routineFinished = true;
+            Debug.Log("루틴 종료");
         }
     }
     public bool RoutineEnd()
