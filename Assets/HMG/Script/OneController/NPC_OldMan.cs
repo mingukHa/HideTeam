@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using static EventManager;
 
 public class NPC_OldMan : NPCFSM
@@ -9,17 +10,17 @@ public class NPC_OldMan : NPCFSM
     public GameObject npcchatbox;
     public ReturnManager returnManager;
     private string npc = "NPC3";
-
+    private NavMeshAgent agent;
     private void OnEnable()
     {
-        EventManager.Subscribe(GameEventType.Garbage, StartTalking);
+        EventManager.Subscribe(GameEventType.Carkick, StartTalking);
         EventManager.Subscribe(GameEventType.policeTalk, StartLaughing);
     }
 
    
     private void StartTalking()
     {
-        //이런 행동을 할거임
+        
     }
     private void StartLaughing()
     {
@@ -30,6 +31,7 @@ public class NPC_OldMan : NPCFSM
         base.Start();
         chat = GetComponent<NPCChatTest>();
         select.SetActive(false);
+        
     }
 
     protected override void Update()
