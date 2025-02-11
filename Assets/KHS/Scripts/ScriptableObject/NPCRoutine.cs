@@ -18,5 +18,6 @@ public class RoutineAction
 public enum RoutineActionType
 {
     Move,
-    Wait
+    Wait,
+    Run
 }

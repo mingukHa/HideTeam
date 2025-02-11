@@ -3,7 +3,7 @@ using UnityEngine;
 public class NPCStateMachine2 : MonoBehaviour
 {
     private NPCState2 _currentState;
-
+    private float elapsedTime = 0;
     public void ChangeState(NPCState2 newState)
     {
         if (_currentState != null)
@@ -18,7 +18,9 @@ public class NPCStateMachine2 : MonoBehaviour
     public void Update()
     {
         if (_currentState != null)
+        {
             Debug.Log(_currentState);
             _currentState.Update();
+        }
     }
 }

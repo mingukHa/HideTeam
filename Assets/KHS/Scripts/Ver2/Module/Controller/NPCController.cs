@@ -17,7 +17,8 @@ public abstract class NPCController : MonoBehaviour
 
     [Header("이동 속성")]
     public float rotationSpeed = 1.0f;
-    public float walkSpeed = 4.0f;
+    public float walkSpeed = 2.0f;
+    public float runSpeed = 3.0f;
 
     [Header("시야 설정")]
     public float viewRadius = 10f; // 시야 범위 단위원 반지름
@@ -49,7 +50,7 @@ public abstract class NPCController : MonoBehaviour
     }
     public virtual void Start()
     {
-        if (routineInvoker.npcRoutine != null)
+        if (routineInvoker.npcRoutines.Count != 0)
         {
             stateMachine.ChangeState(new RoutineState(this));
         }
