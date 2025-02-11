@@ -10,7 +10,7 @@ public class NPC_NPC2 : NPCFSM
     private NPCChatTest chat;
     public GameObject npcchatbox;
     private string npc = "NPC2";
-    public PatrolRoute patrolRoute;
+    
     private int currentWaypointIndex;
     private bool isLookingAround = false;
     private NavMeshAgent agent;
