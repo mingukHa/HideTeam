@@ -12,6 +12,7 @@ public abstract class NPCController : MonoBehaviour
     public string npcName = string.Empty;
     public NPCStateMachine2 stateMachine;
     public CommandInvoker Invoker { get; private set; }
+    public RoutineInvoker routineInvoker { get; private set; }
 
     [Header("이동 속성")]
     public float rotationSpeed = 1.0f;
@@ -29,22 +30,34 @@ public abstract class NPCController : MonoBehaviour
     public List<Transform> targetTr; // 반응해야하는 타겟 Transform
     public List<Vector3> targetVec;
 
-    //public NavMeshAgent agent;
+    public NavMeshAgent agent;
+    public Animator animator;
 
     private void Awake()
     {
         npcName = transform.name;
         stateMachine = GetComponent<NPCStateMachine2>();
         Invoker = GetComponent<CommandInvoker>();
+        routineInvoker = GetComponent<RoutineInvoker>();
         npcType = GetComponent<NPCType2>();
 
-        //agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
 
         Debug.Log($"{gameObject.name} - NPCController Awake() 실행됨, npcType: {npcType}");
     }
     public virtual void Start()
     {
-        stateMachine.ChangeState(new IdleState2(this));
+        if (routineInvoker.npcRoutine != null)
+        {
+            stateMachine.ChangeState(new RoutineState(this));
+        }
+        else
+        {
+            stateMachine.ChangeState(new IdleState2(this));
+        }
+        agent.speed = walkSpeed;
+        agent.stoppingDistance = 1.5f;
         UpdateTargetInfo();
     }
     public void UpdateTargetInfo()
@@ -101,6 +114,10 @@ public abstract class NPCController : MonoBehaviour
             Debug.Log("의심 상황 미발각");
         }
         return isDetected;
+    }
+    public bool CurrentRoutineEnd()
+    {
+        return routineInvoker.RoutineEnd();
     }
     public abstract bool Response();
 
