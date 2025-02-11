@@ -9,11 +9,14 @@ public class PlayerController : MonoBehaviour
 
     private NPCIdentifier currentNPC;
     private PlayerDisguiser disguiser;
+    private CarAlarm carAlarm;
     public GameObject gun = null;
     public GameObject cigarette = null;
 
+
     private float mouseX = 0;
     private float mouseSensitivity = 5f;
+
     private bool isMoving = false;
     private bool isCrouching = false;
     private bool isStarted = false;
@@ -89,6 +92,7 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Car"))
         {
             isCar = true;
+            carAlarm = other.GetComponent<CarAlarm>();
         }
     }
 
@@ -160,6 +164,7 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("Car"))
         {
             isCar = false;
+            carAlarm = null;
         }
     }
 
@@ -252,6 +257,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && isCar)
         {
             anim.SetTrigger("isCar");
+
+            if (carAlarm != null)
+            {
+                carAlarm.ActivateAlarm(); // 도난방지 알람 실행
+            }
         }
 
         if (Input.GetKey(KeyCode.R) && isDisguised)
