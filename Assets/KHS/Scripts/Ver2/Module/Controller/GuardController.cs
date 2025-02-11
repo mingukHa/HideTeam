@@ -83,7 +83,7 @@ public class GuardController : TNPCController
     {
         if(other.CompareTag("Door"))
         {
-            SoundManager.instance.SFXPlay("DoorSound");
+            //SoundManager.instance.SFXPlay("DoorSound");
             Animator.SetTrigger("DoorOpen");
         }
     }

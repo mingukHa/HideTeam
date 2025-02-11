@@ -16,6 +16,9 @@ public class RoutineCommand2 : ICommand
         Debug.Log("RoutineCommand2 : Executed Call");
         if (_npcController.curRoutineIdx != 0)
             _npcController.ChangeRoutine();
+
+        //_npcController.Invoker.AddCommand(new MoveToNavMeshCommand(_npcController));  // 이동 명령 추가
+
         _isFinished = _npcController.Response() && _npcController.EventTrigger(0);
     }
 
