@@ -9,9 +9,26 @@ public class NPC_OldMan : NPCFSM
     public GameObject npcchatbox;
     public ReturnManager returnManager;
     private string npc = "NPC3";
-    private string npcEventTalk = "Talk";
-    private string npcEventFun = "Fun";
 
+    private void OnEnable()
+    {
+        EventManager.Subscribe(GameEventType.NPC1Talk, StartTalking);
+        EventManager.Subscribe(GameEventType.NPC1Fun, StartLaughing);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Unsubscribe(GameEventType.NPC1Talk, StartTalking);
+        EventManager.Unsubscribe(GameEventType.NPC1Fun, StartLaughing);
+    }
+    private void StartTalking()
+    {
+        //이런 행동을 할거임
+    }
+    private void StartLaughing()
+    {
+        //이런 행동을 할거임
+    }
     protected override void Start()
     {
         base.Start();
@@ -77,12 +94,15 @@ public class NPC_OldMan : NPCFSM
             if (Input.GetKey(KeyCode.Alpha1))
             {
                 chat.LoadNPCDialogue(npc, 2);
-                EventManager.Trigger(GameEventType.Talk);
+                EventManager.Trigger(GameEventType.NPC1Talk);
+                
+
             }
             if (Input.GetKey(KeyCode.Alpha2))
             {
                 chat.LoadNPCDialogue(npc, 1); 
-                EventManager.Trigger(GameEventType.Fun);
+                EventManager.Trigger(GameEventType.NPC1Fun);
+                //EventManager.Unsubscribe(GameEventType.Talk, StartTalking); 다시는 안 쓸 이벤트는 해제
             }
         }
     }

@@ -3,8 +3,8 @@ using static EventManager;
 
 public class EventTriggerManager : MonoBehaviour
 {
-    private GameEventType npcEventTalk = GameEventType.Talk; // Enum 사용
-    private GameEventType npcEventFun = GameEventType.Fun;
+    private GameEventType npcEventTalk = GameEventType.NPC1Talk; // Enum 사용
+    private GameEventType npcEventFun = GameEventType.NPC1Fun;
 
     private void OnEnable()
     {

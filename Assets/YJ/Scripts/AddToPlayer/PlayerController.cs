@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private PlayerDisguiser disguiser;
     public GameObject gun = null;
     public GameObject cigarette = null;
-
+    public Transform cameraTransform;
     private float mouseX = 0;
     private float mouseSensitivity = 5f;
     private bool isMoving = false;
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         tr = GetComponent<Transform>();
-        disguiser = GetComponent<PlayerDisguiser>();
+        disguiser = GetComponent<PlayerDisguiser>();        
     }
 
     private void Update()

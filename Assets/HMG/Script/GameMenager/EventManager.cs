@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 public class EventManager : MonoBehaviour
 {
-    public enum GameEventType //이 부분에서 모든 이벤트 관리 합니다
+    public enum GameEventType //이 부분에서 모든 이벤트 String을 관리 합니다
     {
-        Talk,
-        Fun,
-        Trade,
-        QuestComplete
+        NPC1Talk,
+        NPC1Fun,
+        NPC2Trade,
+        NPC2QuestComplete
     }
 
     private static Dictionary<GameEventType, Action> eventDictionary = new Dictionary<GameEventType, Action>();
