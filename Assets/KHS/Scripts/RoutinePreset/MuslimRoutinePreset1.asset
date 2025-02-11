@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09f7e47008eef234b857300d16f4f7e6, type: 3}
-  m_Name: TestRoutinePreset2
+  m_Name: MuslimRoutinePreset1
   m_EditorClassIdentifier: 
   waypoints:
-  - {x: 10, y: 0, z: 0}
-  - {x: 0, y: 0, z: 10}
-  - {x: -10, y: 0, z: 0}
-  - {x: 0, y: 0, z: -10}
+  - {x: -64.556, y: 1, z: 4.093}
+  - {x: -64.51, y: 1, z: 11.43}
+  - {x: -53.53, y: 1, z: 4.9}
+  - {x: -49.43, y: 1, z: 19.23}
+  - {x: -65.21, y: -3.207, z: 16.78}
