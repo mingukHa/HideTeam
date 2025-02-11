@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour
 
     public Image fImage;    //K키 이미지
 
+    public GameObject CarKey;
+
     private float eholdTime = 0f;   //E키 누른 시간
     private float eGoalholdTime = 1f;   //E키 눌러야하는 시간
 
@@ -93,6 +95,7 @@ public class PlayerController : MonoBehaviour
         {
             isCar = true;
             carAlarm = other.GetComponent<CarAlarm>();
+            CarKey.SetActive(true);
         }
     }
 
@@ -163,6 +166,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.CompareTag("Car"))
         {
+            CarKey.SetActive(false);
             isCar = false;
             carAlarm = null;
         }

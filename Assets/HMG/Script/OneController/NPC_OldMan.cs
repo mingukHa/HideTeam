@@ -12,8 +12,8 @@ public class NPC_OldMan : NPCFSM
 
     private void OnEnable()
     {
-        EventManager.Subscribe(GameEventType.NPC1Talk, StartTalking);
-        EventManager.Subscribe(GameEventType.NPC1Fun, StartLaughing);
+        EventManager.Subscribe(GameEventType.Garbage, StartTalking);
+        EventManager.Subscribe(GameEventType.policeTalk, StartLaughing);
     }
 
    
