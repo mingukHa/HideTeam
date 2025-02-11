@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using static EventManager;
 
 public class NPC_OldMan : NPCFSM
 {
@@ -76,12 +77,12 @@ public class NPC_OldMan : NPCFSM
             if (Input.GetKey(KeyCode.Alpha1))
             {
                 chat.LoadNPCDialogue(npc, 2);
-                EventManager.Trigger(npcEventTalk);
+                EventManager.Trigger(GameEventType.Talk);
             }
             if (Input.GetKey(KeyCode.Alpha2))
             {
                 chat.LoadNPCDialogue(npc, 1); 
-                EventManager.Trigger(npcEventFun);
+                EventManager.Trigger(GameEventType.Fun);
             }
         }
     }
