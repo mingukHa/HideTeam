@@ -1,6 +1,7 @@
 using UnityEngine;
 
 using Unity.VisualScripting;
+using static EventManager;
 
 public class NPC_NPC2 : NPCFSM
 {
@@ -8,6 +9,14 @@ public class NPC_NPC2 : NPCFSM
     private NPCChatTest chat;
     public GameObject npcchatbox;
     private string npc = "NPC2";
+    private void OnEnable()
+    {
+        EventManager.Subscribe(GameEventType.Garbage, StartTalking);    
+    }
+    private void StartTalking()
+    {
+        Debug.Log("할배의 반응을 받았음");
+    }
     protected override void Start()
     {
         base.Start();
