@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using static EventManager;
 
 public class PlayerController : MonoBehaviour
 {
@@ -264,6 +265,8 @@ public class PlayerController : MonoBehaviour
 
             if (carAlarm != null)
             {
+                EventManager.Trigger(GameEventType.Carkick);
+                Debug.Log("차킥 이벤트 발생");
                 carAlarm.ActivateAlarm(); // 도난방지 알람 실행
             }
         }

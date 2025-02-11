@@ -21,6 +21,7 @@ public class NPC_NPC2 : NPCFSM
     }
     private void StartKar()
     {
+        Debug.Log("차킥 이벤트 받아서 달려감");
         agent.SetDestination(carpos.transform.position);
     }
     protected override void Start()
