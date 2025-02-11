@@ -4,11 +4,11 @@ using System.Collections;
 public class FadeOut : MonoBehaviour
 {
     [SerializeField]private Image fadeImage; // 검은색 UI 이미지
-
+    public float FadeInTime = 2f;
     private void Start()
     {
         fadeImage.gameObject.SetActive(true);
-        StartCoroutine(FadeIn(1f)); // 씬 시작 시 페이드 인 (1초)
+        StartCoroutine(FadeIn(FadeInTime)); // 씬 시작 시 페이드 인 (1초)
     }
 
     public IEnumerator FadeIn(float duration)
