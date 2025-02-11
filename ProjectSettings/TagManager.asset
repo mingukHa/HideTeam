@@ -7,6 +7,7 @@ TagManager:
   - NPC
   - Ragdoll
   - Door
+  - Car
   layers:
   - Default
   - TransparentFX
