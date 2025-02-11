@@ -9,13 +9,18 @@ public class PlayerController : MonoBehaviour
 
     private NPCIdentifier currentNPC;
     private PlayerDisguiser disguiser;
+    private CarAlarm carAlarm;
     public GameObject gun = null;
     public GameObject cigarette = null;
-    public Transform cameraTransform;
+
+
     private float mouseX = 0;
     private float mouseSensitivity = 5f;
+
     private bool isMoving = false;
     private bool isCrouching = false;
+    private bool isStarted = false;
+    private bool isCar = false;
 
     public Image eImage;    //E키 이미지
     public Slider eSlider;  //E키 게이지
@@ -39,12 +44,13 @@ public class PlayerController : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         tr = GetComponent<Transform>();
-        disguiser = GetComponent<PlayerDisguiser>();        
+        disguiser = GetComponent<PlayerDisguiser>();
+
+        Smoking();
     }
 
     private void Update()
     {
-        StartCoroutine(ThrowCigarette());
         PlayerAction();
         PlayerMove();
 
@@ -55,34 +61,40 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    // 만약 other 오브젝트의 태그가 "NPC"가 아니면 반환 (실행 X)
-    //    if (!other.gameObject.CompareTag("NPC")) return;
+    private void OnTriggerEnter(Collider other)
+    {
+        //    // 만약 other 오브젝트의 태그가 "NPC"가 아니면 반환 (실행 X)
+        //    if (!other.gameObject.CompareTag("NPC")) return;
 
-    //    NPCIdentifier npc = other.GetComponent<NPCIdentifier>();    
-    //    NPCFSM npcFSM = other.GetComponent<NPCFSM>(); // NPCFSM 가져오기
+        //    NPCIdentifier npc = other.GetComponent<NPCIdentifier>();    
+        //    NPCFSM npcFSM = other.GetComponent<NPCFSM>(); // NPCFSM 가져오기
 
-    //    if (npcFSM != null && npcFSM.isDead)
-    //    {
-    //        Debug.Log("죽은 NPC와 상호작용");
-    //        // NPCIdentifier가 있는 오브젝트와 충돌 시, currentNPC 설정
-    //        eImage.gameObject.SetActive(true);
-    //        eSlider.gameObject.SetActive(true);
-    //        fImage.gameObject.SetActive(false);
+        //    if (npcFSM != null && npcFSM.isDead)
+        //    {
+        //        Debug.Log("죽은 NPC와 상호작용");
+        //        // NPCIdentifier가 있는 오브젝트와 충돌 시, currentNPC 설정
+        //        eImage.gameObject.SetActive(true);
+        //        eSlider.gameObject.SetActive(true);
+        //        fImage.gameObject.SetActive(false);
 
-    //        if (npc != null)
-    //        {
-    //            currentNPC = npc;
-    //        }
-    //    }
-    //    else
-    //    {
-    //        // NPC가 살아있을 때 fImage 활성화
-    //        fImage.gameObject.SetActive(true);
-    //        currentNPC = npc; // NPC를 currentNPC에 설정
-    //    }
-    //}
+        //        if (npc != null)
+        //        {
+        //            currentNPC = npc;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        // NPC가 살아있을 때 fImage 활성화
+        //        fImage.gameObject.SetActive(true);
+        //        currentNPC = npc; // NPC를 currentNPC에 설정
+        //    }
+
+        if (other.CompareTag("Car"))
+        {
+            isCar = true;
+            carAlarm = other.GetComponent<CarAlarm>();
+        }
+    }
 
     //실시간으로 UI가 변해야하므로 Stay로 변경
     private void OnTriggerStay(Collider other)
@@ -148,6 +160,12 @@ public class PlayerController : MonoBehaviour
 
         // NPC가 떠나면 fImage 비활성화
         fImage.gameObject.SetActive(false);
+
+        if (other.CompareTag("Car"))
+        {
+            isCar = false;
+            carAlarm = null;
+        }
     }
 
     private bool InputMouse(ref float _mouseX)
@@ -236,6 +254,16 @@ public class PlayerController : MonoBehaviour
             eSlider.value = 0f; // 슬라이더 게이지 초기화
         }
 
+        if (Input.GetKeyDown(KeyCode.E) && isCar)
+        {
+            anim.SetTrigger("isCar");
+
+            if (carAlarm != null)
+            {
+                carAlarm.ActivateAlarm(); // 도난방지 알람 실행
+            }
+        }
+
         if (Input.GetKey(KeyCode.R) && isDisguised)
         {
             rImage.gameObject.SetActive(true);
@@ -276,7 +304,18 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private IEnumerator ThrowCigarette()
+    private void Smoking()
+    {
+        if (!isStarted)
+        {
+            anim.SetTrigger("isStarted");
+            isStarted = true;
+        }
+
+        StartCoroutine(ThrowCigarette());
+    }
+
+private IEnumerator ThrowCigarette()
     {
         yield return new WaitForSecondsRealtime(10f);
 
@@ -308,5 +347,6 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSecondsRealtime(animLength);
 
         Time.timeScale = 1f; // 원래 속도로 복원
+        gun.SetActive(false);
     }
 }
