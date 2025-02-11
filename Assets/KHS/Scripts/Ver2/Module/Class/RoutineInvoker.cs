@@ -3,16 +3,19 @@ using UnityEngine;
 
 public class RoutineInvoker : MonoBehaviour
 {
-    public NPCRoutine npcRoutine;
+    public List<NPCRoutine> npcRoutines;
     private List<ICommand> routineCommands = new List<ICommand>();
     private int currentCommandIndex = 0;
     private bool routineFinished = false;
+    public int curRoutineIdx = 0;
 
     private void Start()
     {
-        if (npcRoutine != null)
+        curRoutineIdx = 0;
+
+        if (npcRoutines.Count != 0)
         {
-            LoadRoutine(npcRoutine);
+            LoadRoutine(npcRoutines[curRoutineIdx]);
         }
     }
     public void LoadRoutine(NPCRoutine routine)
@@ -28,6 +31,9 @@ public class RoutineInvoker : MonoBehaviour
                     break;
                 case RoutineActionType.Wait:
                     routineCommands.Add(new WaitCommand(GetComponent<NPCController>(), action.waitTime));
+                    break;
+                case RoutineActionType.Run:
+                    routineCommands.Add(new RunToCommand(GetComponent<NPCController>(), action.targetPosition));
                     break;
             }
         }
@@ -58,12 +64,18 @@ public class RoutineInvoker : MonoBehaviour
         }
         else
         {
-            routineFinished = true;
-            Debug.Log("루틴 종료");
+            //routineFinished = true;
+            RoutineChange(curRoutineIdx);
+            Debug.Log("루틴 종료 or 반복");
         }
     }
     public bool RoutineEnd()
     {
         return routineFinished;
+    }
+    public void RoutineChange(int nextIdx)
+    {
+        curRoutineIdx = nextIdx;
+        LoadRoutine(npcRoutines[nextIdx]);
     }
 }

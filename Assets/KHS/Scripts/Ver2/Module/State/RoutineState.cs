@@ -4,6 +4,7 @@ public class RoutineState : NPCState2
 {
     private RoutineInvoker routineInvoker;
 
+
     public RoutineState(NPCController npc) : base(npc)
     {
         routineInvoker = npc.GetComponent<RoutineInvoker>();
@@ -24,7 +25,8 @@ public class RoutineState : NPCState2
         }
         else
         {
-            _npcController.stateMachine.ChangeState(new WaitState(_npcController));
+            _npcController.stateMachine.ChangeState(new RoutineState(_npcController));
         }
+        
     }
 }
