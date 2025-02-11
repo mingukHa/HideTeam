@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     private NPCIdentifier currentNPC;
     private PlayerDisguiser disguiser;
     public GameObject gun = null;
+    public GameObject cigarette = null;
 
     private float mouseX = 0;
     private float mouseSensitivity = 5f;
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        StartCoroutine(ThrowCigarette());
         PlayerAction();
         PlayerMove();
 
@@ -273,6 +275,17 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(SuicideCoroutine());
         }
     }
+
+    private IEnumerator ThrowCigarette()
+    {
+        yield return new WaitForSecondsRealtime(10f);
+
+        if (cigarette != null)
+        {
+            cigarette.SetActive(false);
+        }
+    }
+
 
     private IEnumerator SuicideCoroutine()
     {
