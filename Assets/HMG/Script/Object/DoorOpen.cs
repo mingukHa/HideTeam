@@ -33,6 +33,7 @@ public class DoorController : MonoBehaviour
                 if (isOpen == false)
                 {
                     PlayerAnimator.SetTrigger("DoorOpen");
+
                     OpenDoorBasedOnView(Player.transform);
                 }
                 else
@@ -45,10 +46,6 @@ public class DoorController : MonoBehaviour
         
     }
 
-    public void dooropensound()
-    {
-        SoundManager.instance.SFXPlay("DoorSound", this.gameObject);
-    }
     public void OpenDoorBasedOnView(Transform entity)
     {
         if (entity == null) return;
@@ -90,6 +87,7 @@ public class DoorController : MonoBehaviour
     // 문 열기
     public void OpenDoor()
     {
+        SoundManager.instance.SFXPlay("DoorSound", this.gameObject);
         StopAllCoroutines();
         StartCoroutine(AnimateDoor(openRotation));
         isOpen = true;
