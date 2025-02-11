@@ -8,6 +8,9 @@ public class NPC_OldMan : NPCFSM
     public GameObject npcchatbox;
     public ReturnManager returnManager;
     private string npc = "NPC3";
+    private string npcEventTalk = "Talk";
+    private string npcEventFun = "Fun";
+
     protected override void Start()
     {
         base.Start();
@@ -73,11 +76,12 @@ public class NPC_OldMan : NPCFSM
             if (Input.GetKey(KeyCode.Alpha1))
             {
                 chat.LoadNPCDialogue(npc, 2);
-                //returnManager.ReturnStack(2f);
+                EventManager.Trigger(npcEventTalk);
             }
             if (Input.GetKey(KeyCode.Alpha2))
             {
-                chat.LoadNPCDialogue(npc, 1);
+                chat.LoadNPCDialogue(npc, 1); 
+                EventManager.Trigger(npcEventFun);
             }
         }
     }
