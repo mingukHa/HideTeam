@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
     public GameObject gun = null;
     public GameObject cigarette = null;
 
-
     private float mouseX = 0;
     private float mouseSensitivity = 5f;
 
@@ -94,9 +93,11 @@ public class PlayerController : MonoBehaviour
 
         if (other.CompareTag("Car"))
         {
-            isCar = true;
             carAlarm = other.GetComponent<CarAlarm>();
-            CarKey.SetActive(true);
+            if (carAlarm != null)
+            {
+                CarKey.SetActive(true);
+            }
         }
     }
 
@@ -145,6 +146,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.CompareTag("Car"))
+        {
+            CarKey.SetActive(false);
+            carAlarm = null;  // carAlarm을 null로 설정하여, 차량과 상호작용 불가하도록 만듦
+        }
+
         if (!other.gameObject.CompareTag("NPC")) return;
 
         //NPCFSM npcFSM = other.GetComponent<NPCFSM>();
@@ -164,13 +171,6 @@ public class PlayerController : MonoBehaviour
 
         // NPC가 떠나면 fImage 비활성화
         fImage.gameObject.SetActive(false);
-
-        if (other.CompareTag("Car"))
-        {
-            CarKey.SetActive(false);
-            isCar = false;
-            carAlarm = null;
-        }
     }
 
     private bool InputMouse(ref float _mouseX)
@@ -259,16 +259,12 @@ public class PlayerController : MonoBehaviour
             eSlider.value = 0f; // 슬라이더 게이지 초기화
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && isCar)
+        if (Input.GetKeyDown(KeyCode.E) && carAlarm != null)
         {
             anim.SetTrigger("isCar");
-
-            if (carAlarm != null)
-            {
-                EventManager.Trigger(GameEventType.Carkick);
-                Debug.Log("차킥 이벤트 발생");
-                carAlarm.ActivateAlarm(); // 도난방지 알람 실행
-            }
+            EventManager.Trigger(GameEventType.Carkick);
+            Debug.Log("차킥 이벤트 발생");
+            carAlarm.ActivateAlarm(); // 도난방지 알람 실행
         }
 
         if (Input.GetKey(KeyCode.R) && isDisguised)

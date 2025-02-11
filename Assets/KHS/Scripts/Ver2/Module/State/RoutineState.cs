@@ -1,5 +1,3 @@
-using Unity.AI.Navigation.Samples;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class RoutineState : NPCState2
@@ -25,11 +23,7 @@ public class RoutineState : NPCState2
         {
             NamedController namedController = _npcController.GetComponent<NamedController>();
             Debug.Log("네임드 코루틴 진입 체크");
-            _npcController.StartCoroutine(JudgeCoroutine(namedController.CurrentRoutineEnd(), new RoutineState(namedController)));
+            _npcController.StartCoroutine(JudgeCoroutine(namedController.CurrentRoutineEnd(), new WaitState(namedController)));
         }
-    }
-    public override void Exit()
-    {
-        
     }
 }
