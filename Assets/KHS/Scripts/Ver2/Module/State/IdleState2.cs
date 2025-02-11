@@ -20,7 +20,7 @@ public class IdleState2 : NPCState2
             Debug.Log("Adding RoutineCommand2 to Invoker.");
             _npcController.Invoker.AddCommand(new RoutineCommand2(_namedNPCController));
             _npcController.Invoker.AddCommand(new MoveToNavMeshCommand(_namedNPCController));  // 이동 명령 추가
-            //_npcController.Invoker.AddCommand(new MoveToNavMeshCommand(_namedNPCController));
+
         }
     }
     public override void Update()
@@ -32,11 +32,6 @@ public class IdleState2 : NPCState2
             NamedNPCController2 namedNPCController = _npcController.GetComponent<NamedNPCController2>();
             Debug.Log("네임드 코루틴 진입 체크");
             _npcController.StartCoroutine(JudgeCoroutine(namedNPCController.EventTrigger(0), new WaitState2(namedNPCController)));
-        }
-        else
-        {
-            Debug.Log("네임드 외 코루틴 진입 체크");
-            
         }
     }
 }

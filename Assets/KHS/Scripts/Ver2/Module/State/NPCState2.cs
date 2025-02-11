@@ -16,11 +16,13 @@ public abstract class NPCState2
     public virtual void Execute()
     {
         Debug.Log($"{_npcController.npcName} - Executing Commands in {this.GetType().Name}");
-        _npcController.Invoker.ExecuteCommands();
+        if (_npcController.GetComponent<NamedController>())
+            _npcController.routineInvoker.ExcuteRoutine();
+        else
+            _npcController.Invoker.ExecuteCommands();
     }
     public virtual IEnumerator JudgeCoroutine(bool _stateCheck, NPCState2 _nextState)
     {
-        Execute();
         if (_stateCheck)  // 상태 변경 조건 확인
         {
             _npcController.stateMachine.ChangeState(_nextState);  // 다음 상태로 전환
