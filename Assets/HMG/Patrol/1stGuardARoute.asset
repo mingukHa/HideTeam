@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89841ff76f8cf8446a24df87a1257cbe, type: 3}
+  m_Name: 1stGuardARoute
+  m_EditorClassIdentifier: 
+  waypoints:
+  - {x: -55.996, y: 0, z: 17.976}
+  - {x: -60.88, y: 0, z: 17.99}
+  - {x: -60.694, y: 0, z: 27.778}
+  - {x: -55.05, y: 0, z: 27.82}
+  - {x: -52.24, y: 0, z: 29.23}
+  - {x: -47.525, y: 2.703, z: 29.391}
+  - {x: -45.484, y: 2.703, z: 27.559}
+  - {x: -46.95, y: 2.703, z: 24.9}
+  - {x: -51.999, y: 5.42, z: 25.02}
+  - {x: -56.249, y: 5.42, z: 25.02}
+  - {x: -51.999, y: 5.42, z: 25.02}
+  - {x: -46.95, y: 2.703, z: 24.9}
+  - {x: -45.484, y: 2.703, z: 27.559}
+  - {x: -47.525, y: 2.703, z: 29.391}
+  - {x: -52.24, y: 0, z: 29.23}
+  - {x: -55.05, y: 0, z: 27.82}
+  - {x: -60.694, y: 0, z: 27.778}
+  - {x: -60.88, y: 0, z: 17.99}

@@ -5,7 +5,7 @@ public class CarAlarm : MonoBehaviour
 {
     public Light leftHeadLamp;  // 왼쪽 헤드 램프 (Inspector에서 지정)
     public Light rightHeadLamp; // 오른쪽 헤드 램프 (Inspector에서 지정)
-
+    [SerializeField] GameObject SoundPos = null;
     private bool isAlarmActive = false;
 
     public void ActivateAlarm()
@@ -13,14 +13,18 @@ public class CarAlarm : MonoBehaviour
         if (!isAlarmActive)
         {
             SoundManager.instance.SFXPlay("CarKickSound", this.gameObject);
+            SoundManager.instance.SFXPlay("CarKickFootSound", SoundPos);
             StartCoroutine(BlinkHeadLamps());
         }
     }
-
+    public void CarKick()
+    {
+        Debug.Log("차 발 사운드");
+    }
     private IEnumerator BlinkHeadLamps()
     {
+        
         isAlarmActive = true;
-        SoundManager.instance.SFXPlay("CarKickFootSound", this.gameObject);
 
         for (int i = 0; i < 20; i++) // 20번 깜빡임
         {

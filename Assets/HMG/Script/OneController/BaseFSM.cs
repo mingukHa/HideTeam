@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UIElements;
 
 public class NPCFSM : MonoBehaviour
@@ -16,7 +17,9 @@ public class NPCFSM : MonoBehaviour
     private Quaternion initrotation;
     private NPCChatTest NPCChatTest;
     public SphereCollider BoxCollider;
-
+    private NavMeshAgent agent;
+    public PatrolRoute patrolRoute;
+    private int currentWaypointIndex;
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
@@ -27,6 +30,10 @@ public class NPCFSM : MonoBehaviour
         SetRagdollState(false);
         ChangeState(State.Idle);
         initrotation = transform.rotation;
+        animator = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
+        agent.SetDestination(patrolRoute.waypoints[currentWaypointIndex]);
+        agent.autoBraking = false;
 
     }
 
