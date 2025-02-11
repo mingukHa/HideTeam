@@ -47,7 +47,7 @@ public class DoorController : MonoBehaviour
 
     public void dooropensound()
     {
-        //SoundManager.instance.SFXPlay("DoorSound");
+        SoundManager.instance.SFXPlay("DoorSound", this.gameObject);
     }
     public void OpenDoorBasedOnView(Transform entity)
     {
