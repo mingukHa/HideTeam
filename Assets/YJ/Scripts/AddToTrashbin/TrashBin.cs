@@ -1,31 +1,58 @@
-using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections;
 
 public class TrashBin : MonoBehaviour
 {
-    public Transform trashBinRid;
+    public Transform trashBinRid; // Trashbin의 회전 기준 Transform
     public GameObject[] trashObjects; // Trash 오브젝트 4개
-    //public Transform[] trashPositions; // 바닥에 떨어질 위치
-    private Rigidbody rb = null;
+    private float rotationDuration = 1.5f; // 회전이 완료되는 시간
 
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-    }
+    private bool isMessUpTriggered = false; // 중복 실행 방지
 
+    // PlayerController에서 E키 누르면 작동
     public void MessUpTrashBin()
     {
-        //// Trash 오브젝트를 바닥 위치로 이동
-        //for (int i = 0; i < trashObjects.Length; i++)
-        //{
-        //    if (i < trashPositions.Length)
-        //    {
-        //        trashObjects[i].transform.position = trashPositions[i].position;
-        //        trashObjects[i].transform.rotation = trashPositions[i].rotation;
-        //    }
-        //}
+        if (!isMessUpTriggered)
+        {
+            isMessUpTriggered = true;
+            StartCoroutine(RotateTrashBinRid());
+            AddRigidbodyToTrash();
 
-        trashBinRid.Rotate(-90f, 0f, 0f);
-        rb.AddForce(Vector3.up, ForceMode.Impulse);
+            // 청소부 호출 이벤트
+            EventManager.Trigger(EventManager.GameEventType.Garbage);
+        }
+    }
+
+    // 쓰레기통 뚜껑 열기
+    private IEnumerator RotateTrashBinRid()
+    {
+        Quaternion startRotation = trashBinRid.rotation;
+        Quaternion targetRotation = startRotation * Quaternion.Euler(-90f, 0f, 0f);
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < rotationDuration)
+        {
+            trashBinRid.rotation = Quaternion.Lerp(startRotation, targetRotation, elapsedTime / rotationDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        trashBinRid.rotation = targetRotation;
+    }
+
+    // 쓰레기봉지에 Rigidbody 부착
+    private void AddRigidbodyToTrash()
+    {
+        foreach (GameObject trash in trashObjects)
+        {
+            if (trash.GetComponent<Rigidbody>() == null)
+            {
+                Rigidbody rb = trash.AddComponent<Rigidbody>();
+                rb.useGravity = true;
+                rb.mass = 0.2f; // 무게 조절 가능
+                rb.AddTorque(Vector3.up, ForceMode.Impulse); // 쓰레기가 위로 솟구침
+            }
+        }
     }
 }
