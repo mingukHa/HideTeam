@@ -23,6 +23,7 @@ public abstract class NPCState2
     }
     public virtual IEnumerator JudgeCoroutine(bool _stateCheck, NPCState2 _nextState)
     {
+        Execute();
         if (_stateCheck)  // 상태 변경 조건 확인
         {
             _npcController.stateMachine.ChangeState(_nextState);  // 다음 상태로 전환

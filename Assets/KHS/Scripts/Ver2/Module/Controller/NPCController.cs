@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -57,7 +58,7 @@ public abstract class NPCController : MonoBehaviour
             stateMachine.ChangeState(new IdleState2(this));
         }
         agent.speed = walkSpeed;
-        agent.stoppingDistance = 1.5f;
+        agent.stoppingDistance = 0.8f;
         UpdateTargetInfo();
     }
     public void UpdateTargetInfo()
@@ -140,5 +141,10 @@ public abstract class NPCController : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(transform.position, transform.position + viewAngleA * viewRadius);
         Gizmos.DrawLine(transform.position, transform.position + viewAngleB * viewRadius);
+    }
+    public IEnumerator TalkCoroutine()
+    {
+        Debug.Log("TalkCoroutine");
+        yield return null;
     }
 }
