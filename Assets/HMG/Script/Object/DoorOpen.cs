@@ -16,6 +16,7 @@ public class DoorController : MonoBehaviour
     private void Awake()
     {
         Player = GameObject.FindWithTag("Player");
+        Debug.Log($"{Player}문이 받아 옴");
         PlayerAnimator = Player.GetComponent<Animator>();
             
 

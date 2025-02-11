@@ -12,6 +12,7 @@ public class CarAlarm : MonoBehaviour
     {
         if (!isAlarmActive)
         {
+            SoundManager.instance.SFXPlay("CarKickSound", this.gameObject);
             StartCoroutine(BlinkHeadLamps());
         }
     }
@@ -19,6 +20,7 @@ public class CarAlarm : MonoBehaviour
     private IEnumerator BlinkHeadLamps()
     {
         isAlarmActive = true;
+        SoundManager.instance.SFXPlay("CarKickFootSound", this.gameObject);
 
         for (int i = 0; i < 20; i++) // 20¹ø ±ôºýÀÓ
         {
