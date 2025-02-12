@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class WaitState : NPCState2
+public class WaitState : NPCState
 {
     private RoutineInvoker routineInvoker;
 

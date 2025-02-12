@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class NPCStateMachine2 : MonoBehaviour
+public class NPCStateMachine : MonoBehaviour
 {
-    private NPCState2 _currentState;
+    public NPCState _currentState;
     private float elapsedTime = 0;
-    public void ChangeState(NPCState2 newState)
+    public void ChangeState(NPCState newState)
     {
         if (_currentState != null)
             _currentState.Exit();

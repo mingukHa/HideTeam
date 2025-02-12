@@ -4,7 +4,7 @@ using UnityEngine;
 public class RoutineInvoker : MonoBehaviour
 {
     public List<NPCRoutine> npcRoutines;
-    private List<ICommand> routineCommands = new List<ICommand>();
+    public List<ICommand> routineCommands = new List<ICommand>();
     private int currentCommandIndex = 0;
     private bool routineFinished = false;
     public int curRoutineIdx = 0;
@@ -37,12 +37,6 @@ public class RoutineInvoker : MonoBehaviour
                     break;
             }
         }
-        currentCommandIndex = 0;
-    }
-
-    public void SetRoutine(List<ICommand> commands)
-    {
-        routineCommands = commands;
         currentCommandIndex = 0;
     }
 

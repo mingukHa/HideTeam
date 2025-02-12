@@ -17,7 +17,6 @@ public class RunToCommand : ICommand
         Debug.Log($"{npcController.npcName} 가 {targetPosition}을 향해 Destination중");
         npcController.animator.SetTrigger("Run");
         npcController.agent.speed = npcController.runSpeed;
-        npcController.agent.angularSpeed = 200f;
         npcController.agent.SetDestination(targetPosition);
         if (Vector3.Distance(npcController.transform.position, targetPosition) <= npcController.agent.stoppingDistance)
         {

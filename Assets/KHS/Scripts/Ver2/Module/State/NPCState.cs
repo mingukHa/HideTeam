@@ -2,11 +2,11 @@ using System.Collections;
 using UnityEngine;
 
 
-public abstract class NPCState2
+public abstract class NPCState
 {
     protected NPCController _npcController;
 
-    public NPCState2(NPCController npc)
+    public NPCState(NPCController npc)
     {
         _npcController = npc;
     }
@@ -16,14 +16,10 @@ public abstract class NPCState2
     public virtual void Execute()
     {
         Debug.Log($"{_npcController.npcName} - Executing Commands in {this.GetType().Name}");
-        if (_npcController.GetComponent<NamedController>())
-            _npcController.routineInvoker.ExcuteRoutine();
-        else
-            _npcController.Invoker.ExecuteCommands();
+        _npcController.routineInvoker.ExcuteRoutine();
     }
-    public virtual IEnumerator JudgeCoroutine(bool _stateCheck, NPCState2 _nextState)
+    public virtual IEnumerator JudgeCoroutine(bool _stateCheck, NPCState _nextState)
     {
-        Execute();
         if (_stateCheck)  // 상태 변경 조건 확인
         {
             _npcController.stateMachine.ChangeState(_nextState);  // 다음 상태로 전환

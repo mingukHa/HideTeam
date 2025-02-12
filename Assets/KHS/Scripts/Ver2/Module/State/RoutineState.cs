@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class RoutineState : NPCState2
+public class RoutineState : NPCState
 {
     private RoutineInvoker routineInvoker;
 
@@ -27,6 +27,5 @@ public class RoutineState : NPCState2
         {
             _npcController.stateMachine.ChangeState(new RoutineState(_npcController));
         }
-        
     }
 }
