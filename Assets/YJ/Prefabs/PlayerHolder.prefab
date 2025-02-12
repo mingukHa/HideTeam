@@ -5417,6 +5417,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultCharacter: {fileID: 8049245499363119288}
   defaultAvatar: {fileID: 9000000, guid: 7aea2d469d67de44f9dd680a5088c739, type: 3}
+  defaultHandIKTarget: {fileID: 8280655040660102763}
   characterVariants:
   - {fileID: 5115684400203367848}
   - {fileID: 2948166221909097789}
@@ -5435,8 +5436,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fdfdff9fa476aa24a8400b67f3a5ddd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  holdPoint: {fileID: 2084791816221230120}
-  grabKey: 103
+  ragdollHoldPoint: {fileID: 2084791816221230120}
+  handIKTarget: {fileID: 8280655040660102763}
 --- !u!1 &3015967799511760244
 GameObject:
   m_ObjectHideFlags: 0
@@ -6096,7 +6097,7 @@ GameObject:
   - component: {fileID: 2084791816221230120}
   - component: {fileID: 950464022064093096}
   m_Layer: 0
-  m_Name: HoldPoint
+  m_Name: RagdollHoldPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6140,7 +6141,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -13927,7 +13928,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1575465286858069730
 Transform:
   m_ObjectHideFlags: 0
@@ -17105,6 +17106,10 @@ PrefabInstance:
     - target: {fileID: 5906917402462211438, guid: 3c852deeacfc0534a90f03087ab1c4d1, type: 3}
       propertyPath: m_Name
       value: PChar_RichMan
+      objectReference: {fileID: 0}
+    - target: {fileID: 5906917402462211438, guid: 3c852deeacfc0534a90f03087ab1c4d1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4699170420333955455, guid: 3c852deeacfc0534a90f03087ab1c4d1, type: 3}
