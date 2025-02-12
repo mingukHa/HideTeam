@@ -16,7 +16,7 @@ public class NPCFSM : MonoBehaviour
     private bool isRagdollActivated = false; // 레그돌 활성화 여부 확인용
     private Quaternion initrotation;
     private NPCChatTest NPCChatTest;
-    public SphereCollider BoxCollider;
+    public Collider BoxCollider;
     private NavMeshAgent agent;
     public PatrolRoute patrolRoute;
     private int currentWaypointIndex;

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using static EventManager;
@@ -41,6 +42,10 @@ public class PlayerController : MonoBehaviour
 
     private bool isDisguised = false;
 
+    public List<DoorController> doorCons = new List<DoorController>();
+    [SerializeField]
+    private bool isFirstOpen = false;   // 출입문 첫 개방 확인용
+
     private NPCIdentifier disguisedNPC = null;  //변장한 NPC를 추적
 
     private void Start()
@@ -50,6 +55,7 @@ public class PlayerController : MonoBehaviour
         disguiser = GetComponent<PlayerDisguiser>();
 
         Smoking();
+        isFirstOpen = false;
     }
 
     private void Update()
@@ -62,6 +68,8 @@ public class PlayerController : MonoBehaviour
         {
             InputMouseProcess(mouseX);
         }
+
+        CheckFirstDoorOpen();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -321,6 +329,17 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K))
         {
             StartCoroutine(SuicideCoroutine());
+        }
+    }
+    private void CheckFirstDoorOpen()
+    {
+        foreach(DoorController doorCon in doorCons)
+        {
+            if(!isFirstOpen && doorCon.isOpen)
+            {
+                isFirstOpen = true;
+                EventManager.Trigger(GameEventType.PlayerEnterBank);
+            }
         }
     }
 

@@ -13,4 +13,8 @@ public class NamedController : NPCController
     {
         stateMachine.ChangeState(new EventWaitState(this));
     }
+    public void PlayerEnter()
+    {
+        stateMachine.ChangeState(new RoutineState(this));
+    }
 }

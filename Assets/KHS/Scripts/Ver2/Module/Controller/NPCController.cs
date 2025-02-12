@@ -57,7 +57,7 @@ public abstract class NPCController : MonoBehaviour
     {
         if (routineInvoker.npcRoutines.Count != 0)
         {
-            stateMachine.ChangeState(new RoutineState(this));
+            stateMachine.ChangeState(new IdleState(this));
         }
         agent.speed = walkSpeed;
         agent.angularSpeed = 200f;

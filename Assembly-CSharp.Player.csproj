@@ -143,6 +143,7 @@
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\Controller\NPCController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\IdleState.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\NPCStateMachine.cs" />
     <Compile Include="Assets\HMG\Script\Object\vault door.cs" />
     <Compile Include="Assets\HMG\Script\FirebaseChat\TextCameraVeiw.cs" />

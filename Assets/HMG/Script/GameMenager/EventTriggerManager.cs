@@ -5,6 +5,8 @@ public class EventTriggerManager : MonoBehaviour
 {
     private GameEventType[] npcEvents =
     {
+        GameEventType.SuspiciousDetected,
+        GameEventType.PlayerEnterBank,
         GameEventType.Carkick,
         GameEventType.Garbage,
         GameEventType.sweeper,
