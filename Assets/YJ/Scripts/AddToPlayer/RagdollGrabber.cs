@@ -1,13 +1,15 @@
 using UnityEngine;
 
-public class RagdollGraber : MonoBehaviour
+public class RagdollGrabber : MonoBehaviour
 {
-    private Animator anim;
-    public Transform holdPoint; // Ragdoll을 붙잡을 위치 (예: 플레이어 앞쪽)
-    public KeyCode grabKey = KeyCode.F; // 잡기 키
 
-    private FixedJoint joint;
+    public Transform ragdollHoldPoint; // Ragdoll을 붙잡을 위치 (예: 플레이어 앞쪽)
+    public Transform handIKTarget; // IK 타겟 (오른손 포지션)
+
+    private Animator anim;
+    private ConfigurableJoint joint;
     private Rigidbody ragdollRigidbody;
+    private bool isGrabbing = false;
 
 
     private void Start()
@@ -17,17 +19,19 @@ public class RagdollGraber : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(grabKey))
+        if (Input.GetKeyDown(KeyCode.G))
         {
-            if (joint == null)
+            if (!isGrabbing)
             {
+                anim.SetBool("isGrabbingRagdoll", true);
                 TryGrabRagdoll();
-                anim.SetBool("GrabbingRagdoll", true);
+                Debug.LogWarning("래그돌 붙잡음");
             }
             else
             {
+                anim.SetBool("isGrabbingRagdoll", false);
                 ReleaseRagdoll();
-                anim.SetBool("GrabbingRagdoll", false);
+                Debug.LogWarning("래그돌 놓음");
             }
         }
     }
@@ -49,20 +53,56 @@ public class RagdollGraber : MonoBehaviour
 
     private void AttachRagdoll()
     {
-        // Fixed Joint 추가
-        joint = ragdollRigidbody.gameObject.AddComponent<FixedJoint>();
-        joint.connectedBody = holdPoint.GetComponent<Rigidbody>();
-        joint.breakForce = 5000; // 너무 강한 충격을 받으면 Joint 해제
-        joint.breakTorque = 5000;
+        // 잡은 상태
+        isGrabbing = true;
+
+        handIKTarget.position = ragdollRigidbody.position;
+
+        // Configurable Joint 추가
+        joint = ragdollRigidbody.gameObject.AddComponent<ConfigurableJoint>();
+        joint.connectedBody = ragdollHoldPoint.GetComponent<Rigidbody>();
+
+        joint.xMotion = ConfigurableJointMotion.Limited;
+        joint.yMotion = ConfigurableJointMotion.Limited;
+        joint.zMotion = ConfigurableJointMotion.Limited;
+
+        // 래그돌이 손을 따라오게 하는 힘 적용
+        JointDrive drive = new JointDrive();
+        drive.positionSpring = 200; // 손을 따라오는 힘(낮으면 더 부드럽게 끌림)
+        drive.positionDamper = 10;
+        drive.maximumForce = 1000;
+
+        joint.xDrive = drive;
+        joint.yDrive = drive;
+        joint.zDrive = drive;
     }
 
     private void ReleaseRagdoll()
     {
+        isGrabbing = false;
         if (joint != null)
         {
             Destroy(joint);
             joint = null;
-            ragdollRigidbody = null;
+        }
+        ragdollRigidbody = null;
+    }
+
+    // IK 적용
+    private void OnAnimatorIK(int layerIndex)
+    {
+        if (anim && isGrabbing)
+        {
+            anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
+            anim.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
+
+            anim.SetIKPosition(AvatarIKGoal.RightHand, handIKTarget.position);
+            anim.SetIKRotation(AvatarIKGoal.RightHand, handIKTarget.rotation);
+        }
+        else
+        {
+            anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 0);
+            anim.SetIKRotationWeight(AvatarIKGoal.RightHand, 0);
         }
     }
 }
