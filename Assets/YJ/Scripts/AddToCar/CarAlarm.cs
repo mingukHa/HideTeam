@@ -3,8 +3,11 @@ using System.Collections;
 
 public class CarAlarm : MonoBehaviour
 {
-    public Light leftHeadLamp;  // 왼쪽 헤드 램프 (Inspector에서 지정)
-    public Light rightHeadLamp; // 오른쪽 헤드 램프 (Inspector에서 지정)
+    public Light frontLeftHeadLamp;  // 전방 왼쪽 헤드 램프
+    public Light frontRightHeadLamp; // 전방 오른쪽 헤드 램프
+    public Light rearLeftHeadLamp; // 후방 왼쪽 헤드 램프
+    public Light rearRightHeadLamp; // 후방 오른쪽 헤드 램프
+
     [SerializeField] GameObject SoundPos = null;
     private bool isAlarmActive = false;
 
@@ -39,7 +42,9 @@ public class CarAlarm : MonoBehaviour
 
     private void ToggleLights(bool state)
     {
-        if (leftHeadLamp != null) leftHeadLamp.enabled = state;
-        if (rightHeadLamp != null) rightHeadLamp.enabled = state;
+        if (frontLeftHeadLamp != null) frontLeftHeadLamp.enabled = state;
+        if (frontRightHeadLamp != null) frontRightHeadLamp.enabled = state;
+        if (rearLeftHeadLamp != null) rearLeftHeadLamp.enabled = state;
+        if (rearRightHeadLamp != null) rearRightHeadLamp.enabled = state;
     }
 }
