@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints:
   - {x: -80.67, y: 1.3452569, z: -5.826477}
+  - {x: -80.534, y: -0.133, z: -4.767}
