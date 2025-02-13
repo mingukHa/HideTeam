@@ -2,19 +2,33 @@ using UnityEngine;
 
 public class RagdollGrabber : MonoBehaviour
 {
-
     public Transform ragdollHoldPoint; // Ragdoll을 붙잡을 위치 (예: 플레이어 앞쪽)
-    public Transform handIKTarget; // IK 타겟 (오른손 포지션)
+    public Transform leftHandIKTarget; // 왼손 IK 타겟
+    public Transform rightHandIKTarget; // 오른손 IK 타겟
+    private float ikLerpSpeed = 10f; // IK 보간 속도
 
     private Animator anim;
     private ConfigurableJoint joint;
     private Rigidbody ragdollRigidbody;
+    private Transform rootTransform; // NPC 최상위 오브젝트의 Transform
+    private Collider[] rootColliders; // NPC 최상위 오브젝트의 Collider 목록
     private bool isGrabbing = false;
+
+    private Vector3 leftHandIKPosition;
+    private Quaternion leftHandIKRotation;
+    private Vector3 rightHandIKPosition;
+    private Quaternion rightHandIKRotation;
 
 
     private void Start()
     {
         anim = GetComponent<Animator>();
+
+        // 손의 초기 위치와 회전 저장
+        leftHandIKPosition = anim.GetIKPosition(AvatarIKGoal.LeftHand);
+        leftHandIKRotation = anim.GetIKRotation(AvatarIKGoal.LeftHand);
+        rightHandIKPosition = anim.GetIKPosition(AvatarIKGoal.RightHand);
+        rightHandIKRotation = anim.GetIKRotation(AvatarIKGoal.RightHand);
     }
 
     private void Update()
@@ -25,21 +39,28 @@ public class RagdollGrabber : MonoBehaviour
             {
                 anim.SetBool("isGrabbingRagdoll", true);
                 TryGrabRagdoll();
-                Debug.LogWarning("래그돌 붙잡음");
             }
             else
             {
                 anim.SetBool("isGrabbingRagdoll", false);
                 ReleaseRagdoll();
-                Debug.LogWarning("래그돌 놓음");
             }
+        }
+
+        if (isGrabbing && rootTransform != null)
+        {
+            // Ragdoll의 평균 위치 계산
+            Vector3 ragdollCenter = CalculateRagdollCenter();
+
+            // 최상위 부모 Transform 이동
+            rootTransform.position = ragdollCenter;
         }
     }
 
     private void TryGrabRagdoll()
     {
         // 가까운 Ragdoll의 Rigidbody 찾기
-        Collider[] colliders = Physics.OverlapSphere(transform.position, 2f);
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 1f);
         foreach (var col in colliders)
         {
             if (col.attachedRigidbody != null && col.attachedRigidbody.CompareTag("Ragdoll")) // Ragdoll 태그를 비교해서 래그돌 판정
@@ -49,6 +70,10 @@ public class RagdollGrabber : MonoBehaviour
                 return;
             }
         }
+
+        // 주변에 Ragdoll이 없는 경우
+        isGrabbing = false;
+        anim.SetBool("isGrabbingRagdoll", false);
     }
 
     private void AttachRagdoll()
@@ -56,7 +81,23 @@ public class RagdollGrabber : MonoBehaviour
         // 잡은 상태
         isGrabbing = true;
 
-        handIKTarget.position = ragdollRigidbody.position;
+        // Ragdoll의 루트 오브젝트 찾기
+        rootTransform = ragdollRigidbody.transform.root; // 최상위 부모 찾기
+
+        // 부모 오브젝트의 모든 Collider 저장 및 비활성화
+        rootColliders = rootTransform.GetComponents<Collider>();
+        foreach (var col in rootColliders)
+        {
+            col.enabled = false;
+        }
+
+        //ragdollRigidbody.position = handIKTarget.position;
+
+        // HoldPoint 위치로 잡은 Ragdoll 이동
+        //ragdollRigidbody.MovePosition(ragdollHoldPoint.position);
+        //ragdollRigidbody.MoveRotation(ragdollHoldPoint.rotation);
+        ragdollRigidbody.transform.position = ragdollHoldPoint.position;
+        ragdollRigidbody.transform.rotation = ragdollHoldPoint.rotation;
 
         // Configurable Joint 추가
         joint = ragdollRigidbody.gameObject.AddComponent<ConfigurableJoint>();
@@ -80,29 +121,76 @@ public class RagdollGrabber : MonoBehaviour
     private void ReleaseRagdoll()
     {
         isGrabbing = false;
+
+        // 최상위 부모 오브젝트의 Collider 다시 활성화
+        if (rootColliders != null)
+        {
+            foreach (var col in rootColliders)
+            {
+                col.enabled = true;
+            }
+        }
+
+        // Configurable Joint 삭제
         if (joint != null)
         {
             Destroy(joint);
             joint = null;
         }
+
         ragdollRigidbody = null;
+        rootTransform = null; // 루트 Transform 초기화
+    }
+
+    // Ragdoll의 Rigidbody 평균 위치 계산
+    private Vector3 CalculateRagdollCenter()
+    {
+        Rigidbody[] rigidbodies = rootTransform.GetComponentsInChildren<Rigidbody>();
+        if (rigidbodies.Length == 0) return rootTransform.position;
+
+        Vector3 center = Vector3.zero;
+        foreach (var rb in rigidbodies)
+        {
+            center += rb.position;
+        }
+        center /= rigidbodies.Length; // 평균 위치 계산
+        return center;
     }
 
     // IK 적용
     private void OnAnimatorIK(int layerIndex)
     {
-        if (anim && isGrabbing)
+        if (anim)
         {
-            anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
-            anim.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
+            if (isGrabbing)
+            {
+                // Lerp & Slerp를 이용한 부드러운 IK 이동
+                leftHandIKPosition = Vector3.Lerp(leftHandIKPosition,
+                    leftHandIKTarget.position, Time.deltaTime * ikLerpSpeed);
+                leftHandIKRotation = Quaternion.Slerp(leftHandIKRotation,
+                    leftHandIKTarget.rotation, Time.deltaTime * ikLerpSpeed);
+                rightHandIKPosition = Vector3.Lerp(rightHandIKPosition,
+                    rightHandIKTarget.position, Time.deltaTime * ikLerpSpeed);
+                rightHandIKRotation = Quaternion.Slerp(rightHandIKRotation,
+                    rightHandIKTarget.rotation, Time.deltaTime * ikLerpSpeed);
 
-            anim.SetIKPosition(AvatarIKGoal.RightHand, handIKTarget.position);
-            anim.SetIKRotation(AvatarIKGoal.RightHand, handIKTarget.rotation);
-        }
-        else
-        {
-            anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 0);
-            anim.SetIKRotationWeight(AvatarIKGoal.RightHand, 0);
+                anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
+                anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1);
+                anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
+                anim.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
+
+                anim.SetIKPosition(AvatarIKGoal.LeftHand, leftHandIKPosition);
+                anim.SetIKRotation(AvatarIKGoal.LeftHand, leftHandIKRotation);
+                anim.SetIKPosition(AvatarIKGoal.RightHand, rightHandIKPosition);
+                anim.SetIKRotation(AvatarIKGoal.RightHand, rightHandIKRotation);
+            }
+            else
+            {
+                anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, 0);
+                anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, 0);
+                anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 0);
+                anim.SetIKRotationWeight(AvatarIKGoal.RightHand, 0);
+            }
         }
     }
 }
