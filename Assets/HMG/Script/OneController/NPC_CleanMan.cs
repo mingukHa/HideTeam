@@ -29,6 +29,7 @@ public class NPC_CleanMan : NPCFSM
     {
         StopCoroutine(TalkView());
         transform.rotation = initrotation;
+        new WaitForSeconds(2f);
         NPCCollider.radius = 0.01f;
         animator.SetTrigger("Idel");
         select.SetActive(false);
@@ -39,7 +40,7 @@ public class NPC_CleanMan : NPCFSM
         base.Start();
         select.SetActive(false);
         chat = GetComponent<NPCChatTest>();
-        select.SetActive(false);
+        
         agent = GetComponent<NavMeshAgent>();
         NPCCollider = GetComponent<SphereCollider>();
     }
@@ -85,7 +86,6 @@ public class NPC_CleanMan : NPCFSM
     {
         if (!isDead && other.CompareTag("Player"))
         {
-            select.SetActive(true);
             ChangeState(State.Talk);
             chat.LoadNPCDialogue(npc, 0);
         }

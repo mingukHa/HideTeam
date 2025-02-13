@@ -13,11 +13,11 @@ public class NPC_OldMan : NPCFSM
     private string npc = "NPC3";
     public Transform OldManPos; //이동 할 위치
 
-
     private void StopNpc()
     {
         StopCoroutine(TalkView());
         transform.rotation = initrotation;
+        new WaitForSeconds(2f);
         NPCCollider.radius = 0.01f;
         animator.SetTrigger("Idel");
         select.SetActive(false);
