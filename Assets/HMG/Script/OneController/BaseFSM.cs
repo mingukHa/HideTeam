@@ -66,7 +66,18 @@ public class NPCFSM : MonoBehaviour
             case State.Dead:
                 DeadBehavior();
                 break;
-        }        
+        }
+        if (isDead && !isRagdollActivated)
+        {
+            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+
+            // 애니메이션 "Dead"가 실행 중인지 확인
+            if (stateInfo.IsName("Dead") && stateInfo.normalizedTime >= 1.0f)
+            {
+                Debug.Log(" Dead 애니메이션 종료 - 레그돌 활성화 실행");
+                ActivateRagdoll(); //  레그돌 처리
+            }
+        }
     }
 
     protected virtual void ChangeState(State newState)
@@ -113,22 +124,23 @@ public class NPCFSM : MonoBehaviour
         }
     }
 
-    // 레그돌 활성화
     private void ActivateRagdoll()
     {
-        animator.enabled = false; // 애니메이터 비활성화
-        SetRagdollState(true);    // 레그돌 활성화
+        if (isRagdollActivated) return; //  중복 실행 방지
+        Debug.Log("ActivateRagdoll() 실행됨 - 레그돌 활성화!");
 
-        //여기에 NPC가 래그돌 상태가 되면 태그를 NPC -> Ragdoll로 바뀌는 기능 넣어주세요(모든 하위 Bone에 일괄 적용 되도록)
-        //From 유진
+        animator.enabled = false; //  애니메이션 정지
+        SetRagdollState(true); //  물리 적용
+
+        isRagdollActivated = true; //  이미 실행되었음을 저장
     }
 
-    // 레그돌 상태 설정
     private void SetRagdollState(bool state)
     {
+        Debug.Log($" 레그돌 상태 변경: {(state ? "활성화" : "비활성화")}");
         foreach (var rb in rigidbodies)
         {
-            rb.isKinematic = !state; // 물리 활성화
+            rb.isKinematic = !state; //  Rigidbody 물리 활성화
         }
     }
 
