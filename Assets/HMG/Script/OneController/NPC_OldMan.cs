@@ -102,7 +102,7 @@ public class NPC_OldMan : NPCFSM
                 Invoke("ReturnOldMan", 6f);
                             
             }
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKey(KeyCode.F))
             {
                 isDead = true;
             }

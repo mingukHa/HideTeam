@@ -102,7 +102,7 @@ public class NPC_Polic : NPCFSM
                 Invoke("StopNpc", 2f);
             }
         }
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKey(KeyCode.F))
         {
             isDead = true;
         }

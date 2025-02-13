@@ -97,7 +97,7 @@ public class NPC_CleanMan : NPCFSM
             ChangeState(State.Talk);
             chat.LoadNPCDialogue(npc, 0);
         }
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKey(KeyCode.F))
         {
             isDead = true;
         }

@@ -127,7 +127,6 @@ public class NPCFSM : MonoBehaviour
     protected void ActivateRagdoll()
     {
         if (isRagdollActivated) return; //  중복 실행 방지
-        Debug.Log("ActivateRagdoll() 실행됨 - 레그돌 활성화!");
         isDead = true;
         animator.enabled = false; //  애니메이션 정지
         SetRagdollState(true); //  물리 적용
@@ -140,6 +139,7 @@ public class NPCFSM : MonoBehaviour
         Debug.Log($" 레그돌 상태 변경: {(state ? "활성화" : "비활성화")}");
         foreach (var rb in rigidbodies)
         {
+            gameObject.tag = "Ragdoll";
             rb.isKinematic = !state; //  Rigidbody 물리 활성화
         }
     }
