@@ -10,6 +10,12 @@ TagManager:
   - Car
   - TrashBin
   - CutScene
+  - ElevatorButtonOpen
+  - ElevatorNumericButton
+  - ElevatorGoButton
+  - Elevator
+  - FxTemporaire
+  - Dumpster
   layers:
   - Default
   - TransparentFX

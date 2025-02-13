@@ -1,90 +1,118 @@
-using System.Collections;
 using UnityEngine;
+using System.Collections;
 
 public class Dumpster : MonoBehaviour
 {
-    public Transform dumpsterLid; // 대형 쓰레기통 뚜껑
-    public Transform disposalPoint; // NPC 래그돌을 이동시킬 지점
-    private float lidRotationDuration = 1.5f; // 
-    public float disposeTime = 2f; // 쓰레기통에 넣는 시간
-    private bool isInDisposalRange = false; // 대형 쓰레기통 범위 내에 있는지 확인
-    private Animator anim;
-    private RagdollGrabber ragdollGrabber; // RagdollGrabber 스크립트 참조
+    public Transform disposalPoint; // Ragdoll을 버릴 위치
+    public Transform lid; // 뚜껑 오브젝트
+    private Rigidbody ragdollRigidbody;
+    private Transform ragdollRoot;
+    private bool isPlayerNearby = false;
+    private bool isRagdollNearby = false;
+    private Quaternion lidClosedRotation;
+    private Quaternion lidOpenRotation;
+    private Animation anim;
 
     private void Start()
     {
-        anim = GetComponent<Animator>();
-        ragdollGrabber = GetComponent<RagdollGrabber>();
+        // 뚜껑의 초기 회전 저장
+        lidClosedRotation = lid.rotation;
+        lidOpenRotation = lidClosedRotation * Quaternion.Euler(-80f, 0f, 0f);
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && isInDisposalRange)//eee && ragdollGrabber.isGrabbing)
+        if (isPlayerNearby && isRagdollNearby && Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("시체 처리 프로세스 시작");
-            //StartCoroutine(OpenDumpsterLid());
             DisposeRagdoll();
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Ragdoll") && ragdollGrabber.isGrabbing) // Ragdoll이 쓰레기통에 닿았을 때
+        if (other.CompareTag("Player"))
         {
-            isInDisposalRange = true;
+            isPlayerNearby = true;
+            anim = other.GetComponent<Animation>();
+        }
+
+        if (other.CompareTag("Ragdoll"))
+        {
+            isRagdollNearby = true;
+            ragdollRigidbody = other.attachedRigidbody;
+            ragdollRoot = other.transform.root;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerNearby = false;
+            anim = null;
+        }
+
         if (other.CompareTag("Ragdoll"))
         {
-            isInDisposalRange = false;
+            isRagdollNearby = false;
+            ragdollRigidbody = null;
+            ragdollRoot = null;
         }
-    }
-
-    private IEnumerator OpenDumpsterLid()
-    {
-        Quaternion startRotation = dumpsterLid.rotation;
-        Quaternion targetRotation = startRotation * Quaternion.Euler(-80f, 0f, 0f);
-
-        float elapsedTime = 0f;
-
-        while (elapsedTime < lidRotationDuration)
-        {
-            dumpsterLid.rotation = Quaternion.Lerp(startRotation, targetRotation, elapsedTime / lidRotationDuration);
-            elapsedTime += Time.deltaTime;
-            yield return null;
-        }
-
-        dumpsterLid.rotation = targetRotation;
     }
 
     private void DisposeRagdoll()
     {
-        // Animator의 isDisposer 파라미터를 true로 설정하여 쓰레기통에 Ragdoll을 넣는 애니메이션 시작
-        anim.SetBool("isDisposer", true);
+        if (ragdollRoot == null) return;
 
-        // Ragdoll을 놓고, NPC를 특정 지점으로 이동
-        StartCoroutine(DisposeRagdollCoroutine());
-    }
+        // 뚜껑 열기
+        StartCoroutine(RotateLid(lidOpenRotation));
 
-    private IEnumerator DisposeRagdollCoroutine()
-    {
-        // Ragdoll을 놓는 동안 애니메이션에 맞춰 기다리기
-        yield return new WaitForSeconds(disposeTime); // disposeTime만큼 기다린 후
-
-        // Ragdoll을 놓기
-        ragdollGrabber.ReleaseRagdoll();
-
-        // NPC를 특정 지점으로 이동
-        if (ragdollGrabber.ragdollRigidbody != null)
+        // 플레이어가 잡고 있다면 해제
+        RagdollGrabber grabber = FindObjectOfType<RagdollGrabber>();
+        if (grabber != null && grabber.IsHoldingRagdoll(ragdollRoot))
         {
-            ragdollGrabber.ragdollRigidbody.transform.position = disposalPoint.position;
-            ragdollGrabber.ragdollRigidbody.transform.rotation = disposalPoint.rotation;
+            grabber.ReleaseRagdoll();
         }
 
-        // Player Animator의 isDisposer 파라미터를 false로 설정하여 애니메이션 종료
-        anim.SetBool("isDisposer", false);
+
+        StartCoroutine(MoveToDisposal());
+    }
+
+    private IEnumerator MoveToDisposal()
+    {
+        float duration = 1.5f;
+        float elapsed = 0f;
+        Vector3 startPos = ragdollRoot.position;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            ragdollRoot.position = Vector3.Lerp(startPos, disposalPoint.position, elapsed / duration);
+            yield return null;
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        // 뚜껑 닫기
+        StartCoroutine(RotateLid(lidClosedRotation));
+
+        // Ragdoll 삭제
+        Destroy(ragdollRoot.gameObject);
+    }
+
+    private IEnumerator RotateLid(Quaternion targetRotation)
+    {
+        float duration = 1f;
+        float elapsed = 0f;
+        Quaternion startRotation = lid.rotation;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            lid.rotation = Quaternion.Lerp(startRotation, targetRotation, elapsed / duration);
+            yield return null;
+        }
+
+        lid.rotation = targetRotation; // 정확한 값 보정
     }
 }

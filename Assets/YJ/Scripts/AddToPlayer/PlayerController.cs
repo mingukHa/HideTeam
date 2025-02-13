@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private PlayerDisguiser disguiser;
     private CarAlarm carAlarm;
     private TrashBin trashBin;
+    public RagdollGrabber ragdollGrabber;
 
     public GameObject gun = null;
     public GameObject cigarette = null;
@@ -106,6 +107,7 @@ public class PlayerController : MonoBehaviour
         {
             E_Chat.SetActive(true);
         }
+
         if (other.CompareTag("Car"))
         {
             carAlarm = other.GetComponent<CarAlarm>();
@@ -170,6 +172,7 @@ public class PlayerController : MonoBehaviour
         {
             E_Chat.SetActive(false);
         }
+
         if (other.CompareTag("Car"))
         {
             CarKey.SetActive(false);

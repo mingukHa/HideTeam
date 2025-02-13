@@ -59,6 +59,11 @@ public class RagdollGrabber : MonoBehaviour
         }
     }
 
+    public bool IsHoldingRagdoll(Transform ragdoll)
+    {
+        return isGrabbing && rootTransform == ragdoll;
+    }
+
     private void TryGrabRagdoll()
     {
         // 가까운 Ragdoll의 Rigidbody 찾기
