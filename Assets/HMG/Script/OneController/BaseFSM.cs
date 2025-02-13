@@ -7,18 +7,18 @@ public class NPCFSM : MonoBehaviour
 {
     protected enum State { Idle, Look, Walk, Run, Talk, Dead }
     protected State currentState = State.Idle;
-    private Transform player;
+    private Transform player; //플레이어 위치
     protected Animator animator;
-    private Rigidbody[] rigidbodies;
+    private Rigidbody[] rigidbodies; //레그돌 받아오는 부분
     public bool isDead = false; //죽음 상태
     private bool isTalking = false; //대화 상태
     //private bool isText = false; //죽으면 채팅 끄기 
     private bool isRagdollActivated = false; // 레그돌 활성화 여부 확인용
-    protected Quaternion initrotation;
-    private NPCChatTest NPCChatTest;
-    public SphereCollider NPCCollider;
-    protected int currentWaypointIndex;
-    protected NavMeshAgent agent;
+    protected Quaternion initrotation; //기본 위치
+    private NPCChatTest NPCChatTest; //NPC대화 불러오는 곳
+    public SphereCollider NPCCollider; //NPC 상호작용 콜라이더
+    protected int currentWaypointIndex; //네브메쉬 배열 초기 값
+    protected NavMeshAgent agent; //네브메쉬
     [SerializeField]
     protected GameObject select; //캐릭터 말풍선
     private bool isPlayerNearby = false;

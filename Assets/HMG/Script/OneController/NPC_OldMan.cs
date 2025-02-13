@@ -8,11 +8,10 @@ using UnityEngine.AI;
 public class NPC_OldMan : NPCFSM
 {
     
-    private NPCChatTest chat;
-    public GameObject npcchatbox;
+    private NPCChatTest chat; 
+    public GameObject npcchatbox; //NPC의 메인 채팅 최상위
     private string npc = "NPC3";
-    public Transform OldManPos;
-    private bool hasMoved = false;
+    public Transform OldManPos; //이동 할 위치
 
 
     private void StopNpc()
@@ -23,10 +22,7 @@ public class NPC_OldMan : NPCFSM
         animator.SetTrigger("Idel");
         select.SetActive(false);
     }
-    private void StartOldManHelp()
-    {
-        
-    }
+    
     protected override void Start()
     {
         base.Start();

@@ -69,6 +69,7 @@
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\WaitState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\FImpossible Creations\Plugins - Shared\Math Helpers\Math\FEngineering.cs" />
+    <Compile Include="Assets\KJH\Scripts\PlayerCutScene1.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\CFX_Demo_RotateCamera.cs" />
     <Compile Include="Assets\FImpossible Creations\Plugins - Animating\Ragdoll Animator\Core\RagdollDummy_PostAttach.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Assets\FImpossible Creations\Plugins - Animating\Ragdoll Animator\Core\RagdollProcessor.cs" />
     <Compile Include="Assets\YJ\Assets\QA_Office 1\Scripts\Door.cs" />
     <Compile Include="Assets\YJ\Assets\QA_Office 1\Scripts\Clock.cs" />
+    <Compile Include="Assets\KJH\Scripts\LookUI.cs" />
     <Compile Include="Assets\FImpossible Creations\Shared Tools\GUI Helpers\FGUI_Inspector.cs" />
     <Compile Include="Assets\FImpossible Creations\Plugins - Animating\Ragdoll Animator\Core\RagdollProcessor.User.cs" />
     <Compile Include="Assets\YJ\Assets\QA_Office 1\Scripts\ElevatorManager.cs" />

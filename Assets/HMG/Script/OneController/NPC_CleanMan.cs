@@ -4,17 +4,14 @@ using Unity.VisualScripting;
 using static EventManager;
 using UnityEngine.AI;
 
+
 public class NPC_CleanMan : NPCFSM
 {
-    [SerializeField] private GameObject select;
+
     private NPCChatTest chat;
-    public GameObject npcchatbox;
+    public GameObject npcchatbox; //NPC의 메인 채팅 최상위
     private string npc = "NPC4";
-    
-    private bool isLookingAround = false;
-    
-    public GameObject GarbagePos;
-    private SphereCollider sphere;
+    public Transform GarbagePos; //이동 할 위치
     private void OnEnable()
     {
         EventManager.Subscribe(GameEventType.Garbage, StartGarbage);
@@ -24,8 +21,19 @@ public class NPC_CleanMan : NPCFSM
         Debug.Log("청소부 개 빡쳐서 달려오는 중");
         agent.SetDestination(GarbagePos.transform.position);
         animator.SetBool("Run", true);
-        sphere.enabled = true;
+        NPCCollider.enabled = true;
     }
+
+
+    private void StopNpc()
+    {
+        StopCoroutine(TalkView());
+        transform.rotation = initrotation;
+        NPCCollider.radius = 0.01f;
+        animator.SetTrigger("Idel");
+        select.SetActive(false);
+    }
+
     protected override void Start()
     {
         base.Start();
@@ -33,7 +41,7 @@ public class NPC_CleanMan : NPCFSM
         chat = GetComponent<NPCChatTest>();
         select.SetActive(false);
         agent = GetComponent<NavMeshAgent>();
-        sphere = GetComponent<SphereCollider>();
+        NPCCollider = GetComponent<SphereCollider>();
     }
 
     protected override void Update()
@@ -73,7 +81,7 @@ public class NPC_CleanMan : NPCFSM
         chat.LoadNPCDialogue("NULL", 0);
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
         if (!isDead && other.CompareTag("Player"))
         {
@@ -81,7 +89,9 @@ public class NPC_CleanMan : NPCFSM
             ChangeState(State.Talk);
             chat.LoadNPCDialogue(npc, 0);
         }
+
     }
+
     protected override void OnTriggerStay(Collider other)
     {
         if (!isDead && other.CompareTag("Player"))
@@ -91,23 +101,28 @@ public class NPC_CleanMan : NPCFSM
             {
                 chat.LoadNPCDialogue(npc, 1);
                 EventManager.Trigger(GameEventType.sweeper);
+                StopCoroutine(TalkView());
+                StopNpc();
+
             }
-                if (Input.GetKeyDown(KeyCode.Alpha2))
+            if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 chat.LoadNPCDialogue(npc, 2);
                 EventManager.Trigger(GameEventType.sweeperKill);
+                StopCoroutine(TalkView());
+                StopNpc();
             }
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    protected override void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            ChangeState(State.Idle);
-            select.SetActive(false);
             chat.LoadNPCDialogue("NULL", 0);
+            StopNpc();
         }
+
     }
 }
 
