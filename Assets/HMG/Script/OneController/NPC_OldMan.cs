@@ -10,9 +10,9 @@ public class NPC_PldMan : NPCFSM
     private NPCChatTest chat;
     public GameObject npcchatbox;
     private string npc = "NPC3";
-    private int currentWaypointIndex;
+   
     private bool isLookingAround = false;
-    private NavMeshAgent agent;
+   
     
     private void OnEnable()
     {
@@ -74,23 +74,28 @@ public class NPC_PldMan : NPCFSM
 
     private void OnTriggerEnter(Collider other)
     {
-        if (isDead == false)
+        if (!isDead && other.CompareTag("Player"))
         {
-            if (other.CompareTag("Player"))
+            select.SetActive(true);
+            ChangeState(State.Talk);
+            chat.LoadNPCDialogue(npc, 0);
+        }
+    }
+
+    protected override void OnTriggerStay(Collider other)
+    {
+        if (!isDead && other.CompareTag("Player"))
+        {
+            // 키 입력을 지속적으로 체크
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                select.SetActive(true);
-                ChangeState(State.Talk);
-                chat.LoadNPCDialogue(npc, 0);
-                if (Input.GetKeyDown(KeyCode.Keypad1))
-                {
-                    chat.LoadNPCDialogue(npc, 1);
-                    EventManager.Trigger(GameEventType.OldManHelp);
-                }
-                if (Input.GetKeyDown(KeyCode.Keypad2))
-                {
-                    chat.LoadNPCDialogue(npc, 2);
-                    EventManager.Trigger(GameEventType.OldManoutside);
-                }
+                chat.LoadNPCDialogue(npc, 1);
+                EventManager.Trigger(GameEventType.OldManHelp);
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                chat.LoadNPCDialogue(npc, 2);
+                EventManager.Trigger(GameEventType.OldManoutside);
             }
         }
     }

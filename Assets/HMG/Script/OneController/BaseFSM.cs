@@ -17,9 +17,10 @@ public class NPCFSM : MonoBehaviour
     private Quaternion initrotation;
     private NPCChatTest NPCChatTest;
     public Collider BoxCollider;
-    private NavMeshAgent agent;
-    public PatrolRoute patrolRoute;
-    private int currentWaypointIndex;
+    protected int currentWaypointIndex;
+    protected NavMeshAgent agent;
+
+    
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
@@ -32,7 +33,7 @@ public class NPCFSM : MonoBehaviour
         initrotation = transform.rotation;
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
-        agent.SetDestination(patrolRoute.waypoints[currentWaypointIndex]);
+        
         agent.autoBraking = false;
 
     }
@@ -60,24 +61,7 @@ public class NPCFSM : MonoBehaviour
             case State.Dead:
                 DeadBehavior();
                 break;
-        }        //// F 키로 Dead 상태 전환
-        //if (Input.GetKeyDown(KeyCode.F) && currentState != State.Dead)
-        //{
-        //    ChangeState(State.Dead); // Dead 상태로 전환
-        //}
-
-        //// Dead 모션이 끝났는지 확인
-        //if (currentState == State.Dead && !isRagdollActivated)
-        //{
-        //    AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        //    if (stateInfo.IsName("Dead") && stateInfo.normalizedTime >= 1.0f) // Dead 모션이 끝났을 때
-        //    {
-        //        ActivateRagdoll(); // 레그돌 활성화
-        //        isRagdollActivated = true; // 레그돌이 활성화되었음을 표시
-        //    }
-        //}
-
-
+        }        
     }
 
     protected virtual void ChangeState(State newState)

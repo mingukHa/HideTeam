@@ -10,10 +10,10 @@ public class NPC_NPC2 : NPCFSM
     private NPCChatTest chat;
     public GameObject npcchatbox;
     private string npc = "NPC2";
+    public PatrolRoute patrolRoute;
     
-    private int currentWaypointIndex;
     private bool isLookingAround = false;
-    private NavMeshAgent agent;
+    
     public Transform carpos;
     private void OnEnable()
     {
@@ -33,6 +33,7 @@ public class NPC_NPC2 : NPCFSM
         agent = GetComponent<NavMeshAgent>();
         agent.SetDestination(patrolRoute.waypoints[currentWaypointIndex]);
         agent.autoBraking = false;
+        animator.SetTrigger("Walk");
     }
 
     protected override void Update()

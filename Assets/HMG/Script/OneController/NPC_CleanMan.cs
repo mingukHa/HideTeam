@@ -10,10 +10,11 @@ public class NPC_CleanMan : NPCFSM
     private NPCChatTest chat;
     public GameObject npcchatbox;
     private string npc = "NPC4";
-    private int currentWaypointIndex;
+    
     private bool isLookingAround = false;
-    private NavMeshAgent agent;
-    public Transform GarbagePos;
+    
+    public GameObject GarbagePos;
+    private SphereCollider sphere;
     private void OnEnable()
     {
         EventManager.Subscribe(GameEventType.Garbage, StartGarbage);
@@ -21,14 +22,17 @@ public class NPC_CleanMan : NPCFSM
     private void StartGarbage()
     {
         Debug.Log("청소부 개 빡쳐서 달려오는 중");
-        animator.SetTrigger("Run");
         agent.SetDestination(GarbagePos.transform.position);
+        animator.SetBool("Run", true);
+        sphere.enabled = true;
     }
     protected override void Start()
     {
         base.Start();
         chat = GetComponent<NPCChatTest>();
-        select.SetActive(false);       
+        select.SetActive(false);
+        agent = GetComponent<NavMeshAgent>();
+        sphere = GetComponent<SphereCollider>();
     }
 
     protected override void Update()
@@ -67,26 +71,30 @@ public class NPC_CleanMan : NPCFSM
         npcchatbox.SetActive(false);
         chat.LoadNPCDialogue("NULL", 0);
     }
- 
+
     private void OnTriggerEnter(Collider other)
     {
-        if (isDead == false)
+        if (!isDead && other.CompareTag("Player"))
         {
-            if (other.CompareTag("Player"))
+            select.SetActive(true);
+            ChangeState(State.Talk);
+            chat.LoadNPCDialogue(npc, 0);
+        }
+    }
+    protected override void OnTriggerStay(Collider other)
+    {
+        if (!isDead && other.CompareTag("Player"))
+        {
+            // 키 입력을 지속적으로 체크
+            if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                select.SetActive(true);
-                ChangeState(State.Talk);
-                chat.LoadNPCDialogue(npc, 0);
-                if (Input.GetKeyDown(KeyCode.Keypad1))
-                {
-                    chat.LoadNPCDialogue(npc, 1);
-                    EventManager.Trigger(GameEventType.sweeper);
-                }
-                if (Input.GetKeyDown(KeyCode.Keypad2))
-                {
-                    chat.LoadNPCDialogue(npc, 2);
-                    EventManager.Trigger(GameEventType.sweeperKill);
-                }
+                chat.LoadNPCDialogue(npc, 1);
+                EventManager.Trigger(GameEventType.sweeper);
+            }
+                if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                chat.LoadNPCDialogue(npc, 2);
+                EventManager.Trigger(GameEventType.sweeperKill);
             }
         }
     }
