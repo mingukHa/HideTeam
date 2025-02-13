@@ -55,11 +55,7 @@ public class NPC_CleanMan : NPCFSM
 
     protected override void Update()
     {
-        base.Update();
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            isDead = true;
-        }
+        
     }
 
     protected override void IdleBehavior()
@@ -100,6 +96,10 @@ public class NPC_CleanMan : NPCFSM
         {
             ChangeState(State.Talk);
             chat.LoadNPCDialogue(npc, 0);
+        }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            isDead = true;
         }
 
     }

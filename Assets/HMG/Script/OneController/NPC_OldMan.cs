@@ -33,10 +33,7 @@ public class NPC_OldMan : NPCFSM
     {
         base.Update();
         
-        if(Input.GetKeyDown(KeyCode.F))
-        {
-            isDead = true;
-        }
+        
     }
 
     protected override void IdleBehavior()
@@ -104,6 +101,10 @@ public class NPC_OldMan : NPCFSM
                 Invoke("StopNpc", 2f);
                 Invoke("ReturnOldMan", 6f);
                             
+            }
+            if (Input.GetKeyDown(KeyCode.F))
+            {
+                isDead = true;
             }
         }
     }

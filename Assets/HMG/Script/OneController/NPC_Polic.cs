@@ -102,6 +102,10 @@ public class NPC_Polic : NPCFSM
                 Invoke("StopNpc", 2f);
             }
         }
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            isDead = true;
+        }
     }
 
     protected override void OnTriggerExit(Collider other)
