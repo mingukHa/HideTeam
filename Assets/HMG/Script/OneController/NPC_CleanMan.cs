@@ -56,6 +56,10 @@ public class NPC_CleanMan : NPCFSM
     protected override void Update()
     {
         base.Update();
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            isDead = true;
+        }
     }
 
     protected override void IdleBehavior()
@@ -102,6 +106,7 @@ public class NPC_CleanMan : NPCFSM
 
     protected override void OnTriggerStay(Collider other)
     {
+        base.OnTriggerStay(other);
         if (!isDead && other.CompareTag("Player"))
         {
             // 키 입력을 지속적으로 체크

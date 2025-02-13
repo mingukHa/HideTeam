@@ -14,7 +14,7 @@ public class NPCFSM : MonoBehaviour
     public bool isDead = false; //죽음 상태
     private bool isTalking = false; //대화 상태
     //private bool isText = false; //죽으면 채팅 끄기 
-    private bool isRagdollActivated = false; // 레그돌 활성화 여부 확인용
+    protected bool isRagdollActivated = false; // 레그돌 활성화 여부 확인용
     protected Quaternion initrotation; //기본 위치
     private NPCChatTest NPCChatTest; //NPC대화 불러오는 곳
     public SphereCollider NPCCollider; //NPC 상호작용 콜라이더
@@ -124,11 +124,11 @@ public class NPCFSM : MonoBehaviour
         }
     }
 
-    private void ActivateRagdoll()
+    protected void ActivateRagdoll()
     {
         if (isRagdollActivated) return; //  중복 실행 방지
         Debug.Log("ActivateRagdoll() 실행됨 - 레그돌 활성화!");
-
+        isDead = true;
         animator.enabled = false; //  애니메이션 정지
         SetRagdollState(true); //  물리 적용
 
@@ -155,6 +155,7 @@ public class NPCFSM : MonoBehaviour
     }
     protected virtual void DeadBehavior()
     {
+        Debug.Log("데드 비헤이어 실행");
         isDead = true;
     }
     protected virtual void OnTriggerEnter(Collider other)

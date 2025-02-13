@@ -11,7 +11,7 @@ public class NPC_OldMan : NPCFSM
     public GameObject npcchatbox; //NPC의 메인 채팅 최상위
     private string npc = "NPC3";
     public Transform OldManPos; //이동 할 위치
-    //public bool isDead = false;
+
     private void StopNpc()
     {
         StopCoroutine(TalkView());
@@ -32,6 +32,11 @@ public class NPC_OldMan : NPCFSM
     protected override void Update()
     {
         base.Update();
+        
+        if(Input.GetKeyDown(KeyCode.F))
+        {
+            isDead = true;
+        }
     }
 
     protected override void IdleBehavior()
@@ -62,8 +67,7 @@ public class NPC_OldMan : NPCFSM
     protected override void DeadBehavior()
     {
         base.DeadBehavior();
-        isDead = true;
-        npcchatbox.SetActive(false);
+        
         chat.LoadNPCDialogue("NULL", 0);
     }
 
@@ -105,9 +109,12 @@ public class NPC_OldMan : NPCFSM
     }
     private void ReturnOldMan()
     {
-        animator.SetTrigger("Walk");
-        agent.SetDestination(OldManPos.position);
-        
+        if (!isDead) 
+        {
+            animator.SetTrigger("Walk");
+            agent.SetDestination(OldManPos.position);
+        }
+
     }
     protected override void OnTriggerExit(Collider other)
     {

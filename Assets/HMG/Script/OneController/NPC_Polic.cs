@@ -43,6 +43,10 @@ public class NPC_Polic : NPCFSM
     protected override void Update()
     {
         base.Update();
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            isDead = true;
+        }
     }
 
     protected override void IdleBehavior()
