@@ -3,9 +3,9 @@ using System.Collections;
 
 public class TrashBin : MonoBehaviour
 {
-    public Transform trashBinRid; // Trashbin의 회전 기준 Transform
+    public Transform trashBinLid; // 쓰레기통 뚜껑
     public GameObject[] trashObjects; // Trash 오브젝트 4개
-    private float rotationDuration = 1.5f; // 회전이 완료되는 시간
+    private float lidRotationDuration = 1.5f; // 뚜껑 회전이 완료되는 시간
 
     private bool isMessUpTriggered = false; // 중복 실행 방지
 
@@ -26,19 +26,19 @@ public class TrashBin : MonoBehaviour
     // 쓰레기통 뚜껑 열기
     private IEnumerator RotateTrashBinRid()
     {
-        Quaternion startRotation = trashBinRid.rotation;
+        Quaternion startRotation = trashBinLid.rotation;
         Quaternion targetRotation = startRotation * Quaternion.Euler(-90f, 0f, 0f);
 
         float elapsedTime = 0f;
 
-        while (elapsedTime < rotationDuration)
+        while (elapsedTime < lidRotationDuration)
         {
-            trashBinRid.rotation = Quaternion.Lerp(startRotation, targetRotation, elapsedTime / rotationDuration);
+            trashBinLid.rotation = Quaternion.Lerp(startRotation, targetRotation, elapsedTime / lidRotationDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        trashBinRid.rotation = targetRotation;
+        trashBinLid.rotation = targetRotation;
     }
 
     // 쓰레기봉지에 Rigidbody 부착
