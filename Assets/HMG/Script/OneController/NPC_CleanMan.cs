@@ -8,7 +8,7 @@ using UnityEngine.AI;
 public class NPC_CleanMan : NPCFSM
 {
 
-    private NPCChatTest chat;
+    
     public GameObject npcchatbox; //NPC의 메인 채팅 최상위
     private string npc = "NPC4";
     public Transform GarbagePos; //이동 할 위치
@@ -55,7 +55,7 @@ public class NPC_CleanMan : NPCFSM
 
     protected override void Update()
     {
-        base.Update();
+        
     }
 
     protected override void IdleBehavior()
@@ -97,11 +97,16 @@ public class NPC_CleanMan : NPCFSM
             ChangeState(State.Talk);
             chat.LoadNPCDialogue(npc, 0);
         }
+        if (Input.GetKey(KeyCode.F))
+        {
+            isDead = true;
+        }
 
     }
 
     protected override void OnTriggerStay(Collider other)
     {
+        base.OnTriggerStay(other);
         if (!isDead && other.CompareTag("Player"))
         {
             // 키 입력을 지속적으로 체크
@@ -109,7 +114,6 @@ public class NPC_CleanMan : NPCFSM
             {
                 chat.LoadNPCDialogue(npc, 1);
                 StopCoroutine(TalkView());
-                returnManager.StartCoroutine(returnManager.SaveAllNPCData(4f));
                 Invoke("StopNpc",2f);
 
             }
@@ -117,7 +121,6 @@ public class NPC_CleanMan : NPCFSM
             {
                 chat.LoadNPCDialogue(npc, 2);
                 StopCoroutine(TalkView());
-                returnManager.StartCoroutine(returnManager.SaveAllNPCData(4f));
                 Invoke("StopNpc", 2f);
             }
         }

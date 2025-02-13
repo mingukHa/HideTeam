@@ -8,7 +8,6 @@ using UnityEngine.AI;
 public class NPC_OldMan : NPCFSM
 {
     
-    private NPCChatTest chat; 
     public GameObject npcchatbox; //NPC의 메인 채팅 최상위
     private string npc = "NPC3";
     public Transform OldManPos; //이동 할 위치
@@ -33,6 +32,8 @@ public class NPC_OldMan : NPCFSM
     protected override void Update()
     {
         base.Update();
+        
+        
     }
 
     protected override void IdleBehavior()
@@ -63,7 +64,7 @@ public class NPC_OldMan : NPCFSM
     protected override void DeadBehavior()
     {
         base.DeadBehavior();
-        npcchatbox.SetActive(false);
+        
         chat.LoadNPCDialogue("NULL", 0);
     }
 
@@ -101,13 +102,20 @@ public class NPC_OldMan : NPCFSM
                 Invoke("ReturnOldMan", 6f);
                             
             }
+            if (Input.GetKey(KeyCode.F))
+            {
+                isDead = true;
+            }
         }
     }
     private void ReturnOldMan()
     {
-        animator.SetTrigger("Walk");
-        agent.SetDestination(OldManPos.position);
-        
+        if (!isDead) 
+        {
+            animator.SetTrigger("Walk");
+            agent.SetDestination(OldManPos.position);
+        }
+
     }
     protected override void OnTriggerExit(Collider other)
     {

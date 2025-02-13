@@ -3,12 +3,12 @@ using System.Collections;
 
 public class TrashBin : MonoBehaviour
 {
-    public Transform trashBinLid; // 쓰레기통 뚜껑
+    public Transform trashBinRid; // Trashbin의 회전 기준 Transform
     public GameObject[] trashObjects; // Trash 오브젝트 4개
-    private float lidRotationDuration = 1.5f; // 뚜껑 회전이 완료되는 시간
-
+    private float rotationDuration = 1.5f; // 회전이 완료되는 시간
+    public BoxCollider boxCollider;
     private bool isMessUpTriggered = false; // 중복 실행 방지
-
+    public ReturnManager returnManager;
     // PlayerController에서 E키 누르면 작동
     public void MessUpTrashBin()
     {
@@ -16,9 +16,10 @@ public class TrashBin : MonoBehaviour
         {
             isMessUpTriggered = true;
             StartCoroutine(RotateTrashBinRid());
-            AddRigidbodyToTrash();
-
+            Invoke("AddRigidbodyToTrash", 2f);
+            boxCollider.size = new Vector3(0.1f, 0.1f, 0.1f);
             // 청소부 호출 이벤트
+            returnManager.StartCoroutine(returnManager.SaveAllNPCData(2f));
             EventManager.Trigger(EventManager.GameEventType.Garbage);
         }
     }
@@ -26,24 +27,25 @@ public class TrashBin : MonoBehaviour
     // 쓰레기통 뚜껑 열기
     private IEnumerator RotateTrashBinRid()
     {
-        Quaternion startRotation = trashBinLid.rotation;
+        Quaternion startRotation = trashBinRid.rotation;
         Quaternion targetRotation = startRotation * Quaternion.Euler(-90f, 0f, 0f);
 
         float elapsedTime = 0f;
 
-        while (elapsedTime < lidRotationDuration)
+        while (elapsedTime < rotationDuration)
         {
-            trashBinLid.rotation = Quaternion.Lerp(startRotation, targetRotation, elapsedTime / lidRotationDuration);
+            trashBinRid.rotation = Quaternion.Lerp(startRotation, targetRotation, elapsedTime / rotationDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        trashBinLid.rotation = targetRotation;
+        trashBinRid.rotation = targetRotation;
     }
 
     // 쓰레기봉지에 Rigidbody 부착
     private void AddRigidbodyToTrash()
     {
+
         foreach (GameObject trash in trashObjects)
         {
             if (trash.GetComponent<Rigidbody>() == null)

@@ -8,18 +8,17 @@ using UnityEngine.AI;
 public class NPC_Polic : NPCFSM
 {
 
-    private NPCChatTest chat;
     public GameObject npcchatbox; //NPC의 메인 채팅 최상위
     private string npc = "NPC5";
     public Transform PolicPos; //이동 할 위치    
-    private bool isOldManHelpTrue = false;
+    private bool isPolicTlak = false;
     private void OnEnable()
     {
-        EventManager.Subscribe(GameEventType.OldManHelp, StartOldManHelp);
+        EventManager.Subscribe(GameEventType.OldManHelp, StartPolicTlak);
     }
-    private void StartOldManHelp()
+    private void StartPolicTlak()
     {
-        isOldManHelpTrue = true;       
+        isPolicTlak = true;       
     }
  
     private void StopNpc()
@@ -44,6 +43,10 @@ public class NPC_Polic : NPCFSM
     protected override void Update()
     {
         base.Update();
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            isDead = true;
+        }
     }
 
     protected override void IdleBehavior()
@@ -82,32 +85,26 @@ public class NPC_Polic : NPCFSM
     {
         if (!isDead && other.CompareTag("Player"))
         {
-            ChangeState(State.Talk);
             chat.LoadNPCDialogue(npc, 0);
         }
 
     }
-
     protected override void OnTriggerStay(Collider other)
     {
         if (!isDead && other.CompareTag("Player"))
-        {
-            // 키 입력을 지속적으로 체크
+        {           
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 chat.LoadNPCDialogue(npc, 1);
-                StopCoroutine(TalkView());
-                returnManager.StartCoroutine(returnManager.SaveAllNPCData(4f));
-                Invoke("StopNpc", 2f);
-
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                chat.LoadNPCDialogue(npc, 2);
+                EventManager.Trigger(GameEventType.policeTalk);
                 StopCoroutine(TalkView());
                 returnManager.StartCoroutine(returnManager.SaveAllNPCData(4f));
                 Invoke("StopNpc", 2f);
             }
+        }
+        if (Input.GetKey(KeyCode.F))
+        {
+            isDead = true;
         }
     }
 
