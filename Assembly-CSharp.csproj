@@ -180,6 +180,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
     <Compile Include="Assets\FImpossible Creations\Plugins - Animating\Ragdoll Animator\Core\RagdollProcessor.PosingBone.cs" />
     <Compile Include="Assets\FImpossible Creations\Shared Tools\Editor Tools\FEditor_Handles.cs" />
+    <Compile Include="Assets\HMG\Script\OneController\NPC_Polic.cs" />
     <Compile Include="Assets\YJ\Scripts\AddToPlayer\RagdollGrabber.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\WFX_Demo_DeleteAfterDelay.cs" />
     <Compile Include="Assets\HMG\Script\NavMesh\NevMeshTest.cs" />

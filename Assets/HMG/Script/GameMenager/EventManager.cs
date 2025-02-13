@@ -14,8 +14,7 @@ public class EventManager : MonoBehaviour
         Carkick,//자동차 발차기
         //
         Garbage,//쓰레기장 헤집기
-        sweeper,//청소부 냅두기
-        sweeperKill,//청소부 제압하기
+        
         //
         OldManHelp,//노인 도와줌
         OldManoutside,//노인 안도와줌
@@ -26,7 +25,7 @@ public class EventManager : MonoBehaviour
         policeTalk, //경비에게 사복경찰 지칭하는 인물을 말함
         policeNoTalk, //경비에게 사복경찰 말 안함
         //플랜 a부분
-
+        RichKill //부자를 제압할 때 청소부가 로비에 있으면 달려가는 이벤트
         //메인 루트
         //bankemployee, //안내데스크 10초간 대기하는 이벤트
 
