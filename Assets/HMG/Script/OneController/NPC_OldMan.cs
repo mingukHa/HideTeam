@@ -8,7 +8,6 @@ using UnityEngine.AI;
 public class NPC_OldMan : NPCFSM
 {
     
-    private NPCChatTest chat; 
     public GameObject npcchatbox; //NPC의 메인 채팅 최상위
     private string npc = "NPC3";
     public Transform OldManPos; //이동 할 위치

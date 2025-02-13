@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using static EventManager;
 
+
 public class PlayerController : MonoBehaviour
 {
     private Animator anim = null;
@@ -149,7 +150,7 @@ public class PlayerController : MonoBehaviour
         {
             if (npcFSM.isDead)
             {
-                // 죽은 NPC와 상호작용 시 E키 활성화
+                // 죽은 NPC와 상호작용 시 E키 활성화                
                 eImage.gameObject.SetActive(true);
                 eSlider.gameObject.SetActive(true);
                 fImage.gameObject.SetActive(false); // 죽은 NPC일 때 F키 관련 UI 비활성화

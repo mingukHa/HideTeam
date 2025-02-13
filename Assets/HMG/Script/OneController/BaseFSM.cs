@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -23,8 +24,10 @@ public class NPCFSM : MonoBehaviour
     protected GameObject select; //캐릭터 말풍선
     private bool isPlayerNearby = false;
     public ReturnManager returnManager;
+    protected NPCChatTest chat;
     protected virtual void Start()
     {
+        chat = GetComponent<NPCChatTest>();
         animator = GetComponent<Animator>();
         rigidbodies = GetComponentsInChildren<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -181,6 +184,8 @@ public class NPCFSM : MonoBehaviour
                 ChangeState(State.Dead);
                 NPCChatTest.enabled = false;
                 isTalking = false;
+                select.SetActive(false);
+                chat.LoadNPCDialogue("NULL", 0);
             }
 
             // Dead 모션이 끝났는지 확인
