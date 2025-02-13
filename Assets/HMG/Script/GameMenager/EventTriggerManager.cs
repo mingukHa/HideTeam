@@ -8,7 +8,7 @@ public class EventTriggerManager : MonoBehaviour
         GameEventType.SuspiciousDetected,
         GameEventType.PlayerEnterBank,
         GameEventType.Carkick,
-        GameEventType.Garbage,
+        GameEventType.Garbage,        
         GameEventType.sweeper,
         GameEventType.sweeperKill,
         GameEventType.OldManHelp,

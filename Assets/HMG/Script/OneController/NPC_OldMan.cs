@@ -4,35 +4,34 @@ using Unity.VisualScripting;
 using static EventManager;
 using UnityEngine.AI;
 
-public class NPC_PldMan : NPCFSM
+
+public class NPC_OldMan : NPCFSM
 {
-    [SerializeField] private GameObject select;
+    
     private NPCChatTest chat;
     public GameObject npcchatbox;
     private string npc = "NPC3";
-   
-    private bool isLookingAround = false;
-   
-    
-    private void OnEnable()
+    public Transform OldManPos;
+    private bool hasMoved = false;
+
+
+    private void StopNpc()
     {
-        EventManager.Subscribe(GameEventType.OldManHelp, StartOldManHelp);
-        EventManager.Subscribe(GameEventType.OldManoutside, StartOldManoutside);
-    }
-    private void StartOldManoutside()
-    {
-        Debug.Log("할배 외면");
+        StopCoroutine(TalkView());
+        transform.rotation = initrotation;
+        NPCCollider.radius = 0.01f;
+        animator.SetTrigger("Idel");
+        select.SetActive(false);
     }
     private void StartOldManHelp()
     {
-        Debug.Log("할배 방해 준비 중");
-        //작성 해야함
+        
     }
     protected override void Start()
     {
         base.Start();
-        chat = GetComponent<NPCChatTest>();
-        select.SetActive(false);
+        chat = GetComponent<NPCChatTest>();    
+        agent = GetComponent<NavMeshAgent>();
     }
 
     protected override void Update()
@@ -72,12 +71,11 @@ public class NPC_PldMan : NPCFSM
         chat.LoadNPCDialogue("NULL", 0);
     }
 
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
+        
         if (!isDead && other.CompareTag("Player"))
         {
-            select.SetActive(true);
-            ChangeState(State.Talk);
             chat.LoadNPCDialogue(npc, 0);
         }
     }
@@ -91,22 +89,26 @@ public class NPC_PldMan : NPCFSM
             {
                 chat.LoadNPCDialogue(npc, 1);
                 EventManager.Trigger(GameEventType.OldManHelp);
+                StopCoroutine(TalkView());
+                StopNpc();
+
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 chat.LoadNPCDialogue(npc, 2);
                 EventManager.Trigger(GameEventType.OldManoutside);
+                StopCoroutine(TalkView());
+                StopNpc();
             }
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    protected override void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            ChangeState(State.Idle);
-            select.SetActive(false);
             chat.LoadNPCDialogue("NULL", 0);
+            StopNpc();
         }
     }
 }

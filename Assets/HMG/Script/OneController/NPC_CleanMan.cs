@@ -29,6 +29,7 @@ public class NPC_CleanMan : NPCFSM
     protected override void Start()
     {
         base.Start();
+        select.SetActive(false);
         chat = GetComponent<NPCChatTest>();
         select.SetActive(false);
         agent = GetComponent<NavMeshAgent>();
