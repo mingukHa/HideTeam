@@ -328,7 +328,7 @@ public class Moutline : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            OutlineWidth = 10f; // Set outline width to 2 when player enters
+            OutlineWidth = 7f; // Set outline width to 2 when player enters
         }
     }
 
