@@ -22,6 +22,7 @@ public class NPCFSM : MonoBehaviour
     [SerializeField]
     protected GameObject select; //캐릭터 말풍선
     private bool isPlayerNearby = false;
+    public ReturnManager returnManager;
     protected virtual void Start()
     {
         animator = GetComponent<Animator>();
@@ -149,6 +150,19 @@ public class NPCFSM : MonoBehaviour
             isPlayerNearby = true; // 플레이어가 범위 내에 있음을 저장
         }
     }
+    protected virtual void OnTriggerExit(Collider other)
+    {
+        if (!isDead && other.CompareTag("Player"))
+        {
+            StopCoroutine(TalkView());
+            Debug.Log("플레이어 범위 밖으로 나감");
+            ChangeState(State.Idle);
+            isPlayerNearby = false; // 범위를 벗어나면 초기화
+            isTalking = false; // 대화 종료
+            transform.rotation = initrotation; // 원래 방향으로 복귀
+            select.SetActive(false);
+        }
+    }
     protected virtual void OnTriggerStay(Collider other)
     {
         if (!isDead && other.CompareTag("Player"))
@@ -181,19 +195,7 @@ public class NPCFSM : MonoBehaviour
             }
         }
     }
-    protected virtual void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            StopCoroutine(TalkView());
-            Debug.Log("플레이어 범위 밖으로 나감");
-            ChangeState(State.Idle);
-            isPlayerNearby = false; // 범위를 벗어나면 초기화
-            isTalking = false; // 대화 종료
-            transform.rotation = initrotation; // 원래 방향으로 복귀
-            select.SetActive(false);
-        }
-    }
+   
     protected IEnumerator TalkView()
     {
         if (isTalking || agent.hasPath) yield break; // 이동 중이면 실행 안 함

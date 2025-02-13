@@ -12,16 +12,25 @@ public class NPC_CleanMan : NPCFSM
     public GameObject npcchatbox; //NPC의 메인 채팅 최상위
     private string npc = "NPC4";
     public Transform GarbagePos; //이동 할 위치
+    public Transform richKill;
+    private bool GarbageTrue = false;
     private void OnEnable()
     {
         EventManager.Subscribe(GameEventType.Garbage, StartGarbage);
+        EventManager.Subscribe(GameEventType.RichKill, StartRichKill);
     }
     private void StartGarbage()
     {
+        GarbageTrue = true;
         Debug.Log("청소부 개 빡쳐서 달려오는 중");
         agent.SetDestination(GarbagePos.transform.position);
         animator.SetBool("Run", true);
         NPCCollider.enabled = true;
+    }
+    private void StartRichKill()
+    {
+        if (GarbageTrue == false)
+        agent.SetDestination(richKill.transform.position);
     }
 
 
@@ -99,16 +108,16 @@ public class NPC_CleanMan : NPCFSM
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 chat.LoadNPCDialogue(npc, 1);
-                EventManager.Trigger(GameEventType.sweeper);
                 StopCoroutine(TalkView());
+                returnManager.StartCoroutine(returnManager.SaveAllNPCData(4f));
                 Invoke("StopNpc",2f);
 
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 chat.LoadNPCDialogue(npc, 2);
-                EventManager.Trigger(GameEventType.sweeperKill);
                 StopCoroutine(TalkView());
+                returnManager.StartCoroutine(returnManager.SaveAllNPCData(4f));
                 Invoke("StopNpc", 2f);
             }
         }
@@ -119,7 +128,6 @@ public class NPC_CleanMan : NPCFSM
         if (other.CompareTag("Player"))
         {
             chat.LoadNPCDialogue("NULL", 0);
-            StopNpc();
         }
 
     }

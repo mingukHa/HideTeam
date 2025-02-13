@@ -16,10 +16,7 @@ public class NPCChatTest : MonoBehaviour
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
         chatColider = GetComponent<BoxCollider>();
     }
-    private void Update()
-    {
-        
-    }
+
    
     public void LoadNPCDialogue(string npcID , int number)
     {

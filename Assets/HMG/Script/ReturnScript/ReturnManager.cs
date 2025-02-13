@@ -33,7 +33,7 @@ public class ReturnManager : MonoBehaviour
         }
     }
 
-    // ✅ 일정 시간 동안 지속적으로 모든 NPC 및 플레이어의 데이터를 저장
+    //  일정 시간 동안 지속적으로 모든 NPC 및 플레이어의 데이터를 저장
     public IEnumerator SaveAllNPCData(float duration)
     {
         Debug.Log("모든 NPC 데이터 저장 시작");
@@ -95,7 +95,7 @@ public class ReturnManager : MonoBehaviour
 
         
 
-        // ✅ 모든 NPC 스택에서 가장 많은 데이터를 저장한 개수 찾기
+        //  모든 NPC 스택에서 가장 많은 데이터를 저장한 개수 찾기
         int maxFrames = 0;
         foreach (var kvp in npcSceneStacks)
         {
@@ -132,7 +132,7 @@ public class ReturnManager : MonoBehaviour
                 Player.transform.position = playerData.PlayerPosition;
                 Player.transform.rotation = playerData.PlayerRotation;
 
-                // ✅ 장면 간격(duration) 적용하여 자연스럽게 복원
+                //  장면 간격(duration) 적용하여 자연스럽게 복원
                 yield return new WaitForSeconds(playerData.Duration / maxFrames);
             }
 

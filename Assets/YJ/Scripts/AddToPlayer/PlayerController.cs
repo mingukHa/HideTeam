@@ -32,6 +32,8 @@ public class PlayerController : MonoBehaviour
 
     public Image fImage;    //K키 이미지
 
+    public GameObject E_Chat;
+
     public GameObject CarKey;
 
     private float eholdTime = 0f;   //E키 누른 시간
@@ -100,7 +102,10 @@ public class PlayerController : MonoBehaviour
         //        fImage.gameObject.SetActive(true);
         //        currentNPC = npc; // NPC를 currentNPC에 설정
         //    }
-
+        if (other.CompareTag("NPC"))
+        {
+            E_Chat.SetActive(true);
+        }
         if (other.CompareTag("Car"))
         {
             carAlarm = other.GetComponent<CarAlarm>();
@@ -161,6 +166,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.CompareTag("NPC"))
+        {
+            E_Chat.SetActive(false);
+        }
         if (other.CompareTag("Car"))
         {
             CarKey.SetActive(false);

@@ -85,26 +85,36 @@ public class NPC_OldMan : NPCFSM
             {
                 chat.LoadNPCDialogue(npc, 1);
                 EventManager.Trigger(GameEventType.OldManHelp);
+                returnManager.StartCoroutine(returnManager.SaveAllNPCData(3f));
                 StopCoroutine(TalkView());
                 Invoke("StopNpc", 2f);
-
+                Invoke("ReturnOldMan", 6f);
+                
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 chat.LoadNPCDialogue(npc, 2);
                 EventManager.Trigger(GameEventType.OldManoutside);
+                returnManager.StartCoroutine(returnManager.SaveAllNPCData(3f));
                 StopCoroutine(TalkView());
                 Invoke("StopNpc", 2f);
+                Invoke("ReturnOldMan", 6f);
+                            
             }
         }
     }
-
+    private void ReturnOldMan()
+    {
+        animator.SetTrigger("Walk");
+        agent.SetDestination(OldManPos.position);
+        
+    }
     protected override void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             chat.LoadNPCDialogue("NULL", 0);
-            StopNpc();
+            
         }
     }
 }
