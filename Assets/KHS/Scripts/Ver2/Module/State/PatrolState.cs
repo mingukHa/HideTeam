@@ -1,10 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-public class PatrolState : NPCState2
+public class PatrolState : NPCState
 {
-    private float patrolTime = 10f; // 3Ка (180УЪ)
-    private float elapsedTime = 0f;
+    private float patrolTime = 10f;
 
     public PatrolState(NPCController npc) : base(npc) { }
 
@@ -17,6 +16,8 @@ public class PatrolState : NPCState2
 
     private IEnumerator PatrolRoutine()
     {
+        float elapsedTime = 0f;
+
         _npcController.routineInvoker.RoutineChange(1);
         while (elapsedTime < patrolTime)
         {

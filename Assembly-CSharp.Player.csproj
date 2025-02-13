@@ -9,8 +9,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace></RootNamespace>
-    <ProjectGuid>{880FC178-ED13-04ED-C506-0EC474524D50}</ProjectGuid>
+    <RootNamespace>
+    </RootNamespace>
+    <ProjectGuid>{B68C4D23-CFBD-D96E-0CCF-2CB7AD316C61}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -65,7 +66,6 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventHandler.cs" />
     <Compile Include="Assets\HMG\Script\UI\ESCMenu.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\WFX_Demo_RandomDir.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\WaitState2.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\WaitState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
@@ -76,10 +76,8 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark02.cs" />
     <Compile Include="Assets\YJ\Assets\Synty\AnimationBaseLocomotion\Samples\Scripts\SampleObjectLockOn.cs" />
     <Compile Include="Assets\HMG\Script\ReturnScript\ReturnManager.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver2\Module\Controller\NamedNPCController2.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\Controller\NamedController.cs" />
     <Compile Include="Assets\HMG\Asset\Fighter Pack Bundle\Heavy Fighter Mecanim Animation Pack\Code\CameraControl.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\NPCState2.cs" />
     <Compile Include="Assets\HMG\Script\GameMenager\EventManager.cs" />
     <Compile Include="Assets\HMG\Script\UI\SoundBar.cs" />
     <Compile Include="Assets\HMG\Script\OneController\BaseFSM.cs" />
@@ -88,6 +86,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeB.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Scripts\CFX_LightIntensityFade.cs" />
     <Compile Include="Assets\HMG\Script\UI\FadeOut.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Module\NPCType\NamedNPC.cs" />
     <Compile Include="Assets\KHS\Scripts\Functions\ShoulderViewCam.cs" />
     <Compile Include="Assets\YJ\Assets\QA_Office\Scripts\Door.cs" />
     <Compile Include="Assets\YJ\Assets\Synty\AnimationBaseLocomotion\Samples\Scripts\SampleCameraController.cs" />
@@ -96,15 +95,15 @@
     <Compile Include="Assets\KHS\Scripts\Interface\ICommand.cs" />
     <Compile Include="Assets\HMG\Script\Lobby\LobbyMain.cs" />
     <Compile Include="Assets\YJ\Scripts\AddToNPCs\NPCIdentifier.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver2\Module\Command\RoutineCommand2.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Module\Command\RunToCommand.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
     <Compile Include="Assets\YJ\Assets\QA_Office\Scripts\Clock.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Scripts\WFX_LightFlicker.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver2\Module\Command\MoveToNavMeshCommand.cs" />
     <Compile Include="Assets\HMG\Script\FirebaseChat\FireBaseInit.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_B.cs" />
     <Compile Include="Assets\HMG\Script\Object\DoorOpen.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\EventWaitState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\SkewTextExample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\WarpTextExample.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\WFX_Demo_Wall.cs" />
@@ -112,8 +111,10 @@
     <Compile Include="Assets\HMG\Script\OneController\NPC_OldMan.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\ShaderPropAnimator.cs" />
     <Compile Include="Assets\KJH\Scripts\SFXSlider.cs" />
+    <Compile Include="Assets\KJH\QuickOutline\Scripts\Outline.cs" />
     <Compile Include="Assets\HMG\Script\OneController\NPC_CleanMan.cs" />
     <Compile Include="Assets\HMG\Asset\Fighter Pack Bundle\Heavy Fighter Mecanim Animation Pack\Code\FighterAnimationDemo.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\NPCState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
     <Compile Include="Assets\YJ\Scripts\AddToCar\CarAlarm.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Scripts\CFX_AutoDestructShuriken.cs" />
@@ -133,23 +134,24 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\KJH\Scripts\SceneButton.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver2\Module\NPCType\NPCType2.cs" />
     <Compile Include="Assets\YJ\Assets\Synty\AnimationBaseLocomotion\Samples\Scripts\InputSystem\Controls.cs" />
     <Compile Include="Assets\HMG\Script\ReturnScript\SceneDataStack.cs" />
     <Compile Include="Assets\HMG\Script\ReturnScript\SceneData.cs" />
     <Compile Include="Assets\YJ\Scripts\AddToPlayer\PlayerController.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver2\Module\NPCType\NamedNPC2.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Scripts\WFX_BulletHoleDecal.cs" />
     <Compile Include="Assets\KHS\Scripts\ScriptableObject\RoutinePreset.cs" />
+    <Compile Include="Assets\KJH\Scripts\Moutline.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\Controller\NPCController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\NPCStateMachine.cs" />
     <Compile Include="Assets\HMG\Script\Object\vault door.cs" />
     <Compile Include="Assets\HMG\Script\FirebaseChat\TextCameraVeiw.cs" />
     <Compile Include="Assets\HMG\Script\FirebaseChat\NPCChatTest.cs" />
     <Compile Include="Assets\YJ\Scripts\AddToPlayer\PlayerDisguiser.cs" />
     <Compile Include="Assets\KJH\Scripts\MasterSlider.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver2\Module\Command\RoutineChangeCommand2.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\PatrolState.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Module\NPCType\NPCType.cs" />
     <Compile Include="Assets\KHS\Scripts\Functions\DetMarkerFunc.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\DropdownSample.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexColorCycler.cs" />
@@ -173,17 +175,14 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\Class\RoutineInvoker.cs" />
     <Compile Include="Assets\HMG\Script\Lobby\Chapter1Progress.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\IdleState2.cs" />
     <Compile Include="Assets\YJ\Scripts\AddToCamera\CameraController.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\Class\CommandInvoker.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshProFloatingText.cs" />
     <Compile Include="Assets\YJ\Scripts\AddToPlayer\RootMotionController.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\CFX_Demo_RandomDir.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver2\Module\Command\DetectCommand2.cs" />
     <Compile Include="Assets\KJH\Scripts\PlayerCanvasFollow.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\SusState.cs" />
     <Compile Include="Assets\KHS\Scripts\ScriptableObject\NPCRoutine.cs" />
-    <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\NPCStateMachine2.cs" />
     <Compile Include="Assets\HMG\Script\OneController\NPC_NPC2.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Spawn System\CFX_SpawnSystem.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\WFX_Demo.cs" />
@@ -210,6 +209,7 @@
     <None Include="Assets\JMO Assets\WarFX\Shaders\WFX_S Alpha-Specular TintColor.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+    <None Include="Assets\KJH\QuickOutline\Resources\Shaders\OutlineMask.shader" />
     <None Include="Assets\JMO Assets\WarFX\Shaders\WFX_S Add Scroll.shader" />
     <None Include="Assets\Firebase\Plugins\x86_64\FirebaseCppAuth.dll" />
     <None Include="Assets\JMO Assets\Cartoon FX Easy Editor\CartoonFX Easy Editor Readme.txt" />
@@ -233,6 +233,7 @@
     <None Include="Assets\JMO Assets\WarFX\Shaders\WFX_S AlphaBlend Scroll.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
     <None Include="Assets\Firebase\m2repository\com\google\firebase\firebase-auth-unity\maven-metadata.xml" />
+    <None Include="Assets\KJH\QuickOutline\Readme.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\Firebase\Plugins\iOS\Firebase.Auth.dll" />
     <None Include="Assets\PROTOFACTOR\Ultimate Animation Collection\Animations\Basic Locomotion Animset\Animation List - Basic Locomotion Animset.txt" />
@@ -251,6 +252,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
     <None Include="Assets\HMG\Asset\BodyGuards\ReadMe.txt.txt" />
     <None Include="Assets\Firebase\Plugins\Google.MiniJson.dll" />
+    <None Include="Assets\KJH\QuickOutline\Resources\Shaders\OutlineFill.shader" />
     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
     <None Include="Assets\YJ\Assets\BeautifulSky\ReadMe.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />

@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class NPCIdentifier : MonoBehaviour
 {
-    public Avatar nPCAvatar;
-    public string nPCName;
+    public Avatar nPCAvatar; // 해당 NPC의 아바타
+    public string nPCName; // 해당 NPC 이름
+    public string nPCRightHand; // 해당 NPC 오른손 Bone 이름
 
     private void Start()
     {

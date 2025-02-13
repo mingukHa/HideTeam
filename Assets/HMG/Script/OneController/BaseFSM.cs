@@ -16,7 +16,7 @@ public class NPCFSM : MonoBehaviour
     private bool isRagdollActivated = false; // 레그돌 활성화 여부 확인용
     private Quaternion initrotation;
     private NPCChatTest NPCChatTest;
-    public SphereCollider BoxCollider;
+    public Collider BoxCollider;
     private NavMeshAgent agent;
     public PatrolRoute patrolRoute;
     private int currentWaypointIndex;
@@ -129,6 +129,9 @@ public class NPCFSM : MonoBehaviour
     {
         animator.enabled = false; // 애니메이터 비활성화
         SetRagdollState(true);    // 레그돌 활성화
+
+        //여기에 NPC가 래그돌 상태가 되면 태그를 NPC -> Ragdoll로 바뀌는 기능 넣어주세요(모든 하위 Bone에 일괄 적용 되도록)
+        //(From 유진)
     }
 
     // 레그돌 상태 설정

@@ -6,6 +6,10 @@ public class EventManager : MonoBehaviour
 {
     public enum GameEventType //이 부분에서 모든 이벤트 String을 관리 합니다
     {
+        //공통 상시 동작 이벤트
+        SuspiciousDetected,     // 수상한 상황 발견
+        PlayerEnterBank,        // 플레이어 은행 진입
+
         //공통 루트 부분
         Carkick,//자동차 발차기
         //

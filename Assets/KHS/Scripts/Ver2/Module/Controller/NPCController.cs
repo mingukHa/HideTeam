@@ -1,18 +1,18 @@
-using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.AI;
+using static EventManager;
 
 
-[RequireComponent(typeof(NPCStateMachine2)), RequireComponent(typeof(CommandInvoker))]
+[RequireComponent(typeof(NPCStateMachine)), RequireComponent(typeof(RoutineInvoker))]
 public abstract class NPCController : MonoBehaviour
 {
-    public NPCType2 npcType;
+    public NPCType npcType;
 
     [Header("NPC 정보")]
     public string npcName = string.Empty;
-    public NPCStateMachine2 stateMachine;
-    public CommandInvoker Invoker { get; private set; }
+    public NPCStateMachine stateMachine;
     public RoutineInvoker routineInvoker { get; private set; }
 
     [Header("이동 속성")]
@@ -32,16 +32,21 @@ public abstract class NPCController : MonoBehaviour
     public List<Transform> targetTr; // 반응해야하는 타겟 Transform
     public List<Vector3> targetVec;
 
+    [Header("애니메이터 및 NavMesh Agent")]
     public NavMeshAgent agent;
     public Animator animator;
+
+    [Header("이벤트 설정")]
+    public List<GameEventType> eventFlags = new List<GameEventType>();
+    public List<string> actionNames = new List<string>();
+    private Dictionary<GameEventType, Action> eventActions = new Dictionary<GameEventType, Action>();
 
     private void Awake()
     {
         npcName = transform.name;
-        stateMachine = GetComponent<NPCStateMachine2>();
-        Invoker = GetComponent<CommandInvoker>();
+        stateMachine = GetComponent<NPCStateMachine>();
         routineInvoker = GetComponent<RoutineInvoker>();
-        npcType = GetComponent<NPCType2>();
+        npcType = GetComponent<NPCType>();
 
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
@@ -52,16 +57,62 @@ public abstract class NPCController : MonoBehaviour
     {
         if (routineInvoker.npcRoutines.Count != 0)
         {
-            stateMachine.ChangeState(new RoutineState(this));
-        }
-        else
-        {
-            stateMachine.ChangeState(new IdleState2(this));
+            stateMachine.ChangeState(new IdleState(this));
         }
         agent.speed = walkSpeed;
+        agent.angularSpeed = 200f;
         agent.stoppingDistance = 0.8f;
         UpdateTargetInfo();
+
     }
+    protected virtual void OnEnable()
+    {
+        InitializeEventActions();
+        SubscribeEvents();
+    }
+
+    protected virtual void OnDisable()
+    {
+        UnsubscribeEvents();
+    }
+
+    // 이벤트 동작 매핑
+    private void InitializeEventActions()
+    {
+        eventActions.Clear();
+        for (int i = 0; i < eventFlags.Count && i < actionNames.Count; i++)
+        {
+            string methodName = actionNames[i];
+            Action action = (Action)Delegate.CreateDelegate(typeof(Action), this, methodName, false);
+            if (action != null)
+            {
+                eventActions[eventFlags[i]] = action;
+            }
+            else
+            {
+                Debug.LogWarning($"{methodName} 메서드를 찾을 수 없습니다! {npcName}에 정의되어 있어야 합니다.");
+            }
+        }
+    }
+
+    // 이벤트 등록
+    private void SubscribeEvents()
+    {
+        foreach (var kvp in eventActions)
+        {
+            EventManager.Subscribe(kvp.Key, kvp.Value);
+        }
+    }
+
+    // 이벤트 해제
+    private void UnsubscribeEvents()
+    {
+        foreach (var kvp in eventActions)
+        {
+            EventManager.Unsubscribe(kvp.Key, kvp.Value);
+        }
+    }
+
     public void UpdateTargetInfo()
     {
         targetVec.Clear();
@@ -93,13 +144,15 @@ public abstract class NPCController : MonoBehaviour
                     // 장애물이 없는지 확인 (레이캐스트)
                     if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
                     {
-                        Debug.DrawLine(transform.position, target.transform.position, Color.red); // 디버그용 시야 선
                         targetTr.Add(target.transform);
                         UpdateTargetInfo();
                         isDetected = true;
+                        Debug.DrawLine(transform.position, target.transform.position, Color.red); // 디버그용 시야 선
                     }
                     else
                     {
+                        targetTr.Add(target.transform);
+                        UpdateTargetInfo();
                         Debug.DrawLine(transform.position, target.transform.position, Color.yellow); // 장애물이 있음
                     }
                 }
@@ -121,7 +174,6 @@ public abstract class NPCController : MonoBehaviour
     {
         return routineInvoker.RoutineEnd();
     }
-    public abstract bool Response();
 
     public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
     {
@@ -142,10 +194,5 @@ public abstract class NPCController : MonoBehaviour
         Gizmos.color = Color.blue;
         Gizmos.DrawLine(transform.position, transform.position + viewAngleA * viewRadius);
         Gizmos.DrawLine(transform.position, transform.position + viewAngleB * viewRadius);
-    }
-    public IEnumerator TalkCoroutine()
-    {
-        Debug.Log("TalkCoroutine");
-        yield return null;
     }
 }

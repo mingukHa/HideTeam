@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-public class EventWaitState : NPCState2
+public class EventWaitState : NPCState
 {
     public EventWaitState(NPCController npc) : base(npc)
     {
@@ -15,6 +15,7 @@ public class EventWaitState : NPCState2
     }
     private IEnumerator WaitBeforeMoving()
     {
+        Debug.Log($"{_npcController.npcName}의 3초 대기 코루틴");
         yield return new WaitForSeconds(3f);
         _npcController.animator.ResetTrigger("Look");
         _npcController.stateMachine.ChangeState(new PatrolState(_npcController));
