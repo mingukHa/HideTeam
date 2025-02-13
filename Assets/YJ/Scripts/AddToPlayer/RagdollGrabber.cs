@@ -9,10 +9,10 @@ public class RagdollGrabber : MonoBehaviour
 
     private Animator anim;
     private ConfigurableJoint joint;
-    private Rigidbody ragdollRigidbody;
+    public Rigidbody ragdollRigidbody;
     private Transform rootTransform; // NPC 최상위 오브젝트의 Transform
     private Collider[] rootColliders; // NPC 최상위 오브젝트의 Collider 목록
-    private bool isGrabbing = false;
+    public bool isGrabbing = false;
 
     private Vector3 leftHandIKPosition;
     private Quaternion leftHandIKRotation;
@@ -118,7 +118,7 @@ public class RagdollGrabber : MonoBehaviour
         joint.zDrive = drive;
     }
 
-    private void ReleaseRagdoll()
+    public void ReleaseRagdoll()
     {
         isGrabbing = false;
 
