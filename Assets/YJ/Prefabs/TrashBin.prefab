@@ -2101,7 +2101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e1690d76f06a1941857aec102c900f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trashBinRid: {fileID: 1844063233172139718}
+  trashBinLid: {fileID: 1844063233172139718}
   trashObjects:
   - {fileID: 5834894841011219512}
   - {fileID: 4309595030008670837}
