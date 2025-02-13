@@ -9,9 +9,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
-    <ProjectGuid>{B68C4D23-CFBD-D96E-0CCF-2CB7AD316C61}</ProjectGuid>
+    <RootNamespace></RootNamespace>
+    <ProjectGuid>{880FC178-ED13-04ED-C506-0EC474524D50}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -70,6 +69,7 @@
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\WaitState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\EnvMapAnimator.cs" />
     <Compile Include="Assets\FImpossible Creations\Plugins - Shared\Math Helpers\Math\FEngineering.cs" />
+    <Compile Include="Assets\KJH\Scripts\PlayerCutScene1.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextSelector_A.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\CFX_Demo_RotateCamera.cs" />
     <Compile Include="Assets\FImpossible Creations\Plugins - Animating\Ragdoll Animator\Core\RagdollDummy_PostAttach.cs" />
@@ -81,6 +81,7 @@
     <Compile Include="Assets\YJ\Assets\Synty\AnimationBaseLocomotion\Samples\Scripts\SampleObjectLockOn.cs" />
     <Compile Include="Assets\HMG\Script\ReturnScript\ReturnManager.cs" />
     <Compile Include="Assets\FImpossible Creations\Plugins - Animating\Ragdoll Animator\Core\RagdollProcessor.cs" />
+    <Compile Include="Assets\KJH\Scripts\LookUI.cs" />
     <Compile Include="Assets\FImpossible Creations\Shared Tools\GUI Helpers\FGUI_Inspector.cs" />
     <Compile Include="Assets\FImpossible Creations\Plugins - Animating\Ragdoll Animator\Core\RagdollProcessor.User.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\Controller\NamedController.cs" />
@@ -164,6 +165,7 @@
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\Controller\NPCController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\CameraController.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark03.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\IdleState.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\NPCStateMachine.cs" />
     <Compile Include="Assets\HMG\Script\Object\vault door.cs" />
     <Compile Include="Assets\HMG\Script\FirebaseChat\TextCameraVeiw.cs" />

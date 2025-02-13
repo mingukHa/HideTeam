@@ -9,9 +9,11 @@ public class RagdollGrabber : MonoBehaviour
 
     private Animator anim;
     private ConfigurableJoint joint;
+    [HideInInspector]
     public Rigidbody ragdollRigidbody;
     private Transform rootTransform; // NPC 최상위 오브젝트의 Transform
     private Collider[] rootColliders; // NPC 최상위 오브젝트의 Collider 목록
+    [HideInInspector]
     public bool isGrabbing = false;
 
     private Vector3 leftHandIKPosition;
