@@ -69,7 +69,7 @@ public class RagdollGrabber : MonoBehaviour
         // 래그돌이 손을 따라오게 하는 힘 적용
         JointDrive drive = new JointDrive();
         drive.positionSpring = 200; // 손을 따라오는 힘(낮으면 더 부드럽게 끌림)
-        drive.positionDamper = 10;
+        drive.positionDamper = 50;
         drive.maximumForce = 1000;
 
         joint.xDrive = drive;

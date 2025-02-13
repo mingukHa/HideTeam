@@ -135,6 +135,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Mathematics.Editor", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.VisualScripting.SettingsProvider.Editor", "Unity.VisualScripting.SettingsProvider.Editor.csproj", "{8614AEBC-AAD3-4B85-AD30-67DA56AC5238}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{68BCC62F-9FC7-1BF7-CA32-C7D6CBC59AC5}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.Settings.Editor", "Unity.Settings.Editor.csproj", "{B93FF4BF-93A7-1899-1C44-8062A635F748}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.InputSystem.TestFramework", "Unity.InputSystem.TestFramework.csproj", "{91BA13D0-83C2-7F14-AF72-4D20544C37AB}"
@@ -515,6 +517,10 @@ Global
 		{8614AEBC-AAD3-4B85-AD30-67DA56AC5238}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8614AEBC-AAD3-4B85-AD30-67DA56AC5238}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8614AEBC-AAD3-4B85-AD30-67DA56AC5238}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68BCC62F-9FC7-1BF7-CA32-C7D6CBC59AC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68BCC62F-9FC7-1BF7-CA32-C7D6CBC59AC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68BCC62F-9FC7-1BF7-CA32-C7D6CBC59AC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68BCC62F-9FC7-1BF7-CA32-C7D6CBC59AC5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B93FF4BF-93A7-1899-1C44-8062A635F748}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B93FF4BF-93A7-1899-1C44-8062A635F748}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B93FF4BF-93A7-1899-1C44-8062A635F748}.Release|Any CPU.ActiveCfg = Release|Any CPU
