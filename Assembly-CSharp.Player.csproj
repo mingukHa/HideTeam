@@ -188,6 +188,7 @@
     <Compile Include="Assets\KJH\Scripts\BGMSlider.cs" />
     <Compile Include="Assets\HMG\Script\Minimap\MiniMap.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\WFX_Demo_New.cs" />
+    <Compile Include="Assets\YJ\Scripts\AddToDisposer\RagdollDisposer.cs" />
     <Compile Include="Assets\YJ\Assets\Synty\AnimationBaseLocomotion\Samples\Scripts\InputSystem\InputReader.cs" />
     <Compile Include="Assets\FImpossible Creations\Shared Tools\GUI Helpers\FGUI_Handles.cs" />
     <Compile Include="Assets\YJ\Assets\QA_Office\Scripts\Elevator.cs" />

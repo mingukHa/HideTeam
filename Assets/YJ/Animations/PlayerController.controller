@@ -465,34 +465,34 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: -3762938987472605714}
-    m_Position: {x: 80, y: 360, z: 0}
+    m_Position: {x: 80, y: 400, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -6433649433865600758}
-    m_Position: {x: 300, y: 270, z: 0}
+    m_Position: {x: 300, y: 310, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3862872222412271939}
-    m_Position: {x: 520, y: 360, z: 0}
+    m_Position: {x: 520, y: 400, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3994872174370915906}
-    m_Position: {x: 300, y: 360, z: 0}
+    m_Position: {x: 300, y: 400, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 8455507719683410922}
-    m_Position: {x: 20, y: 270, z: 0}
+    m_Position: {x: 20, y: 310, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3205745255366653944}
-    m_Position: {x: 20, y: 180, z: 0}
+    m_Position: {x: 20, y: 220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8353558690854315745}
-    m_Position: {x: 150, y: 90, z: 0}
+    m_Position: {x: 90, y: 130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8729613064727141622}
-    m_Position: {x: 440, y: 90, z: 0}
+    m_Position: {x: 520, y: 130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 7506396846605540899}
-    m_Position: {x: 580, y: 180, z: 0}
+    m_Position: {x: 580, y: 220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6610173513086019084}
-    m_Position: {x: 580, y: 270, z: 0}
+    m_Position: {x: 580, y: 310, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -690,7 +690,7 @@ BlendTree:
     m_DirectBlendParameter: Forward
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 1827226128182048838, guid: 52a2eb3158000934eb33267c807b8b15, type: 3}
+    m_Motion: {fileID: 1827226128182048838, guid: a4b8f2deec6a99945987cfc59b1b4e54, type: 3}
     m_Threshold: 0.6666667
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -805,6 +805,12 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
   - m_Name: isMessUp
+    m_Type: 9
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: isDisposer
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -1338,7 +1344,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 8993902097722301239, guid: 5fc69aa0ef11f8f4b8e1d9fdf2a0105a, type: 3}
+  m_Motion: {fileID: 1827226128182048838, guid: 8696bc6ac16333d46a1a43e35b88e873, type: 3}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
