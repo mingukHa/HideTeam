@@ -46,7 +46,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2c22d296d434cf54380cc9acfb2c7305, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -55.702
+      value: -55.507
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 2c22d296d434cf54380cc9acfb2c7305, type: 3}
       propertyPath: m_LocalPosition.y
@@ -115,9 +115,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2c22d296d434cf54380cc9acfb2c7305, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7152213464715345089}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2c22d296d434cf54380cc9acfb2c7305, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4292582729924875272}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2c22d296d434cf54380cc9acfb2c7305, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6273730551355504001}
@@ -274,9 +271,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDead: 0
   BoxCollider: {fileID: 6273730551355504001}
+  patrolRoute: {fileID: 0}
   select: {fileID: 4103970997867239927}
   npcchatbox: {fileID: 6557051029272678849}
-  returnManager: {fileID: 0}
 --- !u!114 &7152213464715345089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,21 +287,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
-  BoxCollider: {fileID: 0}
---- !u!114 &4292582729924875272
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 387328884714622978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ea1b2bf2b41a8034a97a5b305155994b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nPCAvatar: {fileID: 9000000, guid: 2c22d296d434cf54380cc9acfb2c7305, type: 3}
-  nPCName: PChar_Scavenger
+  BoxCollider: {fileID: 6273730551355504001}
+  patrolRoute: {fileID: 0}
 --- !u!135 &6273730551355504001
 SphereCollider:
   m_ObjectHideFlags: 0

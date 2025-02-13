@@ -13,10 +13,15 @@ public class NPC_PldMan : NPCFSM
     private int currentWaypointIndex;
     private bool isLookingAround = false;
     private NavMeshAgent agent;
-    public Transform GarbagePos;
+    
     private void OnEnable()
     {
         EventManager.Subscribe(GameEventType.OldManHelp, StartOldManHelp);
+        EventManager.Subscribe(GameEventType.OldManoutside, StartOldManoutside);
+    }
+    private void StartOldManoutside()
+    {
+        Debug.Log("할배 외면");
     }
     private void StartOldManHelp()
     {
