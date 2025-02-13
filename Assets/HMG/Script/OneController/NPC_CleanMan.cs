@@ -28,8 +28,7 @@ public class NPC_CleanMan : NPCFSM
     private void StopNpc()
     {
         StopCoroutine(TalkView());
-        transform.rotation = initrotation;
-        new WaitForSeconds(2f);
+        transform.rotation = initrotation;       
         NPCCollider.radius = 0.01f;
         animator.SetTrigger("Idel");
         select.SetActive(false);
@@ -102,7 +101,7 @@ public class NPC_CleanMan : NPCFSM
                 chat.LoadNPCDialogue(npc, 1);
                 EventManager.Trigger(GameEventType.sweeper);
                 StopCoroutine(TalkView());
-                StopNpc();
+                Invoke("StopNpc",2f);
 
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -110,7 +109,7 @@ public class NPC_CleanMan : NPCFSM
                 chat.LoadNPCDialogue(npc, 2);
                 EventManager.Trigger(GameEventType.sweeperKill);
                 StopCoroutine(TalkView());
-                StopNpc();
+                Invoke("StopNpc", 2f);
             }
         }
     }

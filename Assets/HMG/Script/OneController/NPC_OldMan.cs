@@ -86,7 +86,7 @@ public class NPC_OldMan : NPCFSM
                 chat.LoadNPCDialogue(npc, 1);
                 EventManager.Trigger(GameEventType.OldManHelp);
                 StopCoroutine(TalkView());
-                StopNpc();
+                Invoke("StopNpc", 2f);
 
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -94,7 +94,7 @@ public class NPC_OldMan : NPCFSM
                 chat.LoadNPCDialogue(npc, 2);
                 EventManager.Trigger(GameEventType.OldManoutside);
                 StopCoroutine(TalkView());
-                StopNpc();
+                Invoke("StopNpc", 2f);
             }
         }
     }
