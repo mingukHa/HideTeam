@@ -41,6 +41,7 @@ public class PlayerController : MonoBehaviour
     private float rGoalholdTime = 1f;   //R키 눌러야하는 시간
 
     private bool isDisguised = false;
+    private bool isGrabed = false;
 
     public List<DoorController> doorCons = new List<DoorController>();
     [SerializeField]
@@ -356,7 +357,7 @@ public class PlayerController : MonoBehaviour
 
 private IEnumerator ThrowCigarette()
     {
-        yield return new WaitForSecondsRealtime(10f);
+        yield return new WaitForSecondsRealtime(12f);
 
         if (cigarette != null)
         {
