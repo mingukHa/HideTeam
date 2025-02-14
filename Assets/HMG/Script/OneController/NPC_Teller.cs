@@ -7,11 +7,19 @@ using UnityEngine.AI;
 
 public class NPC_Teller : NPCFSM
 {
-    
-    public GameObject npcchatbox; //NPC의 메인 채팅 최상위
-    private string npc = "NPC";
-    
 
+    public GameObject npcchatbox; //NPC의 메인 채팅 최상위
+    private string npc = "NPC6";
+
+    private void OnEnable()
+    {
+        EventManager.Subscribe(GameEventType.OldManHelp, OldManTalk);
+        EventManager.Subscribe(GameEventType.OldManoutside, OldManTalk);
+    }
+    private void OldManTalk()
+    {
+        //할배한테 말 걸면 실행하는 로직
+    }
     private void StopNpc()
     {
         StopCoroutine(TalkView());
@@ -21,19 +29,19 @@ public class NPC_Teller : NPCFSM
         animator.SetTrigger("Idel");
         select.SetActive(false);
     }
-    
+
     protected override void Start()
     {
         base.Start();
-        chat = GetComponent<NPCChatTest>();    
+        chat = GetComponent<NPCChatTest>();
         agent = GetComponent<NavMeshAgent>();
     }
 
     protected override void Update()
     {
         base.Update();
-        
-        
+
+
     }
 
     protected override void IdleBehavior()
@@ -64,13 +72,13 @@ public class NPC_Teller : NPCFSM
     protected override void DeadBehavior()
     {
         base.DeadBehavior();
-        
+
         chat.LoadNPCDialogue("NULL", 0);
     }
 
     protected override void OnTriggerEnter(Collider other)
     {
-        
+
         if (!isDead && other.CompareTag("Player"))
         {
             chat.LoadNPCDialogue(npc, 0);
@@ -85,22 +93,20 @@ public class NPC_Teller : NPCFSM
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 chat.LoadNPCDialogue(npc, 1);
-                EventManager.Trigger(GameEventType.OldManHelp);
+                EventManager.Trigger(GameEventType.TellerTalk); //텔러랑 말 하면 터지는 이벤트
                 returnManager.StartCoroutine(returnManager.SaveAllNPCData(3f));
                 StopCoroutine(TalkView());
                 Invoke("StopNpc", 2f);
-                Invoke("ReturnOldMan", 6f);
-                
+
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 chat.LoadNPCDialogue(npc, 2);
-                EventManager.Trigger(GameEventType.OldManoutside);
+                EventManager.Trigger(GameEventType.TellerTalk); //텔러랑 말 하면 터지는 이벤트
                 returnManager.StartCoroutine(returnManager.SaveAllNPCData(3f));
                 StopCoroutine(TalkView());
                 Invoke("StopNpc", 2f);
-                Invoke("ReturnOldMan", 6f);
-                            
+
             }
             if (Input.GetKey(KeyCode.F))
             {
@@ -110,9 +116,9 @@ public class NPC_Teller : NPCFSM
     }
     private void ReturnOldMan()
     {
-        if (!isDead) 
+        if (!isDead)
         {
-            animator.SetTrigger("Walk");           
+            animator.SetTrigger("Idle");
         }
 
     }
@@ -121,7 +127,7 @@ public class NPC_Teller : NPCFSM
         if (other.CompareTag("Player"))
         {
             chat.LoadNPCDialogue("NULL", 0);
-            
+
         }
     }
 }
