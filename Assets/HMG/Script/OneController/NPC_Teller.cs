@@ -26,7 +26,7 @@ public class NPC_Teller : NPCFSM
         transform.rotation = initrotation;
         new WaitForSeconds(2f);
         NPCCollider.radius = 0.01f;
-        animator.SetTrigger("Idel");
+        animator.SetTrigger("Idle");
         select.SetActive(false);
     }
 
