@@ -5,6 +5,7 @@ using static EventManager;
 using UnityEngine.AI;
 using UnityEngine.InputSystem.iOS;
 using UnityEngine.UIElements;
+using TMPro;
 
 
 public class NPC_OldMan : NPCFSM
@@ -14,7 +15,7 @@ public class NPC_OldMan : NPCFSM
     private string npc = "NPC3";
     public Transform OldManPos; //이동 할 위치
     public Transform NewManPos;
-
+    public TextMeshPro TextChange;
     private Transform OldPos;
     private void OnEnable()
     {
@@ -23,6 +24,7 @@ public class NPC_OldMan : NPCFSM
     private void OldmanMove()
     {
         OldPos = NewManPos;
+        TextChange.text = "1.카운터로 안내한다";
         Debug.Log($"늙은이 위치 변경 {OldPos}");
     }
     private void StopNpc()
