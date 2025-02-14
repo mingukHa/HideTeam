@@ -369,7 +369,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator ThrowCigarette()
     {
-        yield return new WaitForSecondsRealtime(12f);
+        yield return new WaitForSeconds(9.67f);
 
         if (cigarette != null)
         {
