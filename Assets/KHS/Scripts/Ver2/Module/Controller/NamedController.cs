@@ -23,8 +23,4 @@ public class NamedController : NPCController
     {
         stateMachine.ChangeState(new RoutineState(this));
     }
-    public void VIPAngry()
-    {
-        stateMachine.ChangeState(new AngryState(this));
-    }
 }
