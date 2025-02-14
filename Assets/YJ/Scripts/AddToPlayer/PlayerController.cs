@@ -296,9 +296,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && carAlarm != null)
         {
             anim.SetTrigger("isCar");
-            EventManager.Trigger(GameEventType.Carkick);
-            Debug.Log("차킥 이벤트 발생");
-            carAlarm.ActivateAlarm(); // 도난방지 알람 실행
+            StartCoroutine(KickTheCar());
         }
 
         if (Input.GetKeyDown(KeyCode.E) && trashBin != null)
@@ -369,7 +367,7 @@ public class PlayerController : MonoBehaviour
         StartCoroutine(ThrowCigarette());
     }
 
-private IEnumerator ThrowCigarette()
+    private IEnumerator ThrowCigarette()
     {
         yield return new WaitForSecondsRealtime(12f);
 
@@ -379,6 +377,13 @@ private IEnumerator ThrowCigarette()
         }
     }
 
+    private IEnumerator KickTheCar()
+    {
+        yield return new WaitForSeconds(1f); // 1초 대기
+        EventManager.Trigger(GameEventType.Carkick);
+        Debug.Log("차킥 이벤트 발생");
+        carAlarm.ActivateAlarm(); // 도난방지 알람 실행
+    }
 
     private IEnumerator SuicideCoroutine()
     {
