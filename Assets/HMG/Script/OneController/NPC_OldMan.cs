@@ -3,6 +3,8 @@ using System.Collections;
 using Unity.VisualScripting;
 using static EventManager;
 using UnityEngine.AI;
+using UnityEngine.InputSystem.iOS;
+using UnityEngine.UIElements;
 
 
 public class NPC_OldMan : NPCFSM
@@ -11,7 +13,18 @@ public class NPC_OldMan : NPCFSM
     public GameObject npcchatbox; //NPC의 메인 채팅 최상위
     private string npc = "NPC3";
     public Transform OldManPos; //이동 할 위치
+    public Transform NewManPos;
 
+    private Transform OldPos;
+    private void OnEnable()
+    {
+        EventManager.Subscribe(GameEventType.TellerTalk, OldmanMove);
+    }
+    private void OldmanMove()
+    {
+        OldPos = NewManPos;
+        Debug.Log($"늙은이 위치 변경 {OldPos}");
+    }
     private void StopNpc()
     {
         StopCoroutine(TalkView());
@@ -27,6 +40,7 @@ public class NPC_OldMan : NPCFSM
         base.Start();
         chat = GetComponent<NPCChatTest>();    
         agent = GetComponent<NavMeshAgent>();
+        OldPos = OldManPos;
     }
 
     protected override void Update()
@@ -90,7 +104,7 @@ public class NPC_OldMan : NPCFSM
                 StopCoroutine(TalkView());
                 Invoke("StopNpc", 2f);
                 Invoke("ReturnOldMan", 6f);
-                
+
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
@@ -108,15 +122,7 @@ public class NPC_OldMan : NPCFSM
             }
         }
     }
-    private void ReturnOldMan()
-    {
-        if (!isDead) 
-        {
-            animator.SetTrigger("Walk");
-            agent.SetDestination(OldManPos.position);
-        }
-
-    }
+    
     protected override void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -125,5 +131,32 @@ public class NPC_OldMan : NPCFSM
             
         }
     }
+    private void ReturnOldMan()
+    {
+        if (!isDead)
+        {
+            animator.SetTrigger("Walk");
+            agent.SetDestination(OldPos.position);
+            StartCoroutine(CheckArrival());
+        }
+    }
+    private IEnumerator CheckArrival()
+    {
+        // 목표 지점에 도착할 때까지 대기
+        while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
+        {
+            yield return null;
+        }
+
+        // 도착 후 멈추는 코드
+        if (agent.remainingDistance <= agent.stoppingDistance)
+        {
+            agent.isStopped = true; // 네비게이션 멈춤
+            agent.ResetPath(); // 경로 초기화
+            animator.SetTrigger("Idle"); // Idle 애니메이션으로 변경
+            Debug.Log("NPC가 목적지에 도착하여 멈췄습니다.");
+        }
+    }
+
 }
 

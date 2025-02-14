@@ -15,7 +15,9 @@ public class EventManager : MonoBehaviour
         Carkick,//자동차 발차기
         //
         Garbage,//쓰레기장 헤집기
-        
+
+        TellerTalk, //텔러에게 말걸기
+        RichmanAngry, //부자 화남
         //
         OldManHelp,//노인 도와줌
         OldManoutside,//노인 안도와줌
