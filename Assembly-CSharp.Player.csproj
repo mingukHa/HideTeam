@@ -81,6 +81,7 @@
     <Compile Include="Assets\YJ\Assets\Synty\AnimationBaseLocomotion\Samples\Scripts\SampleObjectLockOn.cs" />
     <Compile Include="Assets\HMG\Script\ReturnScript\ReturnManager.cs" />
     <Compile Include="Assets\FImpossible Creations\Plugins - Animating\Ragdoll Animator\Core\RagdollProcessor.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Module\NPCType\TellerNPC.cs" />
     <Compile Include="Assets\KJH\Scripts\LookUI.cs" />
     <Compile Include="Assets\FImpossible Creations\Shared Tools\GUI Helpers\FGUI_Inspector.cs" />
     <Compile Include="Assets\FImpossible Creations\Plugins - Animating\Ragdoll Animator\Core\RagdollProcessor.User.cs" />
@@ -100,6 +101,7 @@
     <Compile Include="Assets\FImpossible Creations\Plugins - Animating\Ragdoll Animator\Core\RagdollProcessor.References.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\NPCType\NamedNPC.cs" />
     <Compile Include="Assets\FImpossible Creations\Plugins - Animating\Ragdoll Animator\Core\RagdollIndicatorHelper.cs" />
+    <Compile Include="Assets\HMG\Script\OneController\NPC_Teller.cs" />
     <Compile Include="Assets\KHS\Scripts\Functions\ShoulderViewCam.cs" />
     <Compile Include="Assets\YJ\Assets\QA_Office\Scripts\Door.cs" />
     <Compile Include="Assets\FImpossible Creations\Plugins - Animating\Ragdoll Animator\Core\RagdollAnimator.GeneratorMethods.cs" />
@@ -113,6 +115,7 @@
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\Command\RunToCommand.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_UiFrameRateCounter.cs" />
     <Compile Include="Assets\YJ\Assets\QA_Office\Scripts\Clock.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\InteractState.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexZoom.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Scripts\WFX_LightFlicker.cs" />
     <Compile Include="Assets\FImpossible Creations\Plugins - Animating\Ragdoll Animator\Core\RagdollCollisionHelper.cs" />
@@ -140,6 +143,7 @@
     <Compile Include="Assets\JMO Assets\WarFX\Scripts\CFX_AutoDestructShuriken.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\VertexShakeA.cs" />
     <Compile Include="Assets\FImpossible Creations\Shared Tools\Editor Tools\FDebug_PerformanceTest.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\AngryState.cs" />
     <Compile Include="Assets\KHS\Scripts\ScriptableObject\PatrolRoute.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\Command\WaitCommand.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\CFX_AutoStopLoopedEffect.cs" />
@@ -156,6 +160,7 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextMeshSpawner.cs" />
     <Compile Include="Assets\KJH\Scripts\SceneButton.cs" />
     <Compile Include="Assets\YJ\Assets\Synty\AnimationBaseLocomotion\Samples\Scripts\InputSystem\Controls.cs" />
+    <Compile Include="Assets\KHS\Scripts\Ver2\Module\Controller\TellerController.cs" />
     <Compile Include="Assets\HMG\Script\ReturnScript\SceneDataStack.cs" />
     <Compile Include="Assets\HMG\Script\ReturnScript\SceneData.cs" />
     <Compile Include="Assets\YJ\Scripts\AddToPlayer\PlayerController.cs" />
