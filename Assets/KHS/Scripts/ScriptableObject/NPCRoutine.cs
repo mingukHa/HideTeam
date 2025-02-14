@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NPCRoutine", menuName = "Scriptable Objects/NPCRoutine")]
@@ -19,5 +20,6 @@ public enum RoutineActionType
 {
     Move,
     Wait,
-    Run
+    Run,
+    Talk
 }
