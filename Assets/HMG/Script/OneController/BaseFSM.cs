@@ -139,7 +139,7 @@ public class NPCFSM : MonoBehaviour
         Debug.Log($" 레그돌 상태 변경: {(state ? "활성화" : "비활성화")}");
         foreach (var rb in rigidbodies)
         {
-            gameObject.tag = "Ragdoll";
+            //gameObject.tag = "Ragdoll";
             rb.isKinematic = !state; //  Rigidbody 물리 활성화
         }
     }
