@@ -10,18 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e34068933273786488267c2508a41f62, type: 3}
-  m_Name: LobbyGuardRoutine
+  m_Name: CarKickTraking
   m_EditorClassIdentifier: 
   actions:
-  - actionType: 0
-    targetPosition: {x: -46, y: 0.03, z: 0}
-    waitTime: 0
   - actionType: 1
-    targetPosition: {x: 0, y: 0, z: 0}
-    waitTime: 10
-  - actionType: 0
-    targetPosition: {x: -64.556, y: 0, z: 4.093}
+    targetPosition: {x: -57.062, y: 0, z: -10.61}
+    waitTime: 3
+  - actionType: 2
+    targetPosition: {x: -57.062, y: 0, z: -10.61}
     waitTime: 0
-  - actionType: 1
-    targetPosition: {x: -64.556, y: 0, z: 4.093}
-    waitTime: 5

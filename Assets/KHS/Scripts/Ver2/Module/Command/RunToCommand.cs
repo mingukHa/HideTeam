@@ -32,7 +32,7 @@ public class RunToCommand : ICommand
     {
         npcController.animator.ResetTrigger("Run");
         npcController.agent.isStopped = true;  // NavMeshAgent 멈춤
-        npcController.agent.speed = 1f;
+        npcController.agent.speed = npcController.walkSpeed;
         npcController.agent.velocity = Vector3.zero;  // 이동 속도 초기화
         npcController.agent.updatePosition = false;  // NavMesh 위치 업데이트 중지
         Debug.Log($"{npcController.npcName}이 {targetPosition}으로 단일 이동 완료");

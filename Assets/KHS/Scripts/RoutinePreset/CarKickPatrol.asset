@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: CarKickPatrol
   m_EditorClassIdentifier: 
   actions:
-  - actionType: 2
-    targetPosition: {x: -57.062, y: 0, z: -10.61}
-    waitTime: 0
   - actionType: 1
     targetPosition: {x: -57.062, y: 0, z: -10.61}
     waitTime: 4
   - actionType: 2
     targetPosition: {x: -54.65, y: 0, z: -6.33}
-    waitTime: 4
+    waitTime: 0
   - actionType: 1
     targetPosition: {x: -57.062, y: 0, z: -10.61}
     waitTime: 4
+  - actionType: 2
+    targetPosition: {x: -57.062, y: 0, z: -10.61}
+    waitTime: 0
