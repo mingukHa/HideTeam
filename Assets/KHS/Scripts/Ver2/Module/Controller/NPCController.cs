@@ -145,14 +145,11 @@ public abstract class NPCController : MonoBehaviour
                     if (!Physics.Raycast(transform.position, directionToTarget, distanceToTarget, obstructionMask))
                     {
                         targetTr.Add(target.transform);
-                        UpdateTargetInfo();
                         isDetected = true;
                         Debug.DrawLine(transform.position, target.transform.position, Color.red); // 디버그용 시야 선
                     }
                     else
                     {
-                        targetTr.Add(target.transform);
-                        UpdateTargetInfo();
                         Debug.DrawLine(transform.position, target.transform.position, Color.yellow); // 장애물이 있음
                     }
                 }

@@ -58,8 +58,8 @@ public class RoutineInvoker : MonoBehaviour
         }
         else
         {
-            //routineFinished = true;
-            RoutineChange(curRoutineIdx);
+            routineFinished = true;
+            //RoutineChange(curRoutineIdx);
             Debug.Log("루틴 종료 or 반복");
         }
     }

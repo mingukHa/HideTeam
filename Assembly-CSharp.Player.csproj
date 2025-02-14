@@ -191,6 +191,7 @@
     <Compile Include="Assets\KJH\Scripts\BGMSlider.cs" />
     <Compile Include="Assets\HMG\Script\Minimap\MiniMap.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\WFX_Demo_New.cs" />
+    <Compile Include="Assets\YJ\Scripts\AddToDisposer\RagdollDisposer.cs" />
     <Compile Include="Assets\YJ\Assets\Synty\AnimationBaseLocomotion\Samples\Scripts\InputSystem\InputReader.cs" />
     <Compile Include="Assets\FImpossible Creations\Shared Tools\GUI Helpers\FGUI_Handles.cs" />
     <Compile Include="Assets\YJ\Assets\QA_Office\Scripts\Elevator.cs" />
@@ -199,7 +200,6 @@
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TextConsoleSimulator.cs" />
     <Compile Include="Assets\KJH\Scripts\SoundManager.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TeleType.cs" />
-    <Compile Include="Assets\YJ\Scripts\AddToDisposer\Toilet.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextEventCheck.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\Class\RoutineInvoker.cs" />
     <Compile Include="Assets\FImpossible Creations\Shared Tools\GUI Helpers\FGUI_Resources.cs" />
@@ -212,7 +212,6 @@
     <Compile Include="Assets\JMO Assets\WarFX\Demo\Assets\CFX_Demo_RandomDir.cs" />
     <Compile Include="Assets\KJH\Scripts\PlayerCanvasFollow.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\SusState.cs" />
-    <Compile Include="Assets\YJ\Scripts\AddToDisposer\Dumpster.cs" />
     <Compile Include="Assets\FImpossible Creations\Plugins - Shared\Math Helpers\Math\FVectorMethods.cs" />
     <Compile Include="Assets\KHS\Scripts\ScriptableObject\NPCRoutine.cs" />
     <Compile Include="Assets\JMO Assets\WarFX\Spawn System\CFX_SpawnSystem.cs" />
