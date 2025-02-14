@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 using static EventManager;
+using System.Collections;
 
 
 [RequireComponent(typeof(NPCStateMachine)), RequireComponent(typeof(RoutineInvoker))]
@@ -40,6 +41,17 @@ public abstract class NPCController : MonoBehaviour
     public List<GameEventType> eventFlags = new List<GameEventType>();
     public List<string> actionNames = new List<string>();
     private Dictionary<GameEventType, Action> eventActions = new Dictionary<GameEventType, Action>();
+
+
+    public TMPro.TextMeshProUGUI dialogueText;
+    public int converEvent = 0;
+    public List<GameEventType> converEventFlags = new List<GameEventType>();
+
+    public Queue<string> dialogue;
+    public List<string> playerDialogue;
+    public List<string> oldManDialogue;
+    public List<string> richManDialogue;
+
 
     private void Awake()
     {
@@ -170,6 +182,29 @@ public abstract class NPCController : MonoBehaviour
     public bool CurrentRoutineEnd()
     {
         return routineInvoker.RoutineEnd();
+    }
+
+    public void ShowDialogue(string text, System.Action onFinished)
+    {
+        StartCoroutine(TypeDialogue(text, onFinished));
+    }
+    private IEnumerator TypeDialogue(string text, System.Action onFinished)
+    {
+        dialogueText.text = "";
+        foreach (char c in text)
+        {
+            dialogueText.text += c;
+            yield return new WaitForSeconds(0.05f); // 타이핑 효과
+        }
+        yield return new WaitForSeconds(1f); // 잠시 대기
+        onFinished?.Invoke(); // 대사 완료 이벤트 실행
+    }
+    public void TriggerScriptEvent()
+    {
+        EventManager.Trigger(converEventFlags[converEvent]);
+        ++converEvent;
+        Debug.Log("이벤트 발생!");
+
     }
 
     public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)
