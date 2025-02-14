@@ -4,21 +4,21 @@ using System.Collections;
 public class RagdollDisposer : MonoBehaviour
 {
     //public Transform disposalPoint; // Ragdoll을 버릴 위치
-    public Transform lid; // 뚜껑 오브젝트
+    public Transform lid; // 뚜껑 or 문 오브젝트
     private Rigidbody ragdollRigidbody;
     private Transform ragdollRoot;
     private Animator playerAnim;
     private bool isPlayerNearby = false;
     private bool isRagdollNearby = false;
-    private Quaternion lidClosedRotation;
+    private Quaternion lidClosedRotation;// 닫혀있는 뚜껑 각도
     [SerializeField]
-    private Quaternion lidOpenRotation;
+    private Quaternion lidOpenRotation; // 열린 뚜껑 각도
 
     private void Start()
     {
         // 뚜껑의 초기 회전 저장
         lidClosedRotation = lid.rotation;
-        lidOpenRotation = lidClosedRotation * Quaternion.Euler(-80f, 0f, 0f);
+        lidOpenRotation = lidClosedRotation * Quaternion.Euler(0f, 0f, 0f);
     }
 
     private void Update()
@@ -80,7 +80,7 @@ public class RagdollDisposer : MonoBehaviour
         }
 
 
-        // 플레이어 애니메이터에서 "IsDisposer" 트리거 실행
+        // 플레이어 애니메이터에서 "isDisposer" 트리거 실행
         if (playerAnim != null)
         {
             playerAnim.SetTrigger("isDisposer");
