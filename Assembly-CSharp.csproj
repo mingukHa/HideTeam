@@ -177,6 +177,7 @@
     <Compile Include="Assets\HMG\Script\FirebaseChat\TextCameraVeiw.cs" />
     <Compile Include="Assets\HMG\Script\FirebaseChat\NPCChatTest.cs" />
     <Compile Include="Assets\YJ\Scripts\AddToPlayer\PlayerDisguiser.cs" />
+    <Compile Include="Assets\HMG\Script\OneController\NPC_DoorGaurd.cs" />
     <Compile Include="Assets\KJH\Scripts\MasterSlider.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\State\PatrolState.cs" />
     <Compile Include="Assets\KHS\Scripts\Ver2\Module\NPCType\NPCType.cs" />

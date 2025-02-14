@@ -33,7 +33,7 @@ public class NPC_OldMan : NPCFSM
         transform.rotation = initrotation;
         new WaitForSeconds(2f);
         NPCCollider.radius = 0.01f;
-        animator.SetTrigger("Idel");
+       // animator.SetTrigger("Idel");
         select.SetActive(false);
     }
     
@@ -105,7 +105,7 @@ public class NPC_OldMan : NPCFSM
                 returnManager.StartCoroutine(returnManager.SaveAllNPCData(3f));
                 StopCoroutine(TalkView());
                 Invoke("StopNpc", 2f);
-                Invoke("ReturnOldMan", 6f);
+                Invoke("ReturnOldMan", 2f);
 
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -115,7 +115,7 @@ public class NPC_OldMan : NPCFSM
                 returnManager.StartCoroutine(returnManager.SaveAllNPCData(3f));
                 StopCoroutine(TalkView());
                 Invoke("StopNpc", 2f);
-                Invoke("ReturnOldMan", 6f);
+                Invoke("ReturnOldMan", 2f);
                             
             }
             if (Input.GetKey(KeyCode.F))
