@@ -1,24 +1,33 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UIElements;
 
 public class NPCFSM : MonoBehaviour
 {
     protected enum State { Idle, Look, Walk, Run, Talk, Dead }
     protected State currentState = State.Idle;
-    private Transform player;
+    private Transform player; //플레이어 위치
     protected Animator animator;
-    private Rigidbody[] rigidbodies;
+    private Rigidbody[] rigidbodies; //레그돌 받아오는 부분
     public bool isDead = false; //죽음 상태
     private bool isTalking = false; //대화 상태
     //private bool isText = false; //죽으면 채팅 끄기 
-    private bool isRagdollActivated = false; // 레그돌 활성화 여부 확인용
-    private Quaternion initrotation;
-    private NPCChatTest NPCChatTest;
-    public SphereCollider BoxCollider;
-
+    protected bool isRagdollActivated = false; // 레그돌 활성화 여부 확인용
+    protected Quaternion initrotation; //기본 위치
+    private NPCChatTest NPCChatTest; //NPC대화 불러오는 곳
+    public SphereCollider NPCCollider; //NPC 상호작용 콜라이더
+    protected int currentWaypointIndex; //네브메쉬 배열 초기 값
+    protected NavMeshAgent agent; //네브메쉬
+    [SerializeField]
+    protected GameObject select; //캐릭터 말풍선
+    private bool isPlayerNearby = false;
+    public ReturnManager returnManager;
+    protected NPCChatTest chat;
     protected virtual void Start()
     {
+        chat = GetComponent<NPCChatTest>();
         animator = GetComponent<Animator>();
         rigidbodies = GetComponentsInChildren<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -27,6 +36,10 @@ public class NPCFSM : MonoBehaviour
         SetRagdollState(false);
         ChangeState(State.Idle);
         initrotation = transform.rotation;
+        animator = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
+        
+        agent.autoBraking = false;
 
     }
 
@@ -53,24 +66,18 @@ public class NPCFSM : MonoBehaviour
             case State.Dead:
                 DeadBehavior();
                 break;
-        }        //// F 키로 Dead 상태 전환
-        //if (Input.GetKeyDown(KeyCode.F) && currentState != State.Dead)
-        //{
-        //    ChangeState(State.Dead); // Dead 상태로 전환
-        //}
+        }
+        if (isDead && !isRagdollActivated)
+        {
+            AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
 
-        //// Dead 모션이 끝났는지 확인
-        //if (currentState == State.Dead && !isRagdollActivated)
-        //{
-        //    AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        //    if (stateInfo.IsName("Dead") && stateInfo.normalizedTime >= 1.0f) // Dead 모션이 끝났을 때
-        //    {
-        //        ActivateRagdoll(); // 레그돌 활성화
-        //        isRagdollActivated = true; // 레그돌이 활성화되었음을 표시
-        //    }
-        //}
-
-
+            // 애니메이션 "Dead"가 실행 중인지 확인
+            if (stateInfo.IsName("Dead") && stateInfo.normalizedTime >= 1.0f)
+            {
+                Debug.Log(" Dead 애니메이션 종료 - 레그돌 활성화 실행");
+                ActivateRagdoll(); //  레그돌 처리
+            }
+        }
     }
 
     protected virtual void ChangeState(State newState)
@@ -117,19 +124,23 @@ public class NPCFSM : MonoBehaviour
         }
     }
 
-    // 레그돌 활성화
-    private void ActivateRagdoll()
+    protected void ActivateRagdoll()
     {
-        animator.enabled = false; // 애니메이터 비활성화
-        SetRagdollState(true);    // 레그돌 활성화
+        if (isRagdollActivated) return; //  중복 실행 방지
+        isDead = true;
+        animator.enabled = false; //  애니메이션 정지
+        SetRagdollState(true); //  물리 적용
+
+        isRagdollActivated = true; //  이미 실행되었음을 저장
     }
 
-    // 레그돌 상태 설정
     private void SetRagdollState(bool state)
     {
+        Debug.Log($" 레그돌 상태 변경: {(state ? "활성화" : "비활성화")}");
         foreach (var rb in rigidbodies)
         {
-            rb.isKinematic = !state; // 물리 활성화
+            gameObject.tag = "Ragdoll";
+            rb.isKinematic = !state; //  Rigidbody 물리 활성화
         }
     }
 
@@ -144,73 +155,80 @@ public class NPCFSM : MonoBehaviour
     }
     protected virtual void DeadBehavior()
     {
+        Debug.Log("데드 비헤이어 실행");
         isDead = true;
     }
-    private void OnTriggerEnter(Collider other)
+    protected virtual void OnTriggerEnter(Collider other)
     {
-        if (isDead == false)
+        if (!isDead && other.CompareTag("Player"))
         {
-            if (other.CompareTag("Player"))
-               {
-               Debug.Log("바라보기 코루틴 시작");
-               StartCoroutine(TalkView());
-                }
+            Debug.Log("플레이어 범위 내 진입");
+            isPlayerNearby = true; // 플레이어가 범위 내에 있음을 저장
+        }
+    }
+    protected virtual void OnTriggerExit(Collider other)
+    {
+        if (!isDead && other.CompareTag("Player"))
+        {
+            StopCoroutine(TalkView());
+            Debug.Log("플레이어 범위 밖으로 나감");
+            ChangeState(State.Idle);
+            isPlayerNearby = false; // 범위를 벗어나면 초기화
+            isTalking = false; // 대화 종료
+            transform.rotation = initrotation; // 원래 방향으로 복귀
+            select.SetActive(false);
         }
     }
     protected virtual void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (!isDead && other.CompareTag("Player"))
         {
-            // F 키로 Dead 상태 전환
+            // E 키를 눌렀을 때만 NPC가 플레이어를 바라보며 대화 시작
+            if (Input.GetKeyDown(KeyCode.E) && !isTalking)
+            {
+                Debug.Log("NPC가 플레이어를 바라보며 대화 시작");
+                StartCoroutine(TalkView());
+                ChangeState(State.Talk); // 대화 상태로 변경
+            }
+
+            // F 키를 눌렀을 때 Dead 상태 전환
             if (Input.GetKey(KeyCode.F) && currentState != State.Dead)
             {
-                ChangeState(State.Dead); // Dead 상태로 전환
+                ChangeState(State.Dead);
                 NPCChatTest.enabled = false;
                 isTalking = false;
-                
+                select.SetActive(false);
+                chat.LoadNPCDialogue("NULL", 0);
             }
+
             // Dead 모션이 끝났는지 확인
             if (currentState == State.Dead && !isRagdollActivated)
             {
                 AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-                if (stateInfo.IsName("Dead") && stateInfo.normalizedTime >= 1.0f) // Dead 모션이 끝났을 때
+                if (stateInfo.IsName("Dead") && stateInfo.normalizedTime >= 1.0f)
                 {
-                    ActivateRagdoll(); // 레그돌 활성화
-                    isRagdollActivated = true; // 레그돌이 활성화되었음을 표시
-                    
-                    //StopCoroutine(TalkView());
+                    ActivateRagdoll();
+                    isRagdollActivated = true;
                 }
             }
         }
     }
-    private void OnTriggerExit(Collider other)
+   
+    protected IEnumerator TalkView()
     {
-        if (other.CompareTag("Player"))
+        if (isTalking || agent.hasPath) yield break; // 이동 중이면 실행 안 함
+        select.SetActive(true);
+        isTalking = true;
+        while (isTalking)
         {
-            
-            StopCoroutine(TalkView());
-            transform.rotation = initrotation;
-            isTalking = false;
-            Debug.Log("바라보기 코루틴 종료");
-        }
-
-    }
-    private IEnumerator TalkView()
-    {
-        if (isTalking) yield break; 
-
-        isTalking = true; 
-
-        while (isTalking == true)
-        {
+            Debug.Log("바라보기 코루틴이 정상 작동 중");
             Vector3 direction = (player.position - transform.position).normalized;
             direction.y = 0;
             Quaternion lookRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
 
-            yield return null; 
+            yield return null;
         }
-        
     }
 
 }

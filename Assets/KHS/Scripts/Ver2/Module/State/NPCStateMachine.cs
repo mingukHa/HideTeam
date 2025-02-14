@@ -2,8 +2,7 @@ using UnityEngine;
 
 public class NPCStateMachine : MonoBehaviour
 {
-    private NPCState _currentState;
-
+    public NPCState _currentState;
     public void ChangeState(NPCState newState)
     {
         if (_currentState != null)
@@ -18,7 +17,9 @@ public class NPCStateMachine : MonoBehaviour
     public void Update()
     {
         if (_currentState != null)
+        {
             Debug.Log(_currentState);
             _currentState.Update();
+        }
     }
 }

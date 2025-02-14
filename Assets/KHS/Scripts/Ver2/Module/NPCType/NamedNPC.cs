@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class NamedNPC : NPCType
 {
-    public NamedNPC(NamedNPCController npc) : base(npc)
+    public NamedNPC(NamedController npc) : base(npc)
     {
 
     }

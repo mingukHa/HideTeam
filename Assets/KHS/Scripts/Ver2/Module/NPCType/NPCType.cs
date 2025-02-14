@@ -3,13 +3,12 @@ using UnityEngine;
 
 public abstract class NPCType : MonoBehaviour
 {
-    protected TNPCController _npcController;
-    public List<ICommand> _commandList;
+    protected NPCController _npcController;
 
-    public NPCType(TNPCController npc)
+
+    public NPCType(NPCController npc)
     {
         _npcController = npc;
-        _commandList = new List<ICommand>();
     }
 
     public abstract void PerformCommand();

@@ -1,0 +1,77 @@
+using UnityEngine;
+using System;
+using System.Collections.Generic;
+
+public class EventManager : MonoBehaviour
+{
+    public enum GameEventType //이 부분에서 모든 이벤트 String을 관리 합니다
+    {
+        //공통 상시 동작 이벤트
+        SuspiciousDetected,     // 수상한 상황 발견
+        PlayerEnterBank,        // 플레이어 은행 진입
+
+        //공통 루트 부분
+        Carkick,//자동차 발차기
+        //
+        Garbage,//쓰레기장 헤집기
+        
+        //
+        OldManHelp,//노인 도와줌
+        OldManoutside,//노인 안도와줌
+        //
+        plainclothespoliceTalk, //사복경찰에게 말을 검
+        plainclothespoliceNoTalk, //사복경찰에게 말을 안검
+        //
+        policeTalk, //경비에게 사복경찰 지칭하는 인물을 말함
+        policeNoTalk, //경비에게 사복경찰 말 안함
+        //플랜 a부분
+        RichKill //부자를 제압할 때 청소부가 로비에 있으면 달려가는 이벤트
+        //메인 루트
+        //bankemployee, //안내데스크 10초간 대기하는 이벤트
+
+    }
+
+    private static Dictionary<GameEventType, Action> eventDictionary = new Dictionary<GameEventType, Action>();
+
+    public static void Subscribe(GameEventType eventType, Action listener)
+    {
+        if (!eventDictionary.ContainsKey(eventType))
+        {
+            eventDictionary[eventType] = listener;
+            Debug.Log($"{eventType} : 이벤트 추가됨!");
+        }
+        else
+        {
+            eventDictionary[eventType] += listener;
+            Debug.Log($"{eventType} : 이벤트 구독자가 추가됨!");
+        }
+    }
+
+    public static void Unsubscribe(GameEventType eventType, Action listener)
+    {
+        if (eventDictionary.ContainsKey(eventType))
+        {
+            eventDictionary[eventType] -= listener;
+            Debug.Log($"{eventType} : 이벤트 구독 해제됨!");
+
+            if (eventDictionary[eventType] == null)
+            {
+                eventDictionary.Remove(eventType);
+                Debug.Log($"{eventType} : 이벤트 삭제됨! 구독자 없음");
+            }
+        }
+    }
+
+    public static void Trigger(GameEventType eventType)
+    {
+        if (eventDictionary.ContainsKey(eventType))
+        {
+            Debug.Log($"{eventType} : 이벤트 트리거 발동!");
+            eventDictionary[eventType]?.Invoke();
+        }
+        else
+        {
+            Debug.Log($"{eventType} : 이벤트 없음!");
+        }
+    }
+}

@@ -1,6 +1,9 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static EventManager;
+
 
 public class PlayerController : MonoBehaviour
 {
@@ -9,12 +12,19 @@ public class PlayerController : MonoBehaviour
 
     private NPCIdentifier currentNPC;
     private PlayerDisguiser disguiser;
+    private CarAlarm carAlarm;
+    private TrashBin trashBin;
+    public RagdollGrabber ragdollGrabber;
+
     public GameObject gun = null;
+    public GameObject cigarette = null;
 
     private float mouseX = 0;
     private float mouseSensitivity = 5f;
+
     private bool isMoving = false;
     private bool isCrouching = false;
+    private bool isStarted = false;
 
     public Image eImage;    //E키 이미지
     public Slider eSlider;  //E키 게이지
@@ -24,6 +34,10 @@ public class PlayerController : MonoBehaviour
 
     public Image fImage;    //K키 이미지
 
+    public GameObject E_Chat;
+
+    public GameObject CarKey;
+
     private float eholdTime = 0f;   //E키 누른 시간
     private float eGoalholdTime = 1f;   //E키 눌러야하는 시간
 
@@ -31,6 +45,11 @@ public class PlayerController : MonoBehaviour
     private float rGoalholdTime = 1f;   //R키 눌러야하는 시간
 
     private bool isDisguised = false;
+    private bool isGrabed = false;
+
+    public List<DoorController> doorCons = new List<DoorController>();
+    [SerializeField]
+    private bool isFirstOpen = false;   // 출입문 첫 개방 확인용
 
     private NPCIdentifier disguisedNPC = null;  //변장한 NPC를 추적
 
@@ -39,6 +58,9 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         tr = GetComponent<Transform>();
         disguiser = GetComponent<PlayerDisguiser>();
+
+        Smoking();
+        isFirstOpen = false;
     }
 
     private void Update()
@@ -46,41 +68,61 @@ public class PlayerController : MonoBehaviour
         PlayerAction();
         PlayerMove();
 
-        // 플레이어가 움직이고 있을 때만 마우스 입력 처리
+        // 흡연이 끝나고 플레이어가 움직이고 있을 때만 마우스 입력 처리
         if (isMoving && InputMouse(ref mouseX))
         {
             InputMouseProcess(mouseX);
         }
+
+        CheckFirstDoorOpen();
     }
 
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    // 만약 other 오브젝트의 태그가 "NPC"가 아니면 반환 (실행 X)
-    //    if (!other.gameObject.CompareTag("NPC")) return;
+    private void OnTriggerEnter(Collider other)
+    {
+        //    // 만약 other 오브젝트의 태그가 "NPC"가 아니면 반환 (실행 X)
+        //    if (!other.gameObject.CompareTag("NPC")) return;
 
-    //    NPCIdentifier npc = other.GetComponent<NPCIdentifier>();    
-    //    NPCFSM npcFSM = other.GetComponent<NPCFSM>(); // NPCFSM 가져오기
+        //    NPCIdentifier npc = other.GetComponent<NPCIdentifier>();    
+        //    NPCFSM npcFSM = other.GetComponent<NPCFSM>(); // NPCFSM 가져오기
 
-    //    if (npcFSM != null && npcFSM.isDead)
-    //    {
-    //        Debug.Log("죽은 NPC와 상호작용");
-    //        // NPCIdentifier가 있는 오브젝트와 충돌 시, currentNPC 설정
-    //        eImage.gameObject.SetActive(true);
-    //        eSlider.gameObject.SetActive(true);
-    //        fImage.gameObject.SetActive(false);
+        //    if (npcFSM != null && npcFSM.isDead)
+        //    {
+        //        Debug.Log("죽은 NPC와 상호작용");
+        //        // NPCIdentifier가 있는 오브젝트와 충돌 시, currentNPC 설정
+        //        eImage.gameObject.SetActive(true);
+        //        eSlider.gameObject.SetActive(true);
+        //        fImage.gameObject.SetActive(false);
 
-    //        if (npc != null)
-    //        {
-    //            currentNPC = npc;
-    //        }
-    //    }
-    //    else
-    //    {
-    //        // NPC가 살아있을 때 fImage 활성화
-    //        fImage.gameObject.SetActive(true);
-    //        currentNPC = npc; // NPC를 currentNPC에 설정
-    //    }
-    //}
+        //        if (npc != null)
+        //        {
+        //            currentNPC = npc;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        // NPC가 살아있을 때 fImage 활성화
+        //        fImage.gameObject.SetActive(true);
+        //        currentNPC = npc; // NPC를 currentNPC에 설정
+        //    }
+        if (other.CompareTag("NPC"))
+        {
+            E_Chat.SetActive(true);
+        }
+
+        if (other.CompareTag("Car"))
+        {
+            carAlarm = other.GetComponent<CarAlarm>();
+            if (carAlarm != null)
+            {
+                CarKey.SetActive(true);
+            }
+        }
+
+        if (other.CompareTag("TrashBin"))
+        {
+            trashBin = other.GetComponent<TrashBin>();
+        }
+    }
 
     //실시간으로 UI가 변해야하므로 Stay로 변경
     private void OnTriggerStay(Collider other)
@@ -111,6 +153,7 @@ public class PlayerController : MonoBehaviour
             if (npcFSM.isDead)
             {
                 // 죽은 NPC와 상호작용 시 E키 활성화
+                E_Chat.gameObject.SetActive(false);
                 eImage.gameObject.SetActive(true);
                 eSlider.gameObject.SetActive(true);
                 fImage.gameObject.SetActive(false); // 죽은 NPC일 때 F키 관련 UI 비활성화
@@ -127,6 +170,22 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
+        if (other.CompareTag("NPC"))
+        {
+            E_Chat.SetActive(false);
+        }
+
+        if (other.CompareTag("Car"))
+        {
+            CarKey.SetActive(false);
+            carAlarm = null;  // carAlarm을 null로 설정하여, 차량과 상호작용 불가하도록 만듦
+        }
+
+        if (other.CompareTag("TrashBin"))
+        {
+            trashBin = null;
+        }
+
         if (!other.gameObject.CompareTag("NPC")) return;
 
         //NPCFSM npcFSM = other.GetComponent<NPCFSM>();
@@ -145,7 +204,7 @@ public class PlayerController : MonoBehaviour
         //}
 
         // NPC가 떠나면 fImage 비활성화
-        //fImage.gameObject.SetActive(false);
+        fImage.gameObject.SetActive(false);
     }
 
     private bool InputMouse(ref float _mouseX)
@@ -191,7 +250,7 @@ public class PlayerController : MonoBehaviour
             isCrouching = !isCrouching; // 상태 전환
             anim.SetBool("Crouch", isCrouching); // 애니메이터의 Crouch 파라미터 설정
         }
-
+        
         // 뛰기(Sprint)
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -234,6 +293,18 @@ public class PlayerController : MonoBehaviour
             eSlider.value = 0f; // 슬라이더 게이지 초기화
         }
 
+        if (Input.GetKeyDown(KeyCode.E) && carAlarm != null)
+        {
+            anim.SetTrigger("isCar");
+            StartCoroutine(KickTheCar());
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && trashBin != null)
+        {
+            anim.SetTrigger("isMessUp");
+            trashBin.MessUpTrashBin();
+        }
+
         if (Input.GetKey(KeyCode.R) && isDisguised)
         {
             rImage.gameObject.SetActive(true);
@@ -273,6 +344,46 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(SuicideCoroutine());
         }
     }
+    private void CheckFirstDoorOpen()
+    {
+        foreach(DoorController doorCon in doorCons)
+        {
+            if(!isFirstOpen && doorCon.isOpen)
+            {
+                isFirstOpen = true;
+                EventManager.Trigger(GameEventType.PlayerEnterBank);
+            }
+        }
+    }
+
+    private void Smoking()
+    {
+        if (!isStarted)
+        {
+            anim.SetTrigger("isStarted");
+            isStarted = true;
+        }
+
+        StartCoroutine(ThrowCigarette());
+    }
+
+    private IEnumerator ThrowCigarette()
+    {
+        yield return new WaitForSeconds(9.67f);
+
+        if (cigarette != null)
+        {
+            cigarette.SetActive(false);
+        }
+    }
+
+    private IEnumerator KickTheCar()
+    {
+        yield return new WaitForSeconds(1f); // 1초 대기
+        EventManager.Trigger(GameEventType.Carkick);
+        Debug.Log("차킥 이벤트 발생");
+        carAlarm.ActivateAlarm(); // 도난방지 알람 실행
+    }
 
     private IEnumerator SuicideCoroutine()
     {
@@ -295,5 +406,6 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSecondsRealtime(animLength);
 
         Time.timeScale = 1f; // 원래 속도로 복원
+        gun.SetActive(false);
     }
 }
