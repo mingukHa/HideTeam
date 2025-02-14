@@ -69,7 +69,7 @@ AnimatorState:
   - {fileID: -6099276736945525844}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
+  m_IKOnFeet: 1
   m_WriteDefaultValues: 1
   m_Mirror: 0
   m_SpeedParameterActive: 0
@@ -1183,6 +1183,18 @@ AnimatorStateTransition:
   - m_ConditionMode: 1
     m_ConditionEvent: Suicide
     m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: Forward
+    m_EventTreshold: 0.01
+  - m_ConditionMode: 4
+    m_ConditionEvent: Right
+    m_EventTreshold: 0.01
+  - m_ConditionMode: 3
+    m_ConditionEvent: Forward
+    m_EventTreshold: -0.01
+  - m_ConditionMode: 3
+    m_ConditionEvent: Right
+    m_EventTreshold: -0.01
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -887060923212000919}
   m_Solo: 0

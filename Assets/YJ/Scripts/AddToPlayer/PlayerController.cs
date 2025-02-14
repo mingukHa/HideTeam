@@ -387,6 +387,15 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator SuicideCoroutine()
     {
+        anim.SetTrigger("Suicide");
+
+        // Upper Layer에서 'Suicide' 애니메이션 상태가 될 때까지 대기
+        yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(1).IsName("Suicide"));
+
+        // Forward, Right 값을 고정
+        anim.SetFloat("Forward", 0f);
+        anim.SetFloat("Right", 0f);
+
         disguiser.ResetToDefaultCharacter(); // 기본 복장으로 돌아감
 
         if (gun != null)
@@ -394,16 +403,20 @@ public class PlayerController : MonoBehaviour
             gun.SetActive(true);
         }
 
-        Time.timeScale = 0.6f; // 슬로우 모션 적용
-        anim.SetTrigger("Suicide");
+        Time.timeScale = 0.2f; // 슬로우 모션 적용
 
-        // 애니메이션 재생 후 자의적 루프(자살) 로직 추가할 자리
+        // Upper Layer에서 Suicide 애니메이션의 길이를 가져옴
+        float animLength = anim.GetCurrentAnimatorStateInfo(1).length;
 
-        // 애니메이션 길이를 가져옴
-        float animLength = anim.GetCurrentAnimatorStateInfo(0).length;
-
-        // 애니메이션 길이만큼 대기 (시간 스케일 영향을 받지 않도록 WaitForSecondsRealtime 사용)
-        yield return new WaitForSecondsRealtime(animLength);
+        // 애니메이션이 끝날 때까지 Forward와 Right 값을 계속 0으로 유지
+        float elapsedTime = 0f;
+        while (elapsedTime < animLength)
+        {
+            anim.SetFloat("Forward", 0f);
+            anim.SetFloat("Right", 0f);
+            elapsedTime += Time.unscaledDeltaTime; // Time.timeScale 영향을 받지 않도록
+            yield return null;
+        }
 
         Time.timeScale = 1f; // 원래 속도로 복원
         gun.SetActive(false);
