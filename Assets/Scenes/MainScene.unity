@@ -733,9 +733,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
+  isRagdollActivated: 0
   NPCCollider: {fileID: 82743805}
   select: {fileID: 1130133353}
-  returnManager: {fileID: 2007657855}
+  returnManager: {fileID: 0}
 --- !u!114 &82743807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -763,9 +764,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
+  isRagdollActivated: 0
   NPCCollider: {fileID: 82743805}
   select: {fileID: 1130133353}
-  returnManager: {fileID: 2007657855}
+  returnManager: {fileID: 0}
   npcchatbox: {fileID: 576083414}
   PolicPos: {fileID: 1631526045}
 --- !u!195 &82743810
@@ -2196,7 +2198,7 @@ PrefabInstance:
     - target: {fileID: 4037534722440092754, guid: 019afb5205dbd7140bf1cdfd902b991b, type: 3}
       propertyPath: returnManager
       value: 
-      objectReference: {fileID: 2007657855}
+      objectReference: {fileID: 2007657856}
     - target: {fileID: 4103970997867239927, guid: 019afb5205dbd7140bf1cdfd902b991b, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -2252,7 +2254,7 @@ PrefabInstance:
     - target: {fileID: 7152213464715345089, guid: 019afb5205dbd7140bf1cdfd902b991b, type: 3}
       propertyPath: returnManager
       value: 
-      objectReference: {fileID: 2007657855}
+      objectReference: {fileID: 2007657856}
     - target: {fileID: 7567713173093735989, guid: 019afb5205dbd7140bf1cdfd902b991b, type: 3}
       propertyPath: Post
       value: 
@@ -2453,7 +2455,6 @@ MonoBehaviour:
   playerDialogue: []
   oldManDialogue: []
   richManDialogue: []
-  dialogue: []
   AngryEvent1Dialogue: []
   AngryEvent2Dialogue: []
 --- !u!1 &299125839
@@ -12804,9 +12805,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
+  isRagdollActivated: 0
   NPCCollider: {fileID: 889467893}
   select: {fileID: 1187410852}
-  returnManager: {fileID: 2007657855}
+  returnManager: {fileID: 2007657856}
   npcchatbox: {fileID: 2066252043}
 --- !u!114 &889467892
 MonoBehaviour:
@@ -12821,9 +12823,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
+  isRagdollActivated: 0
   NPCCollider: {fileID: 889467893}
   select: {fileID: 1187410852}
-  returnManager: {fileID: 2007657855}
+  returnManager: {fileID: 2007657856}
 --- !u!135 &889467893
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -14293,7 +14296,6 @@ MonoBehaviour:
   playerDialogue: []
   oldManDialogue: []
   richManDialogue: []
-  dialogue: []
   AngryEvent1Dialogue: []
   AngryEvent2Dialogue: []
 --- !u!54 &1124407230
@@ -15339,11 +15341,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6238027188655501229, guid: e98f477abb7db414ab41f572c5959e09, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -63.83099
+      value: -64.57
       objectReference: {fileID: 0}
     - target: {fileID: 6238027188655501229, guid: e98f477abb7db414ab41f572c5959e09, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.89601517
+      value: 1.3764
       objectReference: {fileID: 0}
     - target: {fileID: 6238027188655501229, guid: e98f477abb7db414ab41f572c5959e09, type: 3}
       propertyPath: m_LocalPosition.z
@@ -15351,19 +15353,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6238027188655501229, guid: e98f477abb7db414ab41f572c5959e09, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.9870875
       objectReference: {fileID: 0}
     - target: {fileID: 6238027188655501229, guid: e98f477abb7db414ab41f572c5959e09, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 0.16018228
       objectReference: {fileID: 0}
     - target: {fileID: 6238027188655501229, guid: e98f477abb7db414ab41f572c5959e09, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 7.6880466e-18
       objectReference: {fileID: 0}
     - target: {fileID: 6238027188655501229, guid: e98f477abb7db414ab41f572c5959e09, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -1.2475985e-18
       objectReference: {fileID: 0}
     - target: {fileID: 6238027188655501229, guid: e98f477abb7db414ab41f572c5959e09, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -19128,9 +19130,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
+  isRagdollActivated: 0
   NPCCollider: {fileID: 1557606059}
   select: {fileID: 1819401094}
-  returnManager: {fileID: 2007657855}
+  returnManager: {fileID: 2007657856}
   npcchatbox: {fileID: 317189547}
 --- !u!114 &1557606062
 MonoBehaviour:
@@ -19145,9 +19148,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
+  isRagdollActivated: 0
   NPCCollider: {fileID: 1557606059}
   select: {fileID: 1819401094}
-  returnManager: {fileID: 2007657855}
+  returnManager: {fileID: 2007657856}
 --- !u!114 &1557606063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20645,7 +20649,7 @@ PrefabInstance:
     - target: {fileID: 494584579064435247, guid: ad65ef8b4e0ab2d43b4a8c971551848e, type: 3}
       propertyPath: returnManager
       value: 
-      objectReference: {fileID: 2007657855}
+      objectReference: {fileID: 2007657856}
     - target: {fileID: 2604524886189733788, guid: ad65ef8b4e0ab2d43b4a8c971551848e, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -20729,7 +20733,7 @@ PrefabInstance:
     - target: {fileID: 6403825014880757381, guid: ad65ef8b4e0ab2d43b4a8c971551848e, type: 3}
       propertyPath: returnManager
       value: 
-      objectReference: {fileID: 2007657855}
+      objectReference: {fileID: 2007657856}
     - target: {fileID: 6443478672057171751, guid: ad65ef8b4e0ab2d43b4a8c971551848e, type: 3}
       propertyPath: m_text
       value: "1.\uB3C4\uC640\uC900\uB2E4\n2.\uAC70\uC808\uD55C\uB2E4\nF.\uC81C\uC555\uD55C\uB2E4"
@@ -22015,6 +22019,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2007657854}
   - component: {fileID: 2007657855}
+  - component: {fileID: 2007657856}
   m_Layer: 0
   m_Name: ReturnManager
   m_TagString: Untagged
@@ -22044,9 +22049,24 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2007657852}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54eb1bbfd1b825e4eabb40e375d1b325, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fadeout: {fileID: 1181857850}
+  Post: {fileID: 402040622}
+  mouse: {fileID: 1549053852}
+--- !u!114 &2007657856
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2007657852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 723301e3d916fdd428dd55e1e2f7b28f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fadeout: {fileID: 1181857850}
@@ -23082,7 +23102,6 @@ MonoBehaviour:
   playerDialogue: []
   oldManDialogue: []
   richManDialogue: []
-  dialogue: []
   AngryEvent1Dialogue: []
   AngryEvent2Dialogue: []
 --- !u!114 &8540019948712011051

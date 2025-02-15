@@ -23,7 +23,7 @@ public class NPCFSM : MonoBehaviour
     [SerializeField]
     protected GameObject select; //캐릭터 말풍선
     private bool isPlayerNearby = false;
-    public ReturnManager returnManager;
+    public ReturnManagerinit returnManager;
     protected NPCChatTest chat;
     protected virtual void Start()
     {
