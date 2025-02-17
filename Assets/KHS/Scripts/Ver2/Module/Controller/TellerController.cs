@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Firebase.Database;
 using Firebase.Extensions;
@@ -17,16 +18,56 @@ public class TellerController : NPCController
     public bool isVIP = false;
     public bool isPlayer = false;
     public bool isOLDMan = false;
+    public bool isInterPlayer = false;
     
     public override void Start()
     {
         base.Start();
         dbRef = FirebaseDatabase.DefaultInstance.RootReference;
+        dialogueText.alpha = 0f;
+    }
 
+    private void FixedUpdate()
+    {
         isPlayer = MDC_collider.isPlayer;
         isVIP = MDC_collider.isVIP;
         isOLDMan = MDC_collider.isOLDMan;
+
+
+        if(isVIP is true)
+        {
+            EventManager.Trigger(EventManager.GameEventType.RichmanTalkTeller);
+        }
+        if(isPlayer && Input.GetKeyDown(KeyCode.E))
+        {
+            EventManager.Trigger(EventManager.GameEventType.TellerTalk);
+        }
+        StartCoroutine(TalkCoroutine());
+        if(Chating && !isPlayer)
+        {
+            dialogueText.alpha = 255f;
+        }
+        else
+        {
+            dialogueText.alpha = 0f;
+        }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.name == "PlayerHolder")
+        {
+            Chating = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.name == "PlayerHolder")
+        {
+            Chating = false;
+        }
+    }
+
     public void LoadTellerDialogue(string npcID, int number)
     {
         dbRef.Child("NPC_Dialogues").Child(npcID).GetValueAsync()
@@ -52,7 +93,7 @@ public class TellerController : NPCController
                             }
                             else
                             {
-                                ShowDialogue("대사가 없습니다");
+                                ShowDialogue("");
                             }
                         }
                         else
@@ -77,6 +118,22 @@ public class TellerController : NPCController
     {
         dialogueText.text = text;
         Debug.Log($"[Teller] 대사 출력: {text}");
+    }
+    public void TellerGone()
+    {
+        stateMachine.ChangeState(new GoneState(this));
+    }
+    public void TellerInteract()
+    {
+        Debug.Log("플레이어가 Teller에게 상호작용!");
+    }
+
+
+    private IEnumerator TalkCoroutine()
+    {
+        LoadTellerDialogue(npcID, 0);
+        yield return null;
+        
     }
 }
 [Serializable]
