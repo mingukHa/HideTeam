@@ -29,6 +29,7 @@ public class PatrolState : NPCState
         }
         else
         {
+            _npcController.routineInvoker.RoutineChange(0);
             _npcController.stateMachine.ChangeState(new RoutineState(_npcController));
         }
     }

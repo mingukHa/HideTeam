@@ -23,6 +23,7 @@ public class RoutineState : NPCState
         }
         else
         {
+
             _npcController.stateMachine.ChangeState(new RoutineState(_npcController));
         }
     }
