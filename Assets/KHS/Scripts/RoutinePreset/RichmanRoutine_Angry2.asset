@@ -16,3 +16,4 @@ MonoBehaviour:
   - actionType: 0
     targetPosition: {x: -64, y: 0, z: 4}
     waitTime: 0
+    TalkEvent: 0

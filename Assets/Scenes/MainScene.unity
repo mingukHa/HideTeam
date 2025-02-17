@@ -5347,12 +5347,13 @@ MonoBehaviour:
   targetVec: []
   agent: {fileID: 0}
   animator: {fileID: 0}
-  eventFlags: 010000000700000005000000030000000a000000
+  eventFlags: 0100000007000000050000000a000000
   actionNames:
   - PlayerEnter
   - RichmanGone
   - RichmanAngry1
   - RichmanAngry2
+  - RichmanAngry3
   dialogueText: {fileID: 0}
   converEvent: 0
   converEventFlags: 
@@ -27983,7 +27984,7 @@ PlayableDirector:
   m_Enabled: 0
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: 8c4514c789d167b40985f710815468d3, type: 2}
-  m_InitialState: 1
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
