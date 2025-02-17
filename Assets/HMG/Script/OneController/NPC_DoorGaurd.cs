@@ -8,17 +8,20 @@ using UnityEngine.AI;
 public class NPC_DoorGaurd : NPCFSM
 {
 
-
+    
     public GameObject npcchatbox; //NPC의 메인 채팅 최상위
     private string npc = "NPC1";
 
     private void OnEnable()
     {
-       // EventManager.Subscribe(GameEventType.Garbage, StartGarbage);
+       EventManager.Subscribe(GameEventType.NPCKill, StartNPCKill);
        
     }
 
-
+    private void StartNPCKill()
+    {
+        agent.SetDestination(player.position);
+    }
 
     private void StopNpc()
     {

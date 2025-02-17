@@ -8,7 +8,7 @@ public class NPCFSM : MonoBehaviour
 {
     protected enum State { Idle, Look, Walk, Run, Talk, Dead }
     protected State currentState = State.Idle;
-    private Transform player; //플레이어 위치
+    protected Transform player; //플레이어 위치
     protected Animator animator;
     private Rigidbody[] rigidbodies; //레그돌 받아오는 부분
     public bool isDead = false; //죽음 상태
@@ -218,6 +218,7 @@ public class NPCFSM : MonoBehaviour
                 if (stateInfo.IsName("Dead") && stateInfo.normalizedTime >= 1.0f)
                 {
                     Debug.Log("NPC 죽음");
+                    EventManager.Trigger(EventManager.GameEventType.NPCKill);
                     ActivateRagdoll();
                     isRagdollActivated = true;
                 }

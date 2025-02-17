@@ -34,7 +34,9 @@ public class EventManager : MonoBehaviour
         RichKill, //부자를 제압할 때 청소부가 로비에 있으면 달려가는 이벤트
         //메인 루트
         //bankemployee, //안내데스크 10초간 대기하는 이벤트
-        GameOver //게임 오버 시 동작하는 이벤트
+        GameOver, //게임 오버 시 동작하는 이벤트
+        //
+        NPCKill //NPC죽이면 호출
     }
 
     private static Dictionary<GameEventType, Action> eventDictionary = new Dictionary<GameEventType, Action>();

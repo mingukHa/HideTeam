@@ -19,7 +19,8 @@ public class EventTriggerManager : MonoBehaviour
         GameEventType.RichmanAngry,
         GameEventType.GameOver,
         GameEventType.RichHide,
-        GameEventType.RichNoHide
+        GameEventType.RichNoHide,
+        GameEventType.NPCKill
 
     };
 
