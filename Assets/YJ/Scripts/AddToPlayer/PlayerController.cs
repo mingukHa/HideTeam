@@ -14,10 +14,11 @@ public class PlayerController : MonoBehaviour
     private PlayerDisguiser disguiser;
     private CarAlarm carAlarm;
     private TrashBin trashBin;
-    public RagdollGrabber ragdollGrabber;
+    //public RagdollGrabber ragdollGrabber;
 
     public GameObject gun = null;
     public GameObject cigarette = null;
+    public GameObject droppingCigarette = null;
 
     private float mouseX = 0;
     private float mouseSensitivity = 5f;
@@ -363,6 +364,7 @@ public class PlayerController : MonoBehaviour
         if (cigarette != null)
         {
             cigarette.SetActive(false);
+            droppingCigarette.SetActive(true);
         }
     }
 
