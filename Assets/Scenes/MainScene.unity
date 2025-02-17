@@ -19587,7 +19587,6 @@ MonoBehaviour:
   displayTime: 2
   Post: {fileID: 402040622}
   quad: {fileID: 1343302535}
-  fade: {fileID: 974037217}
 --- !u!114 &974037215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19629,7 +19628,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 553677942}
-  FadeInTime: 0.5
+  FadeInTime: 3
 --- !u!1001 &983030527
 PrefabInstance:
   m_ObjectHideFlags: 0

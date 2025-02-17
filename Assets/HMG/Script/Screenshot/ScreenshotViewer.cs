@@ -11,7 +11,7 @@ public class ScreenshotViewer : MonoBehaviour
     public float displayTime = 1.0f;
     public GameObject Post;
     public GameObject quad;
-    public FadeOut fade;
+    
     private void OnEnable()
     {
         EventManager.Subscribe(GameEventType.GameOver, gameover);
@@ -60,19 +60,21 @@ public class ScreenshotViewer : MonoBehaviour
 
     private IEnumerator ShowScreenshots()
     {
-        List<Texture2D> tempScreenshots = new List<Texture2D>(ScreenshotManager.Instance.screenshots); // 리스트 복사
-        
-        
-        for (int i = tempScreenshots.Count - 1; i >= 0; i--) // 역순 재생
+        List<Texture2D> tempScreenshots = new List<Texture2D>(ScreenshotManager.Instance.screenshots);
+
+        for (int i = tempScreenshots.Count - 1; i >= 0; i--)
         {
             if (quadMaterial != null)
             {
-                quadMaterial.mainTexture = tempScreenshots[i]; // Quad의 Material 업데이트
+                quadMaterial.mainTexture = tempScreenshots[i];
             }
-            fade.Fadeout(0.5f);
+
+            
             yield return new WaitForSecondsRealtime(displayTime);
         }
+
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainScene");
     }
+
 }
