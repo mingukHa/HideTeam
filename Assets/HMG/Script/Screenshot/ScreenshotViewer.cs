@@ -19,6 +19,7 @@ public class ScreenshotViewer : MonoBehaviour
     private void gameover()
     {
         Debug.Log("게임이 오버됨");
+        Time.timeScale = 0f;
         quad.SetActive(true);
         Post.SetActive(true);
         StartSlideshow();
@@ -65,7 +66,7 @@ public class ScreenshotViewer : MonoBehaviour
                 quadMaterial.mainTexture = tempScreenshots[i]; // Quad의 Material 업데이트
             }
 
-            yield return new WaitForSeconds(displayTime);
+            yield return new WaitForSecondsRealtime(displayTime);
         }
 
         SceneManager.LoadScene("MainScene");
