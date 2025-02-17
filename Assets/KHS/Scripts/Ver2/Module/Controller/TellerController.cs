@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Firebase.Database;
 using Firebase.Extensions;
 using TMPro;
@@ -10,7 +11,7 @@ public class TellerController : NPCController
 {
     protected DatabaseReference dbRef = null;
     public string npcID;
-    protected bool Chating = false;
+    protected bool isChatting = false;
 
 
     public MatDetChange MDC_collider;
@@ -23,9 +24,9 @@ public class TellerController : NPCController
     private Queue<string> dialogueQueue = new Queue<string>(); // 대사 큐
     private bool isDialoguePlaying = false; // 대사가 진행 중인지 확인
     private bool isWaitingForEvent = false; // 이벤트 완료 대기 상태
+    private bool isPlayerInRange = false; // 플레이어가 대화 범위 안에 있는지 확인
 
     public List<EventManager.GameEventType> convEnvList;
-    public int convEnvIdx = 0;
 
     public override void Start()
     {
@@ -44,43 +45,67 @@ public class TellerController : NPCController
         if (isVIP)
         {
             EventManager.Trigger(EventManager.GameEventType.RichmanTalkTeller);
+            LoadTellerDialogue(npcID);
         }
-
-        if (isPlayer && Input.GetKeyDown(KeyCode.E) && !isDialoguePlaying)
+        else if (isOLDMan)
         {
-            EventManager.Trigger(EventManager.GameEventType.TellerTalk);
+            EventManager.Trigger(EventManager.GameEventType.OldManGotoTeller);
             LoadTellerDialogue(npcID);
         }
 
-        if (Chating && !isPlayer)
+        else if (isPlayer && Input.GetKeyDown(KeyCode.E) && !isDialoguePlaying)
+        {
+            EventManager.Trigger(EventManager.GameEventType.TellerTalk);
+            LoadTellerDialogue(npcID);
+            isInterPlayer = true; // 플레이어가 대화 시작
+        }
+
+        // 대사 가시성 조정
+        UpdateDialogueVisibility();
+    }
+    private void UpdateDialogueVisibility()
+    {
+        if (isDialoguePlaying && isPlayerInRange)
         {
             dialogueText.alpha = 255f;
         }
         else
         {
             dialogueText.alpha = 0f;
-            if (isPlayer && isInterPlayer)
-                dialogueText.alpha = 255f;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.name == "PlayerHolder")
+        if (other.gameObject.name == "PlayerHolder")
         {
-            Chating = true;
+            isPlayerInRange = true;
+            if (isDialoguePlaying)
+            {
+                dialogueText.alpha = 255f; // 대화 중이면 즉시 표시
+            }
+        }
+        else if (other.CompareTag("NPC"))
+        {
+            isChatting = true;
         }
     }
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.name == "PlayerHolder")
         {
-            Chating = false;
+            isPlayerInRange = false;
+            UpdateDialogueVisibility();
+        }
+        else if (other.CompareTag("NPC"))
+        {
+            isChatting = false;
         }
     }
 
     public void LoadTellerDialogue(string npcID)
     {
+
         dbRef.Child("NPC_Dialogues").Child(npcID).GetValueAsync()
             .ContinueWithOnMainThread(task =>
             {
@@ -127,8 +152,8 @@ public class TellerController : NPCController
     }
     private void ShowDialogue(string text)
     {
-        dialogueText.text = text.Replace("/E", ""); // /E 제거 후 출력
-        dialogueText.alpha = 255f;
+        dialogueText.text = Regex.Replace(text, @"/E\d+", ""); // /E숫자 부분 제거
+        dialogueText.alpha = isPlayerInRange && isChatting ? 255f : 0f; // 범위 내에 있거나 NPC와 대화 중이면 보임
         Debug.Log($"[Teller] 대사 출력: {text}");
     }
 
@@ -151,31 +176,33 @@ public class TellerController : NPCController
             ShowDialogue(dialogue);
 
             // 대사에 /E 이벤트가 포함되어 있는 경우
-            if (dialogue.Contains("/E"))
+            Match match = Regex.Match(dialogue, @"/E(\d+)");
+            if (match.Success)
             {
-
-                Debug.Log($"[이벤트 {convEnvIdx} 호출]");
-                isWaitingForEvent = true;
-
-                // 이벤트 완료 신호를 받을 때까지 대기
-                EventManager.Subscribe(convEnvList[convEnvIdx], OnEventCompleted);
-
-                // EventManager.Trigger(convEnvList[convEnvIdx]);
-
-                while (isWaitingForEvent)
+                int eventIndex = int.Parse(match.Groups[1].Value);
+                if (eventIndex < convEnvList.Count)
                 {
-                    yield return null;
+                    Debug.Log($"[이벤트 {eventIndex} 호출]");
+                    isWaitingForEvent = true;
+
+                    // 이벤트 완료 신호를 받을 때까지 대기
+                    EventManager.Subscribe(convEnvList[eventIndex], OnEventCompleted);
+                    // EventManager.Trigger(convEnvList[eventIndex]);
+
+                    while (isWaitingForEvent)
+                    {
+                        yield return null;
+                    }
+
+                    EventManager.Unsubscribe(convEnvList[eventIndex], OnEventCompleted);
                 }
-                
-                EventManager.Unsubscribe(convEnvList[convEnvIdx], OnEventCompleted);
-                convEnvIdx++;
             }
 
             yield return new WaitForSeconds(2.0f); // 대사 유지 시간
         }
 
         isDialoguePlaying = false;
-        dialogueText.alpha = 0f; // 대화 끝나면 숨김
+        ShowDialogue("");
     }
     
     private void OnEventCompleted()
