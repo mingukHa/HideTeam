@@ -123,6 +123,10 @@ public class TellerController : NPCController
     {
         stateMachine.ChangeState(new GoneState(this));
     }
+    public void TellerInteract()
+    {
+        Debug.Log("플레이어가 Teller에게 상호작용!");
+    }
 
 
     private IEnumerator TalkCoroutine()
