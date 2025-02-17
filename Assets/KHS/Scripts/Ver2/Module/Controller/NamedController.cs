@@ -6,9 +6,6 @@ using UnityEngine;
 [RequireComponent(typeof(NamedNPC))]
 public class NamedController : NPCController
 {
-    public List<string> AngryEvent1Dialogue;
-    public List<string> AngryEvent2Dialogue;
-
     public override void Start()
     {
         base.Start();
@@ -21,5 +18,9 @@ public class NamedController : NPCController
     public void PlayerEnter()
     {
         stateMachine.ChangeState(new RoutineState(this));
+    }
+    public void TellerBehavior()
+    {
+        
     }
 }
