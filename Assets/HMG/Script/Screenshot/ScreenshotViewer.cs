@@ -25,6 +25,7 @@ public class ScreenshotViewer : MonoBehaviour
     }
     private void gameover()
     {
+        Time.timeScale = 0f;
         GameOverText.SetActive(true);
         chat.SetActive(false);
         quad.SetActive(true);
@@ -75,16 +76,9 @@ public class ScreenshotViewer : MonoBehaviour
             
             yield return new WaitForSecondsRealtime(displayTime);
         }
-        yield return new WaitForSeconds(0.5f);  // NavMesh 데이터가 로드될 시간 확보
 
-        NavMeshAgent agent = FindObjectOfType<NavMeshAgent>();
-        if (agent != null)
-        {
-            agent.enabled = false;
-            yield return new WaitForSeconds(0.1f);
-            agent.enabled = true;
-            Debug.Log("NavMeshAgent 재활성화 완료.");
-        }
+        StopAllCoroutines();
+        Time.timeScale = 1f;
         SceneManager.LoadScene("MainScene");
         
     }

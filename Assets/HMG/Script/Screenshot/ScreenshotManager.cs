@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class ScreenshotManager : MonoBehaviour
 {
@@ -23,6 +24,10 @@ public class ScreenshotManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.O))
         {
             CaptureScreenshot();
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            SceneManager.LoadScene("MainScene");            
         }
     }
     public void CaptureScreenshot()

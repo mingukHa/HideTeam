@@ -27,11 +27,8 @@ public class NPCFSM : MonoBehaviour
     public ReturnManagerinit returnManager;
     protected NPCChatTest chat;
     protected Moutline moutline;
-    protected virtual void Awake()
-    {
-        agent = GetComponent<NavMeshAgent>();
-        agent.autoBraking = false;
-    }
+   
+    
     protected virtual void Start()
     {
         chat = GetComponent<NPCChatTest>();
@@ -44,10 +41,10 @@ public class NPCFSM : MonoBehaviour
         ChangeState(State.Idle);
         initrotation = transform.rotation;
         animator = GetComponent<Animator>();
-        
+        agent = GetComponent<NavMeshAgent>();
+        agent.autoBraking = false;
         moutline = GetComponent<Moutline>();
         
-
     }
 
     protected virtual void Update()
