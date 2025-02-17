@@ -171,6 +171,10 @@ public class NPCFSM : MonoBehaviour
             Debug.Log("플레이어 범위 내 진입");
             isPlayerNearby = true; // 플레이어가 범위 내에 있음을 저장
         }
+        //if (other.CompareTag("NPC") || other.CompareTag("Player"))
+        //{
+        //    animator.SetTrigger("Hit");
+        //}
     }
     protected virtual void OnTriggerExit(Collider other)
     {

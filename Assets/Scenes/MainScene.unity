@@ -6627,9 +6627,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 387328884714622978, guid: 019afb5205dbd7140bf1cdfd902b991b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 371222916}
-    - targetCorrespondingSourceObject: {fileID: 387328884714622978, guid: 019afb5205dbd7140bf1cdfd902b991b, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 371222917}
   m_SourcePrefab: {fileID: 100100000, guid: 019afb5205dbd7140bf1cdfd902b991b, type: 3}
 --- !u!1 &269987188 stripped
 GameObject:
@@ -6800,11 +6797,6 @@ MonoBehaviour:
   dialogueText: {fileID: 0}
   converEvent: 0
   converEventFlags: 
-  playerDialogue: []
-  oldManDialogue: []
-  richManDialogue: []
-  AngryEvent1Dialogue: []
-  AngryEvent2Dialogue: []
 --- !u!1 &299125839
 GameObject:
   m_ObjectHideFlags: 0
@@ -7447,18 +7439,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nPCAvatar: {fileID: 9000000, guid: 2c22d296d434cf54380cc9acfb2c7305, type: 3}
   nPCName: PChar_Villain
---- !u!114 &371222917
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 371222892}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54b203af8ff756a439c7d57e6da30e8a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &388997584
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17440,7 +17420,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &836063069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22252,11 +22232,6 @@ MonoBehaviour:
   dialogueText: {fileID: 0}
   converEvent: 0
   converEventFlags: 
-  playerDialogue: []
-  oldManDialogue: []
-  richManDialogue: []
-  AngryEvent1Dialogue: []
-  AngryEvent2Dialogue: []
 --- !u!54 &1124407230
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -37881,11 +37856,6 @@ MonoBehaviour:
   dialogueText: {fileID: 0}
   converEvent: 0
   converEventFlags: 
-  playerDialogue: []
-  oldManDialogue: []
-  richManDialogue: []
-  AngryEvent1Dialogue: []
-  AngryEvent2Dialogue: []
 --- !u!114 &8540019948712011051
 MonoBehaviour:
   m_ObjectHideFlags: 0
