@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isMoving = false;
     private bool isCrouching = false;
-    private bool isStarted = false;
+    private static bool isStarted = false;
 
     public Image eImage;    //E키 이미지
     public Slider eSlider;  //E키 게이지
@@ -60,7 +60,12 @@ public class PlayerController : MonoBehaviour
         tr = GetComponent<Transform>();
         disguiser = GetComponent<PlayerDisguiser>();
 
-        Smoking();
+        if (!isStarted)
+        {
+            Smoking();
+            isStarted = true;
+        }
+
         isFirstOpen = false;
     }
 
@@ -348,12 +353,7 @@ public class PlayerController : MonoBehaviour
 
     private void Smoking()
     {
-        if (!isStarted)
-        {
-            anim.SetTrigger("isStarted");
-            isStarted = true;
-        }
-
+        anim.SetTrigger("isStarted");
         StartCoroutine(ThrowCigarette());
     }
 
