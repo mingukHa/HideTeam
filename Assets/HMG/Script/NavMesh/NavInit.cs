@@ -1,37 +1,32 @@
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.SceneManagement;
-
+using System.Collections;
 public class AgentInitializer : MonoBehaviour
 {
-    public NavMeshAgent agent;
+    private NavMeshAgent agent;
+
     private void Awake()
     {
         agent = GetComponent<NavMeshAgent>();
-        ResetAgent();
     }
-    void Start()
+    private void Start()
     {
-
-        if (agent == null)
-        {
-            Debug.LogError("NavMeshAgent가 존재하지 않습니다!");
-            return;
-        }
-
-        if (!agent.isOnNavMesh)
-        {
-            Debug.LogError("NavMeshAgent가 NavMesh 위에 있지 않습니다!");
-            return;
-        }
-        
+        StartCoroutine(ReenableAgent());
     }
-    void ResetAgent()
+    void ResetAgentState()
     {
         if (agent != null)
         {
             agent.enabled = false;
-            agent.enabled = true;
+            StartCoroutine(ReenableAgent());
         }
+    }
+
+    IEnumerator ReenableAgent()
+    {
+        yield return new WaitForSeconds(0.1f);  // NavMesh 적용 시간 확보
+        agent.enabled = true;
+        Debug.Log("NavMeshAgent 활성화 완료");
     }
 }
