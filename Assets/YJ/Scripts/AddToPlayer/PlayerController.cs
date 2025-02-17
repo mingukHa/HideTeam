@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
         NPCIdentifier npc = other.GetComponent<NPCIdentifier>();    //NPCIdentifier스크립트랑 작용
         NPCFSM npcFSM = other.GetComponent<NPCFSM>(); // NPCFSM 가져오기
-
+        NPCRichMan rich = other.GetComponent<NPCRichMan>();
         if (npc != null)
         {
             // 변장 상태에서, 변장한 NPC와 동일한 NPC에 대해 상호작용 차단
@@ -127,9 +127,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (npcFSM != null)
+        if (npcFSM != null || rich != null)
         {
-            if (npcFSM.isDead && npcFSM.isRagdollActivated)
+            if (npcFSM.isDead && npcFSM.isRagdollActivated && rich.isDead)
             {
                 // 죽은 NPC와 상호작용 시 E키 활성화
                 E_Chat.gameObject.SetActive(false);
