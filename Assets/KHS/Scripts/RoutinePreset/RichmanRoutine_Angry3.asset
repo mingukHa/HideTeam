@@ -18,6 +18,6 @@ MonoBehaviour:
     waitTime: 3
     TalkEvent: 0
   - actionType: 0
-    targetPosition: {x: -81, y: 0, z: 6}
+    targetPosition: {x: -80, y: 0, z: 8}
     waitTime: 0
     TalkEvent: 0
