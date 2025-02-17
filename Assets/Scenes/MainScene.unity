@@ -6800,11 +6800,6 @@ MonoBehaviour:
   dialogueText: {fileID: 0}
   converEvent: 0
   converEventFlags: 
-  playerDialogue: []
-  oldManDialogue: []
-  richManDialogue: []
-  AngryEvent1Dialogue: []
-  AngryEvent2Dialogue: []
 --- !u!1 &299125839
 GameObject:
   m_ObjectHideFlags: 0
@@ -6839,7 +6834,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 150, y: 0}
+  m_AnchoredPosition: {x: 142, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &299125841
@@ -15603,6 +15598,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2089819026}
     m_Modifications:
+    - target: {fileID: 662359770501003748, guid: 536aa32ba9b139c4c8e9fea2ae40da8d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 140
+      objectReference: {fileID: 0}
     - target: {fileID: 795205107955568327, guid: 536aa32ba9b139c4c8e9fea2ae40da8d, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -15758,6 +15757,10 @@ PrefabInstance:
     - target: {fileID: 8778960409873296356, guid: 536aa32ba9b139c4c8e9fea2ae40da8d, type: 3}
       propertyPath: m_SizeDelta.y
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 9042678968114531315, guid: 536aa32ba9b139c4c8e9fea2ae40da8d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 142
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -17221,7 +17224,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 150, y: 0}
+  m_AnchoredPosition: {x: 142, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &806944647
@@ -22252,11 +22255,6 @@ MonoBehaviour:
   dialogueText: {fileID: 0}
   converEvent: 0
   converEventFlags: 
-  playerDialogue: []
-  oldManDialogue: []
-  richManDialogue: []
-  AngryEvent1Dialogue: []
-  AngryEvent2Dialogue: []
 --- !u!54 &1124407230
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -35999,7 +35997,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 150, y: 0}
+  m_AnchoredPosition: {x: 142, y: 0}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2108057527
@@ -37881,11 +37879,6 @@ MonoBehaviour:
   dialogueText: {fileID: 0}
   converEvent: 0
   converEventFlags: 
-  playerDialogue: []
-  oldManDialogue: []
-  richManDialogue: []
-  AngryEvent1Dialogue: []
-  AngryEvent2Dialogue: []
 --- !u!114 &8540019948712011051
 MonoBehaviour:
   m_ObjectHideFlags: 0

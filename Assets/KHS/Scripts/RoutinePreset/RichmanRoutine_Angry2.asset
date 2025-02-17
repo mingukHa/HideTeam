@@ -14,11 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions:
   - actionType: 0
-    targetPosition: {x: -76.6, y: 0, z: -10.78}
+    targetPosition: {x: -50, y: 0, z: -4.5}
+    waitTime: 0
+  - actionType: 0
+    targetPosition: {x: -64, y: 0, z: 4}
     waitTime: 0
   - actionType: 1
-    targetPosition: {x: -76.6, y: 0, z: -10.78}
-    waitTime: 15
+    targetPosition: {x: -64, y: 0, z: 4}
+    waitTime: 3
+  - actionType: 3
+    targetPosition: {x: -64, y: 0, z: 4}
+    waitTime: 3
   - actionType: 0
-    targetPosition: {x: -64.556, y: 0, z: 4.093}
-    waitTime: 15
+    targetPosition: {x: -82, y: 0, z: 6}
+    waitTime: 0
+  - actionType: 1
+    targetPosition: {x: -82, y: 0, z: 6}
+    waitTime: 20
