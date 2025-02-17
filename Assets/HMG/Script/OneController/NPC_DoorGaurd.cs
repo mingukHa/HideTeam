@@ -8,17 +8,40 @@ using UnityEngine.AI;
 public class NPC_DoorGaurd : NPCFSM
 {
 
-
+    
     public GameObject npcchatbox; //NPC의 메인 채팅 최상위
-    private string npc = "NPC4";
-
+    private string npc = "NPC1";
+    public SphereCollider sphereCollider;
     private void OnEnable()
     {
-       // EventManager.Subscribe(GameEventType.Garbage, StartGarbage);
+       EventManager.Subscribe(GameEventType.NPCKill, StartNPCKill);
        
     }
 
+    private void StartNPCKill()
+    {
+        
+        agent.SetDestination(player.position);
+        ChangeState(State.Run);
+        sphereCollider.radius = 3.5f;
+        StartCoroutine(CheckArrival());
 
+    }
+
+    private IEnumerator CheckArrival()
+    {
+        while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
+        {
+            yield return null; 
+        }
+
+        Debug.Log("NPC가 도착했습니다!");
+        StartCoroutine(TalkView());
+        animator.SetTrigger("Talk");
+        chat.LoadNPCDialogue(npc, 1);
+        yield return new WaitForSeconds(2f);
+        EventManager.Trigger(GameEventType.GameOver);
+    }
 
     private void StopNpc()
     {
@@ -83,9 +106,9 @@ public class NPC_DoorGaurd : NPCFSM
             ChangeState(State.Talk);
             chat.LoadNPCDialogue(npc, 0);
         }
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            isDead = true;
+            chat.LoadNPCDialogue(npc, 1);
         }
 
     }

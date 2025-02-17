@@ -49,8 +49,6 @@ public abstract class NPCController : MonoBehaviour
     public int converEvent = 0;
     public List<GameEventType> converEventFlags = new List<GameEventType>();
 
-    public Queue<string> dialogue;
-
 
     private void Awake()
     {
@@ -176,29 +174,6 @@ public abstract class NPCController : MonoBehaviour
             Debug.Log("의심 상황 미발각");
         }
         return isDetected;
-    }
-
-    public void ShowDialogue(string text, System.Action onFinished)
-    {
-        StartCoroutine(TypeDialogue(text, onFinished));
-    }
-    private IEnumerator TypeDialogue(string text, System.Action onFinished)
-    {
-        dialogueText.text = "";
-        foreach (char c in text)
-        {
-            dialogueText.text += c;
-            yield return new WaitForSeconds(0.05f); // 타이핑 효과
-        }
-        yield return new WaitForSeconds(1f); // 잠시 대기
-        Debug.Log(text);
-        onFinished?.Invoke(); // 대사 완료 이벤트 실행
-    }
-    public void TriggerScriptEvent()
-    {
-        EventManager.Trigger(converEventFlags[converEvent]);
-        ++converEvent;
-        Debug.Log("이벤트 발생!");
     }
 
     public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)

@@ -19,8 +19,12 @@ public class NamedController : NPCController
     {
         stateMachine.ChangeState(new RoutineState(this));
     }
-    public void TellerBehavior()
+    public void RichmanGone()
     {
-        
+        stateMachine.ChangeState(new GoneState(this));
+    }
+    public void RichmanAngry1()
+    {
+        stateMachine.ChangeState(new Angry1State(this));
     }
 }

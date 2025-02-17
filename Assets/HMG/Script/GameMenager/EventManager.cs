@@ -9,7 +9,7 @@ public class EventManager : MonoBehaviour
         //공통 상시 동작 이벤트
         SuspiciousDetected,     // 수상한 상황 발견
         PlayerEnterBank,        // 플레이어 은행 진입
-        TellerInteract,         // 텔러 상호작용
+        PlayerTalkTeller,         // 텔러 상호작용
 
         //공통 루트 부분
         Carkick,//자동차 발차기
@@ -18,6 +18,7 @@ public class EventManager : MonoBehaviour
 
         TellerTalk, //텔러에게 말걸기
         RichmanAngry, //부자 화남
+        RichmanTalkTeller,  // 부자가 텔러에게 말걸기
         //
         OldManHelp,//노인 도와줌
         OldManoutside,//노인 안도와줌
@@ -34,7 +35,9 @@ public class EventManager : MonoBehaviour
         RichKill, //부자를 제압할 때 청소부가 로비에 있으면 달려가는 이벤트
         //메인 루트
         //bankemployee, //안내데스크 10초간 대기하는 이벤트
-        GameOver //게임 오버 시 동작하는 이벤트
+        GameOver, //게임 오버 시 동작하는 이벤트
+        //
+        NPCKill //NPC죽이면 호출
     }
 
     private static Dictionary<GameEventType, Action> eventDictionary = new Dictionary<GameEventType, Action>();
@@ -44,12 +47,12 @@ public class EventManager : MonoBehaviour
         if (!eventDictionary.ContainsKey(eventType))
         {
             eventDictionary[eventType] = listener;
-            Debug.Log($"{eventType} : 이벤트 추가됨!");
+            //Debug.Log($"{eventType} : 이벤트 추가됨!");
         }
         else
         {
             eventDictionary[eventType] += listener;
-            Debug.Log($"{eventType} : 이벤트 구독자가 추가됨!");
+            //Debug.Log($"{eventType} : 이벤트 구독자가 추가됨!");
         }
     }
 
@@ -58,12 +61,12 @@ public class EventManager : MonoBehaviour
         if (eventDictionary.ContainsKey(eventType))
         {
             eventDictionary[eventType] -= listener;
-            Debug.Log($"{eventType} : 이벤트 구독 해제됨!");
+           // Debug.Log($"{eventType} : 이벤트 구독 해제됨!");
 
             if (eventDictionary[eventType] == null)
             {
                 eventDictionary.Remove(eventType);
-                Debug.Log($"{eventType} : 이벤트 삭제됨! 구독자 없음");
+                //Debug.Log($"{eventType} : 이벤트 삭제됨! 구독자 없음");
             }
         }
     }

@@ -15,6 +15,7 @@ public class NPCChatTest : MonoBehaviour
     {
         dbReference = FirebaseDatabase.DefaultInstance.RootReference;
         chatColider = GetComponent<BoxCollider>();
+        
     }
 
    

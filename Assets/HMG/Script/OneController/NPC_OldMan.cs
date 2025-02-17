@@ -12,7 +12,7 @@ public class NPC_OldMan : NPCFSM
 {
     
     public GameObject npcchatbox; //NPC의 메인 채팅 최상위
-    private string npc = "NPC3";
+    private string npc = "OldMan";
     public Transform OldManPos; //이동 할 위치
     public Transform NewManPos;
     public TextMeshPro TextChange;
@@ -95,6 +95,8 @@ public class NPC_OldMan : NPCFSM
         if (!isDead && other.CompareTag("Player"))
         {
             chat.LoadNPCDialogue(npc, 0);
+            new WaitForSeconds(1.5f);
+            chat.LoadNPCDialogue(npc, 1);
         }
     }
 
@@ -105,7 +107,7 @@ public class NPC_OldMan : NPCFSM
             // 키 입력을 지속적으로 체크
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
-                chat.LoadNPCDialogue(npc, 1);
+                chat.LoadNPCDialogue(npc, 3);
                 EventManager.Trigger(GameEventType.OldManHelp);
                 returnManager.StartCoroutine(returnManager.SaveAllNPCData(3f));
                 StopCoroutine(TalkView());
@@ -116,7 +118,7 @@ public class NPC_OldMan : NPCFSM
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
-                chat.LoadNPCDialogue(npc, 2);
+                chat.LoadNPCDialogue(npc, 7);
                 EventManager.Trigger(GameEventType.OldManoutside);
                 returnManager.StartCoroutine(returnManager.SaveAllNPCData(3f));
                 StopCoroutine(TalkView());

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using static EventManager;
+using UnityEngine.InputSystem;
 
 public class ScreenshotViewer : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class ScreenshotViewer : MonoBehaviour
     public float displayTime = 1.0f;
     public GameObject Post;
     public GameObject quad;
-
+    public GameObject efKey;
     private void OnEnable()
     {
         EventManager.Subscribe(GameEventType.GameOver, gameover);
@@ -19,9 +20,9 @@ public class ScreenshotViewer : MonoBehaviour
     private void gameover()
     {
         Debug.Log("게임이 오버됨");
-        Time.timeScale = 0f;
         quad.SetActive(true);
         Post.SetActive(true);
+        efKey.SetActive(false);
         StartSlideshow();
     }
     void Start()
@@ -37,8 +38,7 @@ public class ScreenshotViewer : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            quad.SetActive(true);
-            Post.SetActive(true);
+            
             StartSlideshow();
         }
     }
@@ -57,18 +57,21 @@ public class ScreenshotViewer : MonoBehaviour
 
     private IEnumerator ShowScreenshots()
     {
-        List<Texture2D> tempScreenshots = new List<Texture2D>(ScreenshotManager.Instance.screenshots); // 리스트 복사
+        List<Texture2D> tempScreenshots = new List<Texture2D>(ScreenshotManager.Instance.screenshots);
 
-        for (int i = tempScreenshots.Count - 1; i >= 0; i--) // 역순 재생
+        for (int i = tempScreenshots.Count - 1; i >= 0; i--)
         {
             if (quadMaterial != null)
             {
-                quadMaterial.mainTexture = tempScreenshots[i]; // Quad의 Material 업데이트
+                quadMaterial.mainTexture = tempScreenshots[i];
             }
 
+            
             yield return new WaitForSecondsRealtime(displayTime);
         }
 
         SceneManager.LoadScene("MainScene");
+        
     }
+
 }

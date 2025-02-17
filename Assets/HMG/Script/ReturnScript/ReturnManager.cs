@@ -47,7 +47,7 @@ public class ReturnManager : MonoBehaviour
                 if (!npcSceneStacks.ContainsKey(npc))
                 {
                     npcSceneStacks[npc] = new SceneDataStack(); // NPC별로 스택 생성
-                    Debug.Log($"NPC 스택 갯수: {npcSceneStacks.Count}");
+                    //Debug.Log($"NPC 스택 갯수: {npcSceneStacks.Count}");
                 }
 
                 Vector3 npcPosition = npc.transform.position;
