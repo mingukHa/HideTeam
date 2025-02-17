@@ -22,6 +22,13 @@ public class NPC_CleanMan : NPCFSM
         EventManager.Subscribe(GameEventType.RichHide, StartRichHide);
         EventManager.Subscribe(GameEventType.RichNoHide, StartRichNoHide);
     }
+    private void OnDisable()
+    {
+        EventManager.Unsubscribe(GameEventType.Garbage, StartGarbage);
+        EventManager.Unsubscribe(GameEventType.RichKill, StartRichKill);
+        EventManager.Unsubscribe(GameEventType.RichHide, StartRichHide);
+        EventManager.Unsubscribe(GameEventType.RichNoHide, StartRichNoHide);
+    }
     private void StartRichNoHide()
     {
         isHide = false;
@@ -70,6 +77,7 @@ public class NPC_CleanMan : NPCFSM
         
         agent = GetComponent<NavMeshAgent>();
         NPCCollider = GetComponent<SphereCollider>();
+        
     }
 
     protected override void Update()

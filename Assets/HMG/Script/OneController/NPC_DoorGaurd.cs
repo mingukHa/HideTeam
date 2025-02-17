@@ -14,8 +14,12 @@ public class NPC_DoorGaurd : NPCFSM
     public SphereCollider sphereCollider;
     private void OnEnable()
     {
-       EventManager.Subscribe(GameEventType.NPCKill, StartNPCKill);
-       
+
+        EventManager.Subscribe(GameEventType.NPCKill, StartNPCKill);
+    }
+    private void OnDisable()
+    {
+        EventManager.Unsubscribe(GameEventType.NPCKill, StartNPCKill);
     }
 
     private void StartNPCKill()
@@ -60,6 +64,7 @@ public class NPC_DoorGaurd : NPCFSM
 
         agent = GetComponent<NavMeshAgent>();
         NPCCollider = GetComponent<SphereCollider>();
+        
     }
 
     protected override void Update()
