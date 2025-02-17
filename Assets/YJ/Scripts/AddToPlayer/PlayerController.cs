@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
     public Image rImage;    //R키 이미지
     public Slider rSlider;  //R키 게이지
 
-    public Image fImage;    //K키 이미지
+    public Image fImage;    //F키 이미지
 
     public GameObject E_Chat;
 
@@ -79,31 +79,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //    // 만약 other 오브젝트의 태그가 "NPC"가 아니면 반환 (실행 X)
-        //    if (!other.gameObject.CompareTag("NPC")) return;
-
-        //    NPCIdentifier npc = other.GetComponent<NPCIdentifier>();    
-        //    NPCFSM npcFSM = other.GetComponent<NPCFSM>(); // NPCFSM 가져오기
-
-        //    if (npcFSM != null && npcFSM.isDead)
-        //    {
-        //        Debug.Log("죽은 NPC와 상호작용");
-        //        // NPCIdentifier가 있는 오브젝트와 충돌 시, currentNPC 설정
-        //        eImage.gameObject.SetActive(true);
-        //        eSlider.gameObject.SetActive(true);
-        //        fImage.gameObject.SetActive(false);
-
-        //        if (npc != null)
-        //        {
-        //            currentNPC = npc;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        // NPC가 살아있을 때 fImage 활성화
-        //        fImage.gameObject.SetActive(true);
-        //        currentNPC = npc; // NPC를 currentNPC에 설정
-        //    }
         if (other.CompareTag("NPC"))
         {
             E_Chat.SetActive(true);
@@ -127,10 +102,10 @@ public class PlayerController : MonoBehaviour
     //실시간으로 UI가 변해야하므로 Stay로 변경
     private void OnTriggerStay(Collider other)
     {
-        // "NPC" 태그를 가진 오브젝트와만 처리
-        if (!other.gameObject.CompareTag("NPC")) return;
+        // "NPC", "Ragdoll" 태그를 가진 오브젝트와만 처리
+        if (!other.gameObject.CompareTag("NPC") && !other.gameObject.CompareTag("Ragdoll")) return;
 
-        NPCIdentifier npc = other.GetComponent<NPCIdentifier>();
+        NPCIdentifier npc = other.GetComponent<NPCIdentifier>();    //NPCIdentifier스크립트랑 작용
         NPCFSM npcFSM = other.GetComponent<NPCFSM>(); // NPCFSM 가져오기
 
         if (npc != null)
@@ -150,7 +125,7 @@ public class PlayerController : MonoBehaviour
 
         if (npcFSM != null)
         {
-            if (npcFSM.isDead)
+            if (npcFSM.isDead && npcFSM.isRagdollActivated)
             {
                 // 죽은 NPC와 상호작용 시 E키 활성화
                 E_Chat.gameObject.SetActive(false);
@@ -172,6 +147,11 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("NPC"))
         {
+            fImage.gameObject.SetActive(false);
+        }
+
+        if (other.CompareTag("NPC"))
+        {
             E_Chat.SetActive(false);
         }
 
@@ -186,25 +166,26 @@ public class PlayerController : MonoBehaviour
             trashBin = null;
         }
 
-        if (!other.gameObject.CompareTag("NPC")) return;
+        if (!other.gameObject.CompareTag("Ragdoll")) return;
+        {
+            //NPCFSM npcFSM = other.GetComponent<NPCFSM>();
 
-        //NPCFSM npcFSM = other.GetComponent<NPCFSM>();
-
-        //if (npcFSM != null && npcFSM.isDead)
-        //{
+            //if (npcFSM != null && npcFSM.isDead)
+            //{
             Debug.Log("죽은 NPC에서 멀어짐");
             eImage.gameObject.SetActive(false);
             eSlider.gameObject.SetActive(false);
-        //}
+            //}
 
-        // NPCIdentifier가 있는 오브젝트에서 벗어나면 currentNPC 해제
-        //if (other.GetComponent<NPCIdentifier>() == currentNPC)
-        //{
+            // NPCIdentifier가 있는 오브젝트에서 벗어나면 currentNPC 해제
+            //if (other.GetComponent<NPCIdentifier>() == currentNPC)
+            //{
             currentNPC = null;
-        //}
+            //}
 
-        // NPC가 떠나면 fImage 비활성화
-        fImage.gameObject.SetActive(false);
+            // NPC가 떠나면 fImage 비활성화
+            fImage.gameObject.SetActive(false);
+        }
     }
 
     private bool InputMouse(ref float _mouseX)
@@ -332,10 +313,18 @@ public class PlayerController : MonoBehaviour
             //NPC가 살아있을 때만 작동
             NPCFSM npcFSM = currentNPC.GetComponent<NPCFSM>();
 
-            if (npcFSM != null && !npcFSM.isDead)
+            if (npcFSM != null)
             {
-                // NPC 무력화 로직 추가
-                anim.SetTrigger("Neutralize");
+                // NPC가 죽었든 살아있든 F키를 누르면 바로 UI를 끄기
+                fImage.gameObject.SetActive(false);
+                E_Chat.gameObject.SetActive(false);
+
+                // 살아있는 NPC일 때만 무력화 로직 실행
+                if (!npcFSM.isDead)
+                {
+                    // NPC 무력화 로직 추가
+                    anim.SetTrigger("Neutralize");
+                }
             }
         }
 

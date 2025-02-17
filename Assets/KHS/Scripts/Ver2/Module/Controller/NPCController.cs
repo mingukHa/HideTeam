@@ -75,7 +75,8 @@ public abstract class NPCController : MonoBehaviour
         agent.angularSpeed = 200f;
         agent.stoppingDistance = 0.8f;
         UpdateTargetInfo();
-
+        foreach (string str in playerDialogue)
+            dialogue.Enqueue(str);
     }
     protected virtual void OnEnable()
     {
@@ -197,6 +198,7 @@ public abstract class NPCController : MonoBehaviour
             yield return new WaitForSeconds(0.05f); // 타이핑 효과
         }
         yield return new WaitForSeconds(1f); // 잠시 대기
+        Debug.Log(text);
         onFinished?.Invoke(); // 대사 완료 이벤트 실행
     }
     public void TriggerScriptEvent()
