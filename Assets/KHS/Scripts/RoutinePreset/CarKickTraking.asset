@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actions:
   - actionType: 1
-    targetPosition: {x: -57.062, y: 0, z: -10.61}
+    targetPosition: {x: 0, y: 0, z: 0}
     waitTime: 3
   - actionType: 2
     targetPosition: {x: -57.062, y: 0, z: -10.61}

@@ -9,12 +9,15 @@ public class EventManager : MonoBehaviour
         //공통 상시 동작 이벤트
         SuspiciousDetected,     // 수상한 상황 발견
         PlayerEnterBank,        // 플레이어 은행 진입
+        TellerInteract,         // 텔러 상호작용
 
         //공통 루트 부분
         Carkick,//자동차 발차기
         //
         Garbage,//쓰레기장 헤집기
-        
+
+        TellerTalk, //텔러에게 말걸기
+        RichmanAngry, //부자 화남
         //
         OldManHelp,//노인 도와줌
         OldManoutside,//노인 안도와줌

@@ -5,13 +5,11 @@ public class EventWaitState : NPCState
 {
     public EventWaitState(NPCController npc) : base(npc)
     {
-        
     }
     public override void Enter()
     {
         Debug.Log($"{_npcController.npcName}이 이벤트를 감지하여 3초 대기 시작");
         _npcController.routineInvoker.RoutineChange(1);
-        _npcController.routineInvoker.ExcuteRoutine();
     }
 
     public override void Update()

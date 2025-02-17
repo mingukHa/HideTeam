@@ -14,7 +14,7 @@ public class NPCFSM : MonoBehaviour
     public bool isDead = false; //죽음 상태
     private bool isTalking = false; //대화 상태
     //private bool isText = false; //죽으면 채팅 끄기 
-    protected bool isRagdollActivated = false; // 레그돌 활성화 여부 확인용
+    public bool isRagdollActivated = false; // 레그돌 활성화 여부 확인용 // PlayerController에서 사용하기 위해 public으로 수정
     protected Quaternion initrotation; //기본 위치
     private NPCChatTest NPCChatTest; //NPC대화 불러오는 곳
     public SphereCollider NPCCollider; //NPC 상호작용 콜라이더
@@ -23,7 +23,7 @@ public class NPCFSM : MonoBehaviour
     [SerializeField]
     protected GameObject select; //캐릭터 말풍선
     private bool isPlayerNearby = false;
-    public ReturnManager returnManager;
+    public ReturnManagerinit returnManager;
     protected NPCChatTest chat;
     protected virtual void Start()
     {
@@ -132,6 +132,12 @@ public class NPCFSM : MonoBehaviour
         SetRagdollState(true); //  물리 적용
 
         isRagdollActivated = true; //  이미 실행되었음을 저장
+
+        //해당 오브젝트의 자식까지 전부 태그를 Ragdoll로 바꿈
+        foreach (Transform child in GetComponentsInChildren<Transform>())
+        {
+            child.gameObject.tag = "Ragdoll";
+        }
     }
 
     private void SetRagdollState(bool state)
@@ -139,7 +145,7 @@ public class NPCFSM : MonoBehaviour
         Debug.Log($" 레그돌 상태 변경: {(state ? "활성화" : "비활성화")}");
         foreach (var rb in rigidbodies)
         {
-            gameObject.tag = "Ragdoll";
+            //gameObject.tag = "Ragdoll";
             rb.isKinematic = !state; //  Rigidbody 물리 활성화
         }
     }
@@ -207,6 +213,7 @@ public class NPCFSM : MonoBehaviour
                 AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
                 if (stateInfo.IsName("Dead") && stateInfo.normalizedTime >= 1.0f)
                 {
+                    Debug.Log("NPC 죽음");
                     ActivateRagdoll();
                     isRagdollActivated = true;
                 }
