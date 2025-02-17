@@ -103,7 +103,7 @@ public class RagdollDisposer : MonoBehaviour
     {
         float duration = 1f;
         float elapsed = 0f;
-        Quaternion startRotation = lid.localRotation;
+        Quaternion startRotation = lid.rotation;
 
         while (elapsed < duration)
         {

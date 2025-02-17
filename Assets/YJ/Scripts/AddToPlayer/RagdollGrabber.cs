@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class RagdollGrabber : MonoBehaviour
 {
-    public Transform ragdollHoldPoint; // Ragdoll을 붙잡을 위치 (예: 플레이어 앞쪽)
-    public Transform leftHandIKTarget; // 왼손 IK 타겟
-    public Transform rightHandIKTarget; // 오른손 IK 타겟
-    private float ikLerpSpeed = 10f; // IK 보간 속도
+    public Transform ragdollHoldPoint;
+    public Transform leftHandIKTarget;
+    public Transform rightHandIKTarget;
+    private float ikLerpSpeed = 10f;
 
     private Animator anim;
     private ConfigurableJoint joint;
-    //[HideInInspector]
+    [HideInInspector]
     public Rigidbody ragdollRigidbody;
-    private Transform rootTransform; // NPC 최상위 오브젝트의 Transform
-    private Collider[] rootColliders; // NPC 최상위 오브젝트의 Collider 목록
-    //[HideInInspector]
+    private Transform rootTransform;
+    private Collider[] rootColliders;
+    [HideInInspector]
     public bool isGrabbing = false;
 
     private Vector3 leftHandIKPosition;
@@ -21,12 +21,13 @@ public class RagdollGrabber : MonoBehaviour
     private Vector3 rightHandIKPosition;
     private Quaternion rightHandIKRotation;
 
+    private Rigidbody rootRigidbody;
+    private ConfigurableJoint rootJoint;
 
     private void Start()
     {
         anim = GetComponent<Animator>();
 
-        // 손의 초기 위치와 회전 저장
         leftHandIKPosition = anim.GetIKPosition(AvatarIKGoal.LeftHand);
         leftHandIKRotation = anim.GetIKRotation(AvatarIKGoal.LeftHand);
         rightHandIKPosition = anim.GetIKPosition(AvatarIKGoal.RightHand);
@@ -50,6 +51,14 @@ public class RagdollGrabber : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (isGrabbing && rootTransform != null)
+        {
+            rootTransform.position = ragdollRigidbody.position;
+        }
+    }
+
     public bool IsHoldingRagdoll(Transform ragdoll)
     {
         return isGrabbing && rootTransform == ragdoll;
@@ -57,11 +66,10 @@ public class RagdollGrabber : MonoBehaviour
 
     private void TryGrabRagdoll()
     {
-        // 가까운 Ragdoll의 Rigidbody 찾기
         Collider[] colliders = Physics.OverlapSphere(transform.position, 1f);
         foreach (var col in colliders)
         {
-            if (col.attachedRigidbody != null && col.attachedRigidbody.CompareTag("Ragdoll")) // Ragdoll 태그를 비교해서 래그돌 판정
+            if (col.attachedRigidbody != null && col.attachedRigidbody.CompareTag("Ragdoll"))
             {
                 ragdollRigidbody = col.attachedRigidbody;
                 AttachRagdoll();
@@ -69,56 +77,81 @@ public class RagdollGrabber : MonoBehaviour
             }
         }
 
-        // 주변에 Ragdoll이 없는 경우
         isGrabbing = false;
         anim.SetBool("isGrabbingRagdoll", false);
     }
 
     private void AttachRagdoll()
     {
-        // 잡은 상태
         isGrabbing = true;
+        rootTransform = ragdollRigidbody.transform.root;
 
-        // Ragdoll의 루트 오브젝트 찾기
-        rootTransform = ragdollRigidbody.transform.root; // 최상위 부모 찾기
-
-        // 부모 오브젝트의 모든 Collider 저장 및 비활성화
-        rootColliders = rootTransform.GetComponents<Collider>();
+        rootColliders = rootTransform.GetComponentsInChildren<Collider>();
         foreach (var col in rootColliders)
         {
             col.enabled = false;
         }
 
-        //ragdollRigidbody.position = handIKTarget.position;
+        // 루트 Rigidbody 추가
+        if (!rootTransform.TryGetComponent(out rootRigidbody))
+        {
+            rootRigidbody = rootTransform.gameObject.AddComponent<Rigidbody>();
+            rootRigidbody.mass = 10;
+            rootRigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+        }
 
-        // HoldPoint 위치로 잡은 Ragdoll 이동
-        ragdollRigidbody.MovePosition(ragdollHoldPoint.position);
-        ragdollRigidbody.MoveRotation(ragdollHoldPoint.rotation);
+        // 루트 오브젝트 Rigidbody kinematic 활성화
+        if (rootRigidbody != null)
+        {
+            rootRigidbody.isKinematic = true;
+        }
 
-        // Configurable Joint 추가
+        // HoldPoint로 이동
+        rootTransform.position = ragdollHoldPoint.position;
+        ragdollRigidbody.position = ragdollHoldPoint.position;
+
+        // Configurable Joint 설정
         joint = ragdollRigidbody.gameObject.AddComponent<ConfigurableJoint>();
         joint.connectedBody = ragdollHoldPoint.GetComponent<Rigidbody>();
 
-        joint.xMotion = ConfigurableJointMotion.Locked;
-        joint.yMotion = ConfigurableJointMotion.Locked;
-        joint.zMotion = ConfigurableJointMotion.Locked;
+        joint.xMotion = ConfigurableJointMotion.Limited;
+        joint.yMotion = ConfigurableJointMotion.Limited;
+        joint.zMotion = ConfigurableJointMotion.Limited;
 
-        // 래그돌이 손을 따라오게 하는 힘 적용
-        JointDrive drive = new JointDrive();
-        drive.positionSpring = 200; // 손을 따라오는 힘(낮으면 더 부드럽게 끌림)
-        drive.positionDamper = 50;
-        drive.maximumForce = 1000;
+        JointDrive drive = new JointDrive
+        {
+            positionSpring = 200,
+            positionDamper = 50,
+            maximumForce = 1000
+        };
 
         joint.xDrive = drive;
         joint.yDrive = drive;
         joint.zDrive = drive;
+
+        // 루트와 래그돌을 연결하는 조인트 추가
+        rootJoint = rootTransform.gameObject.AddComponent<ConfigurableJoint>();
+        rootJoint.connectedBody = ragdollRigidbody;
+
+        rootJoint.xMotion = ConfigurableJointMotion.Limited;
+        rootJoint.yMotion = ConfigurableJointMotion.Limited;
+        rootJoint.zMotion = ConfigurableJointMotion.Limited;
+        rootJoint.angularXMotion = ConfigurableJointMotion.Limited;
+        rootJoint.angularYMotion = ConfigurableJointMotion.Limited;
+        rootJoint.angularZMotion = ConfigurableJointMotion.Limited;
+        rootJoint.breakForce = Mathf.Infinity; // 강한 힘으로 인해 끊어지지 않도록 설정
     }
 
     public void ReleaseRagdoll()
     {
         isGrabbing = false;
 
-        // 최상위 부모 오브젝트의 Collider 다시 활성화
+        // 루트 오브젝트 Rigidbody kinematic 비활성화
+        if (rootRigidbody != null)
+        {
+            rootRigidbody.isKinematic = false;
+        }
+
         if (rootColliders != null)
         {
             foreach (var col in rootColliders)
@@ -127,25 +160,34 @@ public class RagdollGrabber : MonoBehaviour
             }
         }
 
-        // Configurable Joint 삭제
         if (joint != null)
         {
             Destroy(joint);
             joint = null;
         }
 
+        if (rootJoint != null)
+        {
+            Destroy(rootJoint);
+            rootJoint = null;
+        }
+
+        if (rootRigidbody != null)
+        {
+            Destroy(rootRigidbody);
+            rootRigidbody = null;
+        }
+
         ragdollRigidbody = null;
-        rootTransform = null; // 루트 Transform 초기화
+        rootTransform = null;
     }
 
-    // IK 적용
     private void OnAnimatorIK(int layerIndex)
     {
         if (anim)
         {
             if (isGrabbing)
             {
-                // Lerp & Slerp를 이용한 부드러운 IK 이동
                 leftHandIKPosition = Vector3.Lerp(leftHandIKPosition,
                     leftHandIKTarget.position, Time.deltaTime * ikLerpSpeed);
                 leftHandIKRotation = Quaternion.Slerp(leftHandIKRotation,

@@ -686,8 +686,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 2.1000009, y: 2.7853692, z: 1.3107533}
-  m_Center: {x: -0.00000011920929, y: -0.87506723, z: 0.83}
+  m_Size: {x: 2.1000009, y: 3.2724965, z: 1.3107533}
+  m_Center: {x: -0.00000011920929, y: -1.1186309, z: 0.83}
 --- !u!114 &2273127942045726320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -700,8 +700,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b79a62534598a14bb727f4dfc0d4138, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  disposalPoint: {fileID: 7225391458129851057}
   lid: {fileID: 9124522518612087084}
+  lidOpenRotation: {x: -0.000000026609808, y: -0.7933533, z: -0.6087614, w: 0.000000034678575}
 --- !u!1 &7897151167552254032
 GameObject:
   m_ObjectHideFlags: 0
