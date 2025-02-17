@@ -57,12 +57,12 @@ public class EventManager : MonoBehaviour
         if (!eventDictionary.ContainsKey(eventType))
         {
             eventDictionary[eventType] = listener;
-            //Debug.Log($"{eventType} : 이벤트 추가됨!");
+            Debug.Log($"{eventType} : 이벤트 추가됨!");
         }
         else
         {
             eventDictionary[eventType] += listener;
-            //Debug.Log($"{eventType} : 이벤트 구독자가 추가됨!");
+            Debug.Log($"{eventType} : 이벤트 구독자가 추가됨!");
         }
     }
 
@@ -71,12 +71,12 @@ public class EventManager : MonoBehaviour
         if (eventDictionary.ContainsKey(eventType))
         {
             eventDictionary[eventType] -= listener;
-           // Debug.Log($"{eventType} : 이벤트 구독 해제됨!");
+            Debug.Log($"{eventType} : 이벤트 구독 해제됨!");
 
             if (eventDictionary[eventType] == null)
             {
                 eventDictionary.Remove(eventType);
-                //Debug.Log($"{eventType} : 이벤트 삭제됨! 구독자 없음");
+                Debug.Log($"{eventType} : 이벤트 삭제됨! 구독자 없음");
             }
         }
     }

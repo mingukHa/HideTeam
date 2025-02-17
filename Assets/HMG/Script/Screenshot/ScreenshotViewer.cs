@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using static EventManager;
 using UnityEngine.InputSystem;
 using System;
+using UnityEngine.AI;
 
 public class ScreenshotViewer : MonoBehaviour
 {
@@ -64,7 +65,6 @@ public class ScreenshotViewer : MonoBehaviour
     private IEnumerator ShowScreenshots()
     {
         List<Texture2D> tempScreenshots = new List<Texture2D>(ScreenshotManager.Instance.screenshots);
-        StartCoroutine(fade.FadeIn(3f));
         for (int i = tempScreenshots.Count - 1; i >= 0; i--)
         {
             if (quadMaterial != null)
@@ -75,7 +75,16 @@ public class ScreenshotViewer : MonoBehaviour
             
             yield return new WaitForSecondsRealtime(displayTime);
         }
+        yield return new WaitForSeconds(0.5f);  // NavMesh 데이터가 로드될 시간 확보
 
+        NavMeshAgent agent = FindObjectOfType<NavMeshAgent>();
+        if (agent != null)
+        {
+            agent.enabled = false;
+            yield return new WaitForSeconds(0.1f);
+            agent.enabled = true;
+            Debug.Log("NavMeshAgent 재활성화 완료.");
+        }
         SceneManager.LoadScene("MainScene");
         
     }
