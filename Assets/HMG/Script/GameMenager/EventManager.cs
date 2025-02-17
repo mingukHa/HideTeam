@@ -33,6 +33,8 @@ public class EventManager : MonoBehaviour
         RichNoHide, //리치 암살 후 숨기지 못함
         //플랜 a부분
         RichKill, //부자를 제압할 때 청소부가 로비에 있으면 달려가는 이벤트
+        
+        RichAngrytimeup,    //Angry1루트 시간 종료 후 바로 발동
         //메인 루트
         //bankemployee, //안내데스크 10초간 대기하는 이벤트
         GameOver, //게임 오버 시 동작하는 이벤트
