@@ -3210,7 +3210,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b203af8ff756a439c7d57e6da30e8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
 --- !u!224 &388219929 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8300065662117746328, guid: 90761634c50ae1b4da16c85e5f8d45ab, type: 3}
@@ -13279,7 +13278,7 @@ MonoBehaviour:
   targetVec: []
   agent: {fileID: 0}
   animator: {fileID: 0}
-  eventFlags: 0200000007000000
+  eventFlags: 0500000007000000
   actionNames:
   - TellerInteract
   - TellerGone
@@ -13292,6 +13291,8 @@ MonoBehaviour:
   isPlayer: 0
   isOLDMan: 0
   isInterPlayer: 0
+  convEnvList: 1500000016000000
+  convEnvIdx: 0
 --- !u!114 &889467897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13305,7 +13306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcRoutines:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: f2416564047331a429a9286a7e4889e6, type: 2}
   - {fileID: 11400000, guid: 5ad498835beb2964cb52166753eb6648, type: 2}
   curRoutineIdx: 0
 --- !u!114 &889467898
@@ -13644,10 +13645,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1371b659118044bb0487806a1cff6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fade: {fileID: 0}
   quadRenderer: {fileID: 0}
   displayTime: 1
   Post: {fileID: 0}
   quad: {fileID: 0}
+  efKey: {fileID: 0}
+  chat: {fileID: 0}
+  GameOverText: {fileID: 0}
 --- !u!114 &974037215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15698,7 +15703,7 @@ Transform:
   m_GameObject: {fileID: 1256051431}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -64.46, y: 0.5, z: 10.671}
+  m_LocalPosition: {x: -64.416, y: 0.5, z: 6.783}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -20351,6 +20356,7 @@ MonoBehaviour:
   select: {fileID: 1819401094}
   returnManager: {fileID: 2007657856}
   npcchatbox: {fileID: 317189547}
+  sphereCollider: {fileID: 0}
 --- !u!114 &1557606062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20893,6 +20899,7 @@ GameObject:
   - component: {fileID: 1618075723}
   - component: {fileID: 1618075724}
   - component: {fileID: 1618075725}
+  - component: {fileID: 1618075726}
   m_Layer: 0
   m_Name: Teller2_Collider
   m_TagString: Untagged
@@ -20973,6 +20980,33 @@ MonoBehaviour:
   m_IgnoreFromBuild: 1
   m_ApplyToChildren: 1
   m_AffectedAgents: ffffffff
+--- !u!54 &1618075726
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618075721}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1631526044
 GameObject:
   m_ObjectHideFlags: 0
@@ -24756,10 +24790,11 @@ MonoBehaviour:
   targetVec: []
   agent: {fileID: 0}
   animator: {fileID: 0}
-  eventFlags: 0100000007000000
+  eventFlags: 010000000700000005000000
   actionNames:
   - PlayerEnter
   - RichmanGone
+  - RichmanAngry1
   dialogueText: {fileID: 0}
   converEvent: 0
   converEventFlags: 
@@ -24777,7 +24812,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcRoutines:
   - {fileID: 11400000, guid: 8d3952e3a3cdf3641b5793c1d85bb1ec, type: 2}
+  - {fileID: 11400000, guid: eaec670bc54e5284796e8d9a150e4512, type: 2}
   - {fileID: 11400000, guid: 43229ab10a1ad4341857d10f6bbb6de1, type: 2}
+  - {fileID: 11400000, guid: 7acb7aedee7db984d8d85130e6183293, type: 2}
   curRoutineIdx: 0
 --- !u!114 &8540019948712011052
 MonoBehaviour:

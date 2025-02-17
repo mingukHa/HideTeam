@@ -21,8 +21,8 @@ public class EventTriggerManager : MonoBehaviour
         GameEventType.GameOver,
         GameEventType.RichHide,
         GameEventType.RichNoHide,
-        GameEventType.NPCKill
-
+        GameEventType.NPCKill,
+        GameEventType.OldManGotoTeller
     };
 
     private void OnEnable()

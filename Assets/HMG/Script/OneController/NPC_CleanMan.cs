@@ -32,7 +32,7 @@ public class NPC_CleanMan : NPCFSM
     }
     private void StartGarbage()
     {
-        agent.speed = 3f;
+        //agent.speed = 3f;
         GarbageTrue = true;
         Debug.Log("청소부 개 빡쳐서 달려오는 중");
         agent.SetDestination(GarbagePos.transform.position);
@@ -54,6 +54,7 @@ public class NPC_CleanMan : NPCFSM
     private void StopNpc()
     {
         StopCoroutine(TalkView());
+        chat.LoadNPCDialogue("NULL", 0);
         transform.rotation = initrotation;       
         NPCCollider.radius = 0.01f;
         animator.SetTrigger("Idel");

@@ -22,6 +22,7 @@ public class EventManager : MonoBehaviour
         //
         OldManHelp,//노인 도와줌
         OldManoutside,//노인 안도와줌
+        OldManGotoTeller, //노인이 텔러에게 감
         //
         plainclothespoliceTalk, //사복경찰에게 말을 검
         plainclothespoliceNoTalk, //사복경찰에게 말을 안검
@@ -39,7 +40,14 @@ public class EventManager : MonoBehaviour
         //bankemployee, //안내데스크 10초간 대기하는 이벤트
         GameOver, //게임 오버 시 동작하는 이벤트
         //
-        NPCKill //NPC죽이면 호출
+        NPCKill, //NPC죽이면 호출
+
+        Conversation1,
+        Conversation2,
+        Conversation3,
+        Conversation4,
+        Conversation5,
+        Conversation6
     }
 
     private static Dictionary<GameEventType, Action> eventDictionary = new Dictionary<GameEventType, Action>();
@@ -49,12 +57,12 @@ public class EventManager : MonoBehaviour
         if (!eventDictionary.ContainsKey(eventType))
         {
             eventDictionary[eventType] = listener;
-            //Debug.Log($"{eventType} : 이벤트 추가됨!");
+            Debug.Log($"{eventType} : 이벤트 추가됨!");
         }
         else
         {
             eventDictionary[eventType] += listener;
-            //Debug.Log($"{eventType} : 이벤트 구독자가 추가됨!");
+            Debug.Log($"{eventType} : 이벤트 구독자가 추가됨!");
         }
     }
 
@@ -63,12 +71,12 @@ public class EventManager : MonoBehaviour
         if (eventDictionary.ContainsKey(eventType))
         {
             eventDictionary[eventType] -= listener;
-           // Debug.Log($"{eventType} : 이벤트 구독 해제됨!");
+            Debug.Log($"{eventType} : 이벤트 구독 해제됨!");
 
             if (eventDictionary[eventType] == null)
             {
                 eventDictionary.Remove(eventType);
-                //Debug.Log($"{eventType} : 이벤트 삭제됨! 구독자 없음");
+                Debug.Log($"{eventType} : 이벤트 삭제됨! 구독자 없음");
             }
         }
     }
