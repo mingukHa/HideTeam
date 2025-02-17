@@ -12910,7 +12910,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.1
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 26c5d03a117e1b24ba8e5972af24f145, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: b803814a8f73b4d42b19954c1a4f29e0, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &836063070
 Transform:
@@ -13558,10 +13558,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c1371b659118044bb0487806a1cff6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  displayImage: {fileID: 1167950602}
+  quadRenderer: {fileID: 0}
   displayTime: 1
-  display: {fileID: 0}
   Post: {fileID: 0}
+  quad: {fileID: 0}
 --- !u!114 &974037215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20803,6 +20803,7 @@ GameObject:
   - component: {fileID: 1618075722}
   - component: {fileID: 1618075723}
   - component: {fileID: 1618075724}
+  - component: {fileID: 1618075725}
   m_Layer: 0
   m_Name: Teller2_Collider
   m_TagString: Untagged
@@ -20863,6 +20864,26 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1618075725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618075721}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SerializedVersion: 0
+  m_OverrideArea: 0
+  m_Area: 0
+  m_OverrideGenerateLinks: 0
+  m_GenerateLinks: 0
+  m_IgnoreFromBuild: 1
+  m_ApplyToChildren: 1
+  m_AffectedAgents: ffffffff
 --- !u!1 &1631526044
 GameObject:
   m_ObjectHideFlags: 0
