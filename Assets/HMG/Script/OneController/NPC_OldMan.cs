@@ -109,6 +109,7 @@ public class NPC_OldMan : NPCFSM
                 EventManager.Trigger(GameEventType.OldManHelp);
                 returnManager.StartCoroutine(returnManager.SaveAllNPCData(3f));
                 StopCoroutine(TalkView());
+                ScreenshotManager.Instance.CaptureScreenshot();
                 Invoke("StopNpc", 2f);
                 Invoke("ReturnOldMan", 2f);
 
@@ -119,6 +120,7 @@ public class NPC_OldMan : NPCFSM
                 EventManager.Trigger(GameEventType.OldManoutside);
                 returnManager.StartCoroutine(returnManager.SaveAllNPCData(3f));
                 StopCoroutine(TalkView());
+                ScreenshotManager.Instance.CaptureScreenshot();
                 Invoke("StopNpc", 2f);
                 Invoke("ReturnOldMan", 2f);
                             

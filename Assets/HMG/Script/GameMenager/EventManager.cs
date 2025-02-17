@@ -27,6 +27,9 @@ public class EventManager : MonoBehaviour
         //
         policeTalk, //경비에게 사복경찰 지칭하는 인물을 말함
         policeNoTalk, //경비에게 사복경찰 말 안함
+        //
+        RichHide, //리치 암살 후 숨겼음
+        RichNoHide, //리치 암살 후 숨기지 못함
         //플랜 a부분
         RichKill, //부자를 제압할 때 청소부가 로비에 있으면 달려가는 이벤트
         //메인 루트

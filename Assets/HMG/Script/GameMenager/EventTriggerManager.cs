@@ -18,6 +18,8 @@ public class EventTriggerManager : MonoBehaviour
         GameEventType.TellerTalk, 
         GameEventType.RichmanAngry,
         GameEventType.GameOver,
+        GameEventType.RichHide,
+        GameEventType.RichNoHide
 
     };
 

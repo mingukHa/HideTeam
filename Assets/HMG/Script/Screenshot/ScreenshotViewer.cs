@@ -14,7 +14,7 @@ public class ScreenshotViewer : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.Subscribe(GameEventType.Garbage, gameover);
+        EventManager.Subscribe(GameEventType.GameOver, gameover);
     }
     private void gameover()
     {

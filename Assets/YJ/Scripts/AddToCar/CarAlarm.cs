@@ -17,6 +17,7 @@ public class CarAlarm : MonoBehaviour
         {
             SoundManager.instance.SFXPlay("CarKickSound", this.gameObject);
             SoundManager.instance.SFXPlay("CarKickFootSound", SoundPos);
+            ScreenshotManager.Instance.CaptureScreenshot();
             returnManager.StartCoroutine(returnManager.SaveAllNPCData(4f));
             StartCoroutine(BlinkHeadLamps());
         }
