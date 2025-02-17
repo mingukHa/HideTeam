@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isMoving = false;
     private bool isCrouching = false;
-    private bool isStarted = false;
+    private static bool isStarted = false;
 
     public Image eImage;    //E키 이미지
     public Slider eSlider;  //E키 게이지
@@ -60,21 +60,24 @@ public class PlayerController : MonoBehaviour
         tr = GetComponent<Transform>();
         disguiser = GetComponent<PlayerDisguiser>();
 
-        Smoking();
+        if (!isStarted)
+        {
+            Smoking();
+        }
+
         isFirstOpen = false;
     }
 
     private void Update()
     {
-        PlayerAction();
-        PlayerMove();
-
         // 흡연이 끝나고 플레이어가 움직이고 있을 때만 마우스 입력 처리
-        if (isMoving && InputMouse(ref mouseX))
+        if (isStarted && InputMouse(ref mouseX))
         {
             InputMouseProcess(mouseX);
         }
 
+        PlayerAction();
+        PlayerMove();
         CheckFirstDoorOpen();
     }
 
@@ -348,12 +351,7 @@ public class PlayerController : MonoBehaviour
 
     private void Smoking()
     {
-        if (!isStarted)
-        {
-            anim.SetTrigger("isStarted");
-            isStarted = true;
-        }
-
+        anim.SetTrigger("isStarted");
         StartCoroutine(ThrowCigarette());
     }
 
@@ -366,6 +364,9 @@ public class PlayerController : MonoBehaviour
             cigarette.SetActive(false);
             droppingCigarette.SetActive(true);
         }
+
+        yield return new WaitForSeconds(5f);
+        isStarted = true;
     }
 
     private IEnumerator KickTheCar()
