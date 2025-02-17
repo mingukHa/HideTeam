@@ -64,7 +64,7 @@ public class ScreenshotViewer : MonoBehaviour
     private IEnumerator ShowScreenshots()
     {
         List<Texture2D> tempScreenshots = new List<Texture2D>(ScreenshotManager.Instance.screenshots);
-        fade.StartCoroutine(fade.FadeIn(3f));
+        StartCoroutine(fade.FadeIn(3f));
         for (int i = tempScreenshots.Count - 1; i >= 0; i--)
         {
             if (quadMaterial != null)
