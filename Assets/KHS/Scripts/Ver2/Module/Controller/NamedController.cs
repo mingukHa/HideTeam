@@ -12,7 +12,6 @@ public class NamedController : NPCController
     public override void Start()
     {
         base.Start();
-        
     }
 
     public void StartKar()

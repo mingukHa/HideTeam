@@ -10,6 +10,7 @@ public class RoutineState : NPCState
     public override void Enter()
     {
         Debug.Log($"{_npcController.npcName}이 루틴 상태에 진입");
+        _npcController.routineInvoker.RoutineChange(0);
     }
 
     public override void Update()
