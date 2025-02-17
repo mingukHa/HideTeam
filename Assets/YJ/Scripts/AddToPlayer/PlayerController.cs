@@ -63,7 +63,6 @@ public class PlayerController : MonoBehaviour
         if (!isStarted)
         {
             Smoking();
-            isStarted = true;
         }
 
         isFirstOpen = false;
@@ -71,15 +70,14 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        PlayerAction();
-        PlayerMove();
-
         // 흡연이 끝나고 플레이어가 움직이고 있을 때만 마우스 입력 처리
-        if (isMoving && InputMouse(ref mouseX))
+        if (isStarted && InputMouse(ref mouseX))
         {
             InputMouseProcess(mouseX);
         }
 
+        PlayerAction();
+        PlayerMove();
         CheckFirstDoorOpen();
     }
 
@@ -366,6 +364,9 @@ public class PlayerController : MonoBehaviour
             cigarette.SetActive(false);
             droppingCigarette.SetActive(true);
         }
+
+        yield return new WaitForSeconds(5f);
+        isStarted = true;
     }
 
     private IEnumerator KickTheCar()
