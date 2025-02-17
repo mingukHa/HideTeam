@@ -5347,7 +5347,7 @@ MonoBehaviour:
   targetVec: []
   agent: {fileID: 0}
   animator: {fileID: 0}
-  eventFlags: 01000000070000000500000003000000
+  eventFlags: 010000000700000005000000030000000a000000
   actionNames:
   - PlayerEnter
   - RichmanGone
@@ -5373,6 +5373,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eaec670bc54e5284796e8d9a150e4512, type: 2}
   - {fileID: 11400000, guid: 43229ab10a1ad4341857d10f6bbb6de1, type: 2}
   - {fileID: 11400000, guid: 7acb7aedee7db984d8d85130e6183293, type: 2}
+  - {fileID: 11400000, guid: b73bd3065bfd8984f8167f78891d834d, type: 2}
   curRoutineIdx: 0
 --- !u!114 &232194063
 MonoBehaviour:
@@ -8463,11 +8464,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2416105224234170748, guid: ea537ab2403b44341ac3c30c61c96299, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.801
+      value: 0.788
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416105224234170748, guid: ea537ab2403b44341ac3c30c61c96299, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: 2416105224234170748, guid: ea537ab2403b44341ac3c30c61c96299, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.424
+      value: 0.495
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416105224234170748, guid: ea537ab2403b44341ac3c30c61c96299, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.3420201
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416105224234170748, guid: ea537ab2403b44341ac3c30c61c96299, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416105224234170748, guid: ea537ab2403b44341ac3c30c61c96299, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.9396927
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416105224234170748, guid: ea537ab2403b44341ac3c30c61c96299, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2416105224234170748, guid: ea537ab2403b44341ac3c30c61c96299, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 220
       objectReference: {fileID: 0}
     - target: {fileID: 2731630632491901950, guid: ea537ab2403b44341ac3c30c61c96299, type: 3}
       propertyPath: m_IsActive
@@ -27947,6 +27972,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ta:
   - {fileID: 11400000, guid: 8c4514c789d167b40985f710815468d3, type: 2}
+  cutscene1: {fileID: 1766005252}
 --- !u!320 &1549053866
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -31831,6 +31857,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 8, y: 90, z: 0}
+--- !u!1 &1766005252 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 519130737757242293, guid: ea537ab2403b44341ac3c30c61c96299, type: 3}
+  m_PrefabInstance: {fileID: 388997584}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1768454534 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8345316581145770244, guid: ad65ef8b4e0ab2d43b4a8c971551848e, type: 3}
