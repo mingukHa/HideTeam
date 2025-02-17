@@ -54,6 +54,7 @@ public class NPC_CleanMan : NPCFSM
     private void StopNpc()
     {
         StopCoroutine(TalkView());
+        chat.LoadNPCDialogue("NULL", 0);
         transform.rotation = initrotation;       
         NPCCollider.radius = 0.01f;
         animator.SetTrigger("Idel");
