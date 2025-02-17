@@ -3215,7 +3215,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b203af8ff756a439c7d57e6da30e8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 0}
 --- !u!1001 &398888433
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13565,7 +13564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   displayImage: {fileID: 1167950602}
   displayTime: 3
-  display: {fileID: 0}
+  display: {fileID: 1167950601}
   Post: {fileID: 402040622}
 --- !u!114 &974037215
 MonoBehaviour:

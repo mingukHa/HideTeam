@@ -36,7 +36,7 @@ public class ScreenshotViewer : MonoBehaviour
     {
         List<Texture2D> tempScreenshots = new List<Texture2D>(ScreenshotManager.Instance.screenshots); // 리스트 복사
 
-        for (int i = tempScreenshots.Count; i <= 1; i--)
+        for (int i = tempScreenshots.Count - 1; i >= 0; i--) // 역순 재생
         {
             displayImage.texture = tempScreenshots[i];
             yield return new WaitForSeconds(displayTime);
