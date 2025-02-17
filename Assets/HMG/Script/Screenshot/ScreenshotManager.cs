@@ -6,7 +6,7 @@ public class ScreenshotManager : MonoBehaviour
 {
     public static ScreenshotManager Instance;
     public List<Texture2D> screenshots = new List<Texture2D>();
-
+    
     private void Awake()
     {
         if (Instance == null)

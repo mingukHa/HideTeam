@@ -1,25 +1,33 @@
 using UnityEngine;
-using UnityEngine.UI;
 using System.Collections;
-using UnityEngine.SceneManagement;
-using UnityEditor.Experimental.GraphView;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class ScreenshotViewer : MonoBehaviour
 {
-    public RawImage displayImage;  // UI에 배치할 RawImage
+    public Renderer quadRenderer; // Quad의 Mesh Renderer
+    private Material quadMaterial; // Quad의 Material
     public float displayTime = 1.0f;
-    public GameObject display;
     public GameObject Post;
+
+    void Start()
+    {
+        // Quad의 Material 가져오기
+        if (quadRenderer != null)
+        {
+            quadMaterial = quadRenderer.material;
+        }
+    }
+
     public void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.P))
         {
             Post.SetActive(true);
-            display.SetActive(true);
             StartSlideshow();
         }
     }
+
     public void StartSlideshow()
     {
         if (ScreenshotManager.Instance.screenshots.Count > 0)
@@ -38,11 +46,14 @@ public class ScreenshotViewer : MonoBehaviour
 
         for (int i = tempScreenshots.Count - 1; i >= 0; i--) // 역순 재생
         {
-            displayImage.texture = tempScreenshots[i];
+            if (quadMaterial != null)
+            {
+                quadMaterial.mainTexture = tempScreenshots[i]; // Quad의 Material 업데이트
+            }
+
             yield return new WaitForSeconds(displayTime);
         }
 
         SceneManager.LoadScene("MainScene");
     }
-
 }
