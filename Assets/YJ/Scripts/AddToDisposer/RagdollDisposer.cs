@@ -18,7 +18,6 @@ public class RagdollDisposer : MonoBehaviour
     {
         // ∂—≤±¿« √ ±‚ »∏¿¸ ¿˙¿Â
         lidClosedRotation = lid.rotation;
-        lidOpenRotation = lidClosedRotation * Quaternion.Euler(0f, 0f, 0f);
     }
 
     private void Update()
@@ -104,7 +103,7 @@ public class RagdollDisposer : MonoBehaviour
     {
         float duration = 1f;
         float elapsed = 0f;
-        Quaternion startRotation = lid.rotation;
+        Quaternion startRotation = lid.localRotation;
 
         while (elapsed < duration)
         {

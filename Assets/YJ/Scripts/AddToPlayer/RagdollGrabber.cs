@@ -9,11 +9,11 @@ public class RagdollGrabber : MonoBehaviour
 
     private Animator anim;
     private ConfigurableJoint joint;
-    [HideInInspector]
+    //[HideInInspector]
     public Rigidbody ragdollRigidbody;
     private Transform rootTransform; // NPC 최상위 오브젝트의 Transform
     private Collider[] rootColliders; // NPC 최상위 오브젝트의 Collider 목록
-    [HideInInspector]
+    //[HideInInspector]
     public bool isGrabbing = false;
 
     private Vector3 leftHandIKPosition;
@@ -47,15 +47,6 @@ public class RagdollGrabber : MonoBehaviour
                 anim.SetBool("isGrabbingRagdoll", false);
                 ReleaseRagdoll();
             }
-        }
-
-        if (isGrabbing && rootTransform != null)
-        {
-            // Ragdoll의 평균 위치 계산
-            Vector3 ragdollCenter = CalculateRagdollCenter();
-
-            // 최상위 부모 Transform 이동
-            rootTransform.position = ragdollCenter;
         }
     }
 
@@ -101,18 +92,16 @@ public class RagdollGrabber : MonoBehaviour
         //ragdollRigidbody.position = handIKTarget.position;
 
         // HoldPoint 위치로 잡은 Ragdoll 이동
-        //ragdollRigidbody.MovePosition(ragdollHoldPoint.position);
-        //ragdollRigidbody.MoveRotation(ragdollHoldPoint.rotation);
-        ragdollRigidbody.transform.position = ragdollHoldPoint.position;
-        ragdollRigidbody.transform.rotation = ragdollHoldPoint.rotation;
+        ragdollRigidbody.MovePosition(ragdollHoldPoint.position);
+        ragdollRigidbody.MoveRotation(ragdollHoldPoint.rotation);
 
         // Configurable Joint 추가
         joint = ragdollRigidbody.gameObject.AddComponent<ConfigurableJoint>();
         joint.connectedBody = ragdollHoldPoint.GetComponent<Rigidbody>();
 
-        joint.xMotion = ConfigurableJointMotion.Limited;
-        joint.yMotion = ConfigurableJointMotion.Limited;
-        joint.zMotion = ConfigurableJointMotion.Limited;
+        joint.xMotion = ConfigurableJointMotion.Locked;
+        joint.yMotion = ConfigurableJointMotion.Locked;
+        joint.zMotion = ConfigurableJointMotion.Locked;
 
         // 래그돌이 손을 따라오게 하는 힘 적용
         JointDrive drive = new JointDrive();
@@ -147,21 +136,6 @@ public class RagdollGrabber : MonoBehaviour
 
         ragdollRigidbody = null;
         rootTransform = null; // 루트 Transform 초기화
-    }
-
-    // Ragdoll의 Rigidbody 평균 위치 계산
-    private Vector3 CalculateRagdollCenter()
-    {
-        Rigidbody[] rigidbodies = rootTransform.GetComponentsInChildren<Rigidbody>();
-        if (rigidbodies.Length == 0) return rootTransform.position;
-
-        Vector3 center = Vector3.zero;
-        foreach (var rb in rigidbodies)
-        {
-            center += rb.position;
-        }
-        center /= rigidbodies.Length; // 평균 위치 계산
-        return center;
     }
 
     // IK 적용
