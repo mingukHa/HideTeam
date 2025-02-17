@@ -182,7 +182,7 @@ public class TellerController : NPCController
                 int eventIndex = int.Parse(match.Groups[1].Value);
                 if (eventIndex < convEnvList.Count)
                 {
-                    Debug.Log($"[이벤트 {eventIndex} 호출]");
+                    Debug.Log($"[이벤트 {eventIndex} 대기!]");
                     isWaitingForEvent = true;
 
                     // 이벤트 완료 신호를 받을 때까지 대기
