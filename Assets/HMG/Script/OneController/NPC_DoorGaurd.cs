@@ -10,7 +10,7 @@ public class NPC_DoorGaurd : NPCFSM
 
 
     public GameObject npcchatbox; //NPC의 메인 채팅 최상위
-    private string npc = "NPC4";
+    private string npc = "NPC1";
 
     private void OnEnable()
     {
@@ -83,9 +83,9 @@ public class NPC_DoorGaurd : NPCFSM
             ChangeState(State.Talk);
             chat.LoadNPCDialogue(npc, 0);
         }
-        if (Input.GetKey(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F))
         {
-            isDead = true;
+            chat.LoadNPCDialogue(npc, 1);
         }
 
     }

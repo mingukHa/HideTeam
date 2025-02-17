@@ -142,7 +142,7 @@ public class NPCFSM : MonoBehaviour
 
     private void SetRagdollState(bool state)
     {
-        Debug.Log($" 레그돌 상태 변경: {(state ? "활성화" : "비활성화")}");
+        //Debug.Log($" 레그돌 상태 변경: {(state ? "활성화" : "비활성화")}");
         foreach (var rb in rigidbodies)
         {
             //gameObject.tag = "Ragdoll";
