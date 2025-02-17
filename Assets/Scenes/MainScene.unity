@@ -20155,6 +20155,7 @@ MonoBehaviour:
   displayTime: 2
   Post: {fileID: 402040622}
   quad: {fileID: 1343302535}
+  efKey: {fileID: 1005086829}
 --- !u!114 &974037215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20595,6 +20596,11 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!1 &1005086829 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1994606797429221442, guid: 536aa32ba9b139c4c8e9fea2ae40da8d, type: 3}
+  m_PrefabInstance: {fileID: 577927461}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1013260227
 GameObject:
   m_ObjectHideFlags: 0
@@ -28773,7 +28779,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 2
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -28799,6 +28805,7 @@ MonoBehaviour:
   select: {fileID: 1819401094}
   returnManager: {fileID: 2007657856}
   npcchatbox: {fileID: 317189547}
+  sphereCollider: {fileID: 1557606059}
 --- !u!114 &1557606062
 MonoBehaviour:
   m_ObjectHideFlags: 0

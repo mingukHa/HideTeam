@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using static EventManager;
+using UnityEngine.InputSystem;
 
 public class ScreenshotViewer : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class ScreenshotViewer : MonoBehaviour
     public float displayTime = 1.0f;
     public GameObject Post;
     public GameObject quad;
-    
+    public GameObject efKey;
     private void OnEnable()
     {
         EventManager.Subscribe(GameEventType.GameOver, gameover);
@@ -19,9 +20,9 @@ public class ScreenshotViewer : MonoBehaviour
     private void gameover()
     {
         Debug.Log("게임이 오버됨");
-        Time.timeScale = 0f;
         quad.SetActive(true);
         Post.SetActive(true);
+        efKey.SetActive(false);
         StartSlideshow();
     }
     void Start()
@@ -46,11 +47,7 @@ public class ScreenshotViewer : MonoBehaviour
     {
         if (ScreenshotManager.Instance.screenshots.Count > 0)
         {
-
             StartCoroutine(ShowScreenshots());
-            quad.SetActive(true);
-            Time.timeScale = 0f;
-            Post.SetActive(true);
         }
         else
         {
@@ -73,8 +70,8 @@ public class ScreenshotViewer : MonoBehaviour
             yield return new WaitForSecondsRealtime(displayTime);
         }
 
-        Time.timeScale = 1f;
         SceneManager.LoadScene("MainScene");
+        
     }
 
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class NPCFSM : MonoBehaviour
@@ -25,6 +26,7 @@ public class NPCFSM : MonoBehaviour
     private bool isPlayerNearby = false;
     public ReturnManagerinit returnManager;
     protected NPCChatTest chat;
+    protected Moutline moutline;
     protected virtual void Start()
     {
         chat = GetComponent<NPCChatTest>();
@@ -38,7 +40,7 @@ public class NPCFSM : MonoBehaviour
         initrotation = transform.rotation;
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
-        
+        moutline = GetComponent<Moutline>();
         agent.autoBraking = false;
 
     }
@@ -74,7 +76,7 @@ public class NPCFSM : MonoBehaviour
             // 애니메이션 "Dead"가 실행 중인지 확인
             if (stateInfo.IsName("Dead") && stateInfo.normalizedTime >= 1.0f)
             {
-                Debug.Log(" Dead 애니메이션 종료 - 레그돌 활성화 실행");
+                //Debug.Log(" Dead 애니메이션 종료 - 레그돌 활성화 실행");
                 ActivateRagdoll(); //  레그돌 처리
             }
         }
@@ -161,14 +163,14 @@ public class NPCFSM : MonoBehaviour
     }
     protected virtual void DeadBehavior()
     {
-        Debug.Log("데드 비헤이어 실행");
+        //Debug.Log("데드 비헤이어 실행");
         isDead = true;
     }
     protected virtual void OnTriggerEnter(Collider other)
     {
         if (!isDead && other.CompareTag("Player"))
         {
-            Debug.Log("플레이어 범위 내 진입");
+            //Debug.Log("플레이어 범위 내 진입");
             isPlayerNearby = true; // 플레이어가 범위 내에 있음을 저장
         }
         //if (other.CompareTag("NPC") || other.CompareTag("Player"))
@@ -181,7 +183,7 @@ public class NPCFSM : MonoBehaviour
         if (!isDead && other.CompareTag("Player"))
         {
             StopCoroutine(TalkView());
-            Debug.Log("플레이어 범위 밖으로 나감");
+            //Debug.Log("플레이어 범위 밖으로 나감");
             ChangeState(State.Idle);
             isPlayerNearby = false; // 범위를 벗어나면 초기화
             isTalking = false; // 대화 종료
@@ -196,7 +198,7 @@ public class NPCFSM : MonoBehaviour
             // E 키를 눌렀을 때만 NPC가 플레이어를 바라보며 대화 시작
             if (Input.GetKeyDown(KeyCode.E) && !isTalking)
             {
-                Debug.Log("NPC가 플레이어를 바라보며 대화 시작");
+                //Debug.Log("NPC가 플레이어를 바라보며 대화 시작");
                 StartCoroutine(TalkView());
                 ChangeState(State.Talk); // 대화 상태로 변경
             }
@@ -206,6 +208,8 @@ public class NPCFSM : MonoBehaviour
             {
                 ChangeState(State.Dead);
                 NPCChatTest.enabled = false;
+                moutline.enabled = false;
+                EventManager.Trigger(EventManager.GameEventType.NPCKill);
                 isTalking = false;
                 select.SetActive(false);
                 chat.LoadNPCDialogue("NULL", 0);
@@ -217,8 +221,8 @@ public class NPCFSM : MonoBehaviour
                 AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
                 if (stateInfo.IsName("Dead") && stateInfo.normalizedTime >= 1.0f)
                 {
-                    Debug.Log("NPC 죽음");
-                    EventManager.Trigger(EventManager.GameEventType.NPCKill);
+                    //Debug.Log("NPC 죽음");
+                    
                     ActivateRagdoll();
                     isRagdollActivated = true;
                 }
@@ -233,7 +237,7 @@ public class NPCFSM : MonoBehaviour
         isTalking = true;
         while (isTalking)
         {
-            Debug.Log("바라보기 코루틴이 정상 작동 중");
+            //Debug.Log("바라보기 코루틴이 정상 작동 중");
             Vector3 direction = (player.position - transform.position).normalized;
             direction.y = 0;
             Quaternion lookRotation = Quaternion.LookRotation(direction);
