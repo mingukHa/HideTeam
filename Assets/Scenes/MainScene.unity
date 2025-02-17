@@ -736,7 +736,7 @@ MonoBehaviour:
   isRagdollActivated: 0
   NPCCollider: {fileID: 82743805}
   select: {fileID: 1130133353}
-  returnManager: {fileID: 0}
+  returnManager: {fileID: 2007657856}
 --- !u!114 &82743807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -767,7 +767,7 @@ MonoBehaviour:
   isRagdollActivated: 0
   NPCCollider: {fileID: 82743805}
   select: {fileID: 1130133353}
-  returnManager: {fileID: 0}
+  returnManager: {fileID: 2007657856}
   npcchatbox: {fileID: 576083414}
   PolicPos: {fileID: 1631526045}
 --- !u!195 &82743810
@@ -15618,7 +15618,7 @@ Transform:
   m_GameObject: {fileID: 1256051431}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -64.46, y: 0.5, z: 10.671}
+  m_LocalPosition: {x: -64.46, y: 0.5, z: 6.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -18408,6 +18408,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8847363970593407941, guid: 087c8fe64ca912446974ba5b4b3aad5b, type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
     - target: {fileID: 8906815161331580858, guid: 087c8fe64ca912446974ba5b4b3aad5b, type: 3}
       propertyPath: m_Layer
       value: 11
@@ -20817,7 +20821,7 @@ Transform:
   m_GameObject: {fileID: 1613718396}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -80.13, y: 0.59, z: 3.73}
+  m_LocalPosition: {x: -78.771, y: 0.59, z: 3.73}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
