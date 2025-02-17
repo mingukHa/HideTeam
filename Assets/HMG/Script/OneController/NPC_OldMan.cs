@@ -17,6 +17,7 @@ public class NPC_OldMan : NPCFSM
     public Transform NewManPos;
     public TextMeshPro TextChange;
     private Transform OldPos;
+    private bool isWalk = false;
     private void OnEnable()
     {
         EventManager.Subscribe(GameEventType.TellerTalk, OldmanMove);
@@ -48,8 +49,12 @@ public class NPC_OldMan : NPCFSM
     protected override void Update()
     {
         base.Update();
-        
-        
+        if (isWalk == true)
+        {
+            animator.SetTrigger("Walk");
+        }
+
+
     }
 
     protected override void IdleBehavior()
@@ -104,6 +109,7 @@ public class NPC_OldMan : NPCFSM
                 EventManager.Trigger(GameEventType.OldManHelp);
                 returnManager.StartCoroutine(returnManager.SaveAllNPCData(3f));
                 StopCoroutine(TalkView());
+                ScreenshotManager.Instance.CaptureScreenshot();
                 Invoke("StopNpc", 2f);
                 Invoke("ReturnOldMan", 2f);
 
@@ -114,6 +120,7 @@ public class NPC_OldMan : NPCFSM
                 EventManager.Trigger(GameEventType.OldManoutside);
                 returnManager.StartCoroutine(returnManager.SaveAllNPCData(3f));
                 StopCoroutine(TalkView());
+                ScreenshotManager.Instance.CaptureScreenshot();
                 Invoke("StopNpc", 2f);
                 Invoke("ReturnOldMan", 2f);
                             
@@ -137,6 +144,7 @@ public class NPC_OldMan : NPCFSM
     {
         if (!isDead)
         {
+            isWalk = true;
             animator.SetTrigger("Walk");
             agent.SetDestination(OldPos.position);
             StartCoroutine(CheckArrival());

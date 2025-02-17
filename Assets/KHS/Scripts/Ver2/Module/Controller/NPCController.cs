@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.AI;
 using static EventManager;
 using System.Collections;
+using TMPro;
+using Firebase.Database;
 
 
 [RequireComponent(typeof(NPCStateMachine)), RequireComponent(typeof(RoutineInvoker))]
@@ -42,15 +44,12 @@ public abstract class NPCController : MonoBehaviour
     public List<string> actionNames = new List<string>();
     private Dictionary<GameEventType, Action> eventActions = new Dictionary<GameEventType, Action>();
 
-
-    public TMPro.TextMeshProUGUI dialogueText;
+    [Header("대사 설정")]
+    public TextMeshProUGUI dialogueText;
     public int converEvent = 0;
     public List<GameEventType> converEventFlags = new List<GameEventType>();
 
     public Queue<string> dialogue;
-    public List<string> playerDialogue;
-    public List<string> oldManDialogue;
-    public List<string> richManDialogue;
 
 
     private void Awake()
@@ -75,8 +74,6 @@ public abstract class NPCController : MonoBehaviour
         agent.angularSpeed = 200f;
         agent.stoppingDistance = 0.8f;
         UpdateTargetInfo();
-        foreach (string str in playerDialogue)
-            dialogue.Enqueue(str);
     }
     protected virtual void OnEnable()
     {
@@ -180,10 +177,6 @@ public abstract class NPCController : MonoBehaviour
         }
         return isDetected;
     }
-    public bool CurrentRoutineEnd()
-    {
-        return routineInvoker.RoutineEnd();
-    }
 
     public void ShowDialogue(string text, System.Action onFinished)
     {
@@ -206,7 +199,6 @@ public abstract class NPCController : MonoBehaviour
         EventManager.Trigger(converEventFlags[converEvent]);
         ++converEvent;
         Debug.Log("이벤트 발생!");
-
     }
 
     public Vector3 DirFromAngle(float angleInDegrees, bool angleIsGlobal)

@@ -23,5 +23,11 @@ MonoBehaviour:
     targetPosition: {x: 0, y: 0, z: 0}
     waitTime: 5
   - actionType: 0
-    targetPosition: {x: -64.49, y: 0, z: 11.3}
+    targetPosition: {x: -64.572, y: 0, z: 8}
     waitTime: 5
+  - actionType: 1
+    targetPosition: {x: -64.572, y: 0, z: 8}
+    waitTime: 4
+  - actionType: 0
+    targetPosition: {x: -64.556, y: 0, z: 4.093}
+    waitTime: 0

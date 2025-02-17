@@ -10,17 +10,29 @@ public class NPC_CleanMan : NPCFSM
 
     
     public GameObject npcchatbox; //NPC의 메인 채팅 최상위
-    private string npc = "NPC4";
+    private string npc = "Cleaner";
     public Transform GarbagePos; //이동 할 위치
     public Transform richKill;
     private bool GarbageTrue = false;
+    private bool isHide = false;
     private void OnEnable()
     {
         EventManager.Subscribe(GameEventType.Garbage, StartGarbage);
         EventManager.Subscribe(GameEventType.RichKill, StartRichKill);
+        EventManager.Subscribe(GameEventType.RichHide, StartRichHide);
+        EventManager.Subscribe(GameEventType.RichNoHide, StartRichNoHide);
+    }
+    private void StartRichNoHide()
+    {
+        isHide = false;
+    }
+    private void StartRichHide()
+    {
+        isHide = true;
     }
     private void StartGarbage()
     {
+        agent.speed = 3f;
         GarbageTrue = true;
         Debug.Log("청소부 개 빡쳐서 달려오는 중");
         agent.SetDestination(GarbagePos.transform.position);
@@ -31,8 +43,13 @@ public class NPC_CleanMan : NPCFSM
     {
         if (GarbageTrue == false)
         agent.SetDestination(richKill.transform.position);
+        chat.LoadNPCDialogue(npc, 3);
     }
+    private IEnumerator RichFind()
+    {
 
+        yield return null;
+    }
 
     private void StopNpc()
     {
@@ -41,6 +58,7 @@ public class NPC_CleanMan : NPCFSM
         NPCCollider.radius = 0.01f;
         animator.SetTrigger("Idel");
         select.SetActive(false);
+        
     }
 
     protected override void Start()
@@ -114,6 +132,7 @@ public class NPC_CleanMan : NPCFSM
             {
                 chat.LoadNPCDialogue(npc, 1);
                 StopCoroutine(TalkView());
+                ScreenshotManager.Instance.CaptureScreenshot();
                 Invoke("StopNpc",2f);
 
             }
@@ -121,6 +140,7 @@ public class NPC_CleanMan : NPCFSM
             {
                 chat.LoadNPCDialogue(npc, 2);
                 StopCoroutine(TalkView());
+                ScreenshotManager.Instance.CaptureScreenshot();
                 Invoke("StopNpc", 2f);
             }
         }

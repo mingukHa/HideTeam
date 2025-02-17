@@ -16,7 +16,11 @@ public class EventTriggerManager : MonoBehaviour
         GameEventType.policeTalk,
         GameEventType.policeNoTalk,
         GameEventType.TellerTalk, 
-        GameEventType.RichmanAngry
+        GameEventType.RichmanAngry,
+        GameEventType.GameOver,
+        GameEventType.RichHide,
+        GameEventType.RichNoHide
+
     };
 
     private void OnEnable()

@@ -142,7 +142,7 @@ public class ReturnManager : MonoBehaviour
             if (!anyDataLeft) break;
         }
 
-        SceneManager.LoadScene("MainScene"); // 씬 복원
+        //SceneManager.LoadScene("MainScene"); // 씬 복원
     }
 
     public void PlayerOff()
