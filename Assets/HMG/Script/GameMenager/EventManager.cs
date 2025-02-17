@@ -40,7 +40,14 @@ public class EventManager : MonoBehaviour
         //bankemployee, //안내데스크 10초간 대기하는 이벤트
         GameOver, //게임 오버 시 동작하는 이벤트
         //
-        NPCKill //NPC죽이면 호출
+        NPCKill, //NPC죽이면 호출
+
+        Conversation1,
+        Conversation2,
+        Conversation3,
+        Conversation4,
+        Conversation5,
+        Conversation6
     }
 
     private static Dictionary<GameEventType, Action> eventDictionary = new Dictionary<GameEventType, Action>();
