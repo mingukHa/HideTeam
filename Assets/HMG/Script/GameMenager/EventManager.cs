@@ -22,6 +22,7 @@ public class EventManager : MonoBehaviour
         //
         OldManHelp,//노인 도와줌
         OldManoutside,//노인 안도와줌
+        OldManGotoTeller, //노인이 텔러에게 감
         //
         plainclothespoliceTalk, //사복경찰에게 말을 검
         plainclothespoliceNoTalk, //사복경찰에게 말을 안검
