@@ -5344,10 +5344,11 @@ MonoBehaviour:
   targetVec: []
   agent: {fileID: 0}
   animator: {fileID: 0}
-  eventFlags: 0100000007000000
+  eventFlags: 010000000700000005000000
   actionNames:
   - PlayerEnter
   - RichmanGone
+  - RichmanAngry1
   dialogueText: {fileID: 0}
   converEvent: 0
   converEventFlags: 
@@ -5365,7 +5366,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   npcRoutines:
   - {fileID: 11400000, guid: 8d3952e3a3cdf3641b5793c1d85bb1ec, type: 2}
+  - {fileID: 11400000, guid: eaec670bc54e5284796e8d9a150e4512, type: 2}
   - {fileID: 11400000, guid: 43229ab10a1ad4341857d10f6bbb6de1, type: 2}
+  - {fileID: 11400000, guid: 7acb7aedee7db984d8d85130e6183293, type: 2}
   curRoutineIdx: 0
 --- !u!114 &232194063
 MonoBehaviour:
@@ -29005,6 +29008,7 @@ GameObject:
   - component: {fileID: 1712179812}
   - component: {fileID: 1712179811}
   - component: {fileID: 1712179810}
+  - component: {fileID: 1712179814}
   m_Layer: 0
   m_Name: Teller2_Collider
   m_TagString: Untagged
@@ -29085,6 +29089,33 @@ Transform:
   - {fileID: 1408186784}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &1712179814
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1712179809}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1712263673
 GameObject:
   m_ObjectHideFlags: 0

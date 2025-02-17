@@ -23,4 +23,8 @@ public class NamedController : NPCController
     {
         stateMachine.ChangeState(new GoneState(this));
     }
+    public void RichmanAngry1()
+    {
+        stateMachine.ChangeState(new Angry1State(this));
+    }
 }
