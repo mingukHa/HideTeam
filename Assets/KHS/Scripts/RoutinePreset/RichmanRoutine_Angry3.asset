@@ -10,18 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e34068933273786488267c2508a41f62, type: 3}
-  m_Name: RichmanRoutine_Angry1
+  m_Name: RichmanRoutine_Angry3
   m_EditorClassIdentifier: 
   actions:
-  - actionType: 0
+  - actionType: 1
     targetPosition: {x: -64, y: 0, z: 4}
-    waitTime: 0
+    waitTime: 3
   - actionType: 3
     targetPosition: {x: -64, y: 0, z: 4}
-    waitTime: 5
-  - actionType: 0
-    targetPosition: {x: -50, y: 0, z: -4.5}
+    waitTime: 3
+  - actionType: 3
+    targetPosition: {x: -82.72, y: 0, z: 4}
     waitTime: 0
-  - actionType: 1
-    targetPosition: {x: -50, y: 0, z: -4.5}
-    waitTime: 6
