@@ -19,7 +19,14 @@ public class TellerController : NPCController
     public bool isPlayer = false;
     public bool isOLDMan = false;
     public bool isInterPlayer = false;
-    
+
+    private Queue<string> dialogueQueue = new Queue<string>(); // 대사 큐
+    private bool isDialoguePlaying = false; // 대사가 진행 중인지 확인
+    private bool isWaitingForEvent = false; // 이벤트 완료 대기 상태
+
+    public List<EventManager.GameEventType> convEnvList;
+    public int convEnvIdx = 0;
+
     public override void Start()
     {
         base.Start();
@@ -34,22 +41,26 @@ public class TellerController : NPCController
         isOLDMan = MDC_collider.isOLDMan;
 
 
-        if(isVIP is true)
+        if (isVIP)
         {
             EventManager.Trigger(EventManager.GameEventType.RichmanTalkTeller);
         }
-        if(isPlayer && Input.GetKeyDown(KeyCode.E))
+
+        if (isPlayer && Input.GetKeyDown(KeyCode.E) && !isDialoguePlaying)
         {
             EventManager.Trigger(EventManager.GameEventType.TellerTalk);
+            LoadTellerDialogue(npcID);
         }
-        StartCoroutine(TalkCoroutine());
-        if(Chating && !isPlayer)
+
+        if (Chating && !isPlayer)
         {
             dialogueText.alpha = 255f;
         }
         else
         {
             dialogueText.alpha = 0f;
+            if (isPlayer && isInterPlayer)
+                dialogueText.alpha = 255f;
         }
     }
 
@@ -68,7 +79,7 @@ public class TellerController : NPCController
         }
     }
 
-    public void LoadTellerDialogue(string npcID, int number)
+    public void LoadTellerDialogue(string npcID)
     {
         dbRef.Child("NPC_Dialogues").Child(npcID).GetValueAsync()
             .ContinueWithOnMainThread(task =>
@@ -89,7 +100,7 @@ public class TellerController : NPCController
 
                             if(dialogues.Length > 0)
                             {
-                                ShowDialogue(dialogues[0]);
+                                StartDialogueSequence(dialogues);
                             }
                             else
                             {
@@ -116,9 +127,63 @@ public class TellerController : NPCController
     }
     private void ShowDialogue(string text)
     {
-        dialogueText.text = text;
+        dialogueText.text = text.Replace("/E", ""); // /E 제거 후 출력
+        dialogueText.alpha = 255f;
         Debug.Log($"[Teller] 대사 출력: {text}");
     }
+
+    private void StartDialogueSequence(string[] dialogues)
+    {
+        dialogueQueue.Clear();
+        foreach (string dialogue in dialogues)
+        {
+            dialogueQueue.Enqueue(dialogue);
+        }
+
+        isDialoguePlaying = true;
+        StartCoroutine(PlayDialogue());
+    }
+    private IEnumerator PlayDialogue()
+    {
+        while (dialogueQueue.Count > 0)
+        {
+            string dialogue = dialogueQueue.Dequeue();
+            ShowDialogue(dialogue);
+
+            // 대사에 /E 이벤트가 포함되어 있는 경우
+            if (dialogue.Contains("/E"))
+            {
+
+                Debug.Log($"[이벤트 {convEnvIdx} 호출]");
+                isWaitingForEvent = true;
+
+                // 이벤트 완료 신호를 받을 때까지 대기
+                EventManager.Subscribe(convEnvList[convEnvIdx], OnEventCompleted);
+
+                // EventManager.Trigger(convEnvList[convEnvIdx]);
+
+                while (isWaitingForEvent)
+                {
+                    yield return null;
+                }
+                
+                EventManager.Unsubscribe(convEnvList[convEnvIdx], OnEventCompleted);
+                convEnvIdx++;
+            }
+
+            yield return new WaitForSeconds(2.0f); // 대사 유지 시간
+        }
+
+        isDialoguePlaying = false;
+        dialogueText.alpha = 0f; // 대화 끝나면 숨김
+    }
+    
+    private void OnEventCompleted()
+    {
+        Debug.Log("[이벤트 완료] 다음 대사 출력");
+        isWaitingForEvent = false;
+    }
+
     public void TellerGone()
     {
         stateMachine.ChangeState(new GoneState(this));
@@ -126,14 +191,7 @@ public class TellerController : NPCController
     public void TellerInteract()
     {
         Debug.Log("플레이어가 Teller에게 상호작용!");
-    }
-
-
-    private IEnumerator TalkCoroutine()
-    {
-        LoadTellerDialogue(npcID, 0);
-        yield return null;
-        
+        isInterPlayer = true;
     }
 }
 [Serializable]

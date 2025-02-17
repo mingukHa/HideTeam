@@ -14,6 +14,7 @@ public class RoutineAction
     public RoutineActionType actionType;
     public Vector3 targetPosition;
     public float waitTime;
+    public EventManager.GameEventType TalkEvent;
 }
 
 public enum RoutineActionType
