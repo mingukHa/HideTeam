@@ -21,8 +21,8 @@ public class NPC_DoorGaurd : NPCFSM
     private void StartNPCKill()
     {
         
-        agent.SetDestination(player.position);
         ChangeState(State.Run);
+        agent.SetDestination(player.position);
         sphereCollider.radius = 3.5f;
         StartCoroutine(CheckArrival());
 
