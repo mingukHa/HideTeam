@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using static EventManager;
 
 public class ScreenshotViewer : MonoBehaviour
 {
@@ -9,7 +10,19 @@ public class ScreenshotViewer : MonoBehaviour
     private Material quadMaterial; // Quad의 Material
     public float displayTime = 1.0f;
     public GameObject Post;
+    public GameObject quad;
 
+    private void OnEnable()
+    {
+        EventManager.Subscribe(GameEventType.Garbage, gameover);
+    }
+    private void gameover()
+    {
+        Debug.Log("게임이 오버됨");
+        quad.SetActive(true);
+        Post.SetActive(true);
+        StartSlideshow();
+    }
     void Start()
     {
         // Quad의 Material 가져오기
@@ -23,6 +36,7 @@ public class ScreenshotViewer : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
+            quad.SetActive(true);
             Post.SetActive(true);
             StartSlideshow();
         }
