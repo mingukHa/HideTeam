@@ -11,9 +11,8 @@ public class RichmanCallTemp : MonoBehaviour
     public string npcID;
 
     public TextMeshProUGUI dialogueText;
+    public MatDetChange MDC_Collider;
 
-    [SerializeField]
-    private bool isGcode = false;
     [SerializeField]
     private bool isDet = false;
 
@@ -26,27 +25,34 @@ public class RichmanCallTemp : MonoBehaviour
         dbRef = FirebaseDatabase.DefaultInstance.RootReference;
         dialogueText.alpha = 0f;
 
-        isGcode = false;
         isDet = false;
+    }
+
+    private void OnEnable()
+    {
+        EventManager.Subscribe(EventManager.GameEventType.Conversation4, RichmanCall);
+    }
+    private void OnDisable()
+    {
+        EventManager.Unsubscribe(EventManager.GameEventType.Conversation4, RichmanCall);
     }
 
     private void FixedUpdate()
     {
-
-        
-    }
-
-    private void OnTriggerEnter(Collider _collider)
-    {
-        if (_collider.gameObject.name == "PlayerHolder")
+        if(MDC_Collider.isPrDet)
         {
             isDet = true;
+            dialogueText.alpha = 255f;
+        }
+        else
+        {
+            isDet = false;
+            dialogueText.alpha = 0;
         }
     }
-    private void OnTriggerExit(Collider _collider)
+    private void RichmanCall()
     {
-        if (_collider.gameObject.name == "PlayerHolder")
-            isDet = false;
+        LastEndingDialogue(npcID);
     }
 
     private void LastEndingDialogue(string npcID)
@@ -62,7 +68,7 @@ public class RichmanCallTemp : MonoBehaviour
                     {
                         // JSON 데이터를 C# 객체로 변환
                         string json = snapshot.GetRawJsonValue();
-                        EndingDialogueData data = JsonUtility.FromJson<EndingDialogueData>(json);
+                        DialogueData data = JsonUtility.FromJson<DialogueData>(json);
 
                         if (data != null)
                         {
@@ -87,8 +93,9 @@ public class RichmanCallTemp : MonoBehaviour
 
             });
     }
-    private string[] GetDialogueBasedOnTarget(EndingDialogueData data)
+    private string[] GetDialogueBasedOnTarget(DialogueData data)
     {
+        if (data.dialogues != null) return data.dialogues;
         return new string[0]; // 기본적으로 빈 배열 반환
     }
     private void ShowDialogue(string text)

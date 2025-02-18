@@ -41,6 +41,7 @@ public class MatDetChange : MonoBehaviour
     };
     public List<interType> buffer;
     public bool isDet = false;
+    public bool isPrDet = false;
 
     private void Awake()
     {
@@ -51,6 +52,7 @@ public class MatDetChange : MonoBehaviour
     private void Start()
     {
         mat.color = noDetColor;
+        isPrDet = false;
     }
 
     private void FixedUpdate()
@@ -66,6 +68,7 @@ public class MatDetChange : MonoBehaviour
         else
         {
             isDet = false;
+            isPrDet = false;
             mat.color = noDetColor;
         }
     }
@@ -84,16 +87,13 @@ public class MatDetChange : MonoBehaviour
             buffer.Add(interType.RichMan);
             OnTriggerEnterCallback?.Invoke(interType.RichMan);
         }
-
-        if(!isDet)
+        if (other.gameObject.name == "PlayerHolder")
         {
-            if (other.gameObject.name == "PlayerHolder")
-            {
-                isDet = true;
-                buffer.Add(interType.Player);
-                OnTriggerEnterCallback?.Invoke(interType.Player);
+            isDet = true;
+            isPrDet = true;
+            buffer.Add(interType.Player);
+            OnTriggerEnterCallback?.Invoke(interType.Player);
                 
-            }
         }
     }
     private void OnTriggerStay(Collider other)
