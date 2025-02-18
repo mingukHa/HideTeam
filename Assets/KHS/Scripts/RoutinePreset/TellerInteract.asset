@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TellerInteract
   m_EditorClassIdentifier: 
   actions:
-  - actionType: 3
+  - actionType: 1
     targetPosition: {x: 0, y: 0, z: 0}
-    waitTime: 0
-    dialogueText: 
+    waitTime: 1
+    TalkEvent: 0

@@ -46,8 +46,6 @@ public abstract class NPCController : MonoBehaviour
 
     [Header("대사 설정")]
     public TextMeshProUGUI dialogueText;
-    public int converEvent = 0;
-    public List<GameEventType> converEventFlags = new List<GameEventType>();
 
 
     private void Awake()

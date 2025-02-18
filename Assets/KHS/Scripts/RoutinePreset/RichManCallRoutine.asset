@@ -10,10 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e34068933273786488267c2508a41f62, type: 3}
-  m_Name: RichmanRoutine_tailertalk
+  m_Name: RichManCallRoutine
   m_EditorClassIdentifier: 
   actions:
-  - actionType: 0
-    targetPosition: {x: -64, y: 0, z: 8}
-    waitTime: 0
-    TalkEvent: 0
+  - actionType: 3
+    targetPosition: {x: 0, y: 0, z: 0}
+    waitTime: 3
+    TalkEvent: 27
+  - actionType: 3
+    targetPosition: {x: 0, y: 0, z: 0}
+    waitTime: 3
+    TalkEvent: 27
+  - actionType: 3
+    targetPosition: {x: 0, y: 0, z: 0}
+    waitTime: 3
+    TalkEvent: 27
