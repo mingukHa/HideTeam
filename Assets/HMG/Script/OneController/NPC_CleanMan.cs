@@ -80,7 +80,7 @@ public class NPC_CleanMan : NPCFSM
     }
     private IEnumerator RichFind()
     {
-        yield return new WaitForSeconds(15f); 
+        yield return new WaitForSeconds(20f); 
 
         ChangeState(State.Walk);
         agent.isStopped = false; //  이동 재개
