@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         // 흡연이 끝나고 플레이어가 움직이고 있을 때만 마우스 입력 처리
-        if (isStarted && InputMouse(ref mouseX))
+        if (isMoving && isStarted && InputMouse(ref mouseX))
         {
             InputMouseProcess(mouseX);
         }
