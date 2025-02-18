@@ -14,11 +14,12 @@ public class GcodeEvent : MonoBehaviour
     {
         box.enabled = false;
         doorman.enabled = false;
+        npcFSM.enabled = false;
     }
 
     public BoxCollider box;
     public NPC_DoorGaurd doorman;
-    
+    public NPCFSM npcFSM;
 
 
 }
