@@ -75,6 +75,7 @@ public class RagdollDisposer : MonoBehaviour
             grabber.ReleaseRagdoll();
 
             // Ragdoll ªË¡¶
+            EventManager.Trigger(EventManager.GameEventType.RichHide);
             Destroy(ragdollRoot.gameObject);
         }
 
