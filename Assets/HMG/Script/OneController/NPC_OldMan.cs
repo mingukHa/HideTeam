@@ -15,7 +15,7 @@ public class NPC_OldMan : NPCFSM
     private string npc = "OldMan";
     public Transform OldManPos; //이동 할 위치
     public Transform NewManPos;
-    public TextMeshPro TextChange;
+    public TextMeshProUGUI TextChange;
     private Transform OldPos;
     private bool isWalk = false;
     private void OnEnable()

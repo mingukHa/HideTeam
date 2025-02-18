@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NPCMiniMaps : MonoBehaviour
+public class NPCMiniMaps                                                                                                                                                                                                                                                                               : MonoBehaviour
 {
     public enum NPCState { Idle, Talk, Run, Walk }
 

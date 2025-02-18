@@ -27,7 +27,7 @@ public class NPCFSM : MonoBehaviour
     public ReturnManagerinit returnManager;
     protected NPCChatTest chat;
     protected Moutline moutline;
-   
+    public GameObject DieIcon;
     
     protected virtual void Start()
     {
@@ -132,6 +132,7 @@ public class NPCFSM : MonoBehaviour
     {
         if (isRagdollActivated) return; //  중복 실행 방지
         isDead = true;
+        DieIcon.SetActive(true);
         animator.enabled = false; //  애니메이션 정지
         SetRagdollState(true); //  물리 적용
 
