@@ -16,7 +16,9 @@ public class TellerController : NPCController
     public bool isVIP = false;
     public bool isPlayer = false;
     public bool isOldMan = false;
+    public bool isPlayerDisg = false;
     public bool isInterPlayer = false;
+    public bool isInterDisPlayer = false;
 
     private Queue<string> dialogueQueue = new Queue<string>(); // 대사 큐
     private bool isDialoguePlaying = false; // 대사가 진행 중인지 확인
@@ -46,6 +48,12 @@ public class TellerController : NPCController
             EventManager.Trigger(EventManager.GameEventType.TellerTalk);
             LoadTellerDialogue(npcID);
             isInterPlayer = true; // 플레이어가 대화 시작
+        }
+        else if(isPlayerDisg && Input.GetKeyDown(KeyCode.E) && !isInterDisPlayer)
+        {
+            EventManager.Trigger(EventManager.GameEventType.PlayerTalkTeller);
+            LoadTellerDialogue(npcID);
+            isInterDisPlayer = true;
         }
 
         // 대사 가시성 조정
@@ -152,6 +160,7 @@ public class TellerController : NPCController
         if (isOldMan && data.OldMan != null) return data.OldMan;
         if (isVIP && data.RichMan != null) return data.RichMan;
         if (isPlayer && data.Player != null) return data.Player;
+        if (isPlayerDisg && data.PlayerRichman != null) return data.PlayerRichman;
         return new string[0]; // 기본적으로 빈 배열 반환
     }
     private void ShowDialogue(string text)
@@ -228,5 +237,5 @@ public class TellerDialogueData
     public string[] OldMan;
     public string[] RichMan;
     public string[] Player;
-
+    public string[] PlayerRichman;
 }

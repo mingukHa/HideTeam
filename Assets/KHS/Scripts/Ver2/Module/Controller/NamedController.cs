@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Firebase.Database;
 using UnityEngine;
 
 
@@ -30,5 +31,13 @@ public class NamedController : NPCController
     public void RichmanAngry3()
     {
         stateMachine.ChangeState(new Angry3State(this));
+    }
+    public void CallGang()
+    {
+        Debug.Log("접근하여 전화내용 출력하기");
+    }
+    public void GcodeEvent()
+    {
+        Debug.Log("Gcode 도달하다!");
     }
 }
