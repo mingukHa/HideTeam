@@ -8874,7 +8874,7 @@ MonoBehaviour:
   isPlayer: 0
   isOldMan: 0
   isInterPlayer: 0
-  convEnvList: 160000001700000018000000190000001a000000
+  convEnvList: 18000000190000001a0000001b0000001c000000
   convEnvIdx: 0
 --- !u!114 &367549494
 MonoBehaviour:
@@ -8956,7 +8956,7 @@ MonoBehaviour:
   isRagdollActivated: 0
   NPCCollider: {fileID: 367549500}
   select: {fileID: 625466187}
-  returnManager: {fileID: 0}
+  returnManager: {fileID: 2007657856}
   npcchatbox: {fileID: 1223241016}
 --- !u!114 &367549499
 MonoBehaviour:
@@ -8974,7 +8974,7 @@ MonoBehaviour:
   isRagdollActivated: 0
   NPCCollider: {fileID: 367549500}
   select: {fileID: 625466187}
-  returnManager: {fileID: 0}
+  returnManager: {fileID: 2007657856}
 --- !u!135 &367549500
 SphereCollider:
   m_ObjectHideFlags: 0

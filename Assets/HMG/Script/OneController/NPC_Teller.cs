@@ -16,6 +16,11 @@ public class NPC_Teller : NPCFSM
         EventManager.Subscribe(GameEventType.OldManHelp, OldManTalk);
         EventManager.Subscribe(GameEventType.OldManoutside, OldManTalk);
     }
+    private void OnDisble()
+    {
+        EventManager.Unsubscribe(GameEventType.OldManHelp, OldManTalk);
+        EventManager.Unsubscribe(GameEventType.OldManoutside, OldManTalk);
+    }
     private void OldManTalk()
     {
         //할배한테 말 걸면 실행하는 로직

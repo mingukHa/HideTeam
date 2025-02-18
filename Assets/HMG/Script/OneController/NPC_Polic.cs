@@ -105,7 +105,7 @@ public class NPC_Polic : NPCFSM
         if (Input.GetKey(KeyCode.F))
         {
             isDead = true;
-            EventManager.Trigger(GameEventType.GameOver);
+            EventManager.Trigger(GameEventType.NPCKill);
         }
     }
 

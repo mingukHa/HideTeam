@@ -22,13 +22,15 @@ public class NPC_CleanMan : NPCFSM
         EventManager.Subscribe(GameEventType.RichKill, StartRichKill);
         EventManager.Subscribe(GameEventType.RichHide, StartRichHide);
         EventManager.Subscribe(GameEventType.RichNoHide, StartRichNoHide);
+        EventManager.Subscribe(GameEventType.RichToiletKill, StartRichToiletKill);
     }
     private void OnDisable()
     {
         EventManager.Unsubscribe(GameEventType.Garbage, StartGarbage);
         EventManager.Unsubscribe(GameEventType.RichKill, StartRichKill);
         EventManager.Unsubscribe(GameEventType.RichHide, StartRichHide);
-        EventManager.Unsubscribe(GameEventType.RichNoHide, StartRichNoHide);
+        EventManager.Unsubscribe(GameEventType.RichToiletKill, StartRichNoHide);
+        EventManager.Unsubscribe(GameEventType.RichToiletKill, StartRichToiletKill);
     }
     private void StartRichNoHide()
     {
@@ -37,6 +39,10 @@ public class NPC_CleanMan : NPCFSM
     private void StartRichHide()
     {
         isHide = true;
+    }
+    private void StartRichToiletKill()
+    {
+        StartCoroutine(RichFind());
     }
     private void StartGarbage()
     {
@@ -74,7 +80,7 @@ public class NPC_CleanMan : NPCFSM
     }
     private IEnumerator RichFind()
     {
-        yield return new WaitForSeconds(10f); 
+        yield return new WaitForSeconds(15f); 
 
         ChangeState(State.Walk);
         agent.isStopped = false; //  이동 재개
