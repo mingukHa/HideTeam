@@ -23,6 +23,7 @@ public class RagdollGrabber : MonoBehaviour
 
     private Rigidbody rootRigidbody;
     private ConfigurableJoint rootJoint;
+    private float groundLevel;
 
     private void Start()
     {
@@ -32,6 +33,12 @@ public class RagdollGrabber : MonoBehaviour
         leftHandIKRotation = anim.GetIKRotation(AvatarIKGoal.LeftHand);
         rightHandIKPosition = anim.GetIKPosition(AvatarIKGoal.RightHand);
         rightHandIKRotation = anim.GetIKRotation(AvatarIKGoal.RightHand);
+
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, Mathf.Infinity))
+        {
+            groundLevel = hit.point.y; // 현재 바닥의 Y 좌표 감지
+        }
     }
 
     private void Update()
@@ -53,9 +60,17 @@ public class RagdollGrabber : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isGrabbing && rootTransform != null)
+        //if (isGrabbing && rootTransform != null)
+        //{
+        //    Vector3 targetPos = ragdollHoldPoint.position;
+        //    rootRigidbody.MovePosition(Vector3.Lerp(rootRigidbody.position, targetPos, Time.fixedDeltaTime * 5f));
+        //}
+
+        if (ragdollRigidbody != null && ragdollRigidbody.transform.position.y < groundLevel)
         {
-            rootTransform.position = ragdollRigidbody.position;
+            Vector3 fixedPosition = ragdollRigidbody.transform.position;
+            fixedPosition.y = groundLevel + 0.1f;  // 바닥보다 살짝 위로 유지
+            ragdollRigidbody.MovePosition(fixedPosition);
         }
     }
 
@@ -97,31 +112,36 @@ public class RagdollGrabber : MonoBehaviour
         {
             rootRigidbody = rootTransform.gameObject.AddComponent<Rigidbody>();
             rootRigidbody.mass = 10;
-            rootRigidbody.interpolation = RigidbodyInterpolation.Interpolate;
         }
 
-        // 루트 오브젝트 Rigidbody kinematic 활성화
-        if (rootRigidbody != null)
-        {
-            rootRigidbody.isKinematic = true;
-        }
+        // Rigidbody 설정
+        rootRigidbody.isKinematic = false; // 중요: 움직일 수 있도록 설정
+        ragdollRigidbody.isKinematic = false; // 중요: 움직일 수 있도록 설정
+        ragdollRigidbody.useGravity = false;  // 중력을 끔
+        ragdollRigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+        ragdollRigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
 
-        // HoldPoint로 이동
-        rootTransform.position = ragdollHoldPoint.position;
-        ragdollRigidbody.position = ragdollHoldPoint.position;
 
-        // Configurable Joint 설정
+
+        // HoldPoint로 즉시 이동
+        rootRigidbody.MovePosition(ragdollHoldPoint.position);
+        ragdollRigidbody.MovePosition(ragdollHoldPoint.position);
+
+        // ragdoll을 root에 부착하는 Configurable Joint 설정
         joint = ragdollRigidbody.gameObject.AddComponent<ConfigurableJoint>();
-        joint.connectedBody = ragdollHoldPoint.GetComponent<Rigidbody>();
+        joint.connectedBody = rootRigidbody; // rootRigidbody에 연결 (HoldPoint가 아님)
 
         joint.xMotion = ConfigurableJointMotion.Limited;
         joint.yMotion = ConfigurableJointMotion.Limited;
         joint.zMotion = ConfigurableJointMotion.Limited;
+        joint.angularXMotion = ConfigurableJointMotion.Limited;
+        joint.angularYMotion = ConfigurableJointMotion.Limited;
+        joint.angularZMotion = ConfigurableJointMotion.Limited;
 
         JointDrive drive = new JointDrive
         {
-            positionSpring = 200,
-            positionDamper = 50,
+            positionSpring = 100,
+            positionDamper = 10,
             maximumForce = 1000
         };
 
@@ -129,9 +149,9 @@ public class RagdollGrabber : MonoBehaviour
         joint.yDrive = drive;
         joint.zDrive = drive;
 
-        // 루트와 래그돌을 연결하는 조인트 추가
+        // 루트와 HoldPoint를 연결하는 조인트 추가
         rootJoint = rootTransform.gameObject.AddComponent<ConfigurableJoint>();
-        rootJoint.connectedBody = ragdollRigidbody;
+        rootJoint.connectedBody = ragdollHoldPoint.GetComponent<Rigidbody>(); // HoldPoint에 연결
 
         rootJoint.xMotion = ConfigurableJointMotion.Limited;
         rootJoint.yMotion = ConfigurableJointMotion.Limited;
@@ -139,8 +159,9 @@ public class RagdollGrabber : MonoBehaviour
         rootJoint.angularXMotion = ConfigurableJointMotion.Limited;
         rootJoint.angularYMotion = ConfigurableJointMotion.Limited;
         rootJoint.angularZMotion = ConfigurableJointMotion.Limited;
-        rootJoint.breakForce = Mathf.Infinity; // 강한 힘으로 인해 끊어지지 않도록 설정
+        rootJoint.breakForce = Mathf.Infinity;
     }
+
 
     public void ReleaseRagdoll()
     {
