@@ -274,8 +274,26 @@ public class PlayerController : MonoBehaviour
         {
             // currentNPC에서 NPCFSM 컴포넌트를 가져옴
             NPCFSM npcFSM = currentNPC.GetComponent<NPCFSM>();
+            NPCRichMan rich = currentNPC.GetComponent<NPCRichMan>();
 
             if (npcFSM != null && npcFSM.isDead)
+            {
+                // NPC가 죽었을 때 실행할 로직
+                Debug.Log("죽은 NPC와 상호작용");
+
+                eholdTime += Time.deltaTime; // 누른 시간 증가
+                eSlider.value = eholdTime / eGoalholdTime;  // 시간만큼 슬라이더 게이지
+
+                if (eholdTime >= eGoalholdTime)
+                {
+                    disguiser.ChangeAppearance(currentNPC); // NPC 정보를 사용해 변장 실행
+                    isDisguised = true;
+                    disguisedNPC = currentNPC; // 변장한 NPC 추적
+                    eholdTime = 0f; // 다시 초기화
+                }
+            }
+
+            if (rich != null && rich.isDead)
             {
                 // NPC가 죽었을 때 실행할 로직
                 Debug.Log("죽은 NPC와 상호작용");
@@ -332,15 +350,32 @@ public class PlayerController : MonoBehaviour
             rSlider.value = 0f; //슬라이더 게이지 초기화
         }
 
+        //제압에 관한 코드
         if (Input.GetKeyDown(KeyCode.F) && currentNPC != null)
         {
             //NPC가 살아있을 때만 작동
             NPCFSM npcFSM = currentNPC.GetComponent<NPCFSM>();
+            NPCRichMan rich = currentNPC.GetComponent<NPCRichMan>();
 
             if (npcFSM != null)
             {
                 // 살아있는 NPC일 때만 무력화 로직 실행
                 if (!npcFSM.isDead)
+                {
+                    // NPC 무력화 로직 추가
+                    anim.SetTrigger("Neutralize");
+                }
+
+                // NPC가 죽었든 살아있든 F키를 누르면 바로 UI를 끄기
+                fImage.gameObject.SetActive(false);
+                E_Chat.gameObject.SetActive(false);
+            }
+
+            //자산가용
+            if (rich != null)
+            {
+                // 살아있는 NPC일 때만 무력화 로직 실행
+                if (!rich.isDead)
                 {
                     // NPC 무력화 로직 추가
                     anim.SetTrigger("Neutralize");
