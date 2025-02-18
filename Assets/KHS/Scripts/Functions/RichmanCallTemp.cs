@@ -54,12 +54,14 @@ public class RichmanCallTemp : MonoBehaviour
         if (!alreadyStarted)
         {
             alreadyStarted = true;
-            LastEndingDialogue(npcID);
+            StartCoroutine(LastEndingDialogue(npcID));
         }
     }
 
-    private void LastEndingDialogue(string npcID)
+    private IEnumerator LastEndingDialogue(string npcID)
     {
+        bool dialogueLoaded = false;
+
         dbRef.Child("NPC_Dialogues").Child(npcID).GetValueAsync()
             .ContinueWithOnMainThread(task =>
             {
@@ -95,6 +97,8 @@ public class RichmanCallTemp : MonoBehaviour
                 }
 
             });
+        yield return new WaitUntil(() => dialogueLoaded);
+
         alreadyStarted = false;
     }
     private string[] GetDialogueBasedOnTarget(DialogueData data)
