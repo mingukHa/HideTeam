@@ -31,7 +31,7 @@ public class NPC_OldMan : NPCFSM
     {
         EventManager.Trigger(GameEventType.OldManGotoTeller);
         OldPos = NewManPos;
-        TextChange.text = "1.카운터로 안내한다";
+        TextChange.text = "1.카운터로 안내한다\n 2.무시한다\n 3.제압한다";
         Debug.Log($"늙은이 위치 변경 {OldPos}");
     }
     private void StopNpc()
