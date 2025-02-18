@@ -4,11 +4,11 @@ public class GcodeEvent : MonoBehaviour
 {
     private void OnEnable()
     {
-       // EventManager.Subscribe(EventManager.GameEventType.Gcode, StartGcode);
+        EventManager.Subscribe(EventManager.GameEventType.Conversation5, StartGcode);
     }
     private void OnDisable()
     {
-       // EventManager.Unsubscribe(EventManager.GameEventType.Gcode, StartGcode);
+        EventManager.Unsubscribe(EventManager.GameEventType.Conversation5, StartGcode);
     }
     private void StartGcode()
     {
