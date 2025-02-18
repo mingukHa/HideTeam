@@ -141,18 +141,13 @@ public class NPCFSM : MonoBehaviour
         foreach (Transform child in GetComponentsInChildren<Transform>())
         {
             child.gameObject.tag = "Ragdoll";
+            child.gameObject.layer = 15;
         }
     }
 
     private void SetRagdollState(bool state)
     {
-        // 모든 자식 오브젝트의 태그를 한 번만 변경
-        foreach (Transform child in GetComponentsInChildren<Transform>())
-        {
-            child.gameObject.tag = "Ragdoll";
-            child.gameObject.layer = 15;
-        }
-
+ 
         // 모든 Rigidbody의 Kinematic 설정 변경
         foreach (var rb in rigidbodies)
         {
