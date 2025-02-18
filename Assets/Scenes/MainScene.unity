@@ -20667,7 +20667,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fade: {fileID: 974037217}
   quadRenderer: {fileID: 1343302538}
-  displayTime: 2
+  displayTime: 3
   Post: {fileID: 402040622}
   quad: {fileID: 1343302535}
   efKey: {fileID: 620596288}
