@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class MatDetChange : MonoBehaviour
 {
-    public TextMeshProUGUI textMesh;
-    
     public delegate void OnTriggerEnterDelegate(interType _interType);
     public delegate void OnTriggerExitDelegate(interType _interType);
 
@@ -100,7 +98,6 @@ public class MatDetChange : MonoBehaviour
     {
         if(other.gameObject.name == "PlayerHolder")
         {
-            textMesh.alpha = 255f;
             EventManager.Subscribe(EventManager.GameEventType.Conversation5, HeardGcode);
         }
     }
@@ -130,7 +127,6 @@ public class MatDetChange : MonoBehaviour
             if (buffer.Contains(interType.Player))
                 buffer.Remove(interType.Player);
             OnTriggerExitCallback?.Invoke(interType.Player);
-            textMesh.alpha = 0f;
             EventManager.Unsubscribe(EventManager.GameEventType.Conversation5, HeardGcode);
         }
     }
