@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.AI;
 
 public class NPCRichMan : MonoBehaviour
 {
@@ -10,6 +11,13 @@ public class NPCRichMan : MonoBehaviour
 
     public SphereCollider NPCCollider;
     public Moutline moutline;
+
+    public NPCIdentifier script1;
+    public NamedNPC script2;
+    public NPCStateMachine script3;
+    public RoutineInvoker script4;
+    public NamedController script5;
+    public NavMeshAgent script6;
 
     private void Start()
     {
@@ -40,7 +48,7 @@ public class NPCRichMan : MonoBehaviour
         if (moutline != null) moutline.enabled = false;
         if (NPCCollider != null) NPCCollider.enabled = false;
 
-        EventManager.Trigger(EventManager.GameEventType.NPCKill);
+        EventManager.Trigger(EventManager.GameEventType.RichKill);
 
         StartCoroutine(ActivateRagdollAfterDeath());
     }
@@ -60,11 +68,17 @@ public class NPCRichMan : MonoBehaviour
         isRagdollActivated = true;
         animator.enabled = false; 
         SetRagdollState(true); // 물리 적용
-
-         //foreach (Transform child in GetComponentsInChildren<Transform>())
-        //{
-        //    child.gameObject.tag = "Ragdoll";
-        //}
+        //여기서 스크립트 다 꺼버리기
+        script1.enabled = false;
+        script2.enabled = false;
+        script3.enabled = false;
+        script4.enabled = false;
+        script5.enabled = false;
+        script6.enabled = false;
+       foreach (Transform child in GetComponentsInChildren<Transform>())
+       {
+           child.gameObject.tag = "Ragdoll";
+       }
     }
 
     private void SetRagdollState(bool state)

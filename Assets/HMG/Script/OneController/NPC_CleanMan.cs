@@ -13,6 +13,7 @@ public class NPC_CleanMan : NPCFSM
     private string npc = "Cleaner";
     public Transform GarbagePos; //이동 할 위치
     public Transform richKill;
+    public Transform richKillPos;
     private bool GarbageTrue = false;
     private bool isHide = false;
     private void OnEnable()
@@ -49,20 +50,54 @@ public class NPC_CleanMan : NPCFSM
     private void StartRichKill()
     {
         if (GarbageTrue == false)
-        agent.SetDestination(richKill.transform.position);
-        chat.LoadNPCDialogue(npc, 3);
-        StartCoroutine(RichFind());
+        {
+            agent.SetDestination(richKill.transform.position);
+            chat.LoadNPCDialogue(npc, 3);
+            StartCoroutine(CheckArrival());
+        }
+    }
+    private IEnumerator CheckArrival()
+    {
+        // NPC가 목적지에 도착할 때까지 대기
+        while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance || agent.velocity.magnitude > 0.1f)
+        {
+            yield return null;
+        }
+
+        // 도착 후 멈추는 코드
+        agent.isStopped = true; // 네비게이션 멈춤
+        agent.ResetPath(); // 경로 초기화
+        ChangeState(State.Talk);
+        chat.LoadNPCDialogue("Null", 0);
+        //StartCoroutine(RichFind());
+        Debug.Log("NPC가 목적지에 도착하여 멈췄습니다.");
     }
     private IEnumerator RichFind()
     {
-        yield return new WaitForSeconds(2f);
-        ChangeState(State.Talk);
-        chat.LoadNPCDialogue(npc, 4);
-        yield return new WaitForSeconds(1f);
-        ChangeState(State.Run);
-        agent.SetDestination(GarbagePos.transform.position);
+        yield return new WaitForSeconds(3f); //  3초 대기 후 이동 시작
 
-        yield return null;
+        ChangeState(State.Walk);
+        agent.isStopped = false; //  이동 재개
+        agent.SetDestination(richKillPos.position);
+
+        // 목적지 도착 감지 (중복 방지)
+        while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance || agent.velocity.magnitude > 0.1f)
+        {
+            yield return null;
+        }
+
+        if (isHide == false)
+        {
+            chat.LoadNPCDialogue(npc, 4);
+            yield return new WaitForSeconds(3f);
+            EventManager.Trigger(GameEventType.GameOver);
+        }
+        else
+        {
+            chat.LoadNPCDialogue(npc, 5);
+            yield return new WaitForSeconds(1f);
+            ChangeState(State.Idle);
+        }
     }
 
     private void StopNpc()
