@@ -43,6 +43,8 @@ public class EventManager : MonoBehaviour
         //
         NPCKill, //NPC죽이면 호출
 
+        RichDead, //리치가 로비에서 죽으면 호출
+
         Conversation1,
         Conversation2,
         Conversation3,

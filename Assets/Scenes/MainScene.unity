@@ -164,6 +164,7 @@ GameObject:
   - component: {fileID: 4500225}
   - component: {fileID: 4500224}
   - component: {fileID: 4500223}
+  - component: {fileID: 4500228}
   m_Layer: 0
   m_Name: Teller2_Collider (1)
   m_TagString: Untagged
@@ -269,6 +270,19 @@ Transform:
   - {fileID: 160026021}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4500228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4500222}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55300bad3dc597844af84c2e956c9e2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nPCRichMan: {fileID: 232194072}
 --- !u!224 &32068294 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3209518575701172087, guid: 536aa32ba9b139c4c8e9fea2ae40da8d, type: 3}
@@ -5840,6 +5854,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
+  isToilet: 0
   NPCCollider: {fileID: 232194068}
   moutline: {fileID: 232194058}
   script1: {fileID: 232194073}
