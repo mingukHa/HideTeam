@@ -13,11 +13,19 @@ MonoBehaviour:
   m_Name: RichmanRoutine_Angry3
   m_EditorClassIdentifier: 
   actions:
-  - actionType: 3
+  - actionType: 0
     targetPosition: {x: -64, y: 0, z: 4}
     waitTime: 3
     TalkEvent: 0
+  - actionType: 3
+    targetPosition: {x: -80, y: 0, z: 8}
+    waitTime: 3
+    TalkEvent: 24
   - actionType: 0
     targetPosition: {x: -80, y: 0, z: 8}
-    waitTime: 0
-    TalkEvent: 0
+    waitTime: 3
+    TalkEvent: 24
+  - actionType: 3
+    targetPosition: {x: -80, y: 0, z: 8}
+    waitTime: 3
+    TalkEvent: 25

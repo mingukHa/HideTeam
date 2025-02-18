@@ -1,27 +1,25 @@
 using UnityEngine;
 
-public class Angry3State : NPCState
+public class TotalEndState : NPCState
 {
-    public Angry3State(NPCController npc) : base(npc)
+    public TotalEndState(NPCController npc) : base(npc)
     {
-
     }
 
     public override void Enter()
     {
-        _npcController.routineInvoker.RoutineChange(3);
+        _npcController.routineInvoker.RoutineChange(6);
     }
-
     public override void Update()
     {
         if (!_npcController.routineInvoker.RoutineEnd()) // 루틴이 끝나지 않았다면 실행
         {
-            Debug.Log("Angry1 State Update 체크");
+            Debug.Log("Gone State Update 체크");
             _npcController.routineInvoker.ExcuteRoutine();
         }
         else
         {
-            _npcController.stateMachine.ChangeState(new CallState(_npcController));
+            _npcController.stateMachine.ChangeState(new TotalEndState(_npcController));
         }
     }
 }

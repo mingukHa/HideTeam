@@ -10,7 +10,7 @@ public class Angry2State : NPCState
 
     public override void Enter()
     {
-        _npcController.routineInvoker.RoutineChange(3);
+        _npcController.routineInvoker.RoutineChange(2);
     }
 
     public override void Update()

@@ -23,6 +23,8 @@ public class TellerController : NPCController
     private bool isWaitingForEvent = false; // 이벤트 완료 대기 상태
     private bool isPlayerInRange = false; // 플레이어가 대화 범위 안에 있는지 확인
 
+    private bool inAction = false;
+
     public List<EventManager.GameEventType> convEnvList;
     public int convEnvIdx = 0;
 
@@ -54,14 +56,16 @@ public class TellerController : NPCController
     {
         if (_interType == MatDetChange.interType.Player)
             isPlayer = true;
-        else if (_interType == MatDetChange.interType.RichMan)
+        else if (_interType == MatDetChange.interType.RichMan && !inAction)
         {
+            inAction = true;
             isVIP = true;
             EventManager.Trigger(EventManager.GameEventType.RichmanTalkTeller);
             LoadTellerDialogue(npcID);
         }
-        else if (_interType == MatDetChange.interType.OldMan)
+        else if (_interType == MatDetChange.interType.OldMan && !inAction)
         {
+            inAction = true;
             isOldMan = true;
             EventManager.Trigger(EventManager.GameEventType.OldManTalkTeller);
             LoadTellerDialogue(npcID);
@@ -199,6 +203,7 @@ public class TellerController : NPCController
 
         isDialoguePlaying = false;
         ShowDialogue("");
+        inAction = false;
     }
 
     private void OnEventCompleted()
@@ -209,7 +214,7 @@ public class TellerController : NPCController
 
     public void TellerGone()
     {
-        stateMachine.ChangeState(new GoneState(this));
+        stateMachine.ChangeState(new TellerGoneState(this));
     }
     public void TellerInteract()
     {

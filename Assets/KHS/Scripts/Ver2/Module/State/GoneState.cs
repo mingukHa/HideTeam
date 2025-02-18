@@ -9,7 +9,7 @@ public class GoneState : NPCState
     public override void Enter()
     {
         Debug.Log($"{_npcController.npcName}이 GoneState로 전환");
-        _npcController.routineInvoker.RoutineChange(1);
+        _npcController.routineInvoker.RoutineChange(4);
     }
     public override void Update()
     {
@@ -20,6 +20,7 @@ public class GoneState : NPCState
         }
         else
         {
+            _npcController.animator.ResetTrigger("Walk");
             _npcController.stateMachine.ChangeState(new IdleState(_npcController));
         }
     }
