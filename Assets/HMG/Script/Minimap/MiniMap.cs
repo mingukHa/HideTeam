@@ -1,44 +1,51 @@
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
 public class MiniMap : MonoBehaviour
 {
     public Transform player; // 플레이어 위치
-    public Vector2 worldSize; // 건물 내부의 실제 크기
-    public Vector2 miniMapSize; // 미니맵 UI 크기
+    public Image playerIcon; // 미니맵 내 플레이어 아이콘
+    public Transform[] npcs; // NPC 목록
+    public Image npcIconPrefab; // NPC 아이콘 프리팹
+    private Image[] npcIcons; // NPC 아이콘 배열
 
-    public RectTransform playerIcon; // 미니맵 위의 플레이어 아이콘
-    private GameObject activeMiniMap; // 현재 활성화된 미니맵
+    public RectTransform miniMapPanel; // 미니맵 UI 패널
+    public float mapScale = 0.1f; // 월드 좌표 -> 미니맵 좌표 변환 비율
 
-    public Dictionary<string, GameObject> miniMaps = new Dictionary<string, GameObject>(); // 건물별 미니맵 관리
-
-    void Update()
+    private void Start()
     {
-        if (activeMiniMap == null) return;
-
-        // 플레이어 좌표를 미니맵 UI 좌표로 변환
-        Vector2 normalizedPos = new Vector2(
-            (player.position.x / worldSize.x) + 0.5f,
-            (player.position.z / worldSize.y) + 0.5f
-        );
-
-        Vector2 miniMapPos = new Vector2(
-            (normalizedPos.x * miniMapSize.x) - (miniMapSize.x * 0.5f),
-            (normalizedPos.y * miniMapSize.y) - (miniMapSize.y * 0.5f)
-        );
-
-        playerIcon.anchoredPosition = miniMapPos; // 플레이어 아이콘 위치 적용
+        // NPC 아이콘을 동적으로 생성하여 관리
+        npcIcons = new Image[npcs.Length];
+        for (int i = 0; i < npcs.Length; i++)
+        {
+            npcIcons[i] = Instantiate(npcIconPrefab, miniMapPanel);
+        }
     }
 
-    // 건물 미니맵을 변경하는 함수
-    public void ActivateMiniMap(string buildingName)
+    private void Update()
     {
-        if (miniMaps.ContainsKey(buildingName))
+        UpdatePlayerPosition();
+        UpdateNPCPositions();
+    }
+
+    private void UpdatePlayerPosition()
+    {
+        if (player == null) return;
+
+        // 월드 위치를 미니맵 위치로 변환
+        Vector2 miniMapPos = new Vector2(player.position.x * mapScale, player.position.z * mapScale);
+        playerIcon.rectTransform.anchoredPosition = miniMapPos;
+    }
+
+    private void UpdateNPCPositions()
+    {
+        for (int i = 0; i < npcs.Length; i++)
         {
-            if (activeMiniMap != null) activeMiniMap.SetActive(false); // 이전 미니맵 숨기기
-            activeMiniMap = miniMaps[buildingName];
-            activeMiniMap.SetActive(true); // 새로운 미니맵 활성화
+            if (npcs[i] == null) continue;
+
+            // NPC의 월드 위치를 미니맵 좌표로 변환
+            Vector2 miniMapPos = new Vector2(npcs[i].position.x * mapScale, npcs[i].position.z * mapScale);
+            npcIcons[i].rectTransform.anchoredPosition = miniMapPos;
         }
     }
 }

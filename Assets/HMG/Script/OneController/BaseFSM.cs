@@ -146,13 +146,20 @@ public class NPCFSM : MonoBehaviour
 
     private void SetRagdollState(bool state)
     {
-        //Debug.Log($" 레그돌 상태 변경: {(state ? "활성화" : "비활성화")}");
+        // 모든 자식 오브젝트의 태그를 한 번만 변경
+        foreach (Transform child in GetComponentsInChildren<Transform>())
+        {
+            child.gameObject.tag = "Ragdoll";
+            child.gameObject.layer = 15;
+        }
+
+        // 모든 Rigidbody의 Kinematic 설정 변경
         foreach (var rb in rigidbodies)
         {
-            //gameObject.tag = "Ragdoll";
-            rb.isKinematic = !state; //  Rigidbody 물리 활성화
+            rb.isKinematic = !state; // Rigidbody 물리 활성화
         }
     }
+
 
     // 각 상태의 기본 행동
     protected virtual void IdleBehavior() { }
