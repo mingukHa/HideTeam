@@ -22,13 +22,15 @@ public class NPC_CleanMan : NPCFSM
         EventManager.Subscribe(GameEventType.RichKill, StartRichKill);
         EventManager.Subscribe(GameEventType.RichHide, StartRichHide);
         EventManager.Subscribe(GameEventType.RichNoHide, StartRichNoHide);
+        EventManager.Subscribe(GameEventType.RichToiletKill, StartRichToiletKill);
     }
     private void OnDisable()
     {
         EventManager.Unsubscribe(GameEventType.Garbage, StartGarbage);
         EventManager.Unsubscribe(GameEventType.RichKill, StartRichKill);
         EventManager.Unsubscribe(GameEventType.RichHide, StartRichHide);
-        EventManager.Unsubscribe(GameEventType.RichNoHide, StartRichNoHide);
+        EventManager.Unsubscribe(GameEventType.RichToiletKill, StartRichNoHide);
+        EventManager.Unsubscribe(GameEventType.RichToiletKill, StartRichToiletKill);
     }
     private void StartRichNoHide()
     {
@@ -37,6 +39,10 @@ public class NPC_CleanMan : NPCFSM
     private void StartRichHide()
     {
         isHide = true;
+    }
+    private void StartRichToiletKill()
+    {
+        StartCoroutine(RichFind());
     }
     private void StartGarbage()
     {
@@ -69,12 +75,12 @@ public class NPC_CleanMan : NPCFSM
         agent.ResetPath(); // 경로 초기화
         ChangeState(State.Talk);
         chat.LoadNPCDialogue("Null", 0);
-        //StartCoroutine(RichFind());
+        StartCoroutine(RichFind());
         Debug.Log("NPC가 목적지에 도착하여 멈췄습니다.");
     }
     private IEnumerator RichFind()
     {
-        yield return new WaitForSeconds(3f); //  3초 대기 후 이동 시작
+        yield return new WaitForSeconds(15f); 
 
         ChangeState(State.Walk);
         agent.isStopped = false; //  이동 재개
@@ -85,7 +91,7 @@ public class NPC_CleanMan : NPCFSM
         {
             yield return null;
         }
-
+        ChangeState(State.Talk);
         if (isHide == false)
         {
             chat.LoadNPCDialogue(npc, 4);

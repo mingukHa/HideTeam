@@ -20,7 +20,7 @@ MonoBehaviour:
   - actionType: 3
     targetPosition: {x: 0, y: 0, z: 0}
     waitTime: 6
-    TalkEvent: 22
+    TalkEvent: 24
   - actionType: 0
     targetPosition: {x: -64.47, y: 0, z: -3.061}
     waitTime: 0
@@ -28,7 +28,7 @@ MonoBehaviour:
   - actionType: 3
     targetPosition: {x: -50, y: 0, z: -4.5}
     waitTime: 0
-    TalkEvent: 23
+    TalkEvent: 25
   - actionType: 0
     targetPosition: {x: -50, y: -0.7, z: -4}
     waitTime: 6

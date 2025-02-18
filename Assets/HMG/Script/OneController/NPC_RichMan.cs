@@ -7,6 +7,7 @@ public class NPCRichMan : MonoBehaviour
     private Animator animator;
     private Rigidbody[] rigidbodies;
     public bool isDead = false;
+    public bool isToilet = false;
     private bool isRagdollActivated = false;
 
     public SphereCollider NPCCollider;
@@ -43,8 +44,13 @@ public class NPCRichMan : MonoBehaviour
     {
         isDead = true;
         animator.SetTrigger("Dead");
-
-
+        
+        script1.enabled = false;
+        script2.enabled = false;
+        script3.enabled = false;
+        script4.enabled = false;
+        script5.enabled = false;
+        script6.enabled = false;
         if (moutline != null) moutline.enabled = false;
         if (NPCCollider != null) NPCCollider.enabled = false;
 
@@ -68,14 +74,11 @@ public class NPCRichMan : MonoBehaviour
         isRagdollActivated = true;
         animator.enabled = false; 
         SetRagdollState(true); // 물리 적용
-        //여기서 스크립트 다 꺼버리기
-        script1.enabled = false;
-        script2.enabled = false;
-        script3.enabled = false;
-        script4.enabled = false;
-        script5.enabled = false;
-        script6.enabled = false;
-       foreach (Transform child in GetComponentsInChildren<Transform>())
+        if (isToilet == false)
+        {
+            EventManager.Trigger(EventManager.GameEventType.NPCKill);
+        }
+        foreach (Transform child in GetComponentsInChildren<Transform>())
        {
            child.gameObject.tag = "Ragdoll";
        }

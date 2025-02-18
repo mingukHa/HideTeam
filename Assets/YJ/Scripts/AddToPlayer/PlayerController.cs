@@ -111,7 +111,8 @@ public class PlayerController : MonoBehaviour
 
         NPCIdentifier npc = other.GetComponent<NPCIdentifier>();    //NPCIdentifier스크립트랑 작용
         NPCFSM npcFSM = other.GetComponent<NPCFSM>(); // NPCFSM 가져오기
-        NPCRichMan rich = other.GetComponent<NPCRichMan>();
+        NPCRichMan rich = other.GetComponent<NPCRichMan>(); //RichMan 전용 컴퍼넌트 받아오기
+
         if (npc != null)
         {
             // 변장 상태에서, 변장한 NPC와 동일한 NPC에 대해 상호작용 차단
@@ -127,9 +128,28 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (npcFSM != null || rich != null)
+        if (npcFSM != null)
         {
-            if (npcFSM.isDead || rich.isDead)
+            if (npcFSM.isDead)
+            {
+                // 죽은 NPC와 상호작용 시 E키 활성화
+                E_Chat.gameObject.SetActive(false);
+                eImage.gameObject.SetActive(true);
+                eSlider.gameObject.SetActive(true);
+                fImage.gameObject.SetActive(false); // 죽은 NPC일 때 F키 관련 UI 비활성화
+            }
+            else
+            {
+                // 살아있는 NPC와 상호작용 시 E키 비활성화
+                eImage.gameObject.SetActive(false);
+                eSlider.gameObject.SetActive(false);
+                fImage.gameObject.SetActive(true); // 살아있는 NPC일 때 F키 관련 UI 활성화
+            }
+        }
+
+        if(rich != null)
+        {
+            if(rich.isDead)
             {
                 // 죽은 NPC와 상호작용 시 E키 활성화
                 E_Chat.gameObject.SetActive(false);
@@ -254,8 +274,26 @@ public class PlayerController : MonoBehaviour
         {
             // currentNPC에서 NPCFSM 컴포넌트를 가져옴
             NPCFSM npcFSM = currentNPC.GetComponent<NPCFSM>();
+            NPCRichMan rich = currentNPC.GetComponent<NPCRichMan>();
 
             if (npcFSM != null && npcFSM.isDead)
+            {
+                // NPC가 죽었을 때 실행할 로직
+                Debug.Log("죽은 NPC와 상호작용");
+
+                eholdTime += Time.deltaTime; // 누른 시간 증가
+                eSlider.value = eholdTime / eGoalholdTime;  // 시간만큼 슬라이더 게이지
+
+                if (eholdTime >= eGoalholdTime)
+                {
+                    disguiser.ChangeAppearance(currentNPC); // NPC 정보를 사용해 변장 실행
+                    isDisguised = true;
+                    disguisedNPC = currentNPC; // 변장한 NPC 추적
+                    eholdTime = 0f; // 다시 초기화
+                }
+            }
+
+            if (rich != null && rich.isDead)
             {
                 // NPC가 죽었을 때 실행할 로직
                 Debug.Log("죽은 NPC와 상호작용");
@@ -312,10 +350,12 @@ public class PlayerController : MonoBehaviour
             rSlider.value = 0f; //슬라이더 게이지 초기화
         }
 
+        //제압에 관한 코드
         if (Input.GetKeyDown(KeyCode.F) && currentNPC != null)
         {
             //NPC가 살아있을 때만 작동
             NPCFSM npcFSM = currentNPC.GetComponent<NPCFSM>();
+            NPCRichMan rich = currentNPC.GetComponent<NPCRichMan>();
 
             if (npcFSM != null)
             {
@@ -324,6 +364,22 @@ public class PlayerController : MonoBehaviour
                 {
                     // NPC 무력화 로직 추가
                     anim.SetTrigger("Neutralize");
+                }
+
+                // NPC가 죽었든 살아있든 F키를 누르면 바로 UI를 끄기
+                fImage.gameObject.SetActive(false);
+                E_Chat.gameObject.SetActive(false);
+            }
+
+            //자산가용
+            if (rich != null)
+            {
+                // 살아있는 NPC일 때만 무력화 로직 실행
+                if (!rich.isDead)
+                {
+                    // NPC 무력화 로직 추가
+                    anim.SetTrigger("Neutralize");
+                    EventManager.Trigger(GameEventType.RichToiletKill);
                 }
 
                 // NPC가 죽었든 살아있든 F키를 누르면 바로 UI를 끄기

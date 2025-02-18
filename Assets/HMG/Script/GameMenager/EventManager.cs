@@ -31,6 +31,7 @@ public class EventManager : MonoBehaviour
         policeTalk, //경비에게 사복경찰 지칭하는 인물을 말함
         policeNoTalk, //경비에게 사복경찰 말 안함
         //
+        RichToiletKill, //화장실에서 경비를 죽였을 때 청소부가 화장실에 들어오는 타이밍
         RichHide, //리치 암살 후 숨겼음
         RichNoHide, //리치 암살 후 숨기지 못함
         //플랜 a부분
@@ -42,6 +43,8 @@ public class EventManager : MonoBehaviour
         GameOver, //게임 오버 시 동작하는 이벤트
         //
         NPCKill, //NPC죽이면 호출
+
+        RichDead, //리치가 로비에서 죽으면 호출
 
         Conversation1,
         Conversation2,
