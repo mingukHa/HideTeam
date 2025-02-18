@@ -24,25 +24,15 @@ public class NPC_DoorGaurd : NPCFSM
 
     private void StartNPCKill()
     {
-        if (player == null) player = GameObject.FindGameObjectWithTag("Player").transform;
-
         ChangeState(State.Run);
-        isChasing = true;
-        sphereCollider.radius = 3.5f;
+        sphereCollider.radius = 3.5f;        
         StartCoroutine(ChasePlayer());
     }
 
     private IEnumerator ChasePlayer()
     {
-        while (isChasing)
-        {
-            animator.SetTrigger("Run");
-
-            if (player != null)
-            {
-                agent.SetDestination(player.position); // 플레이어 위치를 지속적으로 추적
-            }
-
+        yield return new WaitForSeconds(2f);
+        animator.SetTrigger("Run");
             // NPC가 도착했는지 확인
             if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
             {
@@ -59,8 +49,8 @@ public class NPC_DoorGaurd : NPCFSM
                 EventManager.Trigger(GameEventType.GameOver);
             }
 
-            yield return new WaitForSeconds(0.2f); // 너무 자주 호출하지 않도록 약간의 딜레이 추가
-        }
+ 
+        
     }
 
 

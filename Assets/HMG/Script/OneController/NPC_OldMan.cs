@@ -162,8 +162,8 @@ public class NPC_OldMan : NPCFSM
     private IEnumerator CheckArrival()
     {
         // 목표 지점에 도착할 때까지 대기
-        while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
-        {
+        while (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+            {
             yield return null;
         }
 
@@ -172,7 +172,8 @@ public class NPC_OldMan : NPCFSM
         {
             agent.isStopped = true; // 네비게이션 멈춤
             agent.ResetPath(); // 경로 초기화
-            animator.SetTrigger("Idle"); // Idle 애니메이션으로 변경
+            animator.SetTrigger("Talk"); // Idle 애니메이션으로 변경
+            
             Debug.Log("NPC가 목적지에 도착하여 멈췄습니다.");
         }
     }
