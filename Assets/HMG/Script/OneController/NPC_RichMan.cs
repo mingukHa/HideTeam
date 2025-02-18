@@ -81,7 +81,8 @@ public class NPCRichMan : MonoBehaviour
         }
         foreach (Transform child in GetComponentsInChildren<Transform>())
        {
-           child.gameObject.tag = "Ragdoll";
+            child.gameObject.tag = "Ragdoll";
+            child.gameObject.layer = 15;
        }
     }
 
