@@ -23,6 +23,10 @@ public class ScreenshotViewer : MonoBehaviour
     {
         EventManager.Subscribe(GameEventType.GameOver, gameover);
     }
+    private void OnDisable()
+    {
+        EventManager.Unsubscribe(GameEventType.GameOver, gameover);
+    }
     private void gameover()
     {
         Time.timeScale = 0f;

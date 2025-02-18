@@ -1,8 +1,26 @@
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class MatDetChange : MonoBehaviour
 {
+    public delegate void OnTriggerEnterDelegate(interType _interType);
+    public delegate void OnTriggerExitDelegate(interType _interType);
+
+    private OnTriggerEnterDelegate onTriggerEntercallback = null;
+    private OnTriggerExitDelegate onTriggerExitcallback = null;
+
+    public OnTriggerEnterDelegate OnTriggerEnterCallback
+    {
+        get { return onTriggerEntercallback; }
+        set {  onTriggerEntercallback = value; }
+    }
+    public OnTriggerExitDelegate OnTriggerExitCallback
+    {
+        get { return onTriggerExitcallback; }
+        set { onTriggerExitcallback = value; }
+    }
+
     private MeshRenderer meshRenderer = null;
     private Material mat = null;
 
@@ -10,10 +28,14 @@ public class MatDetChange : MonoBehaviour
     private Color DetPlayer = new Color(0, 0, 1, 0.043f);
     private Color DetNPC = new Color(1, 0, 0, 0.043f);
 
-    public List<int> interactObj;
-    public bool isVIP = false;
-    public bool isPlayer = false;
-    public bool isOLDMan = false;
+    public enum interType
+    {
+        Player,
+        RichMan,
+        OldMan,
+    };
+    public List<interType> buffer;
+    public bool isDet = false;
 
     private void Awake()
     {
@@ -28,55 +50,64 @@ public class MatDetChange : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(interactObj.Contains(2))
+        if(buffer.Contains(interType.RichMan) || buffer.Contains(interType.OldMan))
         {
             mat.color = DetNPC;
         }
-        else if (interactObj.Contains(1))
+        else if (buffer.Contains(interType.Player))
         {
             mat.color = DetPlayer;
         }
         else
         {
+            isDet = false;
             mat.color = noDetColor;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.gameObject.name == "OldMan")
         {
-            isPlayer = true;
-            interactObj.Add(1);
+            isDet = true;
+            buffer.Add(interType.OldMan);
+            OnTriggerEnterCallback?.Invoke(interType.OldMan);
         }
         else if (other.gameObject.name == "RichMan")
         {
-            isVIP = true;
-            interactObj.Add(2);
+            isDet = true;
+            buffer.Add(interType.RichMan);
+            OnTriggerEnterCallback?.Invoke(interType.RichMan);
         }
-        else if (other.gameObject.name == "OldMan")
+
+        if(!isDet)
         {
-            isOLDMan = true;
-            interactObj.Add(2);
+            if (other.gameObject.name == "PlayerHolder")
+            {
+                isDet = true;
+                buffer.Add(interType.Player);
+                OnTriggerEnterCallback?.Invoke(interType.Player);
+            }
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.gameObject.name == "OldMan")
         {
-            isPlayer = false;
-            interactObj.Remove(1);
+            buffer.Remove(interType.OldMan);
+            OnTriggerExitCallback?.Invoke(interType.OldMan);
         }
         else if (other.gameObject.name == "RichMan")
         {
-            isVIP = false;
-            interactObj.Remove(2);
+            buffer.Remove(interType.RichMan);
+            OnTriggerExitCallback?.Invoke(interType.RichMan);
         }
-        else if (other.gameObject.name == "OldMan")
+        else if (other.gameObject.name == "PlayerHolder")
         {
-            isOLDMan = false;
-            interactObj.Remove(2);
+            if (buffer.Contains(interType.Player))
+                buffer.Remove(interType.Player);
+            OnTriggerExitCallback?.Invoke(interType.Player);
         }
     }
 }

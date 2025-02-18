@@ -224,7 +224,7 @@ public class NPCFSM : MonoBehaviour
                 if (stateInfo.IsName("Dead") && stateInfo.normalizedTime >= 1.0f)
                 {
                     //Debug.Log("NPC Á×À½");
-                    
+                    ScreenshotManager.Instance.CaptureScreenshot();
                     ActivateRagdoll();
                     isRagdollActivated = true;
                 }

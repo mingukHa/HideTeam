@@ -1,16 +1,15 @@
-using System.Diagnostics.Tracing;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Angry2State : NPCState
+public class Angry3State : NPCState
 {
-    public Angry2State(NPCController npc) : base(npc)
+    public Angry3State(NPCController npc) : base(npc)
     {
+
     }
 
     public override void Enter()
     {
-        _npcController.routineInvoker.RoutineChange(3);
+        _npcController.routineInvoker.RoutineChange(4);
     }
 
     public override void Update()
@@ -22,7 +21,7 @@ public class Angry2State : NPCState
         }
         else
         {
-            _npcController.stateMachine.ChangeState(new Angry3State(_npcController));
+            _npcController.stateMachine.ChangeState(new GoneState(_npcController));
         }
     }
 }

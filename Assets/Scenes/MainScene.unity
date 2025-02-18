@@ -5220,6 +5220,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5906917402462211438, guid: 3c852deeacfc0534a90f03087ab1c4d1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 232194068}
+    - targetCorrespondingSourceObject: {fileID: 5906917402462211438, guid: 3c852deeacfc0534a90f03087ab1c4d1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 232194072}
   m_SourcePrefab: {fileID: 100100000, guid: 3c852deeacfc0534a90f03087ab1c4d1, type: 3}
 --- !u!1 &232194056 stripped
 GameObject:
@@ -5347,12 +5350,13 @@ MonoBehaviour:
   targetVec: []
   agent: {fileID: 0}
   animator: {fileID: 0}
-  eventFlags: 010000000700000005000000030000000a000000
+  eventFlags: 0100000007000000050000000a000000
   actionNames:
   - PlayerEnter
   - RichmanGone
   - RichmanAngry1
   - RichmanAngry2
+  - RichmanAngry3
   dialogueText: {fileID: 0}
   converEvent: 0
   converEventFlags: 
@@ -5420,6 +5424,21 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &232194072
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232194056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b44be5c34a672404e879b50f549b1c66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDead: 0
+  NPCCollider: {fileID: 232194068}
+  moutline: {fileID: 232194058}
 --- !u!1 &238038613
 GameObject:
   m_ObjectHideFlags: 0
@@ -8203,7 +8222,7 @@ MonoBehaviour:
   targetVec: []
   agent: {fileID: 0}
   animator: {fileID: 0}
-  eventFlags: 0200000007000000
+  eventFlags: 0500000007000000
   actionNames:
   - TellerInteract
   - TellerGone
@@ -8214,9 +8233,10 @@ MonoBehaviour:
   MDC_collider: {fileID: 1712179812}
   isVIP: 0
   isPlayer: 0
-  isOLDMan: 0
+  isOldMan: 0
   isInterPlayer: 0
-  convEnvList: 
+  convEnvList: 1600000017000000
+  convEnvIdx: 0
 --- !u!114 &367549494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8230,7 +8250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcRoutines:
-  - {fileID: 0}
+  - {fileID: 11400000, guid: f2416564047331a429a9286a7e4889e6, type: 2}
   - {fileID: 11400000, guid: 5ad498835beb2964cb52166753eb6648, type: 2}
   curRoutineIdx: 0
 --- !u!114 &367549495
@@ -27983,7 +28003,7 @@ PlayableDirector:
   m_Enabled: 0
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: 8c4514c789d167b40985f710815468d3, type: 2}
-  m_InitialState: 1
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -29434,10 +29454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba95368170a7fda4880471a38e40fc3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactObj: 
-  isVIP: 0
-  isPlayer: 0
-  isOLDMan: 0
+  isDet: 0
 --- !u!4 &1712179813
 Transform:
   m_ObjectHideFlags: 0

@@ -25,7 +25,7 @@ public class PlayerController : MonoBehaviour
 
     private bool isMoving = false;
     private bool isCrouching = false;
-    private bool isStarted = false;
+    private static bool isStarted = false;
 
     public Image eImage;    //E키 이미지
     public Slider eSlider;  //E키 게이지
@@ -60,21 +60,24 @@ public class PlayerController : MonoBehaviour
         tr = GetComponent<Transform>();
         disguiser = GetComponent<PlayerDisguiser>();
 
-        Smoking();
+        if (!isStarted)
+        {
+            Smoking();
+        }
+
         isFirstOpen = false;
     }
 
     private void Update()
     {
-        PlayerAction();
-        PlayerMove();
-
         // 흡연이 끝나고 플레이어가 움직이고 있을 때만 마우스 입력 처리
-        if (isMoving && InputMouse(ref mouseX))
+        if (isStarted && InputMouse(ref mouseX))
         {
             InputMouseProcess(mouseX);
         }
 
+        PlayerAction();
+        PlayerMove();
         CheckFirstDoorOpen();
     }
 
@@ -108,7 +111,7 @@ public class PlayerController : MonoBehaviour
 
         NPCIdentifier npc = other.GetComponent<NPCIdentifier>();    //NPCIdentifier스크립트랑 작용
         NPCFSM npcFSM = other.GetComponent<NPCFSM>(); // NPCFSM 가져오기
-
+        NPCRichMan rich = other.GetComponent<NPCRichMan>();
         if (npc != null)
         {
             // 변장 상태에서, 변장한 NPC와 동일한 NPC에 대해 상호작용 차단
@@ -124,9 +127,9 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (npcFSM != null)
+        if (npcFSM != null || rich != null)
         {
-            if (npcFSM.isDead && npcFSM.isRagdollActivated)
+            if (npcFSM.isDead && npcFSM.isRagdollActivated && rich.isDead)
             {
                 // 죽은 NPC와 상호작용 시 E키 활성화
                 E_Chat.gameObject.SetActive(false);
@@ -348,12 +351,7 @@ public class PlayerController : MonoBehaviour
 
     private void Smoking()
     {
-        if (!isStarted)
-        {
-            anim.SetTrigger("isStarted");
-            isStarted = true;
-        }
-
+        anim.SetTrigger("isStarted");
         StartCoroutine(ThrowCigarette());
     }
 
@@ -366,6 +364,9 @@ public class PlayerController : MonoBehaviour
             cigarette.SetActive(false);
             droppingCigarette.SetActive(true);
         }
+
+        yield return new WaitForSeconds(5f);
+        isStarted = true;
     }
 
     private IEnumerator KickTheCar()

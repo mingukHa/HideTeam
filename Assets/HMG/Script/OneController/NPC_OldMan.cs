@@ -22,6 +22,11 @@ public class NPC_OldMan : NPCFSM
     {
         EventManager.Subscribe(GameEventType.TellerTalk, OldmanMove);
     }
+    private void OnDisable()
+    {
+        EventManager.Unsubscribe(GameEventType.TellerTalk, OldmanMove);
+    }
+
     private void OldmanMove()
     {
         EventManager.Trigger(GameEventType.OldManGotoTeller);
@@ -45,6 +50,7 @@ public class NPC_OldMan : NPCFSM
         chat = GetComponent<NPCChatTest>();    
         agent = GetComponent<NavMeshAgent>();
         OldPos = OldManPos;
+        
     }
 
     protected override void Update()

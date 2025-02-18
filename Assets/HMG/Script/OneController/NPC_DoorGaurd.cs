@@ -4,51 +4,73 @@ using Unity.VisualScripting;
 using static EventManager;
 using UnityEngine.AI;
 
-
 public class NPC_DoorGaurd : NPCFSM
 {
-
-    
-    public GameObject npcchatbox; //NPC의 메인 채팅 최상위
+    public GameObject npcchatbox; // NPC의 메인 채팅 최상위
     private string npc = "NPC1";
     public SphereCollider sphereCollider;
+    private bool isChasing = false; // 추적 중인지 체크
+    private Transform playerTransform; // 플레이어 Transform을 지속적으로 업데이트
+
     private void OnEnable()
     {
-       EventManager.Subscribe(GameEventType.NPCKill, StartNPCKill);
-       
+        EventManager.Subscribe(GameEventType.NPCKill, StartNPCKill);
+    }
+
+    private void OnDisable()
+    {
+        EventManager.Unsubscribe(GameEventType.NPCKill, StartNPCKill);
     }
 
     private void StartNPCKill()
     {
-        
+        if (player == null) player = GameObject.FindGameObjectWithTag("Player").transform;
+
         ChangeState(State.Run);
-        agent.SetDestination(player.position);
+        isChasing = true;
         sphereCollider.radius = 3.5f;
-        StartCoroutine(CheckArrival());
-
+        StartCoroutine(ChasePlayer());
     }
 
-    private IEnumerator CheckArrival()
+    private IEnumerator ChasePlayer()
     {
-        while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
+        while (isChasing)
         {
-            yield return null; 
-        }
+            animator.SetTrigger("Run");
 
-        Debug.Log("NPC가 도착했습니다!");
-        StartCoroutine(TalkView());
-        animator.SetTrigger("Talk");
-        chat.LoadNPCDialogue(npc, 1);
-        yield return new WaitForSeconds(2f);
-        EventManager.Trigger(GameEventType.GameOver);
+            if (player != null)
+            {
+                agent.SetDestination(player.position); // 플레이어 위치를 지속적으로 추적
+            }
+
+            // NPC가 도착했는지 확인
+            if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+            {
+                isChasing = false; // 추적 중지
+                agent.isStopped = true; //  NavMeshAgent 멈추기
+                agent.ResetPath(); //  경로 초기화 (불필요한 움직임 방지)
+
+                Debug.Log("NPC가 도착했습니다!");
+                StartCoroutine(TalkView());
+                animator.SetTrigger("Talk");
+                chat.LoadNPCDialogue(npc, 1);
+
+                yield return new WaitForSeconds(2f);
+                EventManager.Trigger(GameEventType.GameOver);
+            }
+
+            yield return new WaitForSeconds(0.2f); // 너무 자주 호출하지 않도록 약간의 딜레이 추가
+        }
     }
+
 
     private void StopNpc()
     {
         StopCoroutine(TalkView());
+        isChasing = false;
         transform.rotation = initrotation;
         NPCCollider.radius = 0.01f;
-        animator.SetTrigger("Idel");
+        animator.SetTrigger("Idle");
         select.SetActive(false);
     }
 
@@ -60,75 +82,10 @@ public class NPC_DoorGaurd : NPCFSM
 
         agent = GetComponent<NavMeshAgent>();
         NPCCollider = GetComponent<SphereCollider>();
-    }
 
-    protected override void Update()
-    {
-
-    }
-
-    protected override void IdleBehavior()
-    {
-        base.IdleBehavior();
-    }
-
-    protected override void LookBehavior()
-    {
-        base.LookBehavior();
-    }
-
-    protected override void WalkBehavior()
-    {
-        base.WalkBehavior();
-    }
-
-    protected override void RunBehavior()
-    {
-        base.RunBehavior();
-    }
-
-    protected override void TalkBehavior()
-    {
-        base.TalkBehavior();
-    }
-
-    protected override void DeadBehavior()
-    {
-        base.DeadBehavior();
-        npcchatbox.SetActive(false);
-        chat.LoadNPCDialogue("NULL", 0);
-    }
-
-    protected override void OnTriggerEnter(Collider other)
-    {
-        if (!isDead && other.CompareTag("Player"))
+        if (player == null)
         {
-            ChangeState(State.Talk);
-            chat.LoadNPCDialogue(npc, 0);
+            player = GameObject.FindGameObjectWithTag("Player").transform;
         }
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            chat.LoadNPCDialogue(npc, 1);
-        }
-
-    }
-
-    //protected override void OnTriggerStay(Collider other)
-    //{
-    //    base.OnTriggerStay(other);
-    //    if (!isDead && other.CompareTag("Player"))
-    //    {
-            
-    //    }
-    //}
-
-    protected override void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            chat.LoadNPCDialogue("NULL", 0);
-        }
-
     }
 }
-

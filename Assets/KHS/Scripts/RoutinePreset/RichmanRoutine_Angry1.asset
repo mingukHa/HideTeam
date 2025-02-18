@@ -20,11 +20,11 @@ MonoBehaviour:
   - actionType: 3
     targetPosition: {x: -64, y: 0, z: 4}
     waitTime: 6
-    TalkEvent: 21
+    TalkEvent: 22
   - actionType: 3
     targetPosition: {x: -50, y: 0, z: -4.5}
     waitTime: 0
-    TalkEvent: 22
+    TalkEvent: 23
   - actionType: 0
     targetPosition: {x: -50, y: 0, z: -4.5}
     waitTime: 0
