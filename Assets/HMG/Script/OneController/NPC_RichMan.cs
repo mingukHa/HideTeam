@@ -76,7 +76,7 @@ public class NPCRichMan : MonoBehaviour
         SetRagdollState(true); // 물리 적용
         if (isToilet == false)
         {
-            EventManager.Trigger(EventManager.GameEventType.GameOver);
+            EventManager.Trigger(EventManager.GameEventType.NPCKill);
         }
         foreach (Transform child in GetComponentsInChildren<Transform>())
        {
