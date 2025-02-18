@@ -136,6 +136,7 @@ public class NPC_OldMan : NPCFSM
             }
             if (Input.GetKey(KeyCode.F))
             {
+                EventManager.Trigger(EventManager.GameEventType.NPCKill);
                 isDead = true;
             }
         }
