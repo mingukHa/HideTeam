@@ -129,27 +129,25 @@ public class SoundManager : MonoBehaviour
 
         if (clip != null)
         {
-            AudioSource audiosource = targetObject.GetComponent<AudioSource>();  // 문 오브젝트에서 AudioSource를 찾음
+            AudioSource audiosource = targetObject.GetComponent<AudioSource>();  // 오브젝트에서 AudioSource를 찾음
 
             if (audiosource == null) // 만약 문에 AudioSource가 없다면 추가
             {
                 audiosource = targetObject.AddComponent<AudioSource>();
             }
-
-            GameObject go = new GameObject(sfxName + "Sound");                  //사운드파일 가져옴
+            
+            //사운드파일 가져옴
             audiosource.outputAudioMixerGroup = mixer.FindMatchingGroups("SFX")[0]; //SFX 믹서 추가
 
             // 3D 효과 설정
             audiosource.spatialBlend = 1f;         // 1: 3D 사운드, 0: 2D 사운드
             audiosource.minDistance = 1f;          // 최소 거리 (풀 볼륨)
-            audiosource.maxDistance = 20f;         // 최대 거리 (감쇠 시작)
+            audiosource.maxDistance = 10f;         // 최대 거리 (감쇠 시작)
             audiosource.rolloffMode = AudioRolloffMode.Linear;  // 선형 감쇠
 
             audiosource.clip = clip;    //clip 파일
             audiosource.volume = 1f;    //volume값
             audiosource.Play();         //그걸 실행
-
-            Destroy(go, clip.length);   //효과음 소리 지나면 파괴
         }
     }
 
@@ -180,6 +178,8 @@ public class SoundManager : MonoBehaviour
         bgmSound.clip = clip;
         bgmSound.loop = true;
         bgmSound.volume = 1f;
+        //2D 사운드로 설정 (카메라 회전 영향 제거)
+        bgmSound.spatialBlend = 0f;
         bgmSound.Play();
     }
 
