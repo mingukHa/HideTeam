@@ -379,6 +379,7 @@ public class PlayerController : MonoBehaviour
                 {
                     // NPC 무력화 로직 추가
                     anim.SetTrigger("Neutralize");
+                    EventManager.Trigger(GameEventType.RichToiletKill);
                 }
 
                 // NPC가 죽었든 살아있든 F키를 누르면 바로 UI를 끄기
