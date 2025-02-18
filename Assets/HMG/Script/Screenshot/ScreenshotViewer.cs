@@ -48,11 +48,17 @@ public class ScreenshotViewer : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.K))
         {
-            
-            StartSlideshow();
+            StartCoroutine(GameRestart());
+
         }
+    }
+
+    private IEnumerator GameRestart()
+    {
+        yield return new WaitForSeconds(0.6f);
+        EventManager.Trigger(GameEventType.GameOver);
     }
 
     public void StartSlideshow()

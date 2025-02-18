@@ -24,15 +24,15 @@ public class ReturnManagerinit : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            StartCoroutine(SaveAllNPCData(4f)); // NPC 데이터 저장
-        }
+        //if (Input.GetKeyDown(KeyCode.Q))
+        //{
+        //    StartCoroutine(SaveAllNPCData(4f)); // NPC 데이터 저장
+        //}
 
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            StartCoroutine(ReturnAllNPCs()); // NPC 및 플레이어 데이터 복원
-        }
+        //if (Input.GetKeyDown(KeyCode.K))
+        //{
+        //    StartCoroutine(ReturnAllNPCs()); // NPC 및 플레이어 데이터 복원
+        //}
     }
 
     public IEnumerator SaveAllNPCData(float duration)

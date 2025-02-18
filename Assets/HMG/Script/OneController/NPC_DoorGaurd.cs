@@ -31,6 +31,7 @@ public class NPC_DoorGaurd : NPCFSM
     }
     private IEnumerator CheckArrival()
     {
+        ScreenshotManager.Instance.CaptureScreenshot();
         yield return new WaitForSeconds(2f);
         while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
         {
