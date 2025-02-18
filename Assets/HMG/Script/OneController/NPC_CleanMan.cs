@@ -51,9 +51,16 @@ public class NPC_CleanMan : NPCFSM
         if (GarbageTrue == false)
         agent.SetDestination(richKill.transform.position);
         chat.LoadNPCDialogue(npc, 3);
+        StartCoroutine(RichFind());
     }
     private IEnumerator RichFind()
     {
+        yield return new WaitForSeconds(2f);
+        ChangeState(State.Talk);
+        chat.LoadNPCDialogue(npc, 4);
+        yield return new WaitForSeconds(1f);
+        ChangeState(State.Run);
+        agent.SetDestination(GarbagePos.transform.position);
 
         yield return null;
     }
