@@ -89,7 +89,7 @@ public class RagdollGrabber : MonoBehaviour
         rootColliders = rootTransform.GetComponentsInChildren<Collider>();
         foreach (var col in rootColliders)
         {
-            col.enabled = false;
+            col.isTrigger = true;
         }
 
         // 루트 Rigidbody 추가
@@ -156,7 +156,7 @@ public class RagdollGrabber : MonoBehaviour
         {
             foreach (var col in rootColliders)
             {
-                col.enabled = true;
+                col.isTrigger = false;
             }
         }
 
