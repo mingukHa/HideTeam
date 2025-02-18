@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour
 
         if (npcFSM != null || rich != null)
         {
-            if (npcFSM.isDead && npcFSM.isRagdollActivated || rich.isDead)
+            if (npcFSM.isDead || rich.isDead)
             {
                 // 죽은 NPC와 상호작용 시 E키 활성화
                 E_Chat.gameObject.SetActive(false);
