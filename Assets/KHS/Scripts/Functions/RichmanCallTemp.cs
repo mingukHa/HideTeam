@@ -4,6 +4,7 @@ using Firebase.Database;
 using Firebase.Extensions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 
 public class RichmanCallTemp : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class RichmanCallTemp : MonoBehaviour
 
     private Queue<string> dialogueQueue = new Queue<string>(); // 대사 큐
     private bool isDialoguePlaying = false; // 대사가 진행 중인지 확인
+    private bool alreadyStarted = false;
 
 
     private void Start()
@@ -30,6 +32,7 @@ public class RichmanCallTemp : MonoBehaviour
 
     private void OnEnable()
     {
+        EventManager.Unsubscribe(EventManager.GameEventType.Conversation4, RichmanCall);
         EventManager.Subscribe(EventManager.GameEventType.Conversation4, RichmanCall);
     }
     private void OnDisable()
@@ -39,20 +42,20 @@ public class RichmanCallTemp : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(MDC_Collider.isPrDet)
+        bool newIsDet = MDC_Collider.isPrDet;
+        if (newIsDet != isDet)
         {
-            isDet = true;
-            dialogueText.alpha = 255f;
-        }
-        else
-        {
-            isDet = false;
-            dialogueText.alpha = 0;
+            isDet = newIsDet;
+            dialogueText.alpha = isDet ? 255f : 0f;
         }
     }
     private void RichmanCall()
     {
-        LastEndingDialogue(npcID);
+        if (!alreadyStarted)
+        {
+            alreadyStarted = true;
+            LastEndingDialogue(npcID);
+        }
     }
 
     private void LastEndingDialogue(string npcID)
@@ -92,6 +95,7 @@ public class RichmanCallTemp : MonoBehaviour
                 }
 
             });
+        alreadyStarted = false;
     }
     private string[] GetDialogueBasedOnTarget(DialogueData data)
     {
