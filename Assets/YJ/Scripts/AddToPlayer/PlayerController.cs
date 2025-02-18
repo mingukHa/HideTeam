@@ -113,7 +113,7 @@ public class PlayerController : MonoBehaviour
         NPCFSM npcFSM = other.GetComponent<NPCFSM>(); // NPCFSM 가져오기
         NPCRichMan rich = other.GetComponent<NPCRichMan>(); //RichMan 전용 컴퍼넌트 받아오기
 
-        Debug.LogWarning("현재 변장중인 직업이 맞는지 : " + (npc == disguisedNPC));
+        Debug.Log("현재 변장중인 직업이 맞는지 : " + (npc == disguisedNPC));
 
         if (npc != null)
         {
