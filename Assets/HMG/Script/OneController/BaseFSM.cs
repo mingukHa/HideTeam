@@ -211,7 +211,7 @@ public class NPCFSM : MonoBehaviour
                 ChangeState(State.Dead);
                 NPCChatTest.enabled = false;
                 moutline.enabled = false;
-                EventManager.Trigger(EventManager.GameEventType.NPCKill);
+                
                 isTalking = false;
                 select.SetActive(false);
                 chat.LoadNPCDialogue("NULL", 0);
