@@ -103,6 +103,8 @@ public class NPC_CleanMan : NPCFSM
             chat.LoadNPCDialogue(npc, 5);
             yield return new WaitForSeconds(1f);
             ChangeState(State.Idle);
+            chat.LoadNPCDialogue("Null", 0);
+            EventManager.Trigger(GameEventType.OldManOut);
         }
     }
 

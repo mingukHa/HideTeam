@@ -23,7 +23,9 @@ public class EventTriggerManager : MonoBehaviour
         GameEventType.RichNoHide,
         GameEventType.NPCKill,
         GameEventType.OldManGotoTeller,
-        GameEventType.RichToiletKill
+        GameEventType.RichToiletKill,
+        GameEventType.OldManOut
+
     };
 
     private void OnEnable()

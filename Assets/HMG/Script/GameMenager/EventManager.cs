@@ -51,7 +51,9 @@ public class EventManager : MonoBehaviour
         Conversation3,
         Conversation4,
         Conversation5,
-        Conversation6
+        Conversation6,
+
+        OldManOut
     }
 
     private static Dictionary<GameEventType, Action> eventDictionary = new Dictionary<GameEventType, Action>();
