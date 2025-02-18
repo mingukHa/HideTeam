@@ -156,28 +156,29 @@ public class NPC_OldMan : NPCFSM
         {
             isWalk = true;
             animator.SetTrigger("Walk");
+            agent.isStopped = false; // 이동 활성화
             agent.SetDestination(OldPos.position);
             StartCoroutine(CheckArrival());
         }
     }
+
     private IEnumerator CheckArrival()
     {
-        // 목표 지점에 도착할 때까지 대기
-        while (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
-            {
+        // NPC가 목적지에 도착할 때까지 대기
+        while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance || agent.velocity.magnitude > 0.1f)
+        {
             yield return null;
         }
 
         // 도착 후 멈추는 코드
-        if (agent.remainingDistance <= agent.stoppingDistance)
-        {
-            agent.isStopped = true; // 네비게이션 멈춤
-            agent.ResetPath(); // 경로 초기화
-            animator.SetTrigger("Talk"); // Idle 애니메이션으로 변경
-            
-            Debug.Log("NPC가 목적지에 도착하여 멈췄습니다.");
-        }
+        agent.isStopped = true; // 네비게이션 멈춤
+        agent.ResetPath(); // 경로 초기화
+        ChangeState(State.Talk);
+        isWalk = false; // 이동 상태 해제
+
+        Debug.Log("NPC가 목적지에 도착하여 멈췄습니다.");
     }
+
 
 }
 
