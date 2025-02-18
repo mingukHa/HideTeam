@@ -225,6 +225,7 @@ public class NPCFSM : MonoBehaviour
                 {
                     //Debug.Log("NPC Á×À½");
                     ScreenshotManager.Instance.CaptureScreenshot();
+                    agent.enabled = false;
                     ActivateRagdoll();
                     isRagdollActivated = true;
                 }

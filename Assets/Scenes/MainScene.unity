@@ -5857,6 +5857,7 @@ MonoBehaviour:
   isToilet: 0
   NPCCollider: {fileID: 232194068}
   moutline: {fileID: 232194058}
+  agent: {fileID: 232194059}
   script1: {fileID: 232194073}
   script2: {fileID: 232194064}
   script3: {fileID: 232194063}

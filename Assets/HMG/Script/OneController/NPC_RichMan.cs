@@ -12,7 +12,7 @@ public class NPCRichMan : MonoBehaviour
 
     public SphereCollider NPCCollider;
     public Moutline moutline;
-
+    public NavMeshAgent agent;
     public NPCIdentifier script1;
     public NamedNPC script2;
     public NPCStateMachine script3;
@@ -51,11 +51,12 @@ public class NPCRichMan : MonoBehaviour
         script4.enabled = false;
         script5.enabled = false;
         script6.enabled = false;
+        
         if (moutline != null) moutline.enabled = false;
-        if (NPCCollider != null) NPCCollider.enabled = false;
+        //if (NPCCollider != null) NPCCollider.enabled = false;
 
         EventManager.Trigger(EventManager.GameEventType.RichKill);
-
+        
         StartCoroutine(ActivateRagdollAfterDeath());
     }
 
