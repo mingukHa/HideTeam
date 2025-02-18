@@ -57,6 +57,7 @@ public class NPC_CleanMan : NPCFSM
     {
         if (GarbageTrue == false)
         {
+            ScreenshotManager.Instance.CaptureScreenshot();
             agent.SetDestination(richKill.transform.position);
             chat.LoadNPCDialogue(npc, 3);
             StartCoroutine(CheckArrival());
@@ -80,7 +81,8 @@ public class NPC_CleanMan : NPCFSM
     }
     private IEnumerator RichFind()
     {
-        yield return new WaitForSeconds(15f); 
+
+        yield return new WaitForSeconds(20f); 
 
         ChangeState(State.Walk);
         agent.isStopped = false; //  이동 재개
@@ -103,6 +105,8 @@ public class NPC_CleanMan : NPCFSM
             chat.LoadNPCDialogue(npc, 5);
             yield return new WaitForSeconds(1f);
             ChangeState(State.Idle);
+            chat.LoadNPCDialogue("Null", 0);
+            EventManager.Trigger(GameEventType.OldManOut);
         }
     }
 

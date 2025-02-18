@@ -113,11 +113,29 @@ public class PlayerController : MonoBehaviour
         NPCFSM npcFSM = other.GetComponent<NPCFSM>(); // NPCFSM 가져오기
         NPCRichMan rich = other.GetComponent<NPCRichMan>(); //RichMan 전용 컴퍼넌트 받아오기
 
+        Debug.LogWarning("현재 변장중인 직업이 맞는지 : " + (npc == disguisedNPC));
+
         if (npc != null)
         {
             // 변장 상태에서, 변장한 NPC와 동일한 NPC에 대해 상호작용 차단
             if (isDisguised && npc == disguisedNPC)
             {
+                eImage.gameObject.SetActive(false);
+                eSlider.gameObject.SetActive(false); // E키 UI 비활성화
+                return; // 변장한 NPC와는 상호작용할 수 없으므로 여기서 종료
+            }
+            else
+            {
+                currentNPC = npc; // 변장하지 않았다면, 현재 NPC 설정
+            }
+        }
+
+        if (rich != null)
+        {
+            // 변장 상태에서, 변장한 NPC와 동일한 NPC에 대해 상호작용 차단
+            if (isDisguised && rich == disguisedNPC)
+            {
+                Debug.Log("UI가 안숨겨짐.");
                 eImage.gameObject.SetActive(false);
                 eSlider.gameObject.SetActive(false); // E키 UI 비활성화
                 return; // 변장한 NPC와는 상호작용할 수 없으므로 여기서 종료
@@ -188,6 +206,12 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("TrashBin"))
         {
             trashBin = null;
+        }
+
+        if (other.CompareTag("Ragdoll"))
+        {
+            eImage.gameObject.SetActive(false);
+            eSlider.gameObject.SetActive(false);
         }
 
         if (!other.gameObject.CompareTag("Ragdoll")) return;
