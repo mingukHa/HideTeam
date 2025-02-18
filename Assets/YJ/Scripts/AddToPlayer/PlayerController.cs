@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour
 
         if (npcFSM != null || rich != null)
         {
-            if (npcFSM.isDead && npcFSM.isRagdollActivated && rich.isDead)
+            if (npcFSM.isDead || rich.isDead)
             {
                 // 죽은 NPC와 상호작용 시 E키 활성화
                 E_Chat.gameObject.SetActive(false);
@@ -319,16 +319,16 @@ public class PlayerController : MonoBehaviour
 
             if (npcFSM != null)
             {
-                // NPC가 죽었든 살아있든 F키를 누르면 바로 UI를 끄기
-                fImage.gameObject.SetActive(false);
-                E_Chat.gameObject.SetActive(false);
-
                 // 살아있는 NPC일 때만 무력화 로직 실행
                 if (!npcFSM.isDead)
                 {
                     // NPC 무력화 로직 추가
                     anim.SetTrigger("Neutralize");
                 }
+
+                // NPC가 죽었든 살아있든 F키를 누르면 바로 UI를 끄기
+                fImage.gameObject.SetActive(false);
+                E_Chat.gameObject.SetActive(false);
             }
         }
 
