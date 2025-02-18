@@ -1,9 +1,12 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor.Rendering;
 using UnityEngine;
 
 public class MatDetChange : MonoBehaviour
 {
+    public TextMeshProUGUI textMesh;
+    
     public delegate void OnTriggerEnterDelegate(interType _interType);
     public delegate void OnTriggerExitDelegate(interType _interType);
 
@@ -23,6 +26,8 @@ public class MatDetChange : MonoBehaviour
 
     private MeshRenderer meshRenderer = null;
     private Material mat = null;
+
+    public bool gcode = false;
 
     private Color noDetColor = new Color(0, 1, 0, 0.043f);
     private Color DetPlayer = new Color(0, 0, 1, 0.043f);
@@ -87,8 +92,25 @@ public class MatDetChange : MonoBehaviour
                 isDet = true;
                 buffer.Add(interType.Player);
                 OnTriggerEnterCallback?.Invoke(interType.Player);
+                
             }
         }
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.gameObject.name == "PlayerHolder")
+        {
+            textMesh.alpha = 255f;
+            EventManager.Subscribe(EventManager.GameEventType.Conversation5, HeardGcode);
+        }
+    }
+    //private void OnEnable()
+    //{
+    //    EventManager.Subscribe(EventManager.GameEventType.Conversation5, HeardGcode);
+    //}
+    private void OnDisable()
+    {
+        EventManager.Unsubscribe(EventManager.GameEventType.Conversation5, HeardGcode);
     }
 
     private void OnTriggerExit(Collider other)
@@ -108,6 +130,12 @@ public class MatDetChange : MonoBehaviour
             if (buffer.Contains(interType.Player))
                 buffer.Remove(interType.Player);
             OnTriggerExitCallback?.Invoke(interType.Player);
+            textMesh.alpha = 0f;
+            EventManager.Unsubscribe(EventManager.GameEventType.Conversation5, HeardGcode);
         }
+    }
+    private void HeardGcode()
+    {
+        gcode = true;
     }
 }
