@@ -320,15 +320,15 @@ public class PlayerController : MonoBehaviour
             // currentNPC에서 NPCFSM 컴포넌트를 가져옴
             NPCFSM npcFSM = currentNPC.GetComponent<NPCFSM>();
             NPCRichMan rich = currentNPC.GetComponent<NPCRichMan>();
-
+            Debug.Log($"{npcFSM},{rich} 받아오고 있음");
             if (npcFSM != null && npcFSM.isDead)
             {
                 // NPC가 죽었을 때 실행할 로직
                 Debug.Log("죽은 NPC와 상호작용");
-
+                Debug.Log($"{npcFSM},{rich} 받아오고 있음2번");
                 eholdTime += Time.deltaTime; // 누른 시간 증가
                 eSlider.value = eholdTime / eGoalholdTime;  // 시간만큼 슬라이더 게이지
-
+                Debug.Log($"{eSlider.value}");
                 if (eholdTime >= eGoalholdTime)
                 {
                     disguiser.ChangeAppearance(currentNPC); // NPC 정보를 사용해 변장 실행

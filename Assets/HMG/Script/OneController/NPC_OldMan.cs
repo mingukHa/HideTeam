@@ -1,18 +1,21 @@
 using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 using static EventManager;
 using UnityEngine.AI;
+using UnityEngine.InputSystem.iOS;
+using UnityEngine.UIElements;
 using TMPro;
 
 
 public class NPC_OldMan : NPCFSM
 {
-    
+
     public GameObject npcchatbox; //NPC의 메인 채팅 최상위
     private string npc = "OldMan";
     public Transform OldManPos; //이동 할 위치
     public Transform NewManPos;
-    public TextMeshProUGUI TextChange;
+    public TextMeshPro TextChange;
     private Transform OldPos;
     private bool isWalk = false;
     private void OnEnable()
@@ -44,17 +47,17 @@ public class NPC_OldMan : NPCFSM
         transform.rotation = initrotation;
         new WaitForSeconds(2f);
         NPCCollider.radius = 0.01f;
-       // animator.SetTrigger("Idel");
+        // animator.SetTrigger("Idel");
         select.SetActive(false);
     }
-    
+
     protected override void Start()
     {
         base.Start();
-        chat = GetComponent<NPCChatTest>();    
+        chat = GetComponent<NPCChatTest>();
         agent = GetComponent<NavMeshAgent>();
         OldPos = OldManPos;
-        
+
     }
 
     protected override void Update()
@@ -96,13 +99,13 @@ public class NPC_OldMan : NPCFSM
     protected override void DeadBehavior()
     {
         base.DeadBehavior();
-        
+
         chat.LoadNPCDialogue("NULL", 0);
     }
 
     protected override void OnTriggerEnter(Collider other)
     {
-        
+
         if (!isDead && other.CompareTag("Player"))
         {
             chat.LoadNPCDialogue(npc, 0);
@@ -136,7 +139,7 @@ public class NPC_OldMan : NPCFSM
                 ScreenshotManager.Instance.CaptureScreenshot();
                 Invoke("StopNpc", 2f);
                 Invoke("ReturnOldMan", 2f);
-                            
+
             }
             if (Input.GetKey(KeyCode.F))
             {
@@ -145,13 +148,13 @@ public class NPC_OldMan : NPCFSM
             }
         }
     }
-    
+
     protected override void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             chat.LoadNPCDialogue("NULL", 0);
-            
+
         }
     }
     private void ReturnOldMan()
@@ -185,4 +188,3 @@ public class NPC_OldMan : NPCFSM
 
 
 }
-
