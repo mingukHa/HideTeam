@@ -95,6 +95,11 @@ public class PlayerController : MonoBehaviour
             E_Chat.SetActive(true);
         }
 
+        if (other.CompareTag("NPCTeller"))
+        {
+            E_Chat.SetActive(true);
+        }
+
         if (other.CompareTag("Car"))
         {
             carAlarm = other.GetComponent<CarAlarm>();
@@ -197,10 +202,12 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("NPC"))
         {
             fImage.gameObject.SetActive(false);
+            E_Chat.SetActive(false);
         }
 
-        if (other.CompareTag("NPC"))
+        if (other.CompareTag("NPCTeller"))
         {
+            fImage.gameObject.SetActive(false);
             E_Chat.SetActive(false);
         }
 
