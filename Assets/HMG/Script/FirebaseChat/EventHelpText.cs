@@ -64,7 +64,7 @@ public class EventHelpText : MonoBehaviour
     }
     private void StartCarKick()
     {
-        StartCoroutine(textNull("이런 그런 차를 발로 차면 어떻해? 누가 오기전에 얼른 숨어"));        
+        StartCoroutine(textNull("이런 차를 발로 차면 어떻해? 누가 오기전에 얼른 숨어"));        
     }
     private IEnumerator textNull(string texts)
     {
