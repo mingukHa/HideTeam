@@ -132,6 +132,7 @@ public class NPC_CleanMan : NPCFSM
             chat.LoadNPCDialogue("Null", 0);
             EventManager.Trigger(GameEventType.OldManOut);
         }
+        chat.LoadNPCDialogue("Null", 0);
     }
 
     private void StopNpc()

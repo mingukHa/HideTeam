@@ -15,7 +15,8 @@ public class EventHelpText : MonoBehaviour
         EventManager.Subscribe(GameEventType.NPCKill, StartNPCKill); 
         EventManager.Subscribe(GameEventType.PlayerEnterBank, StartPlayerEnterBank);
         EventManager.Subscribe(GameEventType.CleanManTalk, StartCleanManTalk);
-}
+        EventManager.Subscribe(GameEventType.OldManOut, OldmanOut);
+    }
     private void OnDisable()
     {
         EventManager.Unsubscribe(GameEventType.Garbage, StartGarbage);
@@ -24,6 +25,11 @@ public class EventHelpText : MonoBehaviour
         EventManager.Unsubscribe(GameEventType.Carkick, StartCarKick);
         EventManager.Unsubscribe(GameEventType.NPCKill, StartNPCKill);
         EventManager.Unsubscribe(GameEventType.PlayerEnterBank, StartPlayerEnterBank);
+        EventManager.Unsubscribe(GameEventType.OldManOut, OldmanOut);
+    }
+    private void OldmanOut()
+    {
+        
     }
     private void StartCleanManTalk()
     {
