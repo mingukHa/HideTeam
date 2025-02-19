@@ -88,8 +88,9 @@ public class EndingFunctionTemp : MonoBehaviour
         
         dialogueText.alpha = 255f;
         LastEndingDialogue(npcID);
-        yield return new WaitForSeconds(4.0f);
-        Debug.Log("4초 경과");
+        yield return new WaitForSeconds(8.0f);
+        Debug.Log("8초 경과");
+        isDefault = false;
         LastEndingDialogue(npcID);
     }
     private void OnTriggerEnter(Collider _collider)
@@ -173,10 +174,18 @@ public class EndingFunctionTemp : MonoBehaviour
         while (dialogueQueue.Count > 0)
         {
             string dialogue = dialogueQueue.Dequeue();
+            
             ShowDialogue(dialogue);
-
             
             yield return new WaitForSeconds(2.0f);
+            if(dialogue.Contains("/B"))
+            {
+                EventManager.Trigger(EndingEnvList[0]);
+            }
+            if(dialogue.Contains("/G"))
+            {
+                EventManager.Trigger(EndingEnvList[1]);
+            }
         }
         isDialoguePlaying = false;
         ShowDialogue("");

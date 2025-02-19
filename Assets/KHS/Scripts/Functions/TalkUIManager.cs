@@ -112,6 +112,7 @@ public class TalkUIManager : MonoBehaviour
     public void TalkReset()
     {
         curBoxIdx = -1;
+        Debug.Log("토크 리셋 타이밍");
         SwitchBox();
     }
 
