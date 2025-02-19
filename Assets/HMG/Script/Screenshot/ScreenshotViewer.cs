@@ -30,32 +30,44 @@ public class ScreenshotViewer : MonoBehaviour
     {
         EventManager.Unsubscribe(GameEventType.GameOver, gameover);
     }
-    private void gameover()
+    private void Awake()
     {
-        clockss.isReturning = true;
-        
-        chat.SetActive(false);
-        Light.SetActive(false);
-        quad.SetActive(true);
-        Post.SetActive(true);
-        efKey.SetActive(false);
-        Nav.SetActive(false);
-        StartSlideshow();
+        DontDestroyOnLoad(Clock);
+        Debug.Log("시계 파괴 방지");
     }
-    void Start()
+    private void Start()
     {
         // Quad의 Material 가져오기
         if (quadRenderer != null)
         {
             quadMaterial = quadRenderer.material;
         }
+        StartCoroutine(ClockStop());
     }
+    private IEnumerator ClockStop()
+    {
+        yield return new WaitForSeconds(1f);
+        Clock.SetActive(false);
+    }
+    private void gameover()
+    {
+        clockss.isReturning = true;
+        
+        chat.SetActive(false);
+        quad.SetActive(true);
+        Post.SetActive(true);
+        efKey.SetActive(false);
+        Nav.SetActive(false);
+        StartSlideshow();
+    }
+    
 
     public void Update()
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
             //정 방향
+            Light.SetActive(false);
             StartCoroutine(GameRestart());
             Clock.SetActive(true);
         }
