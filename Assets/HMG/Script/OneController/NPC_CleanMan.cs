@@ -52,7 +52,6 @@ public class NPC_CleanMan : NPCFSM
     private void StartGarbage()
     {
         // agent.speed = 3f;
-        text.text = "누군가 달려오고 있어";
         GarbageTrue = true;
         Debug.Log("청소부 개 빡쳐서 달려오는 중");
 
@@ -82,7 +81,6 @@ public class NPC_CleanMan : NPCFSM
     {
         if (GarbageTrue == false)
         {
-            text.text = "이런 청소부가 눈치챘어, 얼른 시체를 처리해";
             ScreenshotManager.Instance.CaptureScreenshot();
             agent.SetDestination(richKill.transform.position);
             chat.LoadNPCDialogue(npc, 3);
@@ -122,20 +120,19 @@ public class NPC_CleanMan : NPCFSM
         ChangeState(State.Talk);
         if (isHide == false)
         {
-            text.text = "이런 들켜버렸군 다시 돌아가";
             chat.LoadNPCDialogue(npc, 4);
             yield return new WaitForSeconds(3f);
             EventManager.Trigger(GameEventType.GameOver);
         }
         else
         {
-            text.text = "성공했군 카운터로 이동해봐";
             chat.LoadNPCDialogue(npc, 5);
             yield return new WaitForSeconds(1f);
             ChangeState(State.Idle);
             chat.LoadNPCDialogue("Null", 0);
             EventManager.Trigger(GameEventType.OldManOut);
         }
+        chat.LoadNPCDialogue("Null", 0);
     }
 
     private void StopNpc()
@@ -222,6 +219,7 @@ public class NPC_CleanMan : NPCFSM
                 chat.LoadNPCDialogue(npc, 1);
                 StopCoroutine(TalkView());
                 ScreenshotManager.Instance.CaptureScreenshot();
+                EventManager.Trigger(GameEventType.CleanManTalk);
                 Invoke("StopNpc",2f);
 
             }
@@ -230,6 +228,7 @@ public class NPC_CleanMan : NPCFSM
                 chat.LoadNPCDialogue(npc, 2);
                 StopCoroutine(TalkView());
                 ScreenshotManager.Instance.CaptureScreenshot();
+                EventManager.Trigger(GameEventType.CleanManTalk);
                 Invoke("StopNpc", 2f);
             }
         }

@@ -15,9 +15,13 @@ MonoBehaviour:
   actions:
   - actionType: 1
     targetPosition: {x: 0, y: 0, z: 0}
-    waitTime: 10
-    TalkEvent: 0
+    waitTime: 5
+    gameEvent: 0
   - actionType: 3
     targetPosition: {x: 0, y: 0, z: 0}
-    waitTime: 3
-    TalkEvent: 28
+    waitTime: 0
+    gameEvent: 27
+  - actionType: 3
+    targetPosition: {x: 0, y: 0, z: 0}
+    waitTime: 9
+    gameEvent: 28

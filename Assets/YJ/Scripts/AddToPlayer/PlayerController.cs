@@ -48,6 +48,8 @@ public class PlayerController : MonoBehaviour
 
     public GameObject CarKey;   //차 발로 차기 키
 
+    public Image gImage;    //G키 이미지
+
     private float eholdTime = 0f;   //E키 누른 시간
     private float eGoalholdTime = 1f;   //E키 눌러야하는 시간
 
@@ -398,23 +400,17 @@ public class PlayerController : MonoBehaviour
         //제압에 관한 코드
         if (Input.GetKeyDown(KeyCode.F) && currentNPC != null)
         {
-            //NPC가 살아있을 때만 작동
-            NPCFSM npcFSM = currentNPC.GetComponent<NPCFSM>();
+            
             NPCRichMan rich = currentNPC.GetComponent<NPCRichMan>();
 
-            if (npcFSM != null)
-            {
-                // 살아있는 NPC일 때만 무력화 로직 실행
-                if (!npcFSM.isDead)
-                {
-                    // NPC 무력화 로직 추가
+           
                     anim.SetTrigger("Neutralize");
-                }
+                
 
                 // NPC가 죽었든 살아있든 F키를 누르면 바로 UI를 끄기
                 fImage.gameObject.SetActive(false);
                 E_Chat.gameObject.SetActive(false);
-            }
+            
 
             //자산가용
             if (rich != null)

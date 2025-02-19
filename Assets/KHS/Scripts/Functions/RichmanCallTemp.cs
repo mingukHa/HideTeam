@@ -20,6 +20,9 @@ public class RichmanCallTemp : MonoBehaviour
     private Queue<string> dialogueQueue = new Queue<string>(); // 대사 큐
     private bool isDialoguePlaying = false; // 대사가 진행 중인지 확인
     private bool alreadyStarted = false;
+    private bool isWaitingForEvent = false;
+
+    public EventManager.GameEventType convEnv;
 
 
     private void Start()
@@ -108,8 +111,8 @@ public class RichmanCallTemp : MonoBehaviour
     }
     private void ShowDialogue(string text)
     {
-        dialogueText.text = text;
-        Debug.Log($"[Teller] 대사 출력: {text}");
+        dialogueText.text = text.Replace("/E", ""); // /E 제거 후 출력
+        Debug.Log($"[RichMan] 대사 출력: {text}");
     }
 
     private void StartDialogueSequence(string[] dialogues)
@@ -129,9 +132,34 @@ public class RichmanCallTemp : MonoBehaviour
         {
             string dialogue = dialogueQueue.Dequeue();
             ShowDialogue(dialogue);
+
+            // 대사에 /E 이벤트가 포함되어 있는 경우
+            if (dialogue.Contains("/E"))
+            {
+
+                Debug.Log($"[이벤트 {convEnv} 호출]");
+                isWaitingForEvent = true;
+
+                // 이벤트 완료 신호를 받을 때까지 대기
+                EventManager.Subscribe(convEnv, OnEventCompleted);
+                // EventManager.Trigger(convEnvList[convEnvIdx]);
+
+                while (isWaitingForEvent)
+                {
+                    yield return null;
+                }
+
+                EventManager.Unsubscribe(convEnv, OnEventCompleted);
+            }
+
             yield return new WaitForSeconds(2.0f);
         }
         isDialoguePlaying = false;
         ShowDialogue("");
+    }
+    private void OnEventCompleted()
+    {
+        Debug.Log("[이벤트 완료] 다음 대사 출력");
+        isWaitingForEvent = false;
     }
 }
