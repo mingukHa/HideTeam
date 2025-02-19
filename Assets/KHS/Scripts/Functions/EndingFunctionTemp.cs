@@ -12,7 +12,9 @@ public class EndingFunctionTemp : MonoBehaviour
     public string npcID = "Ending";
 
     public MatDetChange MDC_Collider;
-    public GameObject detectDisguseRichman;
+
+    public GameObject correctDisguse;
+
     public TextMeshProUGUI dialogueText;
 
     [SerializeField]
@@ -63,7 +65,8 @@ public class EndingFunctionTemp : MonoBehaviour
 
     private void FixedUpdate()
     {
-        isDisguse = detectDisguseRichman.activeSelf;
+        isDisguse = correctDisguse.activeSelf;
+
         if (isFlowClear && isDisguse && isDet && Input.GetKeyDown(KeyCode.E) && !alreadyStarted)
         {
             alreadyStarted = true;
@@ -85,9 +88,8 @@ public class EndingFunctionTemp : MonoBehaviour
         
         dialogueText.alpha = 255f;
         LastEndingDialogue(npcID);
-        yield return new WaitForSeconds(8.0f);
-        Debug.Log("8초 경과");
-        isDefault = false;
+        yield return new WaitForSeconds(4.0f);
+        Debug.Log("4초 경과");
         LastEndingDialogue(npcID);
     }
     private void OnTriggerEnter(Collider _collider)
@@ -150,7 +152,8 @@ public class EndingFunctionTemp : MonoBehaviour
     }
     private void ShowDialogue(string text)
     {
-        dialogueText.text = text.Replace("/E", ""); // /E 제거 후 출력
+        text = text.Replace("/B", "");
+        dialogueText.text = text.Replace("/G", ""); // /G 제거 후 출력
         Debug.Log($"[Ending] 대사 출력: {text}");
     }
 
@@ -170,17 +173,6 @@ public class EndingFunctionTemp : MonoBehaviour
         while (dialogueQueue.Count > 0)
         {
             string dialogue = dialogueQueue.Dequeue();
-
-            if(dialogue.Contains("/B"))
-            {
-                EndingIdx = 0;
-                EventManager.Trigger(EndingEnvList[EndingIdx]);
-            }
-            else if(dialogue.Contains("/G"))
-            {
-                EndingIdx = 1;
-                EventManager.Trigger(EndingEnvList[EndingIdx]);
-            }
             ShowDialogue(dialogue);
 
             
