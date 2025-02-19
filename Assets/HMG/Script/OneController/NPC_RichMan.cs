@@ -51,11 +51,16 @@ public class NPCRichMan : MonoBehaviour
         script4.enabled = false;
         script5.enabled = false;
         script6.enabled = false;
-        
         if (moutline != null) moutline.enabled = false;
-        //if (NPCCollider != null) NPCCollider.enabled = false;
 
-        EventManager.Trigger(EventManager.GameEventType.RichKill);
+        if (isToilet == false)
+        {
+            EventManager.Trigger(EventManager.GameEventType.NPCKill);
+        }
+        else if (isToilet == true)
+        {
+            EventManager.Trigger(EventManager.GameEventType.RichKill);
+        }
         
         StartCoroutine(ActivateRagdollAfterDeath());
     }
@@ -75,10 +80,7 @@ public class NPCRichMan : MonoBehaviour
         isRagdollActivated = true;
         animator.enabled = false; 
         SetRagdollState(true); // 물리 적용
-        if (isToilet == false)
-        {
-            EventManager.Trigger(EventManager.GameEventType.NPCKill);
-        }
+        
         foreach (Transform child in GetComponentsInChildren<Transform>())
        {
             child.gameObject.tag = "Ragdoll";

@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -27,6 +28,7 @@ public class NPCFSM : MonoBehaviour
     public ReturnManagerinit returnManager;
     protected NPCChatTest chat;
     protected Moutline moutline;
+    public TextMeshProUGUI text;
     
     
     protected virtual void Start()
@@ -80,6 +82,7 @@ public class NPCFSM : MonoBehaviour
             {
                 //Debug.Log(" Dead 애니메이션 종료 - 레그돌 활성화 실행");
                 ActivateRagdoll(); //  레그돌 처리
+                agent.enabled = true;
             }
         }
     }
