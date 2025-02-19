@@ -39551,6 +39551,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2048680880}
     - target: {fileID: 494584579064435247, guid: ad65ef8b4e0ab2d43b4a8c971551848e, type: 3}
+      propertyPath: npcclean
+      value: 
+      objectReference: {fileID: 983030528}
+    - target: {fileID: 494584579064435247, guid: ad65ef8b4e0ab2d43b4a8c971551848e, type: 3}
       propertyPath: richKill
       value: 
       objectReference: {fileID: 1613718397}
