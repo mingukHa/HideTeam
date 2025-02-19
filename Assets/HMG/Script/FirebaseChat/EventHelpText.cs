@@ -15,7 +15,7 @@ public class EventHelpText : MonoBehaviour
         EventManager.Subscribe(GameEventType.NPCKill, StartNPCKill); 
         EventManager.Subscribe(GameEventType.PlayerEnterBank, StartPlayerEnterBank);
         EventManager.Subscribe(GameEventType.CleanManTalk, StartCleanManTalk);
-        EventManager.Subscribe(GameEventType.OldManOut, OldmanOut);
+        EventManager.Subscribe(GameEventType.OldManTalkTeller, OldTalkTeller);
     }
     private void OnDisable()
     {
@@ -25,11 +25,11 @@ public class EventHelpText : MonoBehaviour
         EventManager.Unsubscribe(GameEventType.Carkick, StartCarKick);
         EventManager.Unsubscribe(GameEventType.NPCKill, StartNPCKill);
         EventManager.Unsubscribe(GameEventType.PlayerEnterBank, StartPlayerEnterBank);
-        EventManager.Unsubscribe(GameEventType.OldManOut, OldmanOut);
+        EventManager.Unsubscribe(GameEventType.OldManTalkTeller, OldTalkTeller);
     }
-    private void OldmanOut()
+    private void OldTalkTeller()
     {
-        
+        text.text = "할아버지가 난동을 부리고 있다";
     }
     private void StartCleanManTalk()
     {

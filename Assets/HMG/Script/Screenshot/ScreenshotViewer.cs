@@ -60,10 +60,7 @@ public class ScreenshotViewer : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            //¡§ πÊ«‚
-            Light.SetActive(false);
             StartCoroutine(GameRestart());
-            Clock.SetActive(true);
         }
     }
 
