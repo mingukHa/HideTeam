@@ -12,7 +12,7 @@ public class NPC_CleanMan : NPCFSM
     public GameObject npcchatbox; //NPC의 메인 채팅 최상위
     private string npc = "Cleaner";
     public Transform GarbagePos; //이동 할 위치
-    public Transform GarbagePos1;
+    
     public Transform richKill;
     public Transform richKillPos;
     private bool GarbageTrue = false;
@@ -57,23 +57,22 @@ public class NPC_CleanMan : NPCFSM
         animator.SetBool("Run", true);
         NPCCollider.enabled = true;
 
-        // 두 번째 목적지로 이동하는 코루틴 실행
-        StartCoroutine(MoveToSecondPosition());
+        
     }
 
-    private IEnumerator MoveToSecondPosition()
-    {
-        // 첫 번째 목적지에 도착할 때까지 대기
-        while (agent.pathPending || agent.remainingDistance > 0.5f)
-        {
-            yield return null;
-        }
+    //private IEnumerator MoveToSecondPosition()
+    //{
+    //    // 첫 번째 목적지에 도착할 때까지 대기
+    //    while (agent.pathPending || agent.remainingDistance > 0.5f)
+    //    {
+    //        yield return null;
+    //    }
 
-        Debug.Log("첫 번째 목적지 도착, 두 번째 위치로 이동");
+    //    Debug.Log("첫 번째 목적지 도착, 두 번째 위치로 이동");
 
-        // 두 번째 목적지로 이동
-        agent.SetDestination(GarbagePos1.transform.position);
-    }
+    //    // 두 번째 목적지로 이동
+    //    agent.SetDestination(GarbagePos1.transform.position);
+    //}
     private void StartRichKill()
     {
         if (GarbageTrue == false)

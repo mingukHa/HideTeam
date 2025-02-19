@@ -20815,7 +20815,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.7
   m_Center: {x: 0.5455122, y: -0.80505335, z: -0.051084995}
 --- !u!114 &574809571
 MonoBehaviour:
@@ -22148,7 +22148,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.7
   m_Center: {x: 0.545516, y: -0.80505335, z: -0.051084995}
 --- !u!114 &701006524
 MonoBehaviour:
@@ -24170,7 +24170,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.7
   m_Center: {x: 0.5455122, y: -0.80505335, z: -0.051084995}
 --- !u!114 &942399580
 MonoBehaviour:
@@ -27489,7 +27489,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.7
   m_Center: {x: 0.5455122, y: -0.80505335, z: -0.051084995}
 --- !u!114 &1166842009
 MonoBehaviour:
@@ -28633,7 +28633,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.7
   m_Center: {x: 0.545516, y: -0.80505335, z: -0.051084995}
 --- !u!114 &1304457191
 MonoBehaviour:
@@ -34450,7 +34450,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lid: {fileID: 1410698476}
   lidOpenRotation: {x: 0, y: -0.53729963, z: 0, w: 0.8433914}
-  eImage: {fileID: 0}
 --- !u!65 &1410698479
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -38730,7 +38729,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.5
+  m_Radius: 0.7
   m_Center: {x: 0.545516, y: -0.80505335, z: -0.051084995}
 --- !u!114 &1724756541
 MonoBehaviour:
@@ -39222,6 +39221,10 @@ PrefabInstance:
       propertyPath: npcchatbox
       value: 
       objectReference: {fileID: 1482859180}
+    - target: {fileID: 494584579064435247, guid: ad65ef8b4e0ab2d43b4a8c971551848e, type: 3}
+      propertyPath: GarbagePos1
+      value: 
+      objectReference: {fileID: 2044822426}
     - target: {fileID: 494584579064435247, guid: ad65ef8b4e0ab2d43b4a8c971551848e, type: 3}
       propertyPath: NPCCollider
       value: 
