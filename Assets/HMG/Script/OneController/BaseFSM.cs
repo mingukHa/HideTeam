@@ -28,7 +28,7 @@ public class NPCFSM : MonoBehaviour
     public ReturnManagerinit returnManager;
     protected NPCChatTest chat;
     protected Moutline moutline;
-    public TextMeshProUGUI text;
+    
     
     
     protected virtual void Start()
