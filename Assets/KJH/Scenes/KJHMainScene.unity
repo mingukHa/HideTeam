@@ -22483,6 +22483,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6819076263201041112, guid: ad65ef8b4e0ab2d43b4a8c971551848e, type: 3}
   m_PrefabInstance: {fileID: 1756619543}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1111927788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111927763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1b2bf2b41a8034a97a5b305155994b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nPCAvatar: {fileID: 9000000, guid: 2c4df6c384979c842a242062dee54602, type: 3}
+  nPCName: 
 --- !u!1 &1115154216
 GameObject:
   m_ObjectHideFlags: 0
@@ -37051,6 +37065,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6117565330496542811, guid: ad65ef8b4e0ab2d43b4a8c971551848e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1111927780}
+    - targetCorrespondingSourceObject: {fileID: 6117565330496542811, guid: ad65ef8b4e0ab2d43b4a8c971551848e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1111927788}
     - targetCorrespondingSourceObject: {fileID: 9170141643244306960, guid: ad65ef8b4e0ab2d43b4a8c971551848e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 185294439}
@@ -38065,6 +38082,10 @@ PrefabInstance:
     - target: {fileID: 100154, guid: 6996385895b383749b266464bf872c69, type: 3}
       propertyPath: m_Name
       value: DoorGaurd
+      objectReference: {fileID: 0}
+    - target: {fileID: 100154, guid: 6996385895b383749b266464bf872c69, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100154, guid: 6996385895b383749b266464bf872c69, type: 3}
       propertyPath: m_TagString
