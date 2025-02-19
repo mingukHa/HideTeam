@@ -60,11 +60,16 @@ public class ScreenshotViewer : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            //정 방향
-            Light.SetActive(false);
-            StartCoroutine(GameRestart());
-            Clock.SetActive(true);
+            Invoke("HandleGameRestart", 1.2f);
         }
+    }
+
+    private void HandleGameRestart()
+    {
+        //정 방향
+        Light.SetActive(false);
+        StartCoroutine(GameRestart());
+        Clock.SetActive(true);
     }
 
     private IEnumerator GameRestart()
