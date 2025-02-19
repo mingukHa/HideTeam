@@ -127,6 +127,7 @@ public class MatDetChange : MonoBehaviour
                 buffer.Remove(interType.Player);
             OnTriggerExitCallback?.Invoke(interType.Player);
             EventManager.Unsubscribe(EventManager.GameEventType.Conversation5, HeardGcode);
+            isPrDet = false;
         }
     }
     private void HeardGcode()

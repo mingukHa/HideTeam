@@ -922,11 +922,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 7889d4b9-1224-4fc7-a314-257dee30c6e4
+  cloudProjectId: a9f31dc4-4666-4a42-92e4-cf42e7b74965
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: My project (1) 2025-01-31_11-06-12
-  organizationId: minguck
+  projectName: Project:Rewind
+  organizationId: kunissac
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

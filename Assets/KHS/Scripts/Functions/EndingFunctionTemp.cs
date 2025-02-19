@@ -12,6 +12,7 @@ public class EndingFunctionTemp : MonoBehaviour
     public string npcID = "Ending";
 
     public MatDetChange MDC_Collider;
+    public MatDetChange MDC_2Collider;
 
     public GameObject correctDisguse;
 
@@ -40,14 +41,11 @@ public class EndingFunctionTemp : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.Unsubscribe(EventManager.GameEventType.Conversation5, GcodeAllow);
-        EventManager.Subscribe(EventManager.GameEventType.Conversation5, GcodeAllow);
         EventManager.Unsubscribe(EventManager.GameEventType.RichHide, FlowEnd);
         EventManager.Subscribe(EventManager.GameEventType.RichHide, FlowEnd);
     }
     private void OnDisable()
     {
-        EventManager.Unsubscribe(EventManager.GameEventType.Conversation5, GcodeAllow);
         EventManager.Unsubscribe(EventManager.GameEventType.RichHide, FlowEnd);
     }
 
@@ -66,6 +64,7 @@ public class EndingFunctionTemp : MonoBehaviour
     private void FixedUpdate()
     {
         isDisguse = correctDisguse.activeSelf;
+        isGcode = MDC_2Collider.gcode;
 
         if (isFlowClear && isDisguse && isDet && Input.GetKeyDown(KeyCode.E) && !alreadyStarted)
         {
@@ -74,10 +73,6 @@ public class EndingFunctionTemp : MonoBehaviour
         }
     }
 
-    private void GcodeAllow()
-    {
-        isGcode = true;
-    }
     private void FlowEnd()
     {
         isFlowClear = true;
