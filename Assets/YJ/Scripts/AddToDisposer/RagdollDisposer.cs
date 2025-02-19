@@ -15,8 +15,11 @@ public class RagdollDisposer : MonoBehaviour
     [SerializeField]
     private Quaternion lidOpenRotation; // ¿­¸° ¶Ñ²± °¢µµ
 
+    public Image eImage;
+
     private void Start()
     {
+        eImage.gameObject.SetActive(false);
         lidClosedRotation = lid.rotation;
     }
 
@@ -32,6 +35,7 @@ public class RagdollDisposer : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            eImage.gameObject.SetActive(true);
             isPlayerNearby = true;
             playerAnim = other.GetComponent<Animator>();
         }
@@ -48,6 +52,7 @@ public class RagdollDisposer : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            eImage.gameObject.SetActive(false);
             isPlayerNearby = false;
             playerAnim = null;
         }
