@@ -15,7 +15,8 @@ public class GcodeEvent : MonoBehaviour
         box.enabled = false;
         doorman.enabled = false;
         npcFSM.enabled = false;
-        chat.enabled = false;    
+        chat.enabled = false;
+        coll.enabled = false;
     }
     public SphereCollider coll;
     public BoxCollider box;
