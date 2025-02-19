@@ -50,6 +50,9 @@ public class ScreenshotViewer : MonoBehaviour
         efKey.SetActive(false);
         Nav.SetActive(false);
         StartSlideshow();
+        Light.SetActive(false);
+        StartCoroutine(GameRestart());
+        Clock.SetActive(true);
     }
     
 
