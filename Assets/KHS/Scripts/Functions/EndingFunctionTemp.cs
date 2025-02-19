@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Firebase.Database;
@@ -10,6 +11,7 @@ public class EndingFunctionTemp : MonoBehaviour
     private DatabaseReference dbRef = null;
     public string npcID = "Ending";
 
+    public MatDetChange MDC_Collider;
 
     public TextMeshProUGUI dialogueText;
 
@@ -24,9 +26,26 @@ public class EndingFunctionTemp : MonoBehaviour
     [SerializeField]
     private bool isDefault = true;
 
+    private bool alreadyStarted = false;
+
     private Queue<string> dialogueQueue = new Queue<string>(); // 대사 큐
     private bool isDialoguePlaying = false; // 대사가 진행 중인지 확인
+    private bool isWaitingForEvent = false;
 
+    public EventManager.GameEventType convEnv;
+
+    private void OnEnable()
+    {
+        EventManager.Unsubscribe(EventManager.GameEventType.Conversation5, GcodeAllow);
+        EventManager.Subscribe(EventManager.GameEventType.Conversation5, GcodeAllow);
+        EventManager.Unsubscribe(EventManager.GameEventType.RichHide, FlowEnd);
+        EventManager.Subscribe(EventManager.GameEventType.RichHide, FlowEnd);
+    }
+    private void OnDisable()
+    {
+        EventManager.Unsubscribe(EventManager.GameEventType.Conversation5, GcodeAllow);
+        EventManager.Unsubscribe(EventManager.GameEventType.RichHide, FlowEnd);
+    }
 
     private void Start()
     {
@@ -43,33 +62,29 @@ public class EndingFunctionTemp : MonoBehaviour
     private void FixedUpdate()
     {
 
-        if(isDefault && isFlowClear && isDisguse && isDet && Input.GetKeyDown(KeyCode.E))
+        if (isFlowClear && isDisguse && isDet && Input.GetKeyDown(KeyCode.E) && !alreadyStarted)
         {
+            alreadyStarted = true;
             StartCoroutine(EndingCoroutine());
         }
-        if(!isDefault)
-        {
-            if (isGcode)
-            {
-                LastEndingDialogue(npcID);
-                // 오른쪽 사무실 막는 것 제거.
-            }
-            else
-            {
-                LastEndingDialogue(npcID);
-                // 게임 오버.
-            }
-        }
-        
+    }
+
+    private void GcodeAllow()
+    {
+        isGcode = true;
+    }
+    private void FlowEnd()
+    {
+        isFlowClear = true;
     }
 
     private IEnumerator EndingCoroutine()
     {
+        
         dialogueText.alpha = 255f;
         LastEndingDialogue(npcID);
-        yield return new WaitForSeconds(4.0f);
-        
-        isDefault = false;
+        yield return new WaitForSeconds(2.0f);
+        Debug.Log("2초 경과");
     }
     private void OnTriggerEnter(Collider _collider)
     {
@@ -131,8 +146,8 @@ public class EndingFunctionTemp : MonoBehaviour
     }
     private void ShowDialogue(string text)
     {
-        dialogueText.text = text;
-        Debug.Log($"[Teller] 대사 출력: {text}");
+        dialogueText.text = text.Replace("/E", ""); // /E 제거 후 출력
+        Debug.Log($"[Ending] 대사 출력: {text}");
     }
 
     private void StartDialogueSequence(string[] dialogues)
@@ -152,6 +167,8 @@ public class EndingFunctionTemp : MonoBehaviour
         {
             string dialogue = dialogueQueue.Dequeue();
             ShowDialogue(dialogue);
+
+            
             yield return new WaitForSeconds(2.0f);
         }
         isDialoguePlaying = false;

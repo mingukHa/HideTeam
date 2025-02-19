@@ -16,20 +16,16 @@ MonoBehaviour:
   - actionType: 0
     targetPosition: {x: -64, y: 0, z: 4}
     waitTime: 3
-    TalkEvent: 0
-  - actionType: 1
+    gameEvent: 0
+  - actionType: 4
     targetPosition: {x: -80, y: 0, z: 8}
     waitTime: 5
-    TalkEvent: 27
+    gameEvent: 38
   - actionType: 3
     targetPosition: {x: -80, y: 0, z: 8}
     waitTime: 3
-    TalkEvent: 26
+    gameEvent: 26
   - actionType: 0
     targetPosition: {x: -80, y: 0, z: 8}
     waitTime: 3
-    TalkEvent: 24
-  - actionType: 3
-    targetPosition: {x: -80, y: 0, z: 8}
-    waitTime: 3
-    TalkEvent: 27
+    gameEvent: 0

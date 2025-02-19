@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Firebase.Database;
 using Firebase.Extensions;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class TellerController : NPCController
@@ -29,6 +31,8 @@ public class TellerController : NPCController
 
     public List<EventManager.GameEventType> convEnvList;
     public int convEnvIdx = 0;
+
+    public EventManager.GameEventType convEnv;
 
     public override void Start()
     {
@@ -165,6 +169,19 @@ public class TellerController : NPCController
     }
     private void ShowDialogue(string text)
     {
+        Match match = Regex.Match(text, @"/F([A-Z])");
+        if (match.Success)
+        {
+            string convTarget = match.Groups[1].Value;
+            ChangeConv(convTarget);
+        }
+        if (text.Contains("/T"))
+        {
+            Debug.Log($"[이벤트 {convEnv} 호출");
+            EventManager.Trigger(convEnv);
+        }
+        text = Regex.Replace(text, @"/F[A-Z]", "");
+        text = text.Replace("/T", "");
         dialogueText.text = text.Replace("/E", ""); // /E 제거 후 출력
         Debug.Log($"[Teller] 대사 출력: {text}");
     }
@@ -191,7 +208,7 @@ public class TellerController : NPCController
             if (dialogue.Contains("/E"))
             {
 
-                Debug.Log($"[이벤트 {convEnvIdx} 호출]");
+                Debug.Log($"[이벤트 {convEnvIdx} 대기]");
                 isWaitingForEvent = true;
 
                 // 이벤트 완료 신호를 받을 때까지 대기
@@ -207,7 +224,7 @@ public class TellerController : NPCController
                 convEnvIdx = (convEnvIdx + 1) % convEnvList.Count;
             }
 
-            yield return new WaitForSeconds(2.0f); // 대사 유지 시간
+                yield return new WaitForSeconds(2.0f); // 대사 유지 시간
         }
 
         isDialoguePlaying = false;
@@ -229,6 +246,34 @@ public class TellerController : NPCController
     {
         Debug.Log("플레이어가 Teller에게 상호작용!");
         isInterPlayer = true;
+    }
+    public void ChangeConv(string _target)
+    {
+        Debug.Log($"체인지 콘버세이션 : {_target}");
+        switch (_target)
+        {
+            case "R":
+                EventManager.Trigger(EventManager.GameEventType.RichManTalkUI);
+                break;
+            case "O":
+                EventManager.Trigger(EventManager.GameEventType.OldManTalkUI);
+                break;
+            case "P":
+                EventManager.Trigger(EventManager.GameEventType.PlayerTalkUI);
+                break;
+            case "T":
+                EventManager.Trigger(EventManager.GameEventType.TellerTalkUI);
+                break;
+            case "C":
+                EventManager.Trigger(EventManager.GameEventType.CleanerTalkUI);
+                break;
+            case "G":
+                EventManager.Trigger(EventManager.GameEventType.GuardTalkUI);
+                break;
+            case "Z":
+                EventManager.Trigger(EventManager.GameEventType.ResetTalkUI);
+                break;
+        }
     }
 }
 [Serializable]

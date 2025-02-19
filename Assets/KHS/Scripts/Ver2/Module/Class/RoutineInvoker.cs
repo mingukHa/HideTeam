@@ -36,7 +36,10 @@ public class RoutineInvoker : MonoBehaviour
                     routineCommands.Add(new RunToCommand(GetComponent<NPCController>(), action.targetPosition));
                     break;
                 case RoutineActionType.Talk:
-                    routineCommands.Add(new TalkCommand(GetComponent<NPCController>(), action.TalkEvent, action.waitTime));
+                    routineCommands.Add(new TalkCommand(GetComponent<NPCController>(), action.gameEvent, action.waitTime));
+                    break;
+                case RoutineActionType.Taking:
+                    routineCommands.Add(new TakingCommand(GetComponent<NPCController>(), action.gameEvent));
                     break;
             }
         }
