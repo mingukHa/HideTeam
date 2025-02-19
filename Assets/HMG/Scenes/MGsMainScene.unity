@@ -22030,6 +22030,19 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &1111927785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1111927763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7650a582543c2e4cbe7a17b66d293ec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minimapIcon: {fileID: 2057667610625100941, guid: 12493ec31c3072d45b1de393613957e7, type: 3}
 --- !u!1001 &1124407223
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30655,12 +30668,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7650a582543c2e4cbe7a17b66d293ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1549053875}
-  playerIcon: {fileID: 2057667610625100941, guid: 12493ec31c3072d45b1de393613957e7, type: 3}
-  npcIconPrefab: {fileID: 1958777178926149601, guid: 66a9aaca99dd38c4ebbe0f53c4ed78b6, type: 3}
-  miniMapPanel: {fileID: 1641288842}
-  mapScale: 3
-  npcTag: NPC
+  minimapIcon: {fileID: 0}
 --- !u!1 &1427335314 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 911402340011001855, guid: 3c852deeacfc0534a90f03087ab1c4d1, type: 3}
@@ -32491,11 +32499,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!4 &1549053875 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 8458969453532913975, guid: 827e65d93efb54f438bc8b3613723df9, type: 3}
-  m_PrefabInstance: {fileID: 1264273170}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1550178545 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6076911383601706917, guid: 879d15b74ad2d174395a45e746b043a1, type: 3}
@@ -36304,6 +36307,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6117565330496542811, guid: ad65ef8b4e0ab2d43b4a8c971551848e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1111927780}
+    - targetCorrespondingSourceObject: {fileID: 6117565330496542811, guid: ad65ef8b4e0ab2d43b4a8c971551848e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1111927785}
     - targetCorrespondingSourceObject: {fileID: 9170141643244306960, guid: ad65ef8b4e0ab2d43b4a8c971551848e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 185294439}
