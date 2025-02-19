@@ -414,10 +414,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba95368170a7fda4880471a38e40fc3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMesh: {fileID: 0}
   gcode: 0
   buffer: 
   isDet: 0
+  isPrDet: 0
 --- !u!4 &4500227
 Transform:
   m_ObjectHideFlags: 0
@@ -29238,11 +29238,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2084791816221230120, guid: 827e65d93efb54f438bc8b3613723df9, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 2084791816221230120, guid: 827e65d93efb54f438bc8b3613723df9, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.08
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2619245076445321627, guid: 827e65d93efb54f438bc8b3613723df9, type: 3}
       propertyPath: CarKey
@@ -37234,10 +37234,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba95368170a7fda4880471a38e40fc3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  textMesh: {fileID: 0}
   gcode: 0
   buffer: 
   isDet: 0
+  isPrDet: 0
 --- !u!4 &1712179813
 Transform:
   m_ObjectHideFlags: 0
