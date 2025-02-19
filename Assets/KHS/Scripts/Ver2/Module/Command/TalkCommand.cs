@@ -17,12 +17,12 @@ public class TalkCommand : ICommand
 
     public void Execute()
     {
-        EventManager.Trigger(talkEvent);
+        npcController.animator.SetTrigger("Talk");
         Debug.Log($"{npcController.npcName} 가 {talkEvent}를 트리거!");
         elapsedTime += Time.deltaTime;
         if (elapsedTime >= talktime)
         {
-            npcController.animator.SetTrigger("Talk");
+            EventManager.Trigger(talkEvent);
             finished = true;
         }
 

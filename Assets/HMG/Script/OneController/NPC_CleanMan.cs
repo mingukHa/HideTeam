@@ -127,12 +127,11 @@ public class NPC_CleanMan : NPCFSM
         else
         {
             chat.LoadNPCDialogue(npc, 5);
-            yield return new WaitForSeconds(1f);
-            ChangeState(State.Idle);
+            yield return new WaitForSeconds(3f);
             chat.LoadNPCDialogue("Null", 0);
+            ChangeState(State.Idle);
             EventManager.Trigger(GameEventType.OldManOut);
         }
-        chat.LoadNPCDialogue("Null", 0);
     }
 
     private void StopNpc()
@@ -192,6 +191,7 @@ public class NPC_CleanMan : NPCFSM
         base.DeadBehavior();
         npcchatbox.SetActive(false);
         chat.LoadNPCDialogue("NULL", 0);
+        EventManager.Trigger(GameEventType.CleanManDie);
     }
 
     protected override void OnTriggerEnter(Collider other)

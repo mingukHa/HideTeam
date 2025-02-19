@@ -2260,7 +2260,6 @@ MonoBehaviour:
   NPCCollider: {fileID: 82743805}
   select: {fileID: 1130133353}
   returnManager: {fileID: 2007657856}
-  text: {fileID: 0}
 --- !u!114 &82743807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2292,7 +2291,6 @@ MonoBehaviour:
   NPCCollider: {fileID: 82743805}
   select: {fileID: 1130133353}
   returnManager: {fileID: 2007657856}
-  text: {fileID: 0}
   npcchatbox: {fileID: 576083414}
   PolicPos: {fileID: 1631526045}
 --- !u!195 &82743810
@@ -7314,6 +7312,7 @@ MonoBehaviour:
   dialogueText: {fileID: 1653169566}
   MDC_Collider: {fileID: 4500226}
   isDet: 0
+  convEnv: 0
 --- !u!1 &238038613
 GameObject:
   m_ObjectHideFlags: 0
@@ -11798,6 +11797,7 @@ MonoBehaviour:
   isInterDisPlayer: 0
   convEnvList: 18000000190000001a0000001b0000001c000000
   convEnvIdx: 0
+  convEnv: 0
 --- !u!114 &367549494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11879,7 +11879,6 @@ MonoBehaviour:
   NPCCollider: {fileID: 367549500}
   select: {fileID: 625466187}
   returnManager: {fileID: 2007657856}
-  text: {fileID: 0}
   npcchatbox: {fileID: 1223241016}
 --- !u!114 &367549499
 MonoBehaviour:
@@ -11898,7 +11897,6 @@ MonoBehaviour:
   NPCCollider: {fileID: 367549500}
   select: {fileID: 625466187}
   returnManager: {fileID: 2007657856}
-  text: {fileID: 0}
 --- !u!135 &367549500
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -20984,6 +20982,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 36f70e8dfdb15044d904e91ddfca6ffa, type: 3}
+    - target: {fileID: 3710568126845062982, guid: 536aa32ba9b139c4c8e9fea2ae40da8d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4028581331679551133, guid: 536aa32ba9b139c4c8e9fea2ae40da8d, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -20991,6 +20993,14 @@ PrefabInstance:
     - target: {fileID: 4571445696676693544, guid: 536aa32ba9b139c4c8e9fea2ae40da8d, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924670095599350007, guid: 536aa32ba9b139c4c8e9fea2ae40da8d, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 4924670095599350007, guid: 536aa32ba9b139c4c8e9fea2ae40da8d, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 4924670095599350007, guid: 536aa32ba9b139c4c8e9fea2ae40da8d, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -21111,6 +21121,10 @@ PrefabInstance:
     - target: {fileID: 7398201183226228793, guid: 536aa32ba9b139c4c8e9fea2ae40da8d, type: 3}
       propertyPath: m_SizeDelta.y
       value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 8419455590143211277, guid: 536aa32ba9b139c4c8e9fea2ae40da8d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 140
       objectReference: {fileID: 0}
     - target: {fileID: 8599559753729915661, guid: 536aa32ba9b139c4c8e9fea2ae40da8d, type: 3}
       propertyPath: m_Sprite
@@ -28501,31 +28515,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6238027188655501229, guid: e98f477abb7db414ab41f572c5959e09, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -53.3
+      value: -62.98099
       objectReference: {fileID: 0}
     - target: {fileID: 6238027188655501229, guid: e98f477abb7db414ab41f572c5959e09, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.2
+      value: 1.0910151
       objectReference: {fileID: 0}
     - target: {fileID: 6238027188655501229, guid: e98f477abb7db414ab41f572c5959e09, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.6
+      value: -17.84
       objectReference: {fileID: 0}
     - target: {fileID: 6238027188655501229, guid: e98f477abb7db414ab41f572c5959e09, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7053843
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6238027188655501229, guid: e98f477abb7db414ab41f572c5959e09, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.049325276
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6238027188655501229, guid: e98f477abb7db414ab41f572c5959e09, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.7053843
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6238027188655501229, guid: e98f477abb7db414ab41f572c5959e09, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.049325276
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6238027188655501229, guid: e98f477abb7db414ab41f572c5959e09, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -34405,7 +34419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lid: {fileID: 1410698476}
   lidOpenRotation: {x: 0, y: -0.53729963, z: 0, w: 0.8433914}
-  eImage: {fileID: 2045449559}
+  gImage: {fileID: 0}
 --- !u!65 &1410698479
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -36728,7 +36742,6 @@ MonoBehaviour:
   NPCCollider: {fileID: 1557606059}
   select: {fileID: 1198871250}
   returnManager: {fileID: 2007657856}
-  text: {fileID: 0}
   npcchatbox: {fileID: 1339747253}
   sphereCollider: {fileID: 1557606059}
 --- !u!114 &1557606062
@@ -36748,7 +36761,6 @@ MonoBehaviour:
   NPCCollider: {fileID: 1557606059}
   select: {fileID: 1198871250}
   returnManager: {fileID: 2007657856}
-  text: {fileID: 0}
 --- !u!114 &1557606063
 MonoBehaviour:
   m_ObjectHideFlags: 0

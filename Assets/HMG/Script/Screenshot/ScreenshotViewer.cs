@@ -23,6 +23,7 @@ public class ScreenshotViewer : MonoBehaviour
     public GameObject Nav;
     public GameObject Light;
     public GameObject Fadeimg;
+    public GameObject Text;
     private void OnEnable()
     {
         EventManager.Subscribe(GameEventType.GameOver, gameover);
@@ -53,6 +54,7 @@ public class ScreenshotViewer : MonoBehaviour
         Light.SetActive(false);
         StartCoroutine(GameRestart());
         Clock.SetActive(true);
+        Text.SetActive(false);
     }
     
 
@@ -60,16 +62,8 @@ public class ScreenshotViewer : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
-            Invoke("HandleGameRestart", 1.2f);
+            StartCoroutine(GameRestart());
         }
-    }
-
-    private void HandleGameRestart()
-    {
-        //¡§ πÊ«‚
-        Light.SetActive(false);
-        StartCoroutine(GameRestart());
-        Clock.SetActive(true);
     }
 
     private IEnumerator GameRestart()

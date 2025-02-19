@@ -17,7 +17,7 @@ public class EventManager : MonoBehaviour
         Garbage,//쓰레기장 헤집기
 
         TellerTalk, //텔러에게 말걸기
-        RichmanAngry, //부자 화남
+        RichmanAngry, //부자 화남 
         RichmanTalkTeller,  // 부자가 텔러에게 말걸기
         //
         OldManHelp,//노인 도와줌
@@ -65,7 +65,8 @@ public class EventManager : MonoBehaviour
 
         ConvStart,
         
-        CleanManTalk
+        CleanManTalk,
+        CleanManDie
     }
 
     private static Dictionary<GameEventType, Action> eventDictionary = new Dictionary<GameEventType, Action>();

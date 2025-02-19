@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using static EventManager;
@@ -15,7 +16,8 @@ public class EventHelpText : MonoBehaviour
         EventManager.Subscribe(GameEventType.NPCKill, StartNPCKill); 
         EventManager.Subscribe(GameEventType.PlayerEnterBank, StartPlayerEnterBank);
         EventManager.Subscribe(GameEventType.CleanManTalk, StartCleanManTalk);
-        EventManager.Subscribe(GameEventType.OldManOut, OldmanOut);
+        EventManager.Subscribe(GameEventType.OldManTalkTeller, OldTalkTeller);
+        EventManager.Subscribe(GameEventType.CleanManDie, CleanManDie);
     }
     private void OnDisable()
     {
@@ -25,39 +27,50 @@ public class EventHelpText : MonoBehaviour
         EventManager.Unsubscribe(GameEventType.Carkick, StartCarKick);
         EventManager.Unsubscribe(GameEventType.NPCKill, StartNPCKill);
         EventManager.Unsubscribe(GameEventType.PlayerEnterBank, StartPlayerEnterBank);
-        EventManager.Unsubscribe(GameEventType.OldManOut, OldmanOut);
+        EventManager.Unsubscribe(GameEventType.OldManTalkTeller, OldTalkTeller);
+        EventManager.Unsubscribe(GameEventType.CleanManDie, CleanManDie);
     }
-    private void OldmanOut()
+    private void CleanManDie()
     {
-        
+        text.text = "이런 거기서 사람을 죽이면 어떻해? 얼른 시체를 숨겨";
+    }
+    private void OldTalkTeller()
+    {
+        StartCoroutine(textNull("할아버지가 난동을 부리고 있다"));
     }
     private void StartCleanManTalk()
     {
-        text.text = "청소부를 성공적으로 유인했어";
+        StartCoroutine(textNull("청소부를 성공적으로 유인했어"));
     }
     private void StartPlayerEnterBank()
     {
-        text.text = "오른쪽 방 금고가 있다. VIP보다 먼저 물품을 탈취해라";
+        StartCoroutine(textNull("오른쪽 방 금고가 있다. VIP보다 먼저 물품을 탈취해라"));
     }
     private void StartNPCKill()
     {
-        text.text = "이런 거기서 사람을 죽이면 어떻해?";
+        StartCoroutine(textNull("이런 거기서 사람을 죽이면 어떻해? 얼른 시체를 숨겨"));
     }
     private void StartGarbage()
     {
-        text.text = "누군가가 다가오고 있어";
+        StartCoroutine(textNull("누군가가 다가오고 있어"));
     }
     private void StartRichKill()
     {
-        text.text = "이런 누군가 소리를 듣고 오고있어 얼른 시체를 숨겨";
+        StartCoroutine(textNull("이런 누군가 소리를 듣고 오고있어 얼른 시체를 숨겨"));
     }
     private void StartRichToiletKill()
     {
-        text.text = "다행히 들키지 않았어. 카운터로 이동해보자";
+        StartCoroutine(textNull("다행히 들키지 않았어. 카운터로 이동해보자"));
     }
     private void StartCarKick()
     {
-        text.text = "이런 그런 차를 발로 차면 어떻해? 누가 오기전에 얼른 숨어";
+        StartCoroutine(textNull("이런 그런 차를 발로 차면 어떻해? 누가 오기전에 얼른 숨어"));        
+    }
+    private IEnumerator textNull(string texts)
+    {
+        text.text = texts;
+        yield return new WaitForSeconds(3f);
+        text.text = "";
     }
 
 }
