@@ -17,6 +17,7 @@ TagManager:
   - FxTemporaire
   - Dumpster
   - Map
+  - NPCTeller
   layers:
   - Default
   - TransparentFX

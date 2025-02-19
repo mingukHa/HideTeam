@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using Firebase.Database;
 using Firebase.Extensions;
 using TMPro;
-using UnityEditor.Rendering;
 using UnityEngine;
 
 public class EndingFunctionTemp : MonoBehaviour
