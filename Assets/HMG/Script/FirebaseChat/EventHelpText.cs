@@ -12,13 +12,30 @@ public class EventHelpText : MonoBehaviour
         EventManager.Subscribe(GameEventType.RichKill, StartRichKill);
         EventManager.Subscribe(GameEventType.RichToiletKill, StartRichToiletKill);
         EventManager.Subscribe(GameEventType.Carkick, StartCarKick);
-    }
+        EventManager.Subscribe(GameEventType.NPCKill, StartNPCKill); 
+        EventManager.Subscribe(GameEventType.PlayerEnterBank, StartPlayerEnterBank);
+        EventManager.Subscribe(GameEventType.CleanManTalk, StartCleanManTalk);
+}
     private void OnDisable()
     {
         EventManager.Unsubscribe(GameEventType.Garbage, StartGarbage);
         EventManager.Unsubscribe(GameEventType.RichKill, StartRichKill);
         EventManager.Unsubscribe(GameEventType.RichToiletKill, StartRichToiletKill);
         EventManager.Unsubscribe(GameEventType.Carkick, StartCarKick);
+        EventManager.Unsubscribe(GameEventType.NPCKill, StartNPCKill);
+        EventManager.Unsubscribe(GameEventType.PlayerEnterBank, StartPlayerEnterBank);
+    }
+    private void StartCleanManTalk()
+    {
+        text.text = "청소부를 성공적으로 유인했어";
+    }
+    private void StartPlayerEnterBank()
+    {
+        text.text = "오른쪽 방 금고가 있다. VIP보다 먼저 물품을 탈취해라";
+    }
+    private void StartNPCKill()
+    {
+        text.text = "이런 거기서 사람을 죽이면 어떻해?";
     }
     private void StartGarbage()
     {

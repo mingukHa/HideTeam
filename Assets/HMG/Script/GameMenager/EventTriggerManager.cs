@@ -24,7 +24,9 @@ public class EventTriggerManager : MonoBehaviour
         GameEventType.NPCKill,
         GameEventType.OldManGotoTeller,
         GameEventType.RichToiletKill,
-        GameEventType.OldManOut
+        GameEventType.OldManOut,
+        GameEventType.CleanManTalk
+
 
     };
 

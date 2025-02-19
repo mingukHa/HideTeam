@@ -63,7 +63,9 @@ public class EventManager : MonoBehaviour
         CleanerTalkUI,
         ResetTalkUI,
 
-        ConvStart
+        ConvStart,
+        
+        CleanManTalk
     }
 
     private static Dictionary<GameEventType, Action> eventDictionary = new Dictionary<GameEventType, Action>();
