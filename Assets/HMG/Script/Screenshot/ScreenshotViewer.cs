@@ -30,11 +30,7 @@ public class ScreenshotViewer : MonoBehaviour
     {
         EventManager.Unsubscribe(GameEventType.GameOver, gameover);
     }
-    private void Awake()
-    {
-        DontDestroyOnLoad(Clock);
-        Debug.Log("시계 파괴 방지");
-    }
+    
     private void Start()
     {
         // Quad의 Material 가져오기
