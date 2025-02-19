@@ -19,8 +19,8 @@ MonoBehaviour:
     gameEvent: 0
   - actionType: 3
     targetPosition: {x: 0, y: 0, z: 0}
-    waitTime: 4
-    gameEvent: 37
+    waitTime: 3
+    gameEvent: 0
   - actionType: 0
     targetPosition: {x: -64, y: 0, z: 25}
     waitTime: 5
