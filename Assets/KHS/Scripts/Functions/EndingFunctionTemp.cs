@@ -85,8 +85,9 @@ public class EndingFunctionTemp : MonoBehaviour
         
         dialogueText.alpha = 255f;
         LastEndingDialogue(npcID);
-        yield return new WaitForSeconds(4.0f);
-        Debug.Log("4초 경과");
+        yield return new WaitForSeconds(8.0f);
+        Debug.Log("8초 경과");
+        isDefault = false;
         LastEndingDialogue(npcID);
     }
     private void OnTriggerEnter(Collider _collider)

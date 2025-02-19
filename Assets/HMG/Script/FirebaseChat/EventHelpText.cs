@@ -16,6 +16,7 @@ public class EventHelpText : MonoBehaviour
         EventManager.Subscribe(GameEventType.PlayerEnterBank, StartPlayerEnterBank);
         EventManager.Subscribe(GameEventType.CleanManTalk, StartCleanManTalk);
         EventManager.Subscribe(GameEventType.OldManTalkTeller, OldTalkTeller);
+        EventManager.Subscribe(GameEventType.CleanManDie, CleanManDie);
     }
     private void OnDisable()
     {
@@ -26,6 +27,11 @@ public class EventHelpText : MonoBehaviour
         EventManager.Unsubscribe(GameEventType.NPCKill, StartNPCKill);
         EventManager.Unsubscribe(GameEventType.PlayerEnterBank, StartPlayerEnterBank);
         EventManager.Unsubscribe(GameEventType.OldManTalkTeller, OldTalkTeller);
+        EventManager.Unsubscribe(GameEventType.CleanManDie, CleanManDie);
+    }
+    private void CleanManDie()
+    {
+        text.text = "이런 거기서 사람을 죽이면 어떻해? 얼른 시체를 숨겨";
     }
     private void OldTalkTeller()
     {

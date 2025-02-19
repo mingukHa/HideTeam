@@ -23,6 +23,7 @@ public class ScreenshotViewer : MonoBehaviour
     public GameObject Nav;
     public GameObject Light;
     public GameObject Fadeimg;
+    public GameObject Text;
     private void OnEnable()
     {
         EventManager.Subscribe(GameEventType.GameOver, gameover);
@@ -53,6 +54,7 @@ public class ScreenshotViewer : MonoBehaviour
         Light.SetActive(false);
         StartCoroutine(GameRestart());
         Clock.SetActive(true);
+        Text.SetActive(false);
     }
     
 
