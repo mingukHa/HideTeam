@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour
 
         if (!isStarted)
         {
+            cigarette.SetActive(true);
             Smoking();
         }
 

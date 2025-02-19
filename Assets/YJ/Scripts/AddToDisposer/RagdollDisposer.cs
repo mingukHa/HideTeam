@@ -14,26 +14,17 @@ public class RagdollDisposer : MonoBehaviour
     private Quaternion lidClosedRotation;// ´ÝÇôÀÖ´Â ¶Ñ²± °¢µµ
     [SerializeField]
     private Quaternion lidOpenRotation; // ¿­¸° ¶Ñ²± °¢µµ
-    public Image eImage;    //¼û±â±â
 
     private void Start()
     {
-        eImage.gameObject.SetActive(false);
-        // ¶Ñ²±ÀÇ ÃÊ±â È¸Àü ÀúÀå
         lidClosedRotation = lid.rotation;
     }
 
     private void Update()
     {
-        if (isPlayerNearby && isRagdollNearby)
+        if (isPlayerNearby && isRagdollNearby && Input.GetKeyDown(KeyCode.E))
         {
-            eImage.gameObject.SetActive(true);
-
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                DisposeRagdoll();
-                eImage.gameObject.SetActive(false);
-            }
+            DisposeRagdoll();
         }
     }
 
