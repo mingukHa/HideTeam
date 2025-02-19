@@ -48,8 +48,6 @@ public class PlayerController : MonoBehaviour
 
     public GameObject CarKey;   //차 발로 차기 키
 
-    public Image gImage;    //G키 이미지
-
     private float eholdTime = 0f;   //E키 누른 시간
     private float eGoalholdTime = 1f;   //E키 눌러야하는 시간
 
