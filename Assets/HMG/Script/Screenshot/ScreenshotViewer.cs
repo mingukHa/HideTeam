@@ -18,7 +18,8 @@ public class ScreenshotViewer : MonoBehaviour
     public GameObject quad;
     public GameObject efKey;
     public GameObject chat;
-    public GameObject GameOverText;
+    public GameObject Clock;
+    public GameObject Sound;
     private void OnEnable()
     {
         EventManager.Subscribe(GameEventType.GameOver, gameover);
@@ -29,12 +30,13 @@ public class ScreenshotViewer : MonoBehaviour
     }
     private void gameover()
     {
-        Time.timeScale = 0f;
-        GameOverText.SetActive(true);
+        
+        Clock.SetActive(true);
         chat.SetActive(false);
         quad.SetActive(true);
         Post.SetActive(true);
         efKey.SetActive(false);
+        Sound.SetActive(false);
         StartSlideshow();
     }
     void Start()
@@ -50,6 +52,7 @@ public class ScreenshotViewer : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.K))
         {
+            //¡§ πÊ«‚
             StartCoroutine(GameRestart());
 
         }
@@ -72,7 +75,10 @@ public class ScreenshotViewer : MonoBehaviour
             Debug.Log("No screenshots available.");
         }
     }
-
+    private IEnumerable Returnroding ()
+    {
+        yield return null;
+    }
     private IEnumerator ShowScreenshots()
     {
         List<Texture2D> tempScreenshots = new List<Texture2D>(ScreenshotManager.Instance.screenshots);
@@ -89,6 +95,7 @@ public class ScreenshotViewer : MonoBehaviour
 
         StopAllCoroutines();
         Time.timeScale = 1f;
+        Sound.SetActive(true);
         SceneManager.LoadScene("MainScene");
         
     }
