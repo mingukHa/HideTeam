@@ -7312,6 +7312,7 @@ MonoBehaviour:
   dialogueText: {fileID: 1653169566}
   MDC_Collider: {fileID: 4500226}
   isDet: 0
+  convEnv: 28
 --- !u!1 &238038613
 GameObject:
   m_ObjectHideFlags: 0
@@ -11796,6 +11797,7 @@ MonoBehaviour:
   isInterDisPlayer: 0
   convEnvList: 18000000190000001a0000001b0000001c000000
   convEnvIdx: 0
+  convEnv: 38
 --- !u!114 &367549494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23743,9 +23745,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4205563734884664132, guid: fe91134591813f447a0fe1250cba2be6, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 16384
+      objectReference: {fileID: 0}
     - target: {fileID: 7259364752673324558, guid: fe91134591813f447a0fe1250cba2be6, type: 3}
       propertyPath: m_Name
       value: DroppingCigarette
+      objectReference: {fileID: 0}
+    - target: {fileID: 7259364752673324558, guid: fe91134591813f447a0fe1250cba2be6, type: 3}
+      propertyPath: m_Layer
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 7259364752673324558, guid: fe91134591813f447a0fe1250cba2be6, type: 3}
       propertyPath: m_IsActive
@@ -23830,51 +23840,6 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &893147029
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 893147031}
-  - component: {fileID: 893147030}
-  m_Layer: 0
-  m_Name: EventHelpManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &893147030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 893147029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac0fb09bd81cea642bc44e18bc60fb6f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  text: {fileID: 2136675563}
---- !u!4 &893147031
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 893147029}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -79.39427, y: -0.8831218, z: 18.528364}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -28534,7 +28499,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6238027188655501229, guid: e98f477abb7db414ab41f572c5959e09, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -62.98099
+      value: -62.897186
       objectReference: {fileID: 0}
     - target: {fileID: 6238027188655501229, guid: e98f477abb7db414ab41f572c5959e09, type: 3}
       propertyPath: m_LocalPosition.y
@@ -38336,6 +38301,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1712179813}
+  - component: {fileID: 1712179815}
   - component: {fileID: 1712179812}
   - component: {fileID: 1712179811}
   - component: {fileID: 1712179810}
@@ -38447,6 +38413,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1712179815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1712179809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7e2de61ffef7a146b3abc445c6f40ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  npcID: Ending
+  MDC_Collider: {fileID: 1712179812}
+  dialogueText: {fileID: 1653169566}
+  isGcode: 0
+  isDisguse: 0
+  isFlowClear: 0
+  isDet: 0
+  isDefault: 1
+  convEnv: 28
 --- !u!1 &1712263673
 GameObject:
   m_ObjectHideFlags: 0
@@ -41289,7 +41276,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3399774324384393750, guid: 0139ab9ac32520c4389c87feb6ce3b4d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -62.98099
+      value: -62.897186
       objectReference: {fileID: 0}
     - target: {fileID: 3399774324384393750, guid: 0139ab9ac32520c4389c87feb6ce3b4d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -41742,7 +41729,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100154, guid: 6996385895b383749b266464bf872c69, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 100154, guid: 6996385895b383749b266464bf872c69, type: 3}
       propertyPath: m_TagString
@@ -53458,4 +53445,3 @@ SceneRoots:
   - {fileID: 512752194}
   - {fileID: 1832014387}
   - {fileID: 554650530}
-  - {fileID: 893147031}

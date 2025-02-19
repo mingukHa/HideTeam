@@ -25,7 +25,7 @@ public class EndingFunctionTemp : MonoBehaviour
     private bool isDet = false;
     [SerializeField]
     private bool isDefault = true;
-
+    [SerializeField]
     private bool alreadyStarted = false;
 
     private Queue<string> dialogueQueue = new Queue<string>(); // 대사 큐
@@ -33,6 +33,8 @@ public class EndingFunctionTemp : MonoBehaviour
     private bool isWaitingForEvent = false;
 
     public EventManager.GameEventType convEnv;
+    public List<EventManager.GameEventType> EndingEnvList;
+    public int EndingIdx = 0;
 
     private void OnEnable()
     {
@@ -83,8 +85,9 @@ public class EndingFunctionTemp : MonoBehaviour
         
         dialogueText.alpha = 255f;
         LastEndingDialogue(npcID);
-        yield return new WaitForSeconds(2.0f);
-        Debug.Log("2초 경과");
+        yield return new WaitForSeconds(4.0f);
+        Debug.Log("4초 경과");
+        LastEndingDialogue(npcID);
     }
     private void OnTriggerEnter(Collider _collider)
     {
