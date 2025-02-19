@@ -14,21 +14,16 @@ public class ScreenshotManager : MonoBehaviour
         {
             Instance = this;
         }
+        
     }
-    private void Start()
-    {
-        CaptureScreenshot();
-    }
+  
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.O))
         {
             CaptureScreenshot();
         }
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            SceneManager.LoadScene("MainScene");            
-        }
+        
     }
     public void CaptureScreenshot()
     {

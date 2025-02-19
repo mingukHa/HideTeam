@@ -18,7 +18,7 @@ public class FadeOut : MonoBehaviour
         while (elapsedTime < duration)
         {
             elapsedTime += Time.deltaTime;
-            color.a = Mathf.Lerp(1f, 0f, elapsedTime / duration);
+            color.a = Mathf.Lerp(1f, -0.5f, elapsedTime / duration);
             fadeImage.color = color;
             yield return null;
         }

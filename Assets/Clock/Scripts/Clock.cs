@@ -9,22 +9,7 @@ public class Clockss : MonoBehaviour
     public float returnSpeed = 5000f; // 빠르게 역방향 회전하는 속도
     public bool isReturning = false; // Returns 상태인지 확인하는 변수
 
-    private static Clockss instance; // 싱글턴 인스턴스
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-            Debug.Log("시계 파괴 방지");
-        }
-        else
-        {
-            Destroy(gameObject); // 중복 생성 방지
-            Debug.Log("중복된 시계 오브젝트 제거");
-        }
-    }
+    
 
     private void Update()
     {

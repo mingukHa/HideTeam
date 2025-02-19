@@ -7,6 +7,8 @@ public class CameraController : MonoBehaviour
     public CinemachineCamera freeLookCam; // 자유 시점 카메라
 
     private bool isMoving = false;
+    private static CameraController instance; // 싱글턴 인스턴스
+
 
     private void Start()
     {

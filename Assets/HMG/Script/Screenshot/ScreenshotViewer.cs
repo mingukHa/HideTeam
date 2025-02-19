@@ -22,6 +22,7 @@ public class ScreenshotViewer : MonoBehaviour
     public GameObject Clock;
     public GameObject Nav;
     public GameObject Light;
+    public GameObject Fadeimg;
     private void OnEnable()
     {
         EventManager.Subscribe(GameEventType.GameOver, gameover);
@@ -38,12 +39,6 @@ public class ScreenshotViewer : MonoBehaviour
         {
             quadMaterial = quadRenderer.material;
         }
-        StartCoroutine(ClockStop());
-    }
-    private IEnumerator ClockStop()
-    {
-        yield return new WaitForSeconds(1f);
-        Clock.SetActive(false);
     }
     private void gameover()
     {
@@ -83,7 +78,7 @@ public class ScreenshotViewer : MonoBehaviour
         }
         else
         {
-            Debug.Log("No screenshots available.");
+            SceneManager.LoadScene("MainScene");
         }
     }
     private IEnumerable Returnroding ()
@@ -100,10 +95,10 @@ public class ScreenshotViewer : MonoBehaviour
                 quadMaterial.mainTexture = tempScreenshots[i];
             }
 
-            
             yield return new WaitForSecondsRealtime(displayTime);
         }
-
+        Fadeimg.SetActive(true);
+        yield return new WaitForSecondsRealtime(displayTime);
         StopAllCoroutines();
         
         SceneManager.LoadScene("MainScene");
