@@ -180,7 +180,7 @@ public class PlayerController : MonoBehaviour
                 // 살아있는 NPC와 상호작용 시 E키 비활성화
                 eImage.gameObject.SetActive(false);
                 eSlider.gameObject.SetActive(false);
-                //fImage.gameObject.SetActive(true); // 살아있는 NPC일 때 F키 관련 UI 활성화
+                fImage.gameObject.SetActive(true); // 살아있는 NPC일 때 F키 관련 UI 활성화
             }
         }
 
@@ -199,7 +199,7 @@ public class PlayerController : MonoBehaviour
                 // 살아있는 NPC와 상호작용 시 E키 비활성화
                 eImage.gameObject.SetActive(false);
                 eSlider.gameObject.SetActive(false);
-                //fImage.gameObject.SetActive(true); // 살아있는 NPC일 때 F키 관련 UI 활성화
+                fImage.gameObject.SetActive(true); // 살아있는 NPC일 때 F키 관련 UI 활성화
             }
         }
     }
