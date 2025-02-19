@@ -41,7 +41,7 @@ public class EventHelpText : MonoBehaviour
     }
     private void StartNPCKill()
     {
-        text.text = "이런 거기서 사람을 죽이면 어떻해?";
+        text.text = "이런 거기서 사람을 죽이면 어떻해? 얼른 시체를 숨겨";
     }
     private void StartGarbage()
     {
