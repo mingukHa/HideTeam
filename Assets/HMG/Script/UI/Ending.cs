@@ -6,9 +6,10 @@ public class Ending : MonoBehaviour
 {
     [SerializeField] private Image fadeImage; // 검은색 UI 이미지
     public float FadeInTime = 2f;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"));
+        if (other.CompareTag("Player"))
         {
             fadeImage.gameObject.SetActive(true);
             StartCoroutine(FadeIn(FadeInTime));
