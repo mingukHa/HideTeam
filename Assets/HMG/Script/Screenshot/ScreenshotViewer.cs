@@ -11,6 +11,7 @@ public class ScreenshotViewer : MonoBehaviour
 {
     public FadeOut fade;
 
+    public Clockss clockss;
     public Renderer quadRenderer; // Quad의 Mesh Renderer
     private Material quadMaterial; // Quad의 Material
     public float displayTime = 1.0f;
@@ -19,7 +20,8 @@ public class ScreenshotViewer : MonoBehaviour
     public GameObject efKey;
     public GameObject chat;
     public GameObject Clock;
-    public GameObject Sound;
+    public GameObject Nav;
+    public GameObject Light;
     private void OnEnable()
     {
         EventManager.Subscribe(GameEventType.GameOver, gameover);
@@ -30,13 +32,14 @@ public class ScreenshotViewer : MonoBehaviour
     }
     private void gameover()
     {
+        clockss.isReturning = true;
         
-        Clock.SetActive(true);
         chat.SetActive(false);
+        Light.SetActive(false);
         quad.SetActive(true);
         Post.SetActive(true);
         efKey.SetActive(false);
-        Sound.SetActive(false);
+        Nav.SetActive(false);
         StartSlideshow();
     }
     void Start()
@@ -54,7 +57,7 @@ public class ScreenshotViewer : MonoBehaviour
         {
             //정 방향
             StartCoroutine(GameRestart());
-
+            Clock.SetActive(true);
         }
     }
 
@@ -94,8 +97,7 @@ public class ScreenshotViewer : MonoBehaviour
         }
 
         StopAllCoroutines();
-        Time.timeScale = 1f;
-        Sound.SetActive(true);
+        
         SceneManager.LoadScene("MainScene");
         
     }

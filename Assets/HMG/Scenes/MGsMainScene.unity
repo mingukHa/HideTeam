@@ -18336,11 +18336,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8056782909459363484, guid: bf7a896caeea89e4abe30516304df5b7, type: 3}
   m_PrefabInstance: {fileID: 625466185}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &631001005 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4517791919158893200, guid: 1acb856b3eb156f40ab3c9be80622937, type: 3}
-  m_PrefabInstance: {fileID: 252083909}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &643343371
 GameObject:
   m_ObjectHideFlags: 0
@@ -20625,6 +20620,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fade: {fileID: 974037217}
+  clockss: {fileID: 1815418094}
   quadRenderer: {fileID: 1343302538}
   displayTime: 3
   Post: {fileID: 402040622}
@@ -20632,7 +20628,8 @@ MonoBehaviour:
   efKey: {fileID: 620596288}
   chat: {fileID: 983030530}
   Clock: {fileID: 1815418085}
-  Sound: {fileID: 631001005}
+  Nav: {fileID: 836063068}
+  Light: {fileID: 504631056}
 --- !u!114 &974037215
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -36833,11 +36830,27 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 428128, guid: 4073f41b7d930f94d9470df64ec12b53, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 300
+      objectReference: {fileID: 0}
+    - target: {fileID: 428128, guid: 4073f41b7d930f94d9470df64ec12b53, type: 3}
       propertyPath: m_LocalScale.y
       value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 451084, guid: 4073f41b7d930f94d9470df64ec12b53, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 451084, guid: 4073f41b7d930f94d9470df64ec12b53, type: 3}
       propertyPath: m_LocalScale.y
+      value: 1500
+      objectReference: {fileID: 0}
+    - target: {fileID: 451084, guid: 4073f41b7d930f94d9470df64ec12b53, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 451220, guid: 4073f41b7d930f94d9470df64ec12b53, type: 3}
+      propertyPath: m_LocalScale.x
       value: 1500
       objectReference: {fileID: 0}
     - target: {fileID: 451220, guid: 4073f41b7d930f94d9470df64ec12b53, type: 3}
@@ -36907,16 +36920,17 @@ PrefabInstance:
     - target: {fileID: 2348674, guid: 4073f41b7d930f94d9470df64ec12b53, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: cb7ba0bfcdb279845b0e2e15bfeb3f6c, type: 2}
+      objectReference: {fileID: 2100000, guid: 460eac4e8dc7f5a41953e650c122e727, type: 2}
     - target: {fileID: 2354958, guid: 4073f41b7d930f94d9470df64ec12b53, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: cb7ba0bfcdb279845b0e2e15bfeb3f6c, type: 2}
+      objectReference: {fileID: 2100000, guid: 460eac4e8dc7f5a41953e650c122e727, type: 2}
     - target: {fileID: 2368624, guid: 4073f41b7d930f94d9470df64ec12b53, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: cb7ba0bfcdb279845b0e2e15bfeb3f6c, type: 2}
-    m_RemovedComponents: []
+      objectReference: {fileID: 2100000, guid: 460eac4e8dc7f5a41953e650c122e727, type: 2}
+    m_RemovedComponents:
+    - {fileID: 11464450, guid: 4073f41b7d930f94d9470df64ec12b53, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -36964,7 +36978,9 @@ MonoBehaviour:
   hours: {fileID: 1815418088}
   minutes: {fileID: 1815418087}
   seconds: {fileID: 1815418086}
-  rotationSpeed: 20000
+  normalSpeed: 1000
+  returnSpeed: 5000
+  isReturning: 0
 --- !u!1001 &1819401092
 PrefabInstance:
   m_ObjectHideFlags: 0
