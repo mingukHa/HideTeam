@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class RagdollGrabber : MonoBehaviour
@@ -24,6 +25,8 @@ public class RagdollGrabber : MonoBehaviour
     private Rigidbody rootRigidbody;
     private ConfigurableJoint rootJoint;
     private float groundLevel;
+
+    private Dictionary<Collider, bool> originalTriggerStates = new Dictionary<Collider, bool>(); // 기존 상태 저장
 
     private void Start()
     {
@@ -100,11 +103,29 @@ public class RagdollGrabber : MonoBehaviour
     {
         isGrabbing = true;
         rootTransform = ragdollRigidbody.transform.root;
-
         rootColliders = rootTransform.GetComponentsInChildren<Collider>();
+        originalTriggerStates.Clear();
+
+        // 모든 Rigidbody 가져오기 (루트 포함)
+        Rigidbody[] allRigidbodies = rootTransform.GetComponentsInChildren<Rigidbody>();
+
         foreach (var col in rootColliders)
         {
-            col.isTrigger = true;
+            // Ragdoll에 부착된 Rigidbody를 가진 Collider는 저장하지 않음 (예외 처리)
+            if (col.attachedRigidbody == ragdollRigidbody)
+                continue;
+
+            // 기존 isTrigger 상태 저장
+            originalTriggerStates[col] = col.isTrigger;
+            col.isTrigger = true; // Trigger 활성화
+        }
+
+        // 모든 Ragdoll 부위의 Rigidbody 설정 적용
+        foreach (var rb in allRigidbodies)
+        {
+            rb.useGravity = false;
+            rb.interpolation = RigidbodyInterpolation.Interpolate;
+            rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
         }
 
         // 루트 Rigidbody 추가
@@ -114,14 +135,11 @@ public class RagdollGrabber : MonoBehaviour
             rootRigidbody.mass = 10;
         }
 
-        // Rigidbody 설정
+        // Root Rigidbody 설정
         rootRigidbody.isKinematic = false; // 중요: 움직일 수 있도록 설정
-        ragdollRigidbody.isKinematic = false; // 중요: 움직일 수 있도록 설정
-        ragdollRigidbody.useGravity = false;  // 중력을 끔
-        ragdollRigidbody.interpolation = RigidbodyInterpolation.Interpolate;
-        ragdollRigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
-
-
+        rootRigidbody.useGravity = false;
+        rootRigidbody.interpolation = RigidbodyInterpolation.Interpolate;
+        rootRigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
 
         // HoldPoint로 즉시 이동
         rootRigidbody.MovePosition(ragdollHoldPoint.position);
@@ -167,19 +185,23 @@ public class RagdollGrabber : MonoBehaviour
     {
         isGrabbing = false;
 
-        // 루트 오브젝트 Rigidbody kinematic 비활성화
-        if (rootRigidbody != null)
+        // 모든 Ragdoll 부위의 Rigidbody 중력 다시 활성화
+        Rigidbody[] allRigidbodies = rootTransform.GetComponentsInChildren<Rigidbody>();
+        foreach (var rb in allRigidbodies)
         {
-            rootRigidbody.isKinematic = false;
+            rb.useGravity = true;
         }
 
-        if (rootColliders != null)
+        // 저장했던 Collider 상태 복원
+        foreach (var entry in originalTriggerStates)
         {
-            foreach (var col in rootColliders)
+            if (entry.Key != null) // Collider가 존재하는 경우만 복원
             {
-                col.isTrigger = false;
+                entry.Key.isTrigger = entry.Value;
             }
         }
+
+        originalTriggerStates.Clear(); // 복원 후 리스트 초기화
 
         if (joint != null)
         {

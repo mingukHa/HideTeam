@@ -68,7 +68,7 @@ public class ScreenshotViewer : MonoBehaviour
 
     private IEnumerator GameRestart()
     {
-        yield return new WaitForSeconds(0.6f);
+        yield return new WaitForSeconds(1.2f);
         EventManager.Trigger(GameEventType.GameOver);
     }
 

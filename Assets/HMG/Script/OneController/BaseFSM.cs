@@ -141,9 +141,11 @@ public class NPCFSM : MonoBehaviour
 
         isRagdollActivated = true; //  이미 실행되었음을 저장
 
-        //해당 오브젝트의 자식까지 전부 태그를 Ragdoll로 바꿈
-        foreach (Transform child in GetComponentsInChildren<Transform>())
+        // 최상위 오브젝트 제외하고 모든 자식 오브젝트의 태그와 레이어 변경
+        foreach (Transform child in GetComponentsInChildren<Transform>(true))
         {
+            if (child == transform) continue; // 루트 오브젝트는 제외
+
             child.gameObject.tag = "Ragdoll";
             child.gameObject.layer = 15;
         }
