@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using static EventManager;
 using UnityEngine.AI;
 using TMPro;
+using UnityEngine.SocialPlatforms;
 
 
 public class NPC_CleanMan : NPCFSM
@@ -18,7 +19,7 @@ public class NPC_CleanMan : NPCFSM
     public Transform richKillPos;
     private bool GarbageTrue = false;
     private bool isHide = false;
-    
+    public TextMeshProUGUI npcclean;
     private void OnEnable()
     {
         EventManager.Subscribe(GameEventType.Garbage, StartGarbage);
@@ -128,12 +129,14 @@ public class NPC_CleanMan : NPCFSM
         {
             chat.LoadNPCDialogue(npc, 5);
             yield return new WaitForSeconds(3f);
-            chat.LoadNPCDialogue("Null", 0);
+            Debug.Log("지워져야함");
+            npcclean.text = "";
+            Debug.Log("지워짐");
             ChangeState(State.Idle);
             EventManager.Trigger(GameEventType.OldManOut);
         }
     }
-
+    
     private void StopNpc()
     {
         StopCoroutine(TalkView());
