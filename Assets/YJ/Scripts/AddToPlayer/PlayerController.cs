@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     private float mouseX = 0;
     private float mouseSensitivity = 5f;
 
+    private bool isEChatActive = false;
+    private bool isECarActive = false;
     private bool isMoving = false;
     private bool isCrouching = false;
     private bool isSuiciding = false;
@@ -42,9 +44,9 @@ public class PlayerController : MonoBehaviour
 
     public Image fImage;    //F키 이미지
 
-    public GameObject E_Chat;
+    public GameObject E_Chat;   //대화키
 
-    public GameObject CarKey;
+    public GameObject CarKey;   //차 발로 차기 키
 
     private float eholdTime = 0f;   //E키 누른 시간
     private float eGoalholdTime = 1f;   //E키 눌러야하는 시간
@@ -52,8 +54,8 @@ public class PlayerController : MonoBehaviour
     private float rholdTime = 0f;   //R키 누른 시간
     private float rGoalholdTime = 1f;   //R키 눌러야하는 시간
 
-    private bool isDisguised = false;
-    private bool isGrabed = false;
+    private bool isDisguised = false;   //분장했는지 체크
+    private bool isGrabed = false;      //잡은걸 체크
 
     public List<DoorController> doorCons = new List<DoorController>();
     [SerializeField]
@@ -84,6 +86,13 @@ public class PlayerController : MonoBehaviour
             InputMouseProcess(mouseX);
         }
 
+        if(isEChatActive && Input.GetKeyDown(KeyCode.E) || isEChatActive && Input.GetKeyDown(KeyCode.E))
+        {
+            E_Chat.SetActive(false);
+            isEChatActive = false;
+            isECarActive = false;
+        }
+
         PlayerAction();
         PlayerMove();
         CheckFirstDoorOpen();
@@ -91,14 +100,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("NPC"))
+        if (other.CompareTag("NPC") || other.CompareTag("NPCTeller"))
         {
             E_Chat.SetActive(true);
-        }
-
-        if (other.CompareTag("NPCTeller"))
-        {
-            E_Chat.SetActive(true);
+            isEChatActive = true; // 상태를 저장
         }
 
         if (other.CompareTag("Car"))
@@ -107,6 +112,7 @@ public class PlayerController : MonoBehaviour
             if (carAlarm != null)
             {
                 CarKey.SetActive(true);
+                isECarActive = true; // 상태를 저장
             }
         }
 
@@ -174,7 +180,7 @@ public class PlayerController : MonoBehaviour
                 // 살아있는 NPC와 상호작용 시 E키 비활성화
                 eImage.gameObject.SetActive(false);
                 eSlider.gameObject.SetActive(false);
-                fImage.gameObject.SetActive(true); // 살아있는 NPC일 때 F키 관련 UI 활성화
+                //fImage.gameObject.SetActive(true); // 살아있는 NPC일 때 F키 관련 UI 활성화
             }
         }
 
@@ -193,7 +199,7 @@ public class PlayerController : MonoBehaviour
                 // 살아있는 NPC와 상호작용 시 E키 비활성화
                 eImage.gameObject.SetActive(false);
                 eSlider.gameObject.SetActive(false);
-                fImage.gameObject.SetActive(true); // 살아있는 NPC일 때 F키 관련 UI 활성화
+                //fImage.gameObject.SetActive(true); // 살아있는 NPC일 때 F키 관련 UI 활성화
             }
         }
     }
