@@ -16,7 +16,12 @@ public class PlayerController : MonoBehaviour
     private TrashBin trashBin;
     //public RagdollGrabber ragdollGrabber;
 
+    [Header ("권총 오브젝트")]
     public GameObject gun = null;
+    public ParticleSystem muzzleFlash;
+    public GameObject muzzleFlashLight;
+
+    [Header ("담배 오브젝트")]
     public GameObject cigarette = null;
     public GameObject droppingCigarette = null;
 
@@ -25,8 +30,10 @@ public class PlayerController : MonoBehaviour
 
     private bool isMoving = false;
     private bool isCrouching = false;
+    private bool isSuiciding = false;
     private static bool isStarted = false;
 
+    [Header("상호작용 키 버튼")]
     public Image eImage;    //E키 이미지
     public Slider eSlider;  //E키 게이지
 
@@ -412,7 +419,7 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K) && !isSuiciding) // 중복 입력 방지
         {
             StartCoroutine(SuicideCoroutine());
         }
@@ -459,6 +466,8 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator SuicideCoroutine()
     {
+        isSuiciding = true; // 코루틴 실행 중 중복 입력 방지
+
         anim.SetTrigger("Suicide");
 
         // Upper Layer에서 'Suicide' 애니메이션 상태가 될 때까지 대기
@@ -477,6 +486,29 @@ public class PlayerController : MonoBehaviour
 
         Time.timeScale = 0.2f; // 슬로우 모션 적용
 
+        // Suicide 애니메이션이 실행된 후 0.35초 대기
+        yield return new WaitForSeconds(0.35f * Time.timeScale);
+
+        // 1. Particle System 재생
+        if (muzzleFlash != null)
+        {
+            muzzleFlash.Play();
+        }
+
+        // 2. Light 켜기
+        if (muzzleFlashLight != null)
+        {
+            muzzleFlashLight.SetActive(true);
+        }
+
+        // 0.1초 후 Light 끄기
+        yield return new WaitForSeconds(0.1f * Time.timeScale);
+
+        if (muzzleFlashLight != null)
+        {
+            muzzleFlashLight.SetActive(false);
+        }
+
         // Upper Layer에서 Suicide 애니메이션의 길이를 가져옴
         float animLength = anim.GetCurrentAnimatorStateInfo(1).length;
 
@@ -492,5 +524,7 @@ public class PlayerController : MonoBehaviour
 
         Time.timeScale = 1f; // 원래 속도로 복원
         gun.SetActive(false);
+
+        isSuiciding = false; // 코루틴 종료 후 다시 K키 입력 가능
     }
 }
