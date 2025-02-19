@@ -4,11 +4,11 @@ public class GcodeEvent : MonoBehaviour
 {
     private void OnEnable()
     {
-        EventManager.Subscribe(EventManager.GameEventType.Conversation5, StartGcode);
+        EventManager.Subscribe(EventManager.GameEventType.GameClear, StartGcode);
     }
     private void OnDisable()
     {
-        EventManager.Unsubscribe(EventManager.GameEventType.Conversation5, StartGcode);
+        EventManager.Unsubscribe(EventManager.GameEventType.GameClear, StartGcode);
     }
     private void StartGcode()
     {
@@ -17,7 +17,7 @@ public class GcodeEvent : MonoBehaviour
         npcFSM.enabled = false;
         chat.enabled = false;    
     }
-
+    public SphereCollider coll;
     public BoxCollider box;
     public NPC_DoorGaurd doorman;
     public NPCFSM npcFSM;

@@ -179,6 +179,7 @@ public class TellerController : NPCController
         {
             Debug.Log($"[이벤트 {convEnv} 호출");
             EventManager.Trigger(convEnv);
+            StartCoroutine(EventCallCoroutine());
         }
         text = Regex.Replace(text, @"/F[A-Z]", "");
         text = text.Replace("/T", "");
@@ -273,6 +274,14 @@ public class TellerController : NPCController
             case "Z":
                 EventManager.Trigger(EventManager.GameEventType.ResetTalkUI);
                 break;
+        }
+    }
+    private IEnumerator EventCallCoroutine()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            EventManager.Trigger(convEnv);
+            yield return new WaitForSeconds(1.0f);
         }
     }
 }

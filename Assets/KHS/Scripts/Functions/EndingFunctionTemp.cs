@@ -12,7 +12,7 @@ public class EndingFunctionTemp : MonoBehaviour
     public string npcID = "Ending";
 
     public MatDetChange MDC_Collider;
-
+    public GameObject detectDisguseRichman;
     public TextMeshProUGUI dialogueText;
 
     [SerializeField]
@@ -63,7 +63,7 @@ public class EndingFunctionTemp : MonoBehaviour
 
     private void FixedUpdate()
     {
-
+        isDisguse = detectDisguseRichman.activeSelf;
         if (isFlowClear && isDisguse && isDet && Input.GetKeyDown(KeyCode.E) && !alreadyStarted)
         {
             alreadyStarted = true;
@@ -170,6 +170,17 @@ public class EndingFunctionTemp : MonoBehaviour
         while (dialogueQueue.Count > 0)
         {
             string dialogue = dialogueQueue.Dequeue();
+
+            if(dialogue.Contains("/B"))
+            {
+                EndingIdx = 0;
+                EventManager.Trigger(EndingEnvList[EndingIdx]);
+            }
+            else if(dialogue.Contains("/G"))
+            {
+                EndingIdx = 1;
+                EventManager.Trigger(EndingEnvList[EndingIdx]);
+            }
             ShowDialogue(dialogue);
 
             

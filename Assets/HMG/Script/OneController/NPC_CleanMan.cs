@@ -128,12 +128,13 @@ public class NPC_CleanMan : NPCFSM
         {
             chat.LoadNPCDialogue(npc, 5);
             yield return new WaitForSeconds(3f);
+            Debug.Log("지워져야함");
             chat.LoadNPCDialogue("Null", 0);
+            Debug.Log("지워짐");
             ChangeState(State.Idle);
             EventManager.Trigger(GameEventType.OldManOut);
         }
     }
-
     private void StopNpc()
     {
         StopCoroutine(TalkView());
