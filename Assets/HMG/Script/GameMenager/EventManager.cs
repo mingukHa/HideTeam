@@ -7,7 +7,7 @@ public class EventManager : MonoBehaviour
     public enum GameEventType //이 부분에서 모든 이벤트 String을 관리 합니다
     {
         //공통 상시 동작 이벤트
-        SuspiciousDetected,     // 수상한 상황 발견
+        NULL,     // 초기화용 NULL 이벤트
         PlayerEnterBank,        // 플레이어 은행 진입
         PlayerTalkTeller,         // 텔러 상호작용
 
@@ -53,7 +53,17 @@ public class EventManager : MonoBehaviour
         Conversation5,
         Conversation6,
 
-        OldManOut
+        OldManOut,
+
+        RichManTalkUI,
+        OldManTalkUI,
+        PlayerTalkUI,
+        TellerTalkUI,
+        GuardTalkUI,
+        CleanerTalkUI,
+        ResetTalkUI,
+
+        ConvStart
     }
 
     private static Dictionary<GameEventType, Action> eventDictionary = new Dictionary<GameEventType, Action>();

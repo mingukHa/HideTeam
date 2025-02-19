@@ -19,10 +19,10 @@ public class TalkCommand : ICommand
     {
         EventManager.Trigger(talkEvent);
         Debug.Log($"{npcController.npcName} 가 {talkEvent}를 트리거!");
-        npcController.animator.SetTrigger("Talk");
         elapsedTime += Time.deltaTime;
         if (elapsedTime >= talktime)
         {
+            npcController.animator.SetTrigger("Talk");
             finished = true;
         }
 
