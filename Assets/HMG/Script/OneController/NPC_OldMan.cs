@@ -103,9 +103,15 @@ public class NPC_OldMan : NPCFSM
             chat.LoadNPCDialogue(npc, 1);
         }
     }
+    protected override void OnTriggerStay(Collider other)
+    {
+        base.OnTriggerStay(other);
 
+
+    }
     protected override void OnTriggerExit(Collider other)
     {
+        base.OnTriggerExit(other);
         if (other.CompareTag("Player"))
         {
             isPlayerNearby = false;
