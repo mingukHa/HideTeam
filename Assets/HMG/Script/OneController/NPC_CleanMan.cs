@@ -63,6 +63,11 @@ public class NPC_CleanMan : NPCFSM
                 EventManager.Trigger(GameEventType.CleanManTalk);
                 Invoke("StopNpc", 2f);
             }
+            if (Input.GetKey(KeyCode.F))
+            {
+                //EventManager.Trigger(GameEventType.NPCKill);
+                isDead = true;
+            }
         }
     }
     private void StartRichNoHide()
@@ -244,6 +249,7 @@ public class NPC_CleanMan : NPCFSM
         if (Input.GetKey(KeyCode.F))
         {
             isDead = true;
+            chat.LoadNPCDialogue("NULL", 0);
         }
 
     }
