@@ -3,12 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 [DisallowMultipleComponent]
 
 public class Moutline : MonoBehaviour
 {
+    public int LenderQueue;
     private static HashSet<Mesh> registeredMeshes = new HashSet<Mesh>();
 
     public enum Mode
@@ -100,6 +102,16 @@ public class Moutline : MonoBehaviour
 
         // Apply material properties immediately
         needsUpdate = true;
+    }
+
+    void Start()
+    {
+        // 게임 시작 시 "Door" 레이어에 있는 오브젝트라면 LenderQueue 값을 4000으로 설정
+        if (gameObject.layer == LayerMask.NameToLayer("Door"))
+        {
+            LenderQueue = 4000;
+            Debug.Log("LenderQueue 값이 4000으로 설정되었습니다.");
+        }
     }
 
     void OnEnable()
