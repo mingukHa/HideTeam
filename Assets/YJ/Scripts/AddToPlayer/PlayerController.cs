@@ -73,6 +73,8 @@ public class PlayerController : MonoBehaviour
 
     private NPCIdentifier disguisedNPC = null;  //변장한 NPC를 추적
 
+    public ScreenshotViewer screenshotViewer;
+
     private void Start()
     {
         Cursor.visible = false;
@@ -94,11 +96,14 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        //// 흡연이 끝나고 플레이어가 움직이고 있을 때만 마우스 입력 처리
-        //if (isMoving && isStarted && InputMouse(ref mouseX))
-        //{
-        //    InputMouseProcess(mouseX);
-        //}
+        // 흡연이 끝나고 플레이어가 움직이고 있을 때만 마우스 입력 처리
+        if (isMoving)
+        {
+            PlayerAction();
+            //PlayerMove();
+            PlayerBasicMove();      // 카메라 바뀌면서 바뀐 플레이어 무브
+            CheckFirstDoorOpen();
+        }
 
         if(isEChatActive && Input.GetKeyDown(KeyCode.E) || isEChatActive && Input.GetKeyDown(KeyCode.E))
         {
@@ -107,10 +112,7 @@ public class PlayerController : MonoBehaviour
             isECarActive = false;
         }
 
-        PlayerAction();
-        //PlayerMove();
-        PlayerBasicMove();      // 카메라 바뀌면서 바뀐 플레이어 무브
-        CheckFirstDoorOpen();
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -542,6 +544,7 @@ public class PlayerController : MonoBehaviour
 
         yield return new WaitForSeconds(5f);
         isStarted = true;
+        isMoving = true;
     }
 
     private IEnumerator KickTheCar()
@@ -621,5 +624,6 @@ public class PlayerController : MonoBehaviour
         gun.SetActive(false);
 
         isSuiciding = false; // 코루틴 종료 후 다시 K키 입력 가능
+        screenshotViewer.StartCoroutine(screenshotViewer.GameRestart());
     }
 }
