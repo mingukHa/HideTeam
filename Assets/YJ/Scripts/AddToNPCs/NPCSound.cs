@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class NPCSound : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private SoundManager soundManager; // 오디오소스 컴포넌트
+
+    private void Start()
     {
-        
+        soundManager = GetComponent<SoundManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Walk()
     {
-        
+        SoundManager.instance.SFXPlay("Walk_SFX", this.gameObject);
     }
 }
