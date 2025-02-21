@@ -100,8 +100,6 @@ public class NPC_OldMan : NPCFSM
         if (!isDead && other.CompareTag("Player"))
         {
             isPlayerNearby = true;
-            chat.LoadNPCDialogue(npc, 0);
-            new WaitForSeconds(1.5f);
             chat.LoadNPCDialogue(npc, 1);
         }
     }
