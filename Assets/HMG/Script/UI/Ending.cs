@@ -36,7 +36,7 @@ public class Ending : MonoBehaviour
             fadeImage.color = color;
             yield return null;
         }
-        SceneManager.LoadScene("LobbyScene");
+        FindAnyObjectByType<ESCMenu>().Lobbygame();
     }
     public IEnumerator GameOverCoroutine()
     {
