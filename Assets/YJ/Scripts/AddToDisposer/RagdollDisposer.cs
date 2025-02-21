@@ -6,7 +6,7 @@ public class RagdollDisposer : MonoBehaviour
 {
     //public Transform disposalPoint; // Ragdoll을 버릴 위치
     public Transform lid; // 뚜껑 or 문 오브젝트
-    private RagdollGrabber ragdollgrab;
+    public RagdollGrabber ragdollgrab;
     private Rigidbody ragdollRigidbody;
     private Transform ragdollRoot;
     private Animator playerAnim;
@@ -20,7 +20,7 @@ public class RagdollDisposer : MonoBehaviour
 
     private void Start()
     {
-        ragdollgrab.GetComponent<RagdollDisposer>();
+        
         grabImage.gameObject.SetActive(false);
         lidClosedRotation = lid.rotation;
     }
