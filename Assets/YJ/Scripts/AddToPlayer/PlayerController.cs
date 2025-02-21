@@ -90,8 +90,11 @@ public class PlayerController : MonoBehaviour
             cigarette.SetActive(true);
             Smoking();
         }
-
-        isFirstOpen = false;
+        else
+        {
+            isMoving = true;
+        }
+            isFirstOpen = false;
     }
 
     private void Update()
@@ -624,6 +627,6 @@ public class PlayerController : MonoBehaviour
         gun.SetActive(false);
 
         isSuiciding = false; // 코루틴 종료 후 다시 K키 입력 가능
-        screenshotViewer.StartCoroutine(screenshotViewer.GameRestart());
+        screenshotViewer.GameRestart();
     }
 }
