@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: 2c22d296d434cf54380cc9acfb2c7305
+AssetOrigin:
+  serializedVersion: 1
+  productId: 261065
+  packageName: Free Scavenger
+  packageVersion: 1.0
+  assetPath: Assets/Homeless_people/Free_Scavenger/FBX/Scavenger.fbx
+  uploadId: 601723
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -31,8 +38,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -116,10 +121,10 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 3
+    tangentImportMode: 2
     normalCalculationMode: 4
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
-    blendShapeNormalImportMode: 1
+    blendShapeNormalImportMode: 0
     normalSmoothingSource: 0
   referencedClips: []
   importAnimation: 1
@@ -839,10 +844,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 261065
-  packageName: Free Scavenger
-  packageVersion: 1.0
-  assetPath: Assets/Homeless_people/Free_Scavenger/FBX/Scavenger.fbx
-  uploadId: 601723
