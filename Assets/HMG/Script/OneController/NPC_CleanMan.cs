@@ -23,6 +23,7 @@ public class NPC_CleanMan : NPCFSM
     //private bool isPlayerNearby = false;
 
     public GameObject PlayerToiletOutPos;
+    
     private void OnEnable()
     {
         EventManager.Subscribe(GameEventType.Garbage, StartGarbage);
@@ -43,6 +44,7 @@ public class NPC_CleanMan : NPCFSM
     }
     protected override void Update()
     {
+        base.Update();
         if (!isDead && isPlayerNearby)
         {
             // 키 입력을 지속적으로 체크
@@ -66,6 +68,7 @@ public class NPC_CleanMan : NPCFSM
             if (Input.GetKey(KeyCode.F))
             {
                 //EventManager.Trigger(GameEventType.NPCKill);
+                agent.enabled = false;
                 isDead = true;
             }
         }
@@ -112,6 +115,10 @@ public class NPC_CleanMan : NPCFSM
     //    // 두 번째 목적지로 이동
     //    agent.SetDestination(GarbagePos1.transform.position);
     //}
+    public void Walk()
+    {
+
+    }
     private void StartRichKill()
     {
         if (GarbageTrue == false)
@@ -240,6 +247,7 @@ public class NPC_CleanMan : NPCFSM
 
     protected override void OnTriggerEnter(Collider other)
     {
+        base.OnTriggerEnter(other);
         if (!isDead && other.CompareTag("Player"))
         {
             isPlayerNearby = true;
@@ -263,6 +271,7 @@ public class NPC_CleanMan : NPCFSM
 
     protected override void OnTriggerExit(Collider other)
     {
+        base.OnTriggerExit(other);
         if (other.CompareTag("Player"))
         {
             isPlayerNearby = false;
