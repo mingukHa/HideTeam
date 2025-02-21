@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using static EventManager;
 
 
 public class PlayerController : MonoBehaviour
 {
+    public Transform mainCam;
+
+
     private Animator anim = null;
     private Transform tr = null;
 
@@ -27,6 +31,10 @@ public class PlayerController : MonoBehaviour
 
     private float mouseX = 0;
     private float mouseSensitivity = 5f;
+
+    public float moveSpeed = 4.0f;
+    public float rotationSpeed = 10f;
+    private Vector3 moveDirection;
 
     private bool isEChatActive = false;
     private bool isECarActive = false;
@@ -83,11 +91,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        // 흡연이 끝나고 플레이어가 움직이고 있을 때만 마우스 입력 처리
-        if (isMoving && isStarted && InputMouse(ref mouseX))
-        {
-            InputMouseProcess(mouseX);
-        }
+        //// 흡연이 끝나고 플레이어가 움직이고 있을 때만 마우스 입력 처리
+        //if (isMoving && isStarted && InputMouse(ref mouseX))
+        //{
+        //    InputMouseProcess(mouseX);
+        //}
 
         if(isEChatActive && Input.GetKeyDown(KeyCode.E) || isEChatActive && Input.GetKeyDown(KeyCode.E))
         {
@@ -97,7 +105,8 @@ public class PlayerController : MonoBehaviour
         }
 
         PlayerAction();
-        PlayerMove();
+        //PlayerMove();
+        PlayerBasicMove();      // 카메라 바뀌면서 바뀐 플레이어 무브
         CheckFirstDoorOpen();
     }
 
@@ -260,32 +269,88 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private bool InputMouse(ref float _mouseX)
+    //private bool InputMouse(ref float _mouseX)
+    //{
+    //    float mX = Input.GetAxis("Mouse X");
+    //    float mY = Input.GetAxis("Mouse Y");
+
+    //    if (mX == 0f && mY == 0f) return false;
+
+    //    _mouseX += mX * mouseSensitivity;
+
+    //    return true;
+    //}
+
+    //private void InputMouseProcess(float _mouseX)
+    //{
+    //    tr.rotation = Quaternion.Euler(0f, _mouseX, 0f);
+    //}
+
+    //private void PlayerMove()
+    //{
+    //    float axisV = Input.GetAxis("Vertical");
+    //    float axisH = Input.GetAxis("Horizontal");
+
+    //    isMoving = axisV != 0 || axisH != 0;
+
+    //    anim.SetFloat("Forward", axisV);
+    //    anim.SetFloat("Right", axisH);
+
+    //    // 걷기(Walk)
+    //    if (Input.GetKey(KeyCode.LeftControl))
+    //    {
+    //        anim.SetBool("Walk", true);
+    //    }
+    //    else
+    //    {
+    //        anim.SetBool("Walk", false);
+    //    }
+
+    //    // 앉기(Crouch)
+    //    if (Input.GetKeyDown(KeyCode.C))
+    //    {
+    //        isCrouching = !isCrouching; // 상태 전환
+    //        anim.SetBool("Crouch", isCrouching); // 애니메이터의 Crouch 파라미터 설정
+    //    }
+        
+    //    // 뛰기(Sprint)
+    //    if (Input.GetKey(KeyCode.LeftShift))
+    //    {
+    //        anim.SetBool("Sprint", true);
+    //    }
+    //    else
+    //    {
+    //        anim.SetBool("Sprint", false);
+    //    }
+
+    //}
+    private void PlayerBasicMove()
     {
-        float mX = Input.GetAxis("Mouse X");
-        float mY = Input.GetAxis("Mouse Y");
+        // 입력 받기 (WASD 혹은 방향키)
+        float horizontal = Input.GetAxis("Horizontal");
+        float vertical = Input.GetAxis("Vertical");
 
-        if (mX == 0f && mY == 0f) return false;
 
-        _mouseX += mX * mouseSensitivity;
+        // 카메라를 기준으로 이동 방향 계산
+        Vector3 forward = mainCam.transform.forward;
+        Vector3 right = mainCam.transform.right;
 
-        return true;
-    }
+        forward.y = 0f; // 수평 방향만 계산
+        right.y = 0f;
 
-    private void InputMouseProcess(float _mouseX)
-    {
-        tr.rotation = Quaternion.Euler(0f, _mouseX, 0f);
-    }
+        forward.Normalize();
+        right.Normalize();
 
-    private void PlayerMove()
-    {
-        float axisV = Input.GetAxis("Vertical");
-        float axisH = Input.GetAxis("Horizontal");
+        anim.SetFloat("Forward", vertical);
+        anim.SetFloat("Right", horizontal);
 
-        isMoving = axisV != 0 || axisH != 0;
+        moveDirection = forward * vertical + right * horizontal;
 
-        anim.SetFloat("Forward", axisV);
-        anim.SetFloat("Right", axisH);
+        // 캐릭터 이동
+        if (moveDirection.magnitude > 0.1f)
+        {
+            RotateViewForward();
+        }
 
         // 걷기(Walk)
         if (Input.GetKey(KeyCode.LeftControl))
@@ -303,7 +368,7 @@ public class PlayerController : MonoBehaviour
             isCrouching = !isCrouching; // 상태 전환
             anim.SetBool("Crouch", isCrouching); // 애니메이터의 Crouch 파라미터 설정
         }
-        
+
         // 뛰기(Sprint)
         if (Input.GetKey(KeyCode.LeftShift))
         {
@@ -313,7 +378,15 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool("Sprint", false);
         }
+    }
+    private void RotateViewForward()
+    {
+        Vector3 camForward = mainCam.transform.forward;
+        camForward.y = 0f;
 
+        Quaternion targetRotation = Quaternion.LookRotation(camForward);
+
+        transform.localRotation = Quaternion.Slerp(transform.localRotation, targetRotation, Time.deltaTime * 5f); // 회전 속도 조정
     }
 
     private void PlayerAction()
@@ -439,7 +512,7 @@ public class PlayerController : MonoBehaviour
     {
         foreach(DoorController doorCon in doorCons)
         {
-            if(!isFirstOpen && doorCon.isOpen)
+            if(!isFirstOpen && doorCon.isPrOpen)
             {
                 isFirstOpen = true;
                 EventManager.Trigger(GameEventType.PlayerEnterBank);

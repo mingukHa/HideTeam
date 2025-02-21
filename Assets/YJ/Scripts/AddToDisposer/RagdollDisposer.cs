@@ -6,6 +6,7 @@ public class RagdollDisposer : MonoBehaviour
 {
     //public Transform disposalPoint; // RagdollÀ» ¹ö¸± À§Ä¡
     public Transform lid; // ¶Ñ²± or ¹® ¿ÀºêÁ§Æ®
+    public RagdollGrabber ragdollgrab;
     private Rigidbody ragdollRigidbody;
     private Transform ragdollRoot;
     private Animator playerAnim;
@@ -15,17 +16,18 @@ public class RagdollDisposer : MonoBehaviour
     [SerializeField]
     private Quaternion lidOpenRotation; // ¿­¸° ¶Ñ²± °¢µµ
 
-    public Image gImage;
+    public Image grabImage; //ÀºÆó ¹öÆ°
 
     private void Start()
     {
-        gImage.gameObject.SetActive(false);
+        
+        grabImage.gameObject.SetActive(false);
         lidClosedRotation = lid.rotation;
     }
 
     private void Update()
     {
-        if (isPlayerNearby && isRagdollNearby && Input.GetKeyDown(KeyCode.E))
+        if (isPlayerNearby && isRagdollNearby && Input.GetKeyDown(KeyCode.E) && ragdollgrab.isGrabbing)
         {
             DisposeRagdoll();
         }
@@ -33,9 +35,9 @@ public class RagdollDisposer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && ragdollgrab.isGrabbing)
         {
-            gImage.gameObject.SetActive(true);
+            grabImage.gameObject.SetActive(true);
             isPlayerNearby = true;
             playerAnim = other.GetComponent<Animator>();
         }
@@ -52,7 +54,7 @@ public class RagdollDisposer : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            gImage.gameObject.SetActive(false);
+            grabImage.gameObject.SetActive(false);
             isPlayerNearby = false;
             playerAnim = null;
         }

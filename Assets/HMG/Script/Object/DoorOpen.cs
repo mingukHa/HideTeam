@@ -1,9 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class DoorController : MonoBehaviour
 {
     public bool isOpen = false; // 문 상태 (열림/닫힘)
+    public bool isPrOpen = false;
     public float openAngle = 90f; // 문이 열릴 각도
     public float animationTime = 1f; // 문 열림/닫힘 애니메이션 시간
     public GameObject DoorOpenUI;
@@ -34,6 +36,7 @@ public class DoorController : MonoBehaviour
                 {
                     PlayerAnimator.SetTrigger("DoorOpen");
 
+                    isPrOpen = true;
                     OpenDoorBasedOnView(Player.transform);
                 }
                 else
@@ -50,20 +53,41 @@ public class DoorController : MonoBehaviour
     {
         if (entity == null) return;
 
-        // 플레이어(NPC)의 바라보는 방향
-        Vector3 entityForward = entity.forward;
+        //// 플레이어(NPC)의 바라보는 방향
+        //Vector3 entityForward = entity.forward;
 
-        // 문의 정면 방향 (문이 바라보는 방향)
-        Vector3 doorForward = transform.forward;
+        //// 문의 정면 방향 (문이 바라보는 방향)
+        //Vector3 doorForward = transform.forward;
 
-        // 바라보는 방향과 문의 방향의 각도 계산
-        float angle = Vector3.Angle(entityForward, doorForward);
+        //// 바라보는 방향과 문의 방향의 각도 계산
+        //float angle = Vector3.Angle(entityForward, doorForward);
 
-        if (angle < 90) // 플레이어가 문을 정면에서 바라볼 때
+
+        //if (angle < 90) // 플레이어가 문을 정면에서 바라볼 때
+        //{
+        //    openRotation = Quaternion.Euler(0, openAngle, 0) * closedRotation;
+        //}
+        //else // 플레이어가 문을 뒤쪽에서 바라볼 때 (반대 방향에서 접근)
+        //{
+        //    openRotation = Quaternion.Euler(0, -openAngle, 0) * closedRotation;
+        //}
+
+        // 플레이어(NPC)의 위치
+        Vector3 entityPos = entity.transform.position;
+
+        // 문의 위치 (문이 바라보는 방향)
+        Vector3 doorPos = transform.position;
+
+        // 플레이어 -> 문 방향의 벡터
+        Vector3 openVec = doorPos - entityPos;
+
+        float dotDoor = Vector3.Dot(openVec, transform.forward);
+
+        if(dotDoor >= 0)
         {
             openRotation = Quaternion.Euler(0, openAngle, 0) * closedRotation;
         }
-        else // 플레이어가 문을 뒤쪽에서 바라볼 때 (반대 방향에서 접근)
+        else
         {
             openRotation = Quaternion.Euler(0, -openAngle, 0) * closedRotation;
         }
@@ -99,6 +123,7 @@ public class DoorController : MonoBehaviour
         StopAllCoroutines();
         StartCoroutine(AnimateDoor(closedRotation));
         isOpen = false;
+        isPrOpen = false;
     }
 
     // 문 애니메이션 처리
