@@ -46324,6 +46324,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 861750213}
     - target: {fileID: 1501117611459636646, guid: 827e65d93efb54f438bc8b3613723df9, type: 3}
+      propertyPath: screenshotViewer
+      value: 
+      objectReference: {fileID: 974037214}
+    - target: {fileID: 1501117611459636646, guid: 827e65d93efb54f438bc8b3613723df9, type: 3}
       propertyPath: droppingCigarette
       value: 
       objectReference: {fileID: 1530973036}

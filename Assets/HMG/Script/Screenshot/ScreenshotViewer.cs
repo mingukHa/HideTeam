@@ -56,20 +56,11 @@ public class ScreenshotViewer : MonoBehaviour
         Clock.SetActive(true);
         Text.SetActive(false);
     }
-    
 
-    public void Update()
+    public IEnumerator GameRestart()
     {
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            StartCoroutine(GameRestart());
-        }
-    }
-
-    private IEnumerator GameRestart()
-    {
-        yield return new WaitForSeconds(1.2f);
         EventManager.Trigger(GameEventType.GameOver);
+        yield return null;
     }
 
     public void StartSlideshow()
