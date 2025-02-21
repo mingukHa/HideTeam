@@ -236,13 +236,17 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("NPC"))
         {
+            eSlider.gameObject.SetActive(false);
             fImage.gameObject.SetActive(false);
+            gImage.gameObject.SetActive(false);
             E_Chat.SetActive(false);
         }
 
         if (other.CompareTag("NPCTeller"))
         {
+            eSlider.gameObject.SetActive(false);
             fImage.gameObject.SetActive(false);
+            gImage.gameObject.SetActive(false);
             E_Chat.SetActive(false);
         }
 

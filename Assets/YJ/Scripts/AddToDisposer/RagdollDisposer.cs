@@ -16,12 +16,11 @@ public class RagdollDisposer : MonoBehaviour
     [SerializeField]
     private Quaternion lidOpenRotation; // ¿­¸° ¶Ñ²± °¢µµ
 
-    public Image grabImage; //ÀºÆó ¹öÆ°
+    public Image egrabImage; //ÀºÆó ¹öÆ°
 
     private void Start()
     {
-        
-        grabImage.gameObject.SetActive(false);
+        egrabImage.gameObject.SetActive(false);
         lidClosedRotation = lid.rotation;
     }
     
@@ -33,11 +32,11 @@ public class RagdollDisposer : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player") && ragdollgrab.isGrabbing)
         {
-            grabImage.gameObject.SetActive(true);
+            egrabImage.gameObject.SetActive(true);
             isPlayerNearby = true;
             playerAnim = other.GetComponent<Animator>();
         }
@@ -54,7 +53,7 @@ public class RagdollDisposer : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            grabImage.gameObject.SetActive(false);
+            egrabImage.gameObject.SetActive(false);
             isPlayerNearby = false;
             playerAnim = null;
         }
