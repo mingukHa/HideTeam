@@ -241,6 +241,8 @@ public class TellerController : NPCController
 
     public void TellerGone()
     {
+        isInterPlayer = true;
+        isInterDisPlayer = true;
         stateMachine.ChangeState(new TellerGoneState(this));
     }
     public void TellerInteract()
