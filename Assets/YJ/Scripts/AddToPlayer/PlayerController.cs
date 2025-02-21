@@ -105,8 +105,8 @@ public class PlayerController : MonoBehaviour
         }
 
         PlayerAction();
-        PlayerMove();
-        //PlayerBasicMove();
+        //PlayerMove();
+        PlayerBasicMove();      // 카메라 바뀌면서 바뀐 플레이어 무브
         CheckFirstDoorOpen();
     }
 
@@ -269,61 +269,61 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private bool InputMouse(ref float _mouseX)
-    {
-        float mX = Input.GetAxis("Mouse X");
-        float mY = Input.GetAxis("Mouse Y");
+    //private bool InputMouse(ref float _mouseX)
+    //{
+    //    float mX = Input.GetAxis("Mouse X");
+    //    float mY = Input.GetAxis("Mouse Y");
 
-        if (mX == 0f && mY == 0f) return false;
+    //    if (mX == 0f && mY == 0f) return false;
 
-        _mouseX += mX * mouseSensitivity;
+    //    _mouseX += mX * mouseSensitivity;
 
-        return true;
-    }
+    //    return true;
+    //}
 
-    private void InputMouseProcess(float _mouseX)
-    {
-        tr.rotation = Quaternion.Euler(0f, _mouseX, 0f);
-    }
+    //private void InputMouseProcess(float _mouseX)
+    //{
+    //    tr.rotation = Quaternion.Euler(0f, _mouseX, 0f);
+    //}
 
-    private void PlayerMove()
-    {
-        float axisV = Input.GetAxis("Vertical");
-        float axisH = Input.GetAxis("Horizontal");
+    //private void PlayerMove()
+    //{
+    //    float axisV = Input.GetAxis("Vertical");
+    //    float axisH = Input.GetAxis("Horizontal");
 
-        isMoving = axisV != 0 || axisH != 0;
+    //    isMoving = axisV != 0 || axisH != 0;
 
-        anim.SetFloat("Forward", axisV);
-        anim.SetFloat("Right", axisH);
+    //    anim.SetFloat("Forward", axisV);
+    //    anim.SetFloat("Right", axisH);
 
-        // 걷기(Walk)
-        if (Input.GetKey(KeyCode.LeftControl))
-        {
-            anim.SetBool("Walk", true);
-        }
-        else
-        {
-            anim.SetBool("Walk", false);
-        }
+    //    // 걷기(Walk)
+    //    if (Input.GetKey(KeyCode.LeftControl))
+    //    {
+    //        anim.SetBool("Walk", true);
+    //    }
+    //    else
+    //    {
+    //        anim.SetBool("Walk", false);
+    //    }
 
-        // 앉기(Crouch)
-        if (Input.GetKeyDown(KeyCode.C))
-        {
-            isCrouching = !isCrouching; // 상태 전환
-            anim.SetBool("Crouch", isCrouching); // 애니메이터의 Crouch 파라미터 설정
-        }
+    //    // 앉기(Crouch)
+    //    if (Input.GetKeyDown(KeyCode.C))
+    //    {
+    //        isCrouching = !isCrouching; // 상태 전환
+    //        anim.SetBool("Crouch", isCrouching); // 애니메이터의 Crouch 파라미터 설정
+    //    }
         
-        // 뛰기(Sprint)
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            anim.SetBool("Sprint", true);
-        }
-        else
-        {
-            anim.SetBool("Sprint", false);
-        }
+    //    // 뛰기(Sprint)
+    //    if (Input.GetKey(KeyCode.LeftShift))
+    //    {
+    //        anim.SetBool("Sprint", true);
+    //    }
+    //    else
+    //    {
+    //        anim.SetBool("Sprint", false);
+    //    }
 
-    }
+    //}
     private void PlayerBasicMove()
     {
         // 입력 받기 (WASD 혹은 방향키)
