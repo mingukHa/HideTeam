@@ -52,6 +52,8 @@ public class ESCMenu : MonoBehaviour
     private void PauseGame()
     {
         isPaused = true;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
         EscMenu.SetActive(true);
         Time.timeScale = 0; // 게임 일시정지
     }
@@ -59,6 +61,8 @@ public class ESCMenu : MonoBehaviour
     private void ResumeGame()
     {
         isPaused = false;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
         EscMenu.SetActive(false);
         Time.timeScale = 1; // 게임 재개
     }
@@ -83,5 +87,7 @@ public class ESCMenu : MonoBehaviour
     {
         ResumeGame(); 
         SceneManager.LoadScene("LobbyScene");
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
     }
 }
