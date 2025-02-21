@@ -2308,6 +2308,7 @@ MonoBehaviour:
   isRagdollActivated: 0
   NPCCollider: {fileID: 82743805}
   select: {fileID: 1130133353}
+  isPlayerNearby: 0
   returnManager: {fileID: 2007657856}
 --- !u!114 &82743807
 MonoBehaviour:
@@ -2339,6 +2340,7 @@ MonoBehaviour:
   isRagdollActivated: 0
   NPCCollider: {fileID: 82743805}
   select: {fileID: 1130133353}
+  isPlayerNearby: 0
   returnManager: {fileID: 2007657856}
   npcchatbox: {fileID: 576083414}
   PolicPos: {fileID: 1631526045}
@@ -11947,6 +11949,7 @@ MonoBehaviour:
   isRagdollActivated: 0
   NPCCollider: {fileID: 367549500}
   select: {fileID: 625466187}
+  isPlayerNearby: 0
   returnManager: {fileID: 2007657856}
   npcchatbox: {fileID: 1223241016}
 --- !u!114 &367549499
@@ -11965,6 +11968,7 @@ MonoBehaviour:
   isRagdollActivated: 0
   NPCCollider: {fileID: 367549500}
   select: {fileID: 625466187}
+  isPlayerNearby: 0
   returnManager: {fileID: 2007657856}
 --- !u!135 &367549500
 SphereCollider:
@@ -21075,6 +21079,10 @@ PrefabInstance:
     - target: {fileID: 7398201183226228793, guid: 536aa32ba9b139c4c8e9fea2ae40da8d, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -280
+      objectReference: {fileID: 0}
+    - target: {fileID: 8141638061665126723, guid: 536aa32ba9b139c4c8e9fea2ae40da8d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8599559753729915661, guid: 536aa32ba9b139c4c8e9fea2ae40da8d, type: 3}
       propertyPath: m_Sprite
@@ -36312,6 +36320,7 @@ MonoBehaviour:
   isRagdollActivated: 0
   NPCCollider: {fileID: 1557606059}
   select: {fileID: 1198871250}
+  isPlayerNearby: 0
   returnManager: {fileID: 2007657856}
   npcchatbox: {fileID: 1339747253}
   sphereCollider: {fileID: 1557606059}
@@ -36331,6 +36340,7 @@ MonoBehaviour:
   isRagdollActivated: 0
   NPCCollider: {fileID: 1557606059}
   select: {fileID: 1198871250}
+  isPlayerNearby: 0
   returnManager: {fileID: 2007657856}
 --- !u!114 &1557606063
 MonoBehaviour:
@@ -43181,6 +43191,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &1976920572 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3978478111961668954, guid: 536aa32ba9b139c4c8e9fea2ae40da8d, type: 3}
+  m_PrefabInstance: {fileID: 577927461}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1982357013
 GameObject:
   m_ObjectHideFlags: 0
@@ -46277,6 +46298,10 @@ PrefabInstance:
       propertyPath: fImage
       value: 
       objectReference: {fileID: 577927463}
+    - target: {fileID: 1501117611459636646, guid: 827e65d93efb54f438bc8b3613723df9, type: 3}
+      propertyPath: gImage
+      value: 
+      objectReference: {fileID: 1976920572}
     - target: {fileID: 1501117611459636646, guid: 827e65d93efb54f438bc8b3613723df9, type: 3}
       propertyPath: rImage
       value: 
