@@ -29,11 +29,13 @@ public class NPC_OldMan : NPCFSM
     private void OldmanOut()
     {
         ChangeState(State.Walk);
+        StartCoroutine(EventOutLine());
         agent.SetDestination(OldManPos.position);
     }
     private void OldmanMove()
     {
         EventManager.Trigger(GameEventType.OldManGotoTeller);
+        StartCoroutine(EventOutLine());
         OldPos = NewManPos;
         TextChange.text = "1.카운터로 안내한다\n 2.무시한다\n 3.제압한다";
         Debug.Log($"늙은이 위치 변경 {OldPos}");
