@@ -14,6 +14,7 @@ public class TellerController : NPCController
     public string npcID;
 
     public MatDetChange MDC_collider;
+    public MatDetChange MDC_VisualTalk;
 
     public bool isVIP = false;
     public bool isPlayer = false;
@@ -59,6 +60,7 @@ public class TellerController : NPCController
             LoadTellerDialogue(npcID);
             isInterDisPlayer = true;
         }
+        isPlayerInRange = MDC_VisualTalk.isPrDet;
 
         // 대사 가시성 조정
         UpdateDialogueVisibility();
@@ -101,21 +103,6 @@ public class TellerController : NPCController
         else
         {
             dialogueText.alpha = 0f;
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.name == "PlayerHolder")
-        {
-            isPlayerInRange = true;
-        }
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.name == "PlayerHolder")
-        {
-            isPlayerInRange = false;
         }
     }
 

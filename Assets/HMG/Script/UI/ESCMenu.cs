@@ -83,10 +83,11 @@ public class ESCMenu : MonoBehaviour
         ResumeGame(); // 게임 재개
     }
 
-    private void Lobbygame()
+    public void Lobbygame()
     {
         ResumeGame(); 
         SceneManager.LoadScene("LobbyScene");
+        FindAnyObjectByType<PlayerController>().SetStarted();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
     }

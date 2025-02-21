@@ -18,6 +18,7 @@ TagManager:
   - Dumpster
   - Map
   - NPCTeller
+  - NPCEND
   layers:
   - Default
   - TransparentFX

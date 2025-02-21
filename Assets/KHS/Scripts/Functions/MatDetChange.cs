@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 
 public class MatDetChange : MonoBehaviour
@@ -9,6 +10,8 @@ public class MatDetChange : MonoBehaviour
 
     private OnTriggerEnterDelegate onTriggerEntercallback = null;
     private OnTriggerExitDelegate onTriggerExitcallback = null;
+
+    private KeyCode debugButton = KeyCode.F3;
 
     public OnTriggerEnterDelegate OnTriggerEnterCallback
     {
@@ -50,6 +53,7 @@ public class MatDetChange : MonoBehaviour
     {
         mat.color = noDetColor;
         isPrDet = false;
+        meshRenderer.gameObject.SetActive(false);
     }
 
     private void FixedUpdate()
@@ -67,6 +71,11 @@ public class MatDetChange : MonoBehaviour
             isDet = false;
             isPrDet = false;
             mat.color = noDetColor;
+        }
+
+        if(Input.GetKeyDown(debugButton))
+        {
+            DebugModeSwitch();
         }
     }
 
@@ -133,5 +142,10 @@ public class MatDetChange : MonoBehaviour
     private void HeardGcode()
     {
         gcode = true;
+    }
+
+    private void DebugModeSwitch()
+    {
+        meshRenderer.gameObject.SetActive(!meshRenderer.gameObject.activeSelf);
     }
 }

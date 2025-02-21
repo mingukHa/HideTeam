@@ -44,6 +44,11 @@ public class PlayerController : MonoBehaviour
     private bool isSuiciding = false;
     private static bool isStarted = false;
 
+    public void SetStarted()
+    {
+        isStarted = false;
+    }
+
     [Header("상호작용 키 버튼")]
     public Image eImage;    //E키 이미지
     public Slider eSlider;  //E키 게이지
