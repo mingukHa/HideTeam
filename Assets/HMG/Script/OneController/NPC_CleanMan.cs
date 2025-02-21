@@ -20,6 +20,9 @@ public class NPC_CleanMan : NPCFSM
     private bool GarbageTrue = false;
     private bool isHide = false;
     public TextMeshProUGUI npcclean;
+    private bool isPlayerNearby = false;
+
+    public GameObject PlayerToiletOutPos;
     private void OnEnable()
     {
         EventManager.Subscribe(GameEventType.Garbage, StartGarbage);
@@ -27,6 +30,7 @@ public class NPC_CleanMan : NPCFSM
         EventManager.Subscribe(GameEventType.RichHide, StartRichHide);
         EventManager.Subscribe(GameEventType.RichNoHide, StartRichNoHide);
         EventManager.Subscribe(GameEventType.RichToiletKill, StartRichToiletKill);
+        EventManager.Subscribe(GameEventType.PlayerToiletOut, RichFinds);
     }
     private void OnDisable()
     {
@@ -35,6 +39,31 @@ public class NPC_CleanMan : NPCFSM
         EventManager.Unsubscribe(GameEventType.RichHide, StartRichHide);
         EventManager.Unsubscribe(GameEventType.RichToiletKill, StartRichNoHide);
         EventManager.Unsubscribe(GameEventType.RichToiletKill, StartRichToiletKill);
+        EventManager.Unsubscribe(GameEventType.PlayerToiletOut, RichFinds);
+    }
+    protected override void Update()
+    {
+        if (!isDead && isPlayerNearby)
+        {
+            // 키 입력을 지속적으로 체크
+            if (Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                chat.LoadNPCDialogue(npc, 1);
+                StopCoroutine(TalkView());
+                ScreenshotManager.Instance.CaptureScreenshot();
+                EventManager.Trigger(GameEventType.CleanManTalk);
+                Invoke("StopNpc", 2f);
+
+            }
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                chat.LoadNPCDialogue(npc, 2);
+                StopCoroutine(TalkView());
+                ScreenshotManager.Instance.CaptureScreenshot();
+                EventManager.Trigger(GameEventType.CleanManTalk);
+                Invoke("StopNpc", 2f);
+            }
+        }
     }
     private void StartRichNoHide()
     {
@@ -85,55 +114,63 @@ public class NPC_CleanMan : NPCFSM
             ScreenshotManager.Instance.CaptureScreenshot();
             agent.SetDestination(richKill.transform.position);
             chat.LoadNPCDialogue(npc, 3);
+            PlayerToiletOutPos.SetActive(true);
             StartCoroutine(CheckArrival());
         }
     }
     private IEnumerator CheckArrival()
     {
-        // NPC가 목적지에 도착할 때까지 대기
-        while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance || agent.velocity.magnitude > 0.1f)
+        if (GarbageTrue == false)
         {
-            yield return null;
-        }
+            // NPC가 목적지에 도착할 때까지 대기
+            while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance || agent.velocity.magnitude > 0.1f)
+            {
+                yield return null;
+            }
 
-        // 도착 후 멈추는 코드
-        agent.isStopped = true; // 네비게이션 멈춤
-        agent.ResetPath(); // 경로 초기화
-        ChangeState(State.Talk);
-        chat.LoadNPCDialogue("Null", 0);
-        StartCoroutine(RichFind());
-        Debug.Log("NPC가 목적지에 도착하여 멈췄습니다.");
+            // 도착 후 멈추는 코드
+            agent.isStopped = true; // 네비게이션 멈춤
+            agent.ResetPath(); // 경로 초기화
+            ChangeState(State.Talk);
+            chat.LoadNPCDialogue("Null", 0);
+            Debug.Log("NPC가 목적지에 도착하여 멈췄습니다.");
+        }
+    }
+    private void RichFinds()
+    {
+        StartCoroutine (RichFind());
     }
     private IEnumerator RichFind()
     {
-
-        yield return new WaitForSeconds(20f); 
-
-        ChangeState(State.Walk);
-        agent.isStopped = false; //  이동 재개
-        agent.SetDestination(richKillPos.position);
-
-        // 목적지 도착 감지 (중복 방지)
-        while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance || agent.velocity.magnitude > 0.1f)
+        if (GarbageTrue == false)
         {
-            yield return null;
-        }
-        ChangeState(State.Talk);
-        if (isHide == false)
-        {
-            chat.LoadNPCDialogue(npc, 4);
-            yield return new WaitForSeconds(3f);
-            EventManager.Trigger(GameEventType.GameOver);
-        }
-        else
-        {
-            chat.LoadNPCDialogue(npc, 5);
-            yield return new WaitForSeconds(3f);
-            Debug.Log("지워져야함");
-            npcclean.text = "";
-            Debug.Log("지워짐");
-            ChangeState(State.Idle);
-            EventManager.Trigger(GameEventType.OldManOut);
+            yield return new WaitForSeconds(1);
+            ChangeState(State.Walk);
+            agent.isStopped = false; //  이동 재개
+            agent.SetDestination(richKillPos.position);
+
+            // 목적지 도착 감지 (중복 방지)
+            while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance || agent.velocity.magnitude > 0.1f)
+            {
+                yield return null;
+            }
+            ChangeState(State.Talk);
+            if (isHide == false)
+            {
+                chat.LoadNPCDialogue(npc, 4);
+                yield return new WaitForSeconds(3f);
+                EventManager.Trigger(GameEventType.GameOver);
+            }
+            else
+            {
+                chat.LoadNPCDialogue(npc, 5);
+                yield return new WaitForSeconds(3f);
+                Debug.Log("지워져야함");
+                npcclean.text = "";
+                Debug.Log("지워짐");
+                ChangeState(State.Idle);
+                EventManager.Trigger(GameEventType.OldManOut);
+            }
         }
     }
     
@@ -159,10 +196,6 @@ public class NPC_CleanMan : NPCFSM
         
     }
 
-    protected override void Update()
-    {
-        
-    }
 
     protected override void IdleBehavior()
     {
@@ -202,6 +235,7 @@ public class NPC_CleanMan : NPCFSM
     {
         if (!isDead && other.CompareTag("Player"))
         {
+            isPlayerNearby = true;
             ChangeState(State.Talk);
             chat.LoadNPCDialogue(npc, 0);
         }
@@ -215,33 +249,15 @@ public class NPC_CleanMan : NPCFSM
     protected override void OnTriggerStay(Collider other)
     {
         base.OnTriggerStay(other);
-        if (!isDead && other.CompareTag("Player"))
-        {
-            // 키 입력을 지속적으로 체크
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                chat.LoadNPCDialogue(npc, 1);
-                StopCoroutine(TalkView());
-                ScreenshotManager.Instance.CaptureScreenshot();
-                EventManager.Trigger(GameEventType.CleanManTalk);
-                Invoke("StopNpc",2f);
-
-            }
-            if (Input.GetKeyDown(KeyCode.Alpha2))
-            {
-                chat.LoadNPCDialogue(npc, 2);
-                StopCoroutine(TalkView());
-                ScreenshotManager.Instance.CaptureScreenshot();
-                EventManager.Trigger(GameEventType.CleanManTalk);
-                Invoke("StopNpc", 2f);
-            }
-        }
+        
+        
     }
 
     protected override void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            isPlayerNearby = false;
             chat.LoadNPCDialogue("NULL", 0);
         }
 

@@ -68,7 +68,9 @@ public class EventManager : MonoBehaviour
         CleanManTalk,
         CleanManDie,
 
-        GameClear
+        GameClear,
+        PlayerToiletOut //플레이어가 리치맨 잡고 화장실을 나올 때
+
     }
 
     private static Dictionary<GameEventType, Action> eventDictionary = new Dictionary<GameEventType, Action>();
