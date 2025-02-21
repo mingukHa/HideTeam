@@ -241,5 +241,10 @@ public class NPCFSM : MonoBehaviour
             yield return null;
         }
     }
+    protected IEnumerator EventOutLine()
+    {
+        moutline.OutlineWidth = 1;
+        yield return null;
+    }
 
 }

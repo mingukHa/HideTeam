@@ -13,6 +13,7 @@ public class NPC_OldMan : NPCFSM
     public TextMeshPro TextChange;
     private Transform OldPos;
     private bool isWalk = false;
+    
     //private bool isPlayerNearby = false; // 플레이어가 범위 내에 있는지 여부
 
     private void OnEnable()
