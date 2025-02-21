@@ -88,6 +88,7 @@ public class ESCMenu : MonoBehaviour
         ResumeGame(); 
         SceneManager.LoadScene("LobbyScene");
         FindAnyObjectByType<PlayerController>().SetStarted();
+        FindAnyObjectByType<PlayerCutScene1>().SetStarted();
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
     }
