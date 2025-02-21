@@ -10,10 +10,10 @@ public class PlayerController : MonoBehaviour
 {
     public Transform mainCam;
 
-
     private Animator anim = null;
     private Transform tr = null;
 
+    private RagdollGrabber grabber; //잡기 컴퍼넌트
     private NPCIdentifier currentNPC;
     private PlayerDisguiser disguiser;
     private CarAlarm carAlarm;
@@ -52,6 +52,8 @@ public class PlayerController : MonoBehaviour
 
     public Image fImage;    //F키 이미지
 
+    public Image gImage;    //G키 이미지
+
     public GameObject E_Chat;   //대화키
 
     public GameObject CarKey;   //차 발로 차기 키
@@ -63,7 +65,6 @@ public class PlayerController : MonoBehaviour
     private float rGoalholdTime = 1f;   //R키 눌러야하는 시간
 
     private bool isDisguised = false;   //분장했는지 체크
-    private bool isGrabed = false;      //잡은걸 체크
 
     public List<DoorController> doorCons = new List<DoorController>();
     [SerializeField]
@@ -76,6 +77,7 @@ public class PlayerController : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
+        grabber = GetComponent<RagdollGrabber>();
         anim = GetComponent<Animator>();
         tr = GetComponent<Transform>();
         disguiser = GetComponent<PlayerDisguiser>();
@@ -185,7 +187,8 @@ public class PlayerController : MonoBehaviour
                 E_Chat.gameObject.SetActive(false);
                 eImage.gameObject.SetActive(true);
                 eSlider.gameObject.SetActive(true);
-                fImage.gameObject.SetActive(false); // 죽은 NPC일 때 F키 관련 UI 비활성화
+                fImage.gameObject.SetActive(false); // 죽은 NPC일 때 F키 UI 비활성화
+                gImage.gameObject.SetActive(true); // 죽은 NPC일 때 G키 UI 활성화
             }
             else
             {
@@ -193,6 +196,7 @@ public class PlayerController : MonoBehaviour
                 eImage.gameObject.SetActive(false);
                 eSlider.gameObject.SetActive(false);
                 fImage.gameObject.SetActive(true); // 살아있는 NPC일 때 F키 관련 UI 활성화
+                gImage.gameObject.SetActive(false); // 살아있는 NPC일 때 G키 UI 비활성화
             }
         }
 
@@ -205,13 +209,16 @@ public class PlayerController : MonoBehaviour
                 eImage.gameObject.SetActive(true);
                 eSlider.gameObject.SetActive(true);
                 fImage.gameObject.SetActive(false); // 죽은 NPC일 때 F키 관련 UI 비활성화
+                gImage.gameObject.SetActive(true); // 죽은 NPC일 때 G키 UI 활성화
             }
             else
             {
                 // 살아있는 NPC와 상호작용 시 E키 비활성화
+                E_Chat.gameObject.SetActive(false);
                 eImage.gameObject.SetActive(false);
                 eSlider.gameObject.SetActive(false);
                 fImage.gameObject.SetActive(true); // 살아있는 NPC일 때 F키 관련 UI 활성화
+                gImage.gameObject.SetActive(false); // 살아있는 NPC일 때 G키 UI 비활성화
             }
         }
     }
@@ -474,17 +481,13 @@ public class PlayerController : MonoBehaviour
         //제압에 관한 코드
         if (Input.GetKeyDown(KeyCode.F) && currentNPC != null)
         {
-            
             NPCRichMan rich = currentNPC.GetComponent<NPCRichMan>();
 
-           
-                    anim.SetTrigger("Neutralize");
+            anim.SetTrigger("Neutralize");
                 
-
-                // NPC가 죽었든 살아있든 F키를 누르면 바로 UI를 끄기
-                fImage.gameObject.SetActive(false);
-                E_Chat.gameObject.SetActive(false);
-            
+            // NPC가 죽었든 살아있든 F키를 누르면 바로 UI를 끄기
+            fImage.gameObject.SetActive(false);
+            E_Chat.gameObject.SetActive(false);
 
             //자산가용
             if (rich != null)
