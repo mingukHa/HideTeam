@@ -10,7 +10,6 @@ using UnityEngine.UI;
 
 public class Moutline : MonoBehaviour
 {
-    public int LenderQueue;
     private static HashSet<Mesh> registeredMeshes = new HashSet<Mesh>();
 
     public enum Mode
@@ -94,6 +93,24 @@ public class Moutline : MonoBehaviour
         outlineMaskMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineMask"));
         outlineFillMaterial = Instantiate(Resources.Load<Material>(@"Materials/OutlineFill"));
 
+        // 태그에 따라 render Queue값 변경
+        if (CompareTag("NPC"))
+        {
+            outlineMaskMaterial.renderQueue = 3000;  // Player용 renderQueue 설정
+            outlineFillMaterial.renderQueue = 3110;  // Player용 renderQueue 설정
+        }
+        else if (CompareTag("Door"))
+        {
+            outlineMaskMaterial.renderQueue = 4000;  // Door용 renderQueue 설정
+            outlineFillMaterial.renderQueue = 4110;  // Door용 renderQueue 설정
+        }
+        else
+        {
+            // 기본 값 설정 (NPC는 무조건 보여야하기 때문에)
+            outlineMaskMaterial.renderQueue = 4000;    
+            outlineFillMaterial.renderQueue = 4110;
+        }
+
         outlineMaskMaterial.name = "OutlineMask (Instance)";
         outlineFillMaterial.name = "OutlineFill (Instance)";
 
@@ -102,16 +119,6 @@ public class Moutline : MonoBehaviour
 
         // Apply material properties immediately
         needsUpdate = true;
-    }
-
-    void Start()
-    {
-        // 게임 시작 시 "Door" 레이어에 있는 오브젝트라면 LenderQueue 값을 4000으로 설정
-        if (gameObject.layer == LayerMask.NameToLayer("Door"))
-        {
-            LenderQueue = 4000;
-            Debug.Log("LenderQueue 값이 4000으로 설정되었습니다.");
-        }
     }
 
     void OnEnable()

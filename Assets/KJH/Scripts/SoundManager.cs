@@ -44,6 +44,7 @@ public class SoundManager : MonoBehaviour
         if (PlayerPrefs.HasKey("MasterVolume"))
         {
             MasterSlider masterSliderObject = FindAnyObjectByType<MasterSlider>(FindObjectsInactive.Include);
+            Debug.Log("Master Slider가 할당되었다.");
             if (masterSliderObject)
             {
                 masterSlider = masterSliderObject.GetComponentInChildren<Slider>();
@@ -63,6 +64,7 @@ public class SoundManager : MonoBehaviour
         {
             //BGMSlider 스크립트를 가지고있는 오브젝트를 찾는다.
             BGMSlider bgmSliderObject = FindAnyObjectByType<BGMSlider>(FindObjectsInactive.Include);
+            Debug.Log("BGM Slider가 할당되었다.");
 
             if (bgmSliderObject)
             {
@@ -89,6 +91,7 @@ public class SoundManager : MonoBehaviour
         {
             //SFXSlider 스크립트를 가지고있는 오브젝트를 찾는다.
             SFXSlider sfxSliderObject = FindAnyObjectByType<SFXSlider>(FindObjectsInactive.Include);
+            Debug.Log("SFX Slider가 할당되었다.");
 
             if (sfxSliderObject)
             {

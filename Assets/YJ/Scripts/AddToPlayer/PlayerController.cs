@@ -9,18 +9,17 @@ using static EventManager;
 
 public class PlayerController : MonoBehaviour
 {
-    public Transform mainCam;
+    public Transform mainCam;   //메인 카메라
 
-    private Animator anim = null;
-    private Transform tr = null;
+    private Animator anim = null;   //애니메이션
+    private Transform tr = null;    //위치
 
     private RagdollGrabber grabber; //잡기 컴퍼넌트
-    private NPCIdentifier currentNPC;
-    private PlayerDisguiser disguiser;
-    private CarAlarm carAlarm;
-    private TrashBin trashBin;
-    private PlayerSound playerSound;
-    //public RagdollGrabber ragdollGrabber;
+    private NPCIdentifier currentNPC;   //NPC 위장 기능용
+    private PlayerDisguiser disguiser;  //위장 기능
+    private CarAlarm carAlarm;  //차알림
+    private TrashBin trashBin;  //쓰레기통
+    private PlayerSound playerSound;    //플레이어 사운드
 
     [Header ("권총 오브젝트")]
     public GameObject gun = null;
@@ -32,20 +31,21 @@ public class PlayerController : MonoBehaviour
     public GameObject cigarette = null;
     public GameObject droppingCigarette = null;
 
-    private float mouseX = 0;
-    private float mouseSensitivity = 5f;
+    //private float mouseX = 0; //이제 안쓰는 마우스 방식
+    //private float mouseSensitivity = 5f;  //이제 안쓰는 마우스 방식
 
-    public float moveSpeed = 4.0f;
-    public float rotationSpeed = 10f;
+    //마우스 관련 변수
+    public float moveSpeed = 4.0f; 
+    public float rotationSpeed = 10f;   
     private Vector3 moveDirection;
     public GameObject cutSceneCam;
 
-    private bool isEChatActive = false;
-    private bool isECarActive = false;
-    private bool isMoving = false;
-    private bool isCrouching = false;
-    private bool isSuiciding = false;
-    private static bool isStarted = false;
+    private bool isEChatActive = false;     //대화하는 중인지 체크
+    private bool isECarActive = false;      //자동차 대화박스 눌렀는지 체크
+    private bool isMoving = false;          //움직이는 중인지 체크
+    private bool isCrouching = false;       //앉은 상태
+    private bool isSuiciding = false;       //자살 중
+    private static bool isStarted = false;  //
 
     public void SetStarted()
     {
@@ -53,25 +53,25 @@ public class PlayerController : MonoBehaviour
     }
 
     [Header("상호작용 키 버튼")]
-    public Image eImage;    //E키 이미지
-    public Slider eSlider;  //E키 게이지
+    public Image eImage;    //위장 E키 이미지
+    public Slider eSlider;  //위장 E키 게이지
 
-    public Image rImage;    //R키 이미지
-    public Slider rSlider;  //R키 게이지
+    public Image rImage;    //환복 R키 이미지
+    public Slider rSlider;  //환복 R키 게이지
 
-    public Image fImage;    //F키 이미지
+    public Image fImage;    //제압 F키 이미지
 
-    public Image gImage;    //G키 이미지
+    public Image gImage;    //잡기 G키 이미지
 
-    public GameObject E_Chat;   //대화키
+    public GameObject E_Chat;   //대화 E키
 
-    public GameObject CarKey;   //차 발로 차기 키
+    public GameObject CarKey;   //차 발로 차기 E키
 
-    private float eholdTime = 0f;   //E키 누른 시간
-    private float eGoalholdTime = 1f;   //E키 눌러야하는 시간
+    private float eholdTime = 0f;   //위장 E키 누른 시간
+    private float eGoalholdTime = 1f;   //위장 E키 눌러야하는 시간
 
-    private float rholdTime = 0f;   //R키 누른 시간
-    private float rGoalholdTime = 1f;   //R키 눌러야하는 시간
+    private float rholdTime = 0f;   //환복 R키 누른 시간
+    private float rGoalholdTime = 1f;   //환복 R키 눌러야하는 시간
 
     private bool isDisguised = false;   //분장했는지 체크
 
@@ -116,58 +116,61 @@ public class PlayerController : MonoBehaviour
             CheckFirstDoorOpen();
         }
 
-        if(isEChatActive && Input.GetKeyDown(KeyCode.E) || isEChatActive && Input.GetKeyDown(KeyCode.E))
+        //대화상태 활성화 시
+        if (isEChatActive && Input.GetKeyDown(KeyCode.E) || isECarActive && Input.GetKeyDown(KeyCode.E))
         {
             E_Chat.SetActive(false);
             isEChatActive = false;
             isECarActive = false;
         }
-
-
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        //NPC, NPCTeller Tag와 TriggerEnter 시
         if (other.CompareTag("NPC") || other.CompareTag("NPCTeller"))
         {
-            E_Chat.SetActive(true);
+            E_Chat.SetActive(true); //대화UI 켜기
             isEChatActive = true; // 상태를 저장
         }
 
+        //Car Tag와 TriggerEnter 시
         if (other.CompareTag("Car"))
         {
-            carAlarm = other.GetComponent<CarAlarm>();
-            if (carAlarm != null)
+            carAlarm = other.GetComponent<CarAlarm>();  
+            if (carAlarm != null)   
             {
-                CarKey.SetActive(true);
-                isECarActive = true; // 상태를 저장
+                CarKey.SetActive(true);     //차 발로차기 UI 켜기
+                isECarActive = true;        //상태를 저장
             }
         }
 
+        //TrashBin Tag와 TriggerEnter 시
         if (other.CompareTag("TrashBin"))
         {
             trashBin = other.GetComponent<TrashBin>();
         }
     }
 
-    //실시간으로 UI가 변해야하므로 Stay로 변경
+    //실시간으로 UI가 변해야하므로 Stay 사용
     private void OnTriggerStay(Collider other)
     {
         // "NPC", "Ragdoll" 태그를 가진 오브젝트와만 처리
         if (!other.gameObject.CompareTag("NPC") && !other.gameObject.CompareTag("Ragdoll")) return;
 
-        NPCIdentifier npc = other.GetComponent<NPCIdentifier>();    //NPCIdentifier스크립트랑 작용
-        NPCFSM npcFSM = other.GetComponent<NPCFSM>(); // NPCFSM 가져오기
+        NPCIdentifier npc = other.GetComponent<NPCIdentifier>();    //NPCIdentifier스크립트랑 작용 (위장 컴퍼넌트)
+        NPCFSM npcFSM = other.GetComponent<NPCFSM>(); // NPCFSM 가져오기 (상태 컴퍼넌트)
         NPCRichMan rich = other.GetComponent<NPCRichMan>(); //RichMan 전용 컴퍼넌트 받아오기
 
         Debug.Log("현재 변장중인 직업이 맞는지 : " + (npc == disguisedNPC));
 
+        //NPCIdentifier 있는 상태
         if (npc != null)
         {
-            // 변장 상태에서, 변장한 NPC와 동일한 NPC에 대해 상호작용 차단
+            // 변장 상태에서, 변장한 NPC와 동일한 NPC라면?
             if (isDisguised && npc == disguisedNPC)
             {
-                eImage.gameObject.SetActive(false);
+                eImage.gameObject.SetActive(false); // 대화 UI 비활성화
                 eSlider.gameObject.SetActive(false); // E키 UI 비활성화
                 return; // 변장한 NPC와는 상호작용할 수 없으므로 여기서 종료
             }
@@ -177,121 +180,150 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        //NPCRichMan 있는 상태
         if (rich != null)
         {
-            // 변장 상태에서, 변장한 NPC와 동일한 NPC에 대해 상호작용 차단
+            // 변장 상태에서, Rich로 변장해있다면?
             if (isDisguised && rich == disguisedNPC)
             {
                 Debug.Log("UI가 안숨겨짐.");
-                eImage.gameObject.SetActive(false);
-                eSlider.gameObject.SetActive(false); // E키 UI 비활성화
+                eImage.gameObject.SetActive(false); //위장 E키 이미지 UI 비활성화
+                eSlider.gameObject.SetActive(false); //위장 E키 슬라이더 UI 비활성화
                 return; // 변장한 NPC와는 상호작용할 수 없으므로 여기서 종료
             }
             else
             {
                 currentNPC = npc; // 변장하지 않았다면, 현재 NPC 설정
             }
+
+            if (rich.isDead)
+            {
+                //죽은 Rich와 상호작용 시
+                E_Chat.gameObject.SetActive(false); //대화 UI 비활성화
+                eImage.gameObject.SetActive(true);  //위장 이미지 활성화
+                eSlider.gameObject.SetActive(true); //위장 슬라이더 활성화
+                fImage.gameObject.SetActive(false); //F키 제압 UI 비활성화
+                gImage.gameObject.SetActive(true);  //G키 잡기 UI 활성화
+            }
+            else
+            {
+                //살아있는 Rich와 상호작용 시
+                E_Chat.gameObject.SetActive(false); //대화 UI 비활성화
+                eImage.gameObject.SetActive(false); //위장 이미지 비활성화
+                eSlider.gameObject.SetActive(false);//위장 슬라이더 비활성화
+                fImage.gameObject.SetActive(true);  // 살아있는 NPC일 때 F키 관련 UI 활성화
+                gImage.gameObject.SetActive(false); // 살아있는 NPC일 때 G키 UI 비활성화
+            }
         }
 
+        //NPCFSM 있는 상태
         if (npcFSM != null)
         {
+            //NPC가 죽었다면?
             if (npcFSM.isDead)
             {
-                // 죽은 NPC와 상호작용 시 E키 활성화
-                E_Chat.gameObject.SetActive(false);
-                eImage.gameObject.SetActive(true);
-                eSlider.gameObject.SetActive(true);
-                fImage.gameObject.SetActive(false); // 죽은 NPC일 때 F키 UI 비활성화
-                gImage.gameObject.SetActive(true); // 죽은 NPC일 때 G키 UI 활성화
+                E_Chat.gameObject.SetActive(false); //대화 UI 비활성화
+                eImage.gameObject.SetActive(true);  //위장 이미지 활성화
+                eSlider.gameObject.SetActive(true); //위장 슬라이더 활성화
+                fImage.gameObject.SetActive(false); //F키 제압 UI 비활성화
+                gImage.gameObject.SetActive(true);  //G키 잡기 UI 활성화
             }
-            else
+            else //NPC가 살아있다면?
             {
-                // 살아있는 NPC와 상호작용 시 E키 비활성화
-                eImage.gameObject.SetActive(false);
-                eSlider.gameObject.SetActive(false);
-                fImage.gameObject.SetActive(true); // 살아있는 NPC일 때 F키 관련 UI 활성화
-                gImage.gameObject.SetActive(false); // 살아있는 NPC일 때 G키 UI 비활성화
+                eImage.gameObject.SetActive(false);  //위장 이미지 비활성화
+                eSlider.gameObject.SetActive(false); //위장 슬라이더 비활성화
+                fImage.gameObject.SetActive(true);   //F키 제압 UI 활성화
+                gImage.gameObject.SetActive(false);  //G키 잡기 UI 비활성화
             }
         }
 
-        if(rich != null)
-        {
-            if(rich.isDead)
-            {
-                // 죽은 NPC와 상호작용 시 E키 활성화
-                E_Chat.gameObject.SetActive(false);
-                eImage.gameObject.SetActive(true);
-                eSlider.gameObject.SetActive(true);
-                fImage.gameObject.SetActive(false); // 죽은 NPC일 때 F키 관련 UI 비활성화
-                gImage.gameObject.SetActive(true); // 죽은 NPC일 때 G키 UI 활성화
-            }
-            else
-            {
-                // 살아있는 NPC와 상호작용 시 E키 비활성화
-                E_Chat.gameObject.SetActive(false);
-                eImage.gameObject.SetActive(false);
-                eSlider.gameObject.SetActive(false);
-                fImage.gameObject.SetActive(true); // 살아있는 NPC일 때 F키 관련 UI 활성화
-                gImage.gameObject.SetActive(false); // 살아있는 NPC일 때 G키 UI 비활성화
-            }
-        }
+        ////Rich 있는 상태 (대화하기 상호작용 없기 때문에 E_Chat은 상시 꺼줘야함.
+        //if(rich != null)
+        //{
+        //    if(rich.isDead)
+        //    {
+        //        //죽은 Rich와 상호작용 시
+        //        E_Chat.gameObject.SetActive(false); //대화 UI 비활성화
+        //        eImage.gameObject.SetActive(true);  //위장 이미지 활성화
+        //        eSlider.gameObject.SetActive(true); //위장 슬라이더 활성화
+        //        fImage.gameObject.SetActive(false); //F키 제압 UI 비활성화
+        //        gImage.gameObject.SetActive(true);  //G키 잡기 UI 활성화
+        //    }
+        //    else
+        //    {
+        //        //살아있는 Rich와 상호작용 시
+        //        E_Chat.gameObject.SetActive(false); //대화 UI 비활성화
+        //        eImage.gameObject.SetActive(false); //위장 이미지 비활성화
+        //        eSlider.gameObject.SetActive(false);//위장 슬라이더 비활성화
+        //        fImage.gameObject.SetActive(true);  // 살아있는 NPC일 때 F키 관련 UI 활성화
+        //        gImage.gameObject.SetActive(false); // 살아있는 NPC일 때 G키 UI 비활성화
+        //    }
+        //}
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("NPC"))
+        //NPC Tag와 TriggerExit 시
+        if (other.CompareTag("NPC") || other.CompareTag("NPCTeller"))
         {
-            eSlider.gameObject.SetActive(false);
-            fImage.gameObject.SetActive(false);
-            gImage.gameObject.SetActive(false);
-            E_Chat.SetActive(false);
+            eImage.gameObject.SetActive(false); //위장 이미지 비활성화
+            eSlider.gameObject.SetActive(false);//위장 슬라이더 비활성화
+            fImage.gameObject.SetActive(false); //제압 F키 비활성화
+            gImage.gameObject.SetActive(false); //잡기 G키 비활성화
+            E_Chat.SetActive(false);            //대화 E키 비활성화
         }
 
-        if (other.CompareTag("NPCTeller"))
-        {
-            eSlider.gameObject.SetActive(false);
-            fImage.gameObject.SetActive(false);
-            gImage.gameObject.SetActive(false);
-            E_Chat.SetActive(false);
-        }
+        ////NPCTeller Tag와 TriggerExit 시
+        //if (other.CompareTag("NPCTeller"))
+        //{
+        //    eImage.gameObject.SetActive(false); //위장 이미지 비활성화
+        //    eSlider.gameObject.SetActive(false);
+        //    fImage.gameObject.SetActive(false);
+        //    gImage.gameObject.SetActive(false);
+        //    E_Chat.SetActive(false);
+        //}
 
+        //Car와 TriggerExit 시
         if (other.CompareTag("Car"))
         {
-            CarKey.SetActive(false);
-            carAlarm = null;  // carAlarm을 null로 설정하여, 차량과 상호작용 불가하도록 만듦
+            CarKey.SetActive(false);    //차 발로차기 버튼 비활성화
+            carAlarm = null;    //carAlarm을 null로 설정하여, 차량과 상호작용 불가하도록 만듦
         }
 
+        //TrashBin과 TriggerExit 시
         if (other.CompareTag("TrashBin"))
         {
-            trashBin = null;
+            trashBin = null;    //trashBin을 null로 설정하여, 차량과 상호작용 불가하도록 만듦
         }
 
+        //Ragdoll과 TriggerExit 시 (rich가 isDead되면 Ragdoll이 됨)
         if (other.CompareTag("Ragdoll"))
         {
-            eImage.gameObject.SetActive(false);
-            eSlider.gameObject.SetActive(false);
+            eImage.gameObject.SetActive(false); //위장키 비활성화
+            eSlider.gameObject.SetActive(false);//위장키 비활성화
+            gImage.gameObject.SetActive(false); //잡기 비활성화
         }
 
-        if (!other.gameObject.CompareTag("Ragdoll")) return;
-        {
-            //NPCFSM npcFSM = other.GetComponent<NPCFSM>();
+        //if (!other.gameObject.CompareTag("Ragdoll")) return;
+        //{
+        //    //NPCFSM npcFSM = other.GetComponent<NPCFSM>();
 
-            //if (npcFSM != null && npcFSM.isDead)
-            //{
-            Debug.Log("죽은 NPC에서 멀어짐");
-            eImage.gameObject.SetActive(false);
-            eSlider.gameObject.SetActive(false);
-            //}
+        //    //if (npcFSM != null && npcFSM.isDead)
+        //    //{
+        //    Debug.Log("죽은 NPC에서 멀어짐");
+        //    eImage.gameObject.SetActive(false);
+        //    eSlider.gameObject.SetActive(false);
+        //    //}
 
-            // NPCIdentifier가 있는 오브젝트에서 벗어나면 currentNPC 해제
-            //if (other.GetComponent<NPCIdentifier>() == currentNPC)
-            //{
-            currentNPC = null;
-            //}
+        //    // NPCIdentifier가 있는 오브젝트에서 벗어나면 currentNPC 해제
+        //    //if (other.GetComponent<NPCIdentifier>() == currentNPC)
+        //    //{
+        //    currentNPC = null;
+        //    //}
 
-            // NPC가 떠나면 fImage 비활성화
-            fImage.gameObject.SetActive(false);
-        }
+        //    // NPC가 떠나면 fImage 비활성화
+        //    fImage.gameObject.SetActive(false);
+        //}
     }
 
     //private bool InputMouse(ref float _mouseX)
@@ -422,6 +454,8 @@ public class PlayerController : MonoBehaviour
             NPCFSM npcFSM = currentNPC.GetComponent<NPCFSM>();
             NPCRichMan rich = currentNPC.GetComponent<NPCRichMan>();
             Debug.Log($"{npcFSM},{rich} 받아오고 있음");
+
+            //NPC의 위장E키 관련 함수
             if (npcFSM != null && npcFSM.isDead)
             {
                 // NPC가 죽었을 때 실행할 로직
@@ -439,6 +473,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
+            //rich의 위장E키 관련 함수
             if (rich != null && rich.isDead)
             {
                 // NPC가 죽었을 때 실행할 로직
@@ -456,7 +491,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        else
+        else //손뗐을 때
         {
             eholdTime = 0f; // 키에서 손 떼면 0초로 초기화
             eSlider.value = 0f; // 슬라이더 게이지 초기화
