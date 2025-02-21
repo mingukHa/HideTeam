@@ -227,7 +227,7 @@ public class NPCFSM : MonoBehaviour
    
     protected IEnumerator TalkView()
     {
-        //if (isTalking || agent.hasPath) yield break; // 이동 중이면 실행 안 함
+        if (isTalking || agent.hasPath) yield break; // 이동 중이면 실행 안 함
         select.SetActive(true);
         isTalking = true;
         while (isTalking)
@@ -243,8 +243,27 @@ public class NPCFSM : MonoBehaviour
     }
     protected IEnumerator EventOutLine()
     {
-        moutline.OutlineWidth = 1;
-        yield return null;
+        float duration = 5f; 
+        float blinkDuration = 1f; 
+        float elapsedTime = 0f;
+        moutline.OutlineColor = Color.yellow;
+        while (elapsedTime <= duration) 
+        {
+            elapsedTime += Time.deltaTime;
+            float t = (elapsedTime / blinkDuration) * Mathf.PI * 2; 
+
+            float value = (Mathf.Sin(t) + 1) * 4.5f + 1; 
+            moutline.OutlineWidth = value; 
+
+            Debug.Log($"현재 OutlineWidth 값: {value}"); 
+
+            yield return null; 
+        }
+
+        moutline.OutlineColor = Color.white;
+        moutline.OutlineWidth = 0;
     }
+
+
 
 }
