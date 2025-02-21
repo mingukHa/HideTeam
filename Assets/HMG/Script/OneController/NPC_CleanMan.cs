@@ -77,7 +77,7 @@ public class NPC_CleanMan : NPCFSM
     }
     private void StartRichToiletKill()
     {
-        StartCoroutine(RichFind());
+        //StartCoroutine(RichFind());
     }
     private void StartGarbage()
     {
