@@ -7257,9 +7257,11 @@ MonoBehaviour:
   outlineMode: 0
   outlineColor: {r: 1, g: 1, b: 1, a: 1}
   outlineWidth: 0
-  precomputeOutline: 0
-  bakeKeys: []
-  bakeValues: []
+  precomputeOutline: 1
+  bakeKeys:
+  - {fileID: -3335442511603561631, guid: f1074d4a39815654ab0aacc82a8ebc36, type: 3}
+  bakeValues:
+  - data: []
 --- !u!195 &232194059
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -24063,7 +24065,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3522472473070726951, guid: 4e4597a8d56c5c24da9be1165fa7752d, type: 3}
       propertyPath: m_Layer
-      value: 11
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3522472473070726951, guid: 4e4597a8d56c5c24da9be1165fa7752d, type: 3}
       propertyPath: m_TagString
@@ -32413,6 +32415,10 @@ PrefabInstance:
       value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5924814297759576956, guid: 087c8fe64ca912446974ba5b4b3aad5b, type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 5924814297759576956, guid: 087c8fe64ca912446974ba5b4b3aad5b, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -32425,12 +32431,20 @@ PrefabInstance:
       value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5925005060519955676, guid: 087c8fe64ca912446974ba5b4b3aad5b, type: 3}
+      propertyPath: m_TagString
+      value: Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 5925005060519955676, guid: 087c8fe64ca912446974ba5b4b3aad5b, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5925093215675729478, guid: 087c8fe64ca912446974ba5b4b3aad5b, type: 3}
       propertyPath: m_Layer
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5925093215675729478, guid: 087c8fe64ca912446974ba5b4b3aad5b, type: 3}
+      propertyPath: m_TagString
+      value: Door
       objectReference: {fileID: 0}
     - target: {fileID: 5925093215675729478, guid: 087c8fe64ca912446974ba5b4b3aad5b, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -32439,6 +32453,10 @@ PrefabInstance:
     - target: {fileID: 5925097028993280366, guid: 087c8fe64ca912446974ba5b4b3aad5b, type: 3}
       propertyPath: m_Layer
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5925097028993280366, guid: 087c8fe64ca912446974ba5b4b3aad5b, type: 3}
+      propertyPath: m_TagString
+      value: Door
       objectReference: {fileID: 0}
     - target: {fileID: 5925097028993280366, guid: 087c8fe64ca912446974ba5b4b3aad5b, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -32447,6 +32465,10 @@ PrefabInstance:
     - target: {fileID: 5925338970778945174, guid: 087c8fe64ca912446974ba5b4b3aad5b, type: 3}
       propertyPath: m_Layer
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5925338970778945174, guid: 087c8fe64ca912446974ba5b4b3aad5b, type: 3}
+      propertyPath: m_TagString
+      value: Door
       objectReference: {fileID: 0}
     - target: {fileID: 5925338970778945174, guid: 087c8fe64ca912446974ba5b4b3aad5b, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -32455,6 +32477,10 @@ PrefabInstance:
     - target: {fileID: 5925678223360733980, guid: 087c8fe64ca912446974ba5b4b3aad5b, type: 3}
       propertyPath: m_Layer
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 5925678223360733980, guid: 087c8fe64ca912446974ba5b4b3aad5b, type: 3}
+      propertyPath: m_TagString
+      value: Door
       objectReference: {fileID: 0}
     - target: {fileID: 5925678223360733980, guid: 087c8fe64ca912446974ba5b4b3aad5b, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -34613,7 +34639,7 @@ MonoBehaviour:
   lid: {fileID: 1410698476}
   ragdollgrab: {fileID: 7803856485902085921}
   lidOpenRotation: {x: 0, y: -0.53729963, z: 0, w: 0.8433914}
-  grabImage: {fileID: 2045449559}
+  egrabImage: {fileID: 1910693658}
 --- !u!65 &1410698479
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -42979,6 +43005,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4427546476288490, guid: 9ea7274ab5508134ea375f7401dff01e, type: 3}
   m_PrefabInstance: {fileID: 1905279184}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1910693658 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8936567363873627245, guid: 536aa32ba9b139c4c8e9fea2ae40da8d, type: 3}
+  m_PrefabInstance: {fileID: 577927461}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1933319118
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -43003,6 +43040,10 @@ PrefabInstance:
       propertyPath: grabImage
       value: 
       objectReference: {fileID: 1976920572}
+    - target: {fileID: 2273127942045726320, guid: 7175b0b83a2fd29499f22ba60bd9878a, type: 3}
+      propertyPath: egrabImage
+      value: 
+      objectReference: {fileID: 1910693658}
     - target: {fileID: 2273127942045726320, guid: 7175b0b83a2fd29499f22ba60bd9878a, type: 3}
       propertyPath: ragdollgrab
       value: 
