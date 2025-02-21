@@ -22,6 +22,7 @@ public class NamedController : NPCController
     }
     public void RichmanGone()
     {
+        gameObject.tag = "NPCEND";
         stateMachine.ChangeState(new GoneState(this));
     }
     public void RichmanAngry1()
