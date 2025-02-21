@@ -81,7 +81,7 @@ public class NPC_CleanMan : NPCFSM
     }
     private void StartGarbage()
     {
-        // agent.speed = 3f;
+        
         GarbageTrue = true;
         Debug.Log("청소부 개 빡쳐서 달려오는 중");
 
