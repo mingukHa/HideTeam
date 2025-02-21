@@ -24,7 +24,7 @@ public class RagdollDisposer : MonoBehaviour
         grabImage.gameObject.SetActive(false);
         lidClosedRotation = lid.rotation;
     }
-
+    
     private void Update()
     {
         if (isPlayerNearby && isRagdollNearby && Input.GetKeyDown(KeyCode.E) && ragdollgrab.isGrabbing)
