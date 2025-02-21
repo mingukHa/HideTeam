@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class PlayerSound : MonoBehaviour
 {
-    private AudioSource audioSource; // 오디오소스 컴포넌트
+    private SoundManager soundManager; // 오디오소스 컴포넌트
     private Animator animator;
     private float lastFootstepTime = 0f; // 마지막 발소리 재생 시간
     private float footstepCooldown = 0.2f; // 발소리 최소 재생 간격 (0.2초)
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        soundManager = GetComponent<SoundManager>();
         animator = GetComponent<Animator>();
     }
 
@@ -26,13 +26,13 @@ public class PlayerSound : MonoBehaviour
 
         if (Mathf.Abs(forwardWeight) > 0.1f || Mathf.Abs(rightWeight) > 0.1f)
         {
-            audioSource.Play(); // 발소리 재생
+            SoundManager.instance.SFXPlay("Walk_SFX", this.gameObject);
             lastFootstepTime = Time.time; // 마지막 재생 시간 업데이트
         }
     }
 
-    //public void Gunshot()
-    //{
-    //    gunSound.Play();
-    //}
+    public void Gunshot()
+    {
+        SoundManager.instance.SFXPlay("Gunshot_SFX", this.gameObject);
+    }
 }
