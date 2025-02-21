@@ -243,8 +243,27 @@ public class NPCFSM : MonoBehaviour
     }
     protected IEnumerator EventOutLine()
     {
-        moutline.OutlineWidth = 1;
-        yield return null;
+        float duration = 3f; // 전체 실행 시간 3초
+        float blinkDuration = 0.3f; // 깜박거리는 주기 (0.3초)
+        float elapsedTime = 0f;
+
+        while (elapsedTime <= duration) // 3초 동안만 실행
+        {
+            elapsedTime += Time.deltaTime;
+            float t = (elapsedTime / blinkDuration) * Mathf.PI * 2; // 0.3초 주기로 깜박이게 설정
+
+            float value = (Mathf.Sin(t) + 1) * 4.5f + 1; // 1~10 범위 값 조정
+            moutline.OutlineWidth = value; // OutlineWidth에 적용
+
+            Debug.Log($"현재 OutlineWidth 값: {value}"); // 값 확인
+
+            yield return null; // 매 프레임마다 실행
+        }
+
+        // 3초 후 기본값(1)로 설정 후 종료
+        moutline.OutlineWidth = 0;
     }
+
+
 
 }
