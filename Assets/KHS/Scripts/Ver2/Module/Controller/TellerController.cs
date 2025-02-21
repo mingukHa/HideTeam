@@ -243,6 +243,7 @@ public class TellerController : NPCController
     {
         isInterPlayer = true;
         isInterDisPlayer = true;
+        gameObject.tag = "NPCEND";
         stateMachine.ChangeState(new TellerGoneState(this));
     }
     public void TellerInteract()

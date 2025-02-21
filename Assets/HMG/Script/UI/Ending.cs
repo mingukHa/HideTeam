@@ -16,7 +16,7 @@ public class Ending : MonoBehaviour
             fadeImage.gameObject.SetActive(true);
             StartCoroutine(FadeIn(FadeInTime));
         }
-        if(other.CompareTag("NPC"))
+        if(other.CompareTag("NPCEND"))
         {
             StartCoroutine(GameOverCoroutine());
         }
