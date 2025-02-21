@@ -3,6 +3,7 @@ using UnityEngine;
 public class LookUI : MonoBehaviour
 {
     private Camera cam;
+    public Transform target;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -14,12 +15,18 @@ public class LookUI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
-        if(cam != null)
+        if (cam != null && target != null)
         {
-            transform.LookAt(transform.position + cam.transform.rotation * Vector3.forward, 
-                cam.transform.rotation * Vector3.up);
+            // UI 위치를 캐릭터 머리 위로 고정
+            transform.position = target.position;
+
+            // UI가 카메라를 정확하게 바라보도록 설정
+            Vector3 cameraForward = cam.transform.forward;
+            cameraForward.y = 0; // UI가 기울어지는 걸 방지 (수평 회전만)
+
+            transform.rotation = Quaternion.LookRotation(cameraForward);
         }
     }
 }
