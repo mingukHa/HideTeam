@@ -20,7 +20,7 @@ public class NPC_CleanMan : NPCFSM
     private bool GarbageTrue = false;
     private bool isHide = false;
     public TextMeshProUGUI npcclean;
-    private bool isPlayerNearby = false;
+    //private bool isPlayerNearby = false;
 
     public GameObject PlayerToiletOutPos;
     private void OnEnable()

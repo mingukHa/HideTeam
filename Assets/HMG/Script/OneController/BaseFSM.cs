@@ -24,7 +24,7 @@ public class NPCFSM : MonoBehaviour
     protected NavMeshAgent agent; //네브메쉬
     [SerializeField]
     protected GameObject select; //캐릭터 말풍선
-    private bool isPlayerNearby = false;
+    public bool isPlayerNearby = false;
     public ReturnManagerinit returnManager;
     protected NPCChatTest chat;
     protected Moutline moutline;
