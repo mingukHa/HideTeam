@@ -46,7 +46,8 @@ public class NPCFSM : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.autoBraking = false;
         moutline = GetComponent<Moutline>();
-        
+       
+
     }
 
     protected virtual void Update()
@@ -83,6 +84,25 @@ public class NPCFSM : MonoBehaviour
                 //Debug.Log(" Dead 애니메이션 종료 - 레그돌 활성화 실행");
                 ActivateRagdoll(); //  레그돌 처리
                 agent.enabled = true;
+            }
+        }
+        if (!isDead && isPlayerNearby)
+        {
+            if (Input.GetKeyDown(KeyCode.E) && !isTalking)
+            {
+                StartCoroutine(TalkView());
+                ChangeState(State.Talk); // 대화 상태로 변경
+            }
+
+            if (Input.GetKey(KeyCode.F) && currentState != State.Dead)
+            {
+                ChangeState(State.Dead);
+                NPCChatTest.enabled = false;
+                moutline.enabled = false;
+
+                isTalking = false;
+                select.SetActive(false);
+                chat.LoadNPCDialogue("NULL", 0);
             }
         }
     }
@@ -193,7 +213,6 @@ public class NPCFSM : MonoBehaviour
         if (!isDead && other.CompareTag("Player"))
         {
             StopCoroutine(TalkView());
-            //Debug.Log("플레이어 범위 밖으로 나감");
             ChangeState(State.Idle);
             isPlayerNearby = false; // 범위를 벗어나면 초기화
             isTalking = false; // 대화 종료
@@ -203,42 +222,7 @@ public class NPCFSM : MonoBehaviour
     }
     protected virtual void OnTriggerStay(Collider other)
     {
-        if (!isDead && other.CompareTag("Player"))
-        {
-            // E 키를 눌렀을 때만 NPC가 플레이어를 바라보며 대화 시작
-            if (Input.GetKeyDown(KeyCode.E) && !isTalking)
-            {
-                //Debug.Log("NPC가 플레이어를 바라보며 대화 시작");
-                StartCoroutine(TalkView());
-                ChangeState(State.Talk); // 대화 상태로 변경
-            }
-
-            // F 키를 눌렀을 때 Dead 상태 전환
-            if (Input.GetKey(KeyCode.F) && currentState != State.Dead)
-            {
-                ChangeState(State.Dead);
-                NPCChatTest.enabled = false;
-                moutline.enabled = false;
-                
-                isTalking = false;
-                select.SetActive(false);
-                chat.LoadNPCDialogue("NULL", 0);
-            }
-
-            // Dead 모션이 끝났는지 확인
-            if (currentState == State.Dead && !isRagdollActivated)
-            {
-                AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-                if (stateInfo.IsName("Dead") && stateInfo.normalizedTime >= 1.0f)
-                {
-                    //Debug.Log("NPC 죽음");
-                    ScreenshotManager.Instance.CaptureScreenshot();
-                    agent.enabled = false;
-                    ActivateRagdoll();
-                    isRagdollActivated = true;
-                }
-            }
-        }
+        
     }
    
     protected IEnumerator TalkView()

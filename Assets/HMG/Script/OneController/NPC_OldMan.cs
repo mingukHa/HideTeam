@@ -4,17 +4,17 @@ using static EventManager;
 using UnityEngine.AI;
 using TMPro;
 
-
 public class NPC_OldMan : NPCFSM
 {
-
-    public GameObject npcchatbox; //NPC의 메인 채팅 최상위
+    public GameObject npcchatbox;
     private string npc = "OldMan";
-    public Transform OldManPos; //이동 할 위치
+    public Transform OldManPos;
     public Transform NewManPos;
     public TextMeshPro TextChange;
     private Transform OldPos;
     private bool isWalk = false;
+    private bool isPlayerNearby = false; // 플레이어가 범위 내에 있는지 여부
+
     private void OnEnable()
     {
         EventManager.Subscribe(GameEventType.TellerTalk, OldmanMove);
@@ -30,7 +30,6 @@ public class NPC_OldMan : NPCFSM
         ChangeState(State.Walk);
         agent.SetDestination(OldManPos.position);
     }
-
     private void OldmanMove()
     {
         EventManager.Trigger(GameEventType.OldManGotoTeller);
@@ -44,7 +43,6 @@ public class NPC_OldMan : NPCFSM
         transform.rotation = initrotation;
         new WaitForSeconds(2f);
         NPCCollider.radius = 0.01f;
-        // animator.SetTrigger("Idel");
         select.SetActive(false);
     }
 
@@ -54,95 +52,54 @@ public class NPC_OldMan : NPCFSM
         chat = GetComponent<NPCChatTest>();
         agent = GetComponent<NavMeshAgent>();
         OldPos = OldManPos;
-
+        agent.avoidancePriority = 50;
     }
 
     protected override void Update()
     {
         base.Update();
-        if (isWalk == true)
+        if (isWalk)
         {
             animator.SetTrigger("Walk");
         }
 
-
-    }
-
-    protected override void IdleBehavior()
-    {
-        base.IdleBehavior();
-    }
-
-    protected override void LookBehavior()
-    {
-        base.LookBehavior();
-    }
-
-    protected override void WalkBehavior()
-    {
-        base.WalkBehavior();
-    }
-
-    protected override void RunBehavior()
-    {
-        base.RunBehavior();
-    }
-
-    protected override void TalkBehavior()
-    {
-        base.TalkBehavior();
-    }
-
-    protected override void DeadBehavior()
-    {
-        base.DeadBehavior();
-
-        chat.LoadNPCDialogue("NULL", 0);
-    }
-
-    protected override void OnTriggerEnter(Collider other)
-    {
-
-        if (!isDead && other.CompareTag("Player"))
+        // 플레이어가 범위 내에 있을 때 키 입력 처리
+        if (isPlayerNearby && !isDead)
         {
-            chat.LoadNPCDialogue(npc, 0);
-            new WaitForSeconds(1.5f);
-            chat.LoadNPCDialogue(npc, 1);
-        }
-    }
-
-    protected override void OnTriggerStay(Collider other)
-    {
-        if (!isDead && other.CompareTag("Player"))
-        {
-            // 키 입력을 지속적으로 체크
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 chat.LoadNPCDialogue(npc, 3);
                 EventManager.Trigger(GameEventType.OldManHelp);
                 returnManager.StartCoroutine(returnManager.SaveAllNPCData(3f));
-                StopCoroutine(TalkView());
                 ScreenshotManager.Instance.CaptureScreenshot();
                 Invoke("StopNpc", 2f);
                 Invoke("ReturnOldMan", 2f);
-
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 chat.LoadNPCDialogue(npc, 7);
                 EventManager.Trigger(GameEventType.OldManoutside);
                 returnManager.StartCoroutine(returnManager.SaveAllNPCData(3f));
-                StopCoroutine(TalkView());
                 ScreenshotManager.Instance.CaptureScreenshot();
                 Invoke("StopNpc", 2f);
                 Invoke("ReturnOldMan", 2f);
-
             }
             if (Input.GetKey(KeyCode.F))
             {
-                EventManager.Trigger(EventManager.GameEventType.NPCKill);
+                EventManager.Trigger(GameEventType.NPCKill);
                 isDead = true;
             }
+        }
+    }
+
+    protected override void OnTriggerEnter(Collider other)
+    {
+        if (!isDead && other.CompareTag("Player"))
+        {
+            isPlayerNearby = true;
+            chat.LoadNPCDialogue(npc, 0);
+            new WaitForSeconds(1.5f);
+            chat.LoadNPCDialogue(npc, 1);
         }
     }
 
@@ -150,17 +107,18 @@ public class NPC_OldMan : NPCFSM
     {
         if (other.CompareTag("Player"))
         {
+            isPlayerNearby = false;
             chat.LoadNPCDialogue("NULL", 0);
-
         }
     }
+
     private void ReturnOldMan()
     {
         if (!isDead)
         {
             isWalk = true;
             animator.SetTrigger("Walk");
-            agent.isStopped = false; // 이동 활성화
+            agent.isStopped = false;
             agent.SetDestination(OldPos.position);
             StartCoroutine(CheckArrival());
         }
@@ -168,20 +126,15 @@ public class NPC_OldMan : NPCFSM
 
     private IEnumerator CheckArrival()
     {
-        // NPC가 목적지에 도착할 때까지 대기
         while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance || agent.velocity.magnitude > 0.1f)
         {
             yield return null;
         }
 
-        // 도착 후 멈추는 코드
-        agent.isStopped = true; // 네비게이션 멈춤
-        agent.ResetPath(); // 경로 초기화
+        agent.isStopped = true;
+        agent.ResetPath();
         ChangeState(State.Talk);
-        isWalk = false; // 이동 상태 해제
-
+        isWalk = false;
         Debug.Log("NPC가 목적지에 도착하여 멈췄습니다.");
     }
-
-
 }

@@ -57,7 +57,7 @@ public class NPC_CleanMan : NPCFSM
         Debug.Log("청소부 개 빡쳐서 달려오는 중");
 
         // 첫 번째 목적지로 이동
-        agent.SetDestination(GarbagePos.transform.position);
+        agent.SetDestination(player.transform.position);
 
         animator.SetBool("Run", true);
         NPCCollider.enabled = true;
@@ -193,6 +193,7 @@ public class NPC_CleanMan : NPCFSM
     {
         base.DeadBehavior();
         npcchatbox.SetActive(false);
+        agent.enabled = false;
         chat.LoadNPCDialogue("NULL", 0);
         EventManager.Trigger(GameEventType.CleanManDie);
     }
