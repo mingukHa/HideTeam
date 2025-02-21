@@ -73,8 +73,6 @@ public class PlayerController : MonoBehaviour
 
     private NPCIdentifier disguisedNPC = null;  //변장한 NPC를 추적
 
-    public ScreenshotViewer screenshotViewer;
-
     private void Start()
     {
         Cursor.visible = false;
@@ -627,6 +625,6 @@ public class PlayerController : MonoBehaviour
         gun.SetActive(false);
 
         isSuiciding = false; // 코루틴 종료 후 다시 K키 입력 가능
-        screenshotViewer.GameRestart();
+        EventManager.Trigger(GameEventType.GameOver);
     }
 }
