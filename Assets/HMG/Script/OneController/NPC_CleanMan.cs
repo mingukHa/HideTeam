@@ -20,7 +20,7 @@ public class NPC_CleanMan : NPCFSM
     private bool GarbageTrue = false;
     private bool isHide = false;
     public TextMeshProUGUI npcclean;
-    //private bool isPlayerNearby = false;
+
 
     public GameObject PlayerToiletOutPos;
     
@@ -45,6 +45,7 @@ public class NPC_CleanMan : NPCFSM
     protected override void Update()
     {
         base.Update();
+
         if (!isDead && isPlayerNearby)
         {
             // 키 입력을 지속적으로 체크
@@ -70,6 +71,10 @@ public class NPC_CleanMan : NPCFSM
                 //EventManager.Trigger(GameEventType.NPCKill);
                 agent.enabled = false;
                 isDead = true;
+            }
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                StartCoroutine(TalkView());
             }
         }
     }

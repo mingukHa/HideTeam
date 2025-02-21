@@ -227,6 +227,7 @@ public class NPCFSM : MonoBehaviour
    
     protected IEnumerator TalkView()
     {
+        Debug.Log("바라보기 코루틴 실행");
         if (isTalking || agent.hasPath) yield break; // 이동 중이면 실행 안 함
         select.SetActive(true);
         isTalking = true;
