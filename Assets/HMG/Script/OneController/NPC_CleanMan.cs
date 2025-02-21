@@ -73,7 +73,7 @@ public class NPC_CleanMan : NPCFSM
     private void StartRichHide()
     {
         isHide = true;
-        StartCoroutine(EventOutLine());
+        StartCoroutine(moutline.EventOutLine());
     }
     private void StartRichToiletKill()
     {
@@ -81,7 +81,7 @@ public class NPC_CleanMan : NPCFSM
     }
     private void StartGarbage()
     {
-        StartCoroutine(EventOutLine());
+        StartCoroutine(moutline.EventOutLine());
         GarbageTrue = true;
         Debug.Log("청소부 개 빡쳐서 달려오는 중");
 
@@ -112,7 +112,7 @@ public class NPC_CleanMan : NPCFSM
         if (GarbageTrue == false)
         {
             ScreenshotManager.Instance.CaptureScreenshot();
-            StartCoroutine(EventOutLine());
+            StartCoroutine(moutline.EventOutLine());
             agent.SetDestination(richKill.transform.position);
             chat.LoadNPCDialogue(npc, 3);
             PlayerToiletOutPos.SetActive(true);
@@ -140,7 +140,7 @@ public class NPC_CleanMan : NPCFSM
     private void RichFinds()
     {
         StartCoroutine (RichFind());
-        StartCoroutine(EventOutLine());
+        StartCoroutine(moutline.EventOutLine());
     }
     private IEnumerator RichFind()
     {

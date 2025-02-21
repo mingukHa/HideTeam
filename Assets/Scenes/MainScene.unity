@@ -7343,6 +7343,7 @@ MonoBehaviour:
   - RichmanAngry1
   - RichmanAngry3
   dialogueText: {fileID: 1653169566}
+  moutline: {fileID: 0}
 --- !u!114 &232194062
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9655,6 +9656,25 @@ MonoBehaviour:
   eventFlags: 
   actionNames: []
   dialogueText: {fileID: 0}
+  moutline: {fileID: 0}
+--- !u!114 &282146790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 282146766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93fd4fe72fc53794685e035c36e3c422, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 0
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &299125839
 GameObject:
   m_ObjectHideFlags: 0
@@ -11897,6 +11917,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7006130886006354831, guid: cb852d8612c7943498093c06a385bc83, type: 3}
       insertIndex: -1
       addedObject: {fileID: 367549493}
+    - targetCorrespondingSourceObject: {fileID: 7006130886006354831, guid: cb852d8612c7943498093c06a385bc83, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 367549504}
   m_SourcePrefab: {fileID: 100100000, guid: cb852d8612c7943498093c06a385bc83, type: 3}
 --- !u!1 &367549491 stripped
 GameObject:
@@ -11944,6 +11967,7 @@ MonoBehaviour:
   - TellerInteract
   - TellerGone
   dialogueText: {fileID: 212599938}
+  moutline: {fileID: 0}
   npcID: Teller
   MDC_collider: {fileID: 1712179812}
   MDC_VisualTalk: {fileID: 1841614210}
@@ -12115,6 +12139,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nPCAvatar: {fileID: 9000000, guid: 143a82af78eb84940983d83a55930737, type: 3}
   nPCName: PChar_Teller2
+--- !u!114 &367549504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367549491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93fd4fe72fc53794685e035c36e3c422, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 0
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &371222892 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 387328884714622978, guid: 019afb5205dbd7140bf1cdfd902b991b, type: 3}
@@ -27327,6 +27369,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4504139456931914766, guid: 94fadfe69101d5145b3aaad4e8aca621, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1124407235}
+    - targetCorrespondingSourceObject: {fileID: 4504139456931914766, guid: 94fadfe69101d5145b3aaad4e8aca621, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1124407238}
   m_SourcePrefab: {fileID: 100100000, guid: 94fadfe69101d5145b3aaad4e8aca621, type: 3}
 --- !u!1 &1124407224 stripped
 GameObject:
@@ -27422,6 +27467,7 @@ MonoBehaviour:
   - StartKar
   - PlayerEnter
   dialogueText: {fileID: 0}
+  moutline: {fileID: 0}
 --- !u!54 &1124407230
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -27508,6 +27554,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nPCAvatar: {fileID: 9000000, guid: 69e0bf832ba8212478b45616cc569f75, type: 3}
   nPCName: PChar_LobbyGuard
+--- !u!114 &1124407238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1124407224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93fd4fe72fc53794685e035c36e3c422, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 0
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &1130133352
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36485,6 +36549,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nPCAvatar: {fileID: 9000000, guid: 6996385895b383749b266464bf872c69, type: 3}
   nPCName: PChar_DoorGuard
+--- !u!114 &1557606067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557606056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93fd4fe72fc53794685e035c36e3c422, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 0
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &1582005790
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42815,6 +42897,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100154, guid: 6996385895b383749b266464bf872c69, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1557606066}
+    - targetCorrespondingSourceObject: {fileID: 100154, guid: 6996385895b383749b266464bf872c69, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1557606067}
   m_SourcePrefab: {fileID: 100100000, guid: 6996385895b383749b266464bf872c69, type: 3}
 --- !u!1001 &1905279184
 PrefabInstance:
@@ -42914,6 +42999,14 @@ PrefabInstance:
       propertyPath: gImage
       value: 
       objectReference: {fileID: 2045449559}
+    - target: {fileID: 2273127942045726320, guid: 7175b0b83a2fd29499f22ba60bd9878a, type: 3}
+      propertyPath: grabImage
+      value: 
+      objectReference: {fileID: 1976920572}
+    - target: {fileID: 2273127942045726320, guid: 7175b0b83a2fd29499f22ba60bd9878a, type: 3}
+      propertyPath: ragdollgrab
+      value: 
+      objectReference: {fileID: 7803856485902085921}
     - target: {fileID: 2273127942045726320, guid: 7175b0b83a2fd29499f22ba60bd9878a, type: 3}
       propertyPath: lidOpenRotation.w
       value: 0.000000034678575
@@ -45070,6 +45163,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4504139456931914766, guid: 94fadfe69101d5145b3aaad4e8aca621, type: 3}
       insertIndex: -1
       addedObject: {fileID: 282146786}
+    - targetCorrespondingSourceObject: {fileID: 4504139456931914766, guid: 94fadfe69101d5145b3aaad4e8aca621, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 282146790}
   m_SourcePrefab: {fileID: 100100000, guid: 94fadfe69101d5145b3aaad4e8aca621, type: 3}
 --- !u!1 &1993773101
 GameObject:

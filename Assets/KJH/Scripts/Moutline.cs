@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 [DisallowMultipleComponent]
 
@@ -338,5 +340,27 @@ public class Moutline : MonoBehaviour
         {
             OutlineWidth = 0f; // Reset outline width to 0 when player exits
         }
+    }
+    public IEnumerator EventOutLine()
+    {
+        float duration = 5f;
+        float blinkDuration = 1f;
+        float elapsedTime = 0f;
+        this.OutlineColor = Color.yellow;
+        while (elapsedTime <= duration)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = (elapsedTime / blinkDuration) * Mathf.PI * 2;
+
+            float value = (Mathf.Sin(t) + 1) * 4.5f + 1;
+            this.OutlineWidth = value;
+
+            Debug.Log($"현재 OutlineWidth 값: {value}");
+
+            yield return null;
+        }
+
+        this.OutlineColor = Color.white;
+        this.OutlineWidth = 0;
     }
 }

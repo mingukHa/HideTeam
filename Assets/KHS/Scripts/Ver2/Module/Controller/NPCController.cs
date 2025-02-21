@@ -6,12 +6,14 @@ using static EventManager;
 using System.Collections;
 using TMPro;
 using Firebase.Database;
+using UnityEngine.UI;
 
 
 [RequireComponent(typeof(NPCStateMachine)), RequireComponent(typeof(RoutineInvoker))]
 public abstract class NPCController : MonoBehaviour
 {
     public NPCType npcType;
+
 
     [Header("NPC 정보")]
     public string npcName = string.Empty;
@@ -47,6 +49,8 @@ public abstract class NPCController : MonoBehaviour
     [Header("대사 설정")]
     public TextMeshProUGUI dialogueText;
 
+    public Moutline moutline;
+
 
     private void Awake()
     {
@@ -57,6 +61,8 @@ public abstract class NPCController : MonoBehaviour
 
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+
+        moutline = GetComponent<Moutline>();
 
         Debug.Log($"{gameObject.name} - NPCController Awake() 실행됨, npcType: {npcType}");
     }

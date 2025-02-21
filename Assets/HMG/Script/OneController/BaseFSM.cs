@@ -241,28 +241,7 @@ public class NPCFSM : MonoBehaviour
             yield return null;
         }
     }
-    protected IEnumerator EventOutLine()
-    {
-        float duration = 5f; 
-        float blinkDuration = 1f; 
-        float elapsedTime = 0f;
-        moutline.OutlineColor = Color.yellow;
-        while (elapsedTime <= duration) 
-        {
-            elapsedTime += Time.deltaTime;
-            float t = (elapsedTime / blinkDuration) * Mathf.PI * 2; 
-
-            float value = (Mathf.Sin(t) + 1) * 4.5f + 1; 
-            moutline.OutlineWidth = value; 
-
-            Debug.Log($"ÇöÀç OutlineWidth °ª: {value}"); 
-
-            yield return null; 
-        }
-
-        moutline.OutlineColor = Color.white;
-        moutline.OutlineWidth = 0;
-    }
+    
 
 
 
