@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed = 4.0f;
     public float rotationSpeed = 10f;
     private Vector3 moveDirection;
+    public GameObject cutSceneCam;
 
     private bool isEChatActive = false;
     private bool isECarActive = false;
@@ -92,6 +94,7 @@ public class PlayerController : MonoBehaviour
 
         if (!isStarted)
         {
+            cutSceneCam.SetActive(true);
             cigarette.SetActive(true);
             Smoking();
         }
