@@ -58,14 +58,14 @@ ModelImporter:
       - time: 0.32832897
         functionName: Walk
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: d8c4118d5fd94ed409e3334a5a855d74, type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: 040f636092628804a97c543a964b248b, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 0.8390094
         functionName: Walk
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: d8c4118d5fd94ed409e3334a5a855d74, type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: 040f636092628804a97c543a964b248b, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
