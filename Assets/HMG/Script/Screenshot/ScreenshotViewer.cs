@@ -50,17 +50,17 @@ public class ScreenshotViewer : MonoBehaviour
         Post.SetActive(true);
         efKey.SetActive(false);
         Nav.SetActive(false);
+        Clock.SetActive(true);
         StartSlideshow();
         Light.SetActive(false);
-        StartCoroutine(GameRestart());
-        Clock.SetActive(true);
         Text.SetActive(false);
+        StartCoroutine(GameRestart());
     }
 
     public IEnumerator GameRestart()
     {
-        EventManager.Trigger(GameEventType.GameOver);
         yield return null;
+        EventManager.Trigger(GameEventType.GameOver);
     }
 
     public void StartSlideshow()
@@ -92,7 +92,7 @@ public class ScreenshotViewer : MonoBehaviour
         }
         Fadeimg.SetActive(true);
         yield return new WaitForSecondsRealtime(displayTime);
-        StopAllCoroutines();
+        //StopAllCoroutines();
         
         SceneManager.LoadScene("MainScene");
         
