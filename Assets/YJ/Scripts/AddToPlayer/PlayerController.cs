@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private PlayerDisguiser disguiser;
     private CarAlarm carAlarm;
     private TrashBin trashBin;
+    private PlayerSound playerSound;
     //public RagdollGrabber ragdollGrabber;
 
     [Header ("권총 오브젝트")]
@@ -87,6 +88,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
         tr = GetComponent<Transform>();
         disguiser = GetComponent<PlayerDisguiser>();
+        playerSound = GetComponent<PlayerSound>();
 
         if (!isStarted)
         {
@@ -602,7 +604,10 @@ public class PlayerController : MonoBehaviour
             muzzleFlashLight.SetActive(true);
         }
 
-        // 3. 혈흔 효과 켜기
+        // 3. 총성 재생
+        playerSound.Gunshot();
+
+        // 4. 혈흔 효과 켜기
         if (bloodEffect != null)
         {
             bloodEffect.SetActive(true);
@@ -618,7 +623,7 @@ public class PlayerController : MonoBehaviour
 
 
         // Upper Layer에서 Suicide 애니메이션의 길이를 가져옴
-        float animLength = anim.GetCurrentAnimatorStateInfo(1).length;
+        float animLength = anim.GetCurrentAnimatorStateInfo(1).length + anim.GetCurrentAnimatorStateInfo(2).length;
 
         // 애니메이션이 끝날 때까지 Forward와 Right 값을 계속 0으로 유지
         float elapsedTime = 0f;
