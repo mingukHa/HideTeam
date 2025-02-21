@@ -10,6 +10,11 @@ public class PlayerCutScene1 : MonoBehaviour
 
     private static bool hasPlayed = false; //씬이 리로드되도 유지됨.
 
+    public void SetStarted()
+    {
+        hasPlayed = false;
+    }
+
     private void Start()
     {
         pd = GetComponent<PlayableDirector>();
