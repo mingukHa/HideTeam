@@ -99,7 +99,7 @@ public class NPCFSM : MonoBehaviour
                 ChangeState(State.Dead);
                 NPCChatTest.enabled = false;
                 moutline.enabled = false;
-
+                agent.enabled = false;
                 isTalking = false;
                 select.SetActive(false);
                 chat.LoadNPCDialogue("NULL", 0);
