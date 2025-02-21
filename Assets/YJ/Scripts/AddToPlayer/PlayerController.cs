@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
     public GameObject gun = null;
     public ParticleSystem muzzleFlash;
     public GameObject muzzleFlashLight;
+    public GameObject bloodEffect;
 
     [Header ("담배 오브젝트")]
     public GameObject cigarette = null;
@@ -576,25 +577,32 @@ public class PlayerController : MonoBehaviour
         // Suicide 애니메이션이 실행된 후 0.35초 대기
         yield return new WaitForSeconds(0.35f * Time.timeScale);
 
-        // 1. Particle System 재생
+        // 1. 머즐플래시 재생
         if (muzzleFlash != null)
         {
             muzzleFlash.Play();
         }
 
-        // 2. Light 켜기
+        // 2. 총구 화염 켜기
         if (muzzleFlashLight != null)
         {
             muzzleFlashLight.SetActive(true);
         }
 
-        // 0.1초 후 Light 끄기
+        // 3. 혈흔 효과 켜기
+        if (bloodEffect != null)
+        {
+            bloodEffect.SetActive(true);
+        }
+
+        // 0.1초 후 총구 화염 끄기
         yield return new WaitForSeconds(0.1f * Time.timeScale);
 
         if (muzzleFlashLight != null)
         {
             muzzleFlashLight.SetActive(false);
         }
+
 
         // Upper Layer에서 Suicide 애니메이션의 길이를 가져옴
         float animLength = anim.GetCurrentAnimatorStateInfo(1).length;
