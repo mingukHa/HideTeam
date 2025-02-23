@@ -40,19 +40,19 @@ public class NPCFinalCutscene : MonoBehaviour
             yield return null;
         }
 
-        // 3️⃣ 도착 후 이동 정지
+      
         agent.isStopped = true;
         agent.velocity = Vector3.zero;
-        npcAnimator.SetTrigger("Idle"); // Idle 애니메이션 전환
+        npcAnimator.SetTrigger("Talk"); // Idle 애니메이션 전환
 
-        // 4️⃣ 버튼 누르는 애니메이션 실행 (애니메이션 길이 만큼 대기)
+        
         yield return new WaitForSeconds(1.5f);
-        npcAnimator.SetTrigger("PressButton"); // 버튼 누르는 애니메이션 실행
+        npcAnimator.SetTrigger("Walk"); // 버튼 누르는 애니메이션 실행
 
-        // 5️⃣ 버튼 누르고 대기 후 문 열기 실행
+        
         yield return new WaitForSeconds(sceneDuration);
 
-        // 🏆 문을 NPC 위치 기준으로 열기 (올바른 함수 호출 방식)
+        
         doorController.OpenDoorBasedOnView(this.transform);
 
         Debug.Log("엔딩 컷씬 완료!");

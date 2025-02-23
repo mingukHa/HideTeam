@@ -43294,7 +43294,7 @@ PrefabInstance:
     - target: {fileID: 3202963939660662547, guid: 904086f9fc866e748a79dd67b933a3e9, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 618a56f934396284e8e4618a36f2baf5, type: 2}
+      objectReference: {fileID: 9100000, guid: 9ac97d24c73b5c844a1c101e54d714cd, type: 2}
     - target: {fileID: 3238084544579950965, guid: 904086f9fc866e748a79dd67b933a3e9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.028745549
@@ -52339,7 +52339,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cam5: {fileID: 2097902491}
-  Door: {fileID: 2055723099}
+  Door: {fileID: 0}
   Fadeimage2: {fileID: 998228671}
   cutscene2: {fileID: 2097902492}
 --- !u!4 &8634041400660064131 stripped
