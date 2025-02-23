@@ -17,9 +17,16 @@ public class NPC_Polic : NPCFSM
     {
         EventManager.Subscribe(GameEventType.Carkick, StartPolicTlak);
     }
+    private void OnDisable()
+    {
+        EventManager.Unsubscribe(GameEventType.Carkick, StartPolicTlak);
+    }
     private void StartPolicTlak()
     {
-        agent.SetDestination(PolicPos.gameObject.transform.position);     
+        StartCoroutine(moutline.EventOutLine());
+        agent.SetDestination(PolicPos.gameObject.transform.position);
+        animator.SetBool("Run", true);
+        NPCCollider.enabled = false;
     }
  
     private void StopNpc()
@@ -44,8 +51,9 @@ public class NPC_Polic : NPCFSM
     protected override void Update()
     {
         base.Update();
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKey(KeyCode.F))
         {
+            EventManager.Trigger(GameEventType.NPCKill);
             isDead = true;
         }
     }
