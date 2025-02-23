@@ -43222,7 +43222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2947870581016087610, guid: 904086f9fc866e748a79dd67b933a3e9, type: 3}
       propertyPath: m_Name
-      value: Teller1 (1)
+      value: EndingNPC
       objectReference: {fileID: 0}
     - target: {fileID: 3202963939660662547, guid: 904086f9fc866e748a79dd67b933a3e9, type: 3}
       propertyPath: m_Controller
@@ -44318,29 +44318,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2947870581016087610, guid: 904086f9fc866e748a79dd67b933a3e9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1803765991}
-    - targetCorrespondingSourceObject: {fileID: 2947870581016087610, guid: 904086f9fc866e748a79dd67b933a3e9, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1803765990}
   m_SourcePrefab: {fileID: 100100000, guid: 904086f9fc866e748a79dd67b933a3e9, type: 3}
 --- !u!1 &1803765989 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2947870581016087610, guid: 904086f9fc866e748a79dd67b933a3e9, type: 3}
   m_PrefabInstance: {fileID: 1803765988}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1803765990
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1803765989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef00fccff4cade04c8eb66f6c7279cc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueText: {fileID: 0}
-  npcID: 
 --- !u!136 &1803765991
 CapsuleCollider:
   m_ObjectHideFlags: 0
