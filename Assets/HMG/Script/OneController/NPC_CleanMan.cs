@@ -102,8 +102,7 @@ public class NPC_CleanMan : NPCFSM
         // 첫 번째 목적지로 이동
         agent.SetDestination(player.transform.position);
 
-        animator.SetBool("Run", true);
-        NPCCollider.enabled = true;
+        
 
         
     }
@@ -128,9 +127,7 @@ public class NPC_CleanMan : NPCFSM
     private void StartRichKill()
     {
         if (GarbageTrue == false)
-        {
-            
-            
+        {                      
             StartCoroutine(moutline.EventOutLine());
             agent.SetDestination(richKill.transform.position);
             chat.LoadNPCDialogue(npc, 3);

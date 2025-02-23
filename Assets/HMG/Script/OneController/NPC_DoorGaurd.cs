@@ -24,6 +24,7 @@ public class NPC_DoorGaurd : NPCFSM
     }
     private void StartNPCKill()
     {
+        Debug.Log("호출되서 달려감");
         StartCoroutine(moutline.EventOutLine());
         ChangeState(State.Run);
         agent.SetDestination(player.position);

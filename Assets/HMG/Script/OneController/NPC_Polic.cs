@@ -21,14 +21,33 @@ public class NPC_Polic : NPCFSM
     {
         EventManager.Unsubscribe(GameEventType.Carkick, StartPolicTlak);
     }
+
     private void StartPolicTlak()
     {
         StartCoroutine(moutline.EventOutLine());
         agent.SetDestination(PolicPos.gameObject.transform.position);
-        animator.SetBool("Run", true);
-        NPCCollider.enabled = false;
+        ChangeState(State.Run);
+
+        // 목표 지점 도착 확인을 위한 코루틴 실행
+        StartCoroutine(CheckArrival());
     }
- 
+
+    private IEnumerator CheckArrival()
+    {
+        // NPC가 이동하는 동안 반복 체크
+        while (agent.pathPending || agent.remainingDistance > 0.1f)
+        {
+            yield return null;
+        }
+
+        // NPC가 도착했을 때 처리
+        agent.isStopped = true;
+        ChangeState(State.Idle);
+
+        NPCCollider.enabled = false;        
+    }
+
+
     private void StopNpc()
     {
         StopCoroutine(TalkView());
@@ -53,7 +72,7 @@ public class NPC_Polic : NPCFSM
         base.Update();
         if (Input.GetKey(KeyCode.F))
         {
-            EventManager.Trigger(GameEventType.NPCKill);
+            //EventManager.Trigger(GameEventType.NPCKill);
             isDead = true;
         }
     }
