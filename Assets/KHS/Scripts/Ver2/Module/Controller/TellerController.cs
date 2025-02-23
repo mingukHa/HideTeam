@@ -5,7 +5,6 @@ using System.Text.RegularExpressions;
 using Firebase.Database;
 using Firebase.Extensions;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class TellerController : NPCController
@@ -228,6 +227,7 @@ public class TellerController : NPCController
 
     public void TellerGone()
     {
+        StartCoroutine(moutline.EventOutLine());
         isInterPlayer = true;
         isInterDisPlayer = true;
         gameObject.tag = "NPCEND";
@@ -235,8 +235,14 @@ public class TellerController : NPCController
     }
     public void TellerInteract()
     {
+        StartCoroutine(moutline.EventOutLine());
         Debug.Log("플레이어가 Teller에게 상호작용!");
         isInterPlayer = true;
+    }
+    public void TellerInteractOldMan()
+    {
+        StartCoroutine(moutline.EventOutLine());
+
     }
     public void ChangeConv(string _target)
     {
