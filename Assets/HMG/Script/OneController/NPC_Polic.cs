@@ -12,7 +12,6 @@ public class NPC_Polic : NPCFSM
     public GameObject npcchatbox; //NPC의 메인 채팅 최상위
     private string npc = "NPC5";
     public GameObject PolicPos; //이동 할 위치    
-    private bool isPolicTlak = false;
     private void OnEnable()
     {
         EventManager.Subscribe(GameEventType.Carkick, StartPolicTlak);
@@ -70,11 +69,7 @@ public class NPC_Polic : NPCFSM
     protected override void Update()
     {
         base.Update();
-        if (Input.GetKey(KeyCode.F))
-        {
-            //EventManager.Trigger(GameEventType.NPCKill);
-            isDead = true;
-        }
+        
     }
 
     protected override void IdleBehavior()
@@ -114,12 +109,20 @@ public class NPC_Polic : NPCFSM
         if (!isDead && other.CompareTag("Player"))
         {
             chat.LoadNPCDialogue(npc, 0);
+            //이 부분 형수씨꺼 추가
         }
 
     }
     protected override void OnTriggerStay(Collider other)
     {
-        
+        if (other.CompareTag("Player"))
+        {
+            if (Input.GetKey(KeyCode.F))
+            {
+                EventManager.Trigger(GameEventType.NPCKill);
+                isDead = true;
+            }
+        }
     }
 
     protected override void OnTriggerExit(Collider other)
