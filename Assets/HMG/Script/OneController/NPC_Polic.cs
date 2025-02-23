@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using static EventManager;
 using UnityEngine.AI;
+using TMPro;
 
 
 public class NPC_Polic : NPCFSM
@@ -10,15 +11,15 @@ public class NPC_Polic : NPCFSM
 
     public GameObject npcchatbox; //NPC의 메인 채팅 최상위
     private string npc = "NPC5";
-    public Transform PolicPos; //이동 할 위치    
+    public GameObject PolicPos; //이동 할 위치    
     private bool isPolicTlak = false;
     private void OnEnable()
     {
-        EventManager.Subscribe(GameEventType.OldManHelp, StartPolicTlak);
+        EventManager.Subscribe(GameEventType.Carkick, StartPolicTlak);
     }
     private void StartPolicTlak()
     {
-        isPolicTlak = true;       
+        agent.SetDestination(PolicPos.gameObject.transform.position);     
     }
  
     private void StopNpc()
@@ -91,22 +92,7 @@ public class NPC_Polic : NPCFSM
     }
     protected override void OnTriggerStay(Collider other)
     {
-        if (!isDead && other.CompareTag("Player"))
-        {           
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                chat.LoadNPCDialogue(npc, 1);
-                EventManager.Trigger(GameEventType.policeTalk);
-                StopCoroutine(TalkView());
-                returnManager.StartCoroutine(returnManager.SaveAllNPCData(4f));
-                Invoke("StopNpc", 2f);
-            }
-        }
-        if (Input.GetKey(KeyCode.F))
-        {
-            isDead = true;
-            EventManager.Trigger(GameEventType.NPCKill);
-        }
+        
     }
 
     protected override void OnTriggerExit(Collider other)
