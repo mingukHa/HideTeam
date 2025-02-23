@@ -298,7 +298,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Chapterer.3\n\uD0C8\uCDE8 \uBBF8\uC158 : \uC740\uD589"
+  m_text: "Chapter.3\n\uD0C8\uCDE8 \uBBF8\uC158 : \uC740\uD589"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4645f8df1404beb4397854d96c38aef3, type: 2}
   m_sharedMaterial: {fileID: -2804543138297231082, guid: 4645f8df1404beb4397854d96c38aef3, type: 2}
@@ -861,7 +861,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Chapterer.1\n\uD0C8\uCDE8 \uBBF8\uC158 : \uC740\uD589"
+  m_text: "Chapter.1\n\uD0C8\uCDE8 \uBBF8\uC158 : \uC740\uD589"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4645f8df1404beb4397854d96c38aef3, type: 2}
   m_sharedMaterial: {fileID: -2804543138297231082, guid: 4645f8df1404beb4397854d96c38aef3, type: 2}
@@ -997,7 +997,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Chapterer.2\n\uC554\uC0B4 \uBBF8\uC158 : \uC0AC\uBB34\uC2E4"
+  m_text: "Chapter.2\n\uC554\uC0B4 \uBBF8\uC158 : \uC0AC\uBB34\uC2E4"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4645f8df1404beb4397854d96c38aef3, type: 2}
   m_sharedMaterial: {fileID: -2804543138297231082, guid: 4645f8df1404beb4397854d96c38aef3, type: 2}
