@@ -32,7 +32,7 @@ public class EventHelpText : MonoBehaviour
     }
     private void CleanManDie()
     {
-        text.text = "이런 거기서 사람을 죽이면 어떡해? 얼른 시체를 숨겨";
+        StartCoroutine(textNull("이런 거기서 사람을 죽이면 어떡해? 얼른 시체를 숨겨"));
     }
     private void OldTalkTeller()
     {
