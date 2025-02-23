@@ -19,7 +19,6 @@ public class TalkState : NPCState
         }
         else
         {
-            _npcController.animator.ResetTrigger("Talk");
             _npcController.stateMachine.ChangeState(new IdleState(_npcController));
         }
     }

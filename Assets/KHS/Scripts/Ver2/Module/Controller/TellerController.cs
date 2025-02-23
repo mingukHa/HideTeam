@@ -15,6 +15,9 @@ public class TellerController : NPCController
     public MatDetChange MDC_collider;
     public MatDetChange MDC_VisualTalk;
 
+    public SphereCollider talkCollider;
+    private float initalRad = 0f;
+
     public bool isVIP = false;
     public bool isPlayer = false;
     public bool isOldMan = false;
@@ -33,6 +36,7 @@ public class TellerController : NPCController
     public int convEnvIdx = 0;
 
     public EventManager.GameEventType convEnv;
+    public EventManager.GameEventType convEndEnv;
 
     public override void Start()
     {
@@ -43,6 +47,8 @@ public class TellerController : NPCController
 
         MDC_collider.OnTriggerEnterCallback += OnTiggerIn;
         MDC_collider.OnTriggerExitCallback += OnTiggerOut;
+
+        initalRad = talkCollider.radius;
     }
 
     private void FixedUpdate()
@@ -167,8 +173,14 @@ public class TellerController : NPCController
             EventManager.Trigger(convEnv);
             StartCoroutine(EventCallCoroutine());
         }
+        if (text.Contains("/C"))
+        {
+            Debug.Log($"[대화종료 이벤트 {convEndEnv} 호출");
+            TellerReset();
+        }
         text = Regex.Replace(text, @"/F[A-Z]", "");
         text = text.Replace("/T", "");
+        text = text.Replace("/C", "");
         dialogueText.text = text.Replace("/E", ""); // /E 제거 후 출력
         Debug.Log($"[Teller] 대사 출력: {text}");
     }
@@ -227,6 +239,7 @@ public class TellerController : NPCController
 
     public void TellerGone()
     {
+        talkCollider.radius = 0f;
         StartCoroutine(moutline.EventOutLine());
         isInterPlayer = true;
         isInterDisPlayer = true;
@@ -235,14 +248,22 @@ public class TellerController : NPCController
     }
     public void TellerInteract()
     {
+        talkCollider.radius = 0f;
+        stateMachine.ChangeState(new TalkState(this));
         StartCoroutine(moutline.EventOutLine());
         Debug.Log("플레이어가 Teller에게 상호작용!");
         isInterPlayer = true;
     }
     public void TellerInteractOldMan()
     {
+        talkCollider.radius = 0f;
+        stateMachine.ChangeState(new TalkState(this));
         StartCoroutine(moutline.EventOutLine());
-
+    }
+    public void TellerReset()
+    {
+        talkCollider.radius = initalRad;
+        EventManager.Trigger(convEndEnv);
     }
     public void ChangeConv(string _target)
     {

@@ -11968,24 +11968,29 @@ MonoBehaviour:
   targetVec: []
   agent: {fileID: 0}
   animator: {fileID: 0}
-  eventFlags: 0500000007000000
+  eventFlags: 05000000070000000b0000001100000029000000
   actionNames:
   - TellerInteract
   - TellerGone
+  - TellerInteractOldMan
+  - TellerReset
+  - TellerReset
   dialogueText: {fileID: 212599938}
   moutline: {fileID: 0}
   npcID: Teller
   MDC_collider: {fileID: 1712179812}
   MDC_VisualTalk: {fileID: 1841614210}
+  talkCollider: {fileID: 367549500}
   isVIP: 0
   isPlayer: 0
   isOldMan: 0
   isPlayerDisg: 0
   isInterPlayer: 0
   isInterDisPlayer: 0
-  convEnvList: 18000000190000001a0000001b0000001c000000
+  convEnvList: 18000000190000001a000000
   convEnvIdx: 0
   convEnv: 38
+  convEndEnv: 43
 --- !u!114 &367549494
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12043,7 +12048,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 367549491}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef00fccff4cade04c8eb66f6c7279cc5, type: 3}
   m_Name: 
@@ -38124,6 +38129,7 @@ MonoBehaviour:
   MDC_Collider: {fileID: 1712179812}
   MDC_2Collider: {fileID: 4500226}
   correctDisguse: {fileID: 7053730351741316137}
+  tellerCon: {fileID: 367549493}
   dialogueText: {fileID: 1653169566}
   isGcode: 0
   isDisguse: 0

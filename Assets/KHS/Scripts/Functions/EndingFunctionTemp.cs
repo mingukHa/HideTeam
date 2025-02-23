@@ -15,6 +15,7 @@ public class EndingFunctionTemp : MonoBehaviour
     public MatDetChange MDC_2Collider;
 
     public GameObject correctDisguse;
+    public TellerController tellerCon;
 
     public TextMeshProUGUI dialogueText;
 
@@ -68,6 +69,7 @@ public class EndingFunctionTemp : MonoBehaviour
 
         if (isFlowClear && isDisguse && isDet && Input.GetKeyDown(KeyCode.E) && !alreadyStarted)
         {
+            tellerCon.talkCollider.radius = 0f;
             alreadyStarted = true;
             StartCoroutine(EndingCoroutine());
         }
