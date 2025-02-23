@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using Firebase.Database;
 using Firebase.Extensions;
 using TMPro;
@@ -70,6 +71,7 @@ public class EndingFunctionTemp : MonoBehaviour
         if (isFlowClear && isDisguse && isDet && Input.GetKeyDown(KeyCode.E) && !alreadyStarted)
         {
             tellerCon.talkCollider.radius = 0f;
+            tellerCon.stateMachine.ChangeState(new TalkState(tellerCon));
             alreadyStarted = true;
             StartCoroutine(EndingCoroutine());
         }
@@ -82,7 +84,6 @@ public class EndingFunctionTemp : MonoBehaviour
 
     private IEnumerator EndingCoroutine()
     {
-        
         dialogueText.alpha = 255f;
         LastEndingDialogue(npcID);
         yield return new WaitForSeconds(8.0f);
@@ -150,11 +151,45 @@ public class EndingFunctionTemp : MonoBehaviour
     }
     private void ShowDialogue(string text)
     {
+        Match match = Regex.Match(text, @"/F([A-Z])");
+        if (match.Success)
+        {
+            string convTarget = match.Groups[1].Value;
+            ChangeConv(convTarget);
+        }
+        text = Regex.Replace(text, @"/F[A-Z]", "");
         text = text.Replace("/B", "");
         dialogueText.text = text.Replace("/G", ""); // /G 제거 후 출력
         Debug.Log($"[Ending] 대사 출력: {text}");
     }
-
+    public void ChangeConv(string _target)
+    {
+        Debug.Log($"체인지 콘버세이션 : {_target}");
+        switch (_target)
+        {
+            case "R":
+                EventManager.Trigger(EventManager.GameEventType.RichManTalkUI);
+                break;
+            case "O":
+                EventManager.Trigger(EventManager.GameEventType.OldManTalkUI);
+                break;
+            case "P":
+                EventManager.Trigger(EventManager.GameEventType.PlayerTalkUI);
+                break;
+            case "T":
+                EventManager.Trigger(EventManager.GameEventType.TellerTalkUI);
+                break;
+            case "C":
+                EventManager.Trigger(EventManager.GameEventType.CleanerTalkUI);
+                break;
+            case "G":
+                EventManager.Trigger(EventManager.GameEventType.GuardTalkUI);
+                break;
+            case "Z":
+                EventManager.Trigger(EventManager.GameEventType.ResetTalkUI);
+                break;
+        }
+    }
     private void StartDialogueSequence(string[] dialogues)
     {
         dialogueQueue.Clear();

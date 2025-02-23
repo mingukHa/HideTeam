@@ -12113,8 +12113,8 @@ MonoBehaviour:
   - TellerInteract
   - TellerGone
   - TellerInteractOldMan
-  - TellerReset
-  - TellerReset
+  - TellerTalkAble
+  - TellerTalkDisable
   dialogueText: {fileID: 212599938}
   moutline: {fileID: 0}
   npcID: Teller

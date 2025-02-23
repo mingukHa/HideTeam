@@ -376,7 +376,7 @@ public class Moutline : MonoBehaviour
 
             this.OutlineWidth = value;
 
-            Debug.Log($"현재 OutlineWidth 값: {value}");
+            //Debug.Log($"현재 OutlineWidth 값: {value}");
 
             yield return null;
         }

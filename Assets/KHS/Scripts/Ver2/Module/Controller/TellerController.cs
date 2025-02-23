@@ -16,7 +16,7 @@ public class TellerController : NPCController
     public MatDetChange MDC_VisualTalk;
 
     public SphereCollider talkCollider;
-    private float initalRad = 0f;
+    private float initalRad = 3f;
 
     public bool isVIP = false;
     public bool isPlayer = false;
@@ -48,7 +48,7 @@ public class TellerController : NPCController
         MDC_collider.OnTriggerEnterCallback += OnTiggerIn;
         MDC_collider.OnTriggerExitCallback += OnTiggerOut;
 
-        initalRad = talkCollider.radius;
+        initalRad = 3f;
     }
 
     private void FixedUpdate()
@@ -239,7 +239,7 @@ public class TellerController : NPCController
 
     public void TellerGone()
     {
-        talkCollider.radius = 0f;
+        TellerTalkDisable();
         StartCoroutine(moutline.EventOutLine());
         isInterPlayer = true;
         isInterDisPlayer = true;
@@ -248,7 +248,7 @@ public class TellerController : NPCController
     }
     public void TellerInteract()
     {
-        talkCollider.radius = 0f;
+        TellerTalkDisable();
         stateMachine.ChangeState(new TalkState(this));
         StartCoroutine(moutline.EventOutLine());
         Debug.Log("플레이어가 Teller에게 상호작용!");
@@ -256,14 +256,22 @@ public class TellerController : NPCController
     }
     public void TellerInteractOldMan()
     {
-        talkCollider.radius = 0f;
+        TellerTalkDisable();
         stateMachine.ChangeState(new TalkState(this));
         StartCoroutine(moutline.EventOutLine());
     }
     public void TellerReset()
     {
-        talkCollider.radius = initalRad;
         EventManager.Trigger(convEndEnv);
+    }
+    public void TellerTalkDisable()
+    {
+        talkCollider.radius = 0f;
+    }
+    public void TellerTalkAble()
+    {
+        EventManager.Trigger(convEndEnv);
+        talkCollider.radius = initalRad;
     }
     public void ChangeConv(string _target)
     {

@@ -121,9 +121,15 @@ public class TalkUIManager : MonoBehaviour
         for (int i = 0; i < uiGoList.Count; ++i)
         {
             if (i == curBoxIdx)
-                uiGoList[i].gameObject.SetActive(true);
+            {
+                if (uiGoList[i].gameObject != null)
+                    uiGoList[i].gameObject.SetActive(true);
+            }
             else
-                uiGoList[i].gameObject.SetActive(false);
+            {
+                if (uiGoList[i].gameObject != null)
+                    uiGoList[i].gameObject.SetActive(false);
+            }
         }
     }
 }
