@@ -66,9 +66,10 @@ public class NPC_CleanMan : NPCFSM
                 EventManager.Trigger(GameEventType.CleanManTalk);
                 Invoke("StopNpc", 2f);
             }
+            
             if (Input.GetKey(KeyCode.F))
             {
-                //EventManager.Trigger(GameEventType.NPCKill);
+                EventManager.Trigger(GameEventType.CleanManDie);
                 agent.enabled = false;
                 isDead = true;
             }
@@ -247,7 +248,6 @@ public class NPC_CleanMan : NPCFSM
         npcchatbox.SetActive(false);
         agent.enabled = false;
         chat.LoadNPCDialogue("NULL", 0);
-        EventManager.Trigger(GameEventType.CleanManDie);
     }
 
     protected override void OnTriggerEnter(Collider other)
