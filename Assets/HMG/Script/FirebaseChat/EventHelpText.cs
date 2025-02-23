@@ -32,7 +32,7 @@ public class EventHelpText : MonoBehaviour
     }
     private void CleanManDie()
     {
-        text.text = "이런 거기서 사람을 죽이면 어떻해? 얼른 시체를 숨겨";
+        text.text = "이런 거기서 사람을 죽이면 어떡해? 얼른 시체를 숨겨";
     }
     private void OldTalkTeller()
     {
@@ -48,7 +48,7 @@ public class EventHelpText : MonoBehaviour
     }
     private void StartNPCKill()
     {
-        StartCoroutine(textNull("이런 거기서 사람을 죽이면 어떻해? 얼른 시체를 숨겨"));
+        StartCoroutine(textNull("이런...시체를 숨기지 못해서 발각되었어"));
     }
     private void StartGarbage()
     {
