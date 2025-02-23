@@ -53,7 +53,7 @@ public class NPC_CleanMan : NPCFSM
             {
                 chat.LoadNPCDialogue(npc, 1);
                 StopCoroutine(TalkView());
-                ScreenshotManager.Instance.CaptureScreenshot();
+                
                 EventManager.Trigger(GameEventType.CleanManTalk);
                 Invoke("StopNpc", 2f);
 
@@ -62,13 +62,14 @@ public class NPC_CleanMan : NPCFSM
             {
                 chat.LoadNPCDialogue(npc, 2);
                 StopCoroutine(TalkView());
-                ScreenshotManager.Instance.CaptureScreenshot();
+                
                 EventManager.Trigger(GameEventType.CleanManTalk);
                 Invoke("StopNpc", 2f);
             }
+            
             if (Input.GetKey(KeyCode.F))
             {
-                //EventManager.Trigger(GameEventType.NPCKill);
+                EventManager.Trigger(GameEventType.CleanManDie);
                 agent.enabled = false;
                 isDead = true;
             }
@@ -128,7 +129,8 @@ public class NPC_CleanMan : NPCFSM
     {
         if (GarbageTrue == false)
         {
-            ScreenshotManager.Instance.CaptureScreenshot();
+            
+            
             StartCoroutine(moutline.EventOutLine());
             agent.SetDestination(richKill.transform.position);
             chat.LoadNPCDialogue(npc, 3);
@@ -247,7 +249,6 @@ public class NPC_CleanMan : NPCFSM
         npcchatbox.SetActive(false);
         agent.enabled = false;
         chat.LoadNPCDialogue("NULL", 0);
-        EventManager.Trigger(GameEventType.CleanManDie);
     }
 
     protected override void OnTriggerEnter(Collider other)
