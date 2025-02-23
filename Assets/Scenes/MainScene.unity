@@ -39489,6 +39489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   npcID: Ending
+  player: {fileID: 2619245077405212297}
   MDC_Collider: {fileID: 1712179812}
   MDC_2Collider: {fileID: 4500226}
   correctDisguse: {fileID: 7053730351741316137}
@@ -44342,7 +44343,7 @@ Transform:
   m_GameObject: {fileID: 1832014386}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -64, y: 0, z: 25}
+  m_LocalPosition: {x: -68.8, y: 0, z: 1.95}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

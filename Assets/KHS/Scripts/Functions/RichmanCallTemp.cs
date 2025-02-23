@@ -64,7 +64,7 @@ public class RichmanCallTemp : MonoBehaviour
     }
     private void RichmanCallStop()
     {
-        StopCoroutine(LastEndingDialogue(npcID));
+        StopAllCoroutines();
         ShowDialogue("");
     }
 

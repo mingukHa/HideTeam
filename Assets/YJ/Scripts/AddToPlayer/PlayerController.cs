@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -152,6 +153,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        EventManager.Subscribe(GameEventType.TellerTalk, LockMoving);
+        EventManager.Subscribe(GameEventType.ConvEnd, UnlockMoving);
+    }
+    private void OnDisable()
+    {
+        EventManager.Unsubscribe(GameEventType.TellerTalk, LockMoving);
+        EventManager.Unsubscribe(GameEventType.ConvEnd, UnlockMoving);
+    }
+
+    public void LockMoving()
+    {
+        anim.Rebind();
+        isMoving = false;
+    }
+    public void UnlockMoving()
+    {
+        isMoving = true;
+    }
     //실시간으로 UI가 변해야하므로 Stay 사용
     private void OnTriggerStay(Collider other)
     {
@@ -179,6 +200,7 @@ public class PlayerController : MonoBehaviour
                 currentNPC = npc; // 변장하지 않았다면, 현재 NPC 설정
             }
         }
+        
 
         //NPCRichMan 있는 상태
         if (rich != null)

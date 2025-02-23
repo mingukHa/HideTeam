@@ -18,6 +18,7 @@ public class EventHelpText : MonoBehaviour
         EventManager.Subscribe(GameEventType.CleanManTalk, StartCleanManTalk);
         EventManager.Subscribe(GameEventType.OldManTalkTeller, OldTalkTeller);
         EventManager.Subscribe(GameEventType.CleanManDie, CleanManDie);
+        EventManager.Subscribe(EventManager.GameEventType.RichmanToliet, StartTolietRichman);
     }
     private void OnDisable()
     {
@@ -29,6 +30,7 @@ public class EventHelpText : MonoBehaviour
         EventManager.Unsubscribe(GameEventType.PlayerEnterBank, StartPlayerEnterBank);
         EventManager.Unsubscribe(GameEventType.OldManTalkTeller, OldTalkTeller);
         EventManager.Unsubscribe(GameEventType.CleanManDie, CleanManDie);
+        EventManager.Unsubscribe(EventManager.GameEventType.RichmanToliet, StartTolietRichman);
     }
     private void CleanManDie()
     {
@@ -65,6 +67,10 @@ public class EventHelpText : MonoBehaviour
     private void StartCarKick()
     {
         StartCoroutine(textNull("이런 차를 발로 차면 어떻해? 누가 오기전에 얼른 숨어"));        
+    }
+    private void StartTolietRichman()
+    {
+        StartCoroutine(textNull("화장실을 향하는군요. 왠지 따라가면 좋은 정보를 얻을 수 있을거 같아요."));
     }
     private IEnumerator textNull(string texts)
     {

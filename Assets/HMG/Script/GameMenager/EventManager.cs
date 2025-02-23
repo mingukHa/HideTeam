@@ -71,7 +71,8 @@ public class EventManager : MonoBehaviour
         GameClear,
         PlayerToiletOut, //플레이어가 리치맨 잡고 화장실을 나올 때
         
-        ConvEnd
+        ConvEnd,
+        RichmanToliet
     }
 
     private static Dictionary<GameEventType, Action> eventDictionary = new Dictionary<GameEventType, Action>();
