@@ -31492,6 +31492,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 753521985803185012, guid: 087c8fe64ca912446974ba5b4b3aad5b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 753521985803185012, guid: 087c8fe64ca912446974ba5b4b3aad5b, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 0
       objectReference: {fileID: 0}
@@ -44445,7 +44449,7 @@ MonoBehaviour:
   destination: {fileID: 397375921}
   sceneDuration: 3
   npcAnimator: {fileID: 1803765994}
-  doorController: {fileID: 2055723101}
+  doorController: {fileID: 1994701580}
 --- !u!95 &1803765994 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 3202963939660662547, guid: 904086f9fc866e748a79dd67b933a3e9, type: 3}
@@ -44461,7 +44465,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 2
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -49178,6 +49182,74 @@ Light:
   m_LightUnit: 1
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!1001 &1994701579
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 7732543642261574086, guid: 3c57fbcb1f2632646a2c57b01d6dc0d6, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -50.068
+      objectReference: {fileID: 0}
+    - target: {fileID: 7732543642261574086, guid: 3c57fbcb1f2632646a2c57b01d6dc0d6, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.084
+      objectReference: {fileID: 0}
+    - target: {fileID: 7732543642261574086, guid: 3c57fbcb1f2632646a2c57b01d6dc0d6, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 15.751
+      objectReference: {fileID: 0}
+    - target: {fileID: 7732543642261574086, guid: 3c57fbcb1f2632646a2c57b01d6dc0d6, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7732543642261574086, guid: 3c57fbcb1f2632646a2c57b01d6dc0d6, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7732543642261574086, guid: 3c57fbcb1f2632646a2c57b01d6dc0d6, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7732543642261574086, guid: 3c57fbcb1f2632646a2c57b01d6dc0d6, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7732543642261574086, guid: 3c57fbcb1f2632646a2c57b01d6dc0d6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7732543642261574086, guid: 3c57fbcb1f2632646a2c57b01d6dc0d6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: -180
+      objectReference: {fileID: 0}
+    - target: {fileID: 7732543642261574086, guid: 3c57fbcb1f2632646a2c57b01d6dc0d6, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7735057462551233904, guid: 3c57fbcb1f2632646a2c57b01d6dc0d6, type: 3}
+      propertyPath: m_Name
+      value: mesh_vault_door_B_01
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 3c57fbcb1f2632646a2c57b01d6dc0d6, type: 3}
+--- !u!114 &1994701580 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8475084853979415601, guid: 3c57fbcb1f2632646a2c57b01d6dc0d6, type: 3}
+  m_PrefabInstance: {fileID: 1994701579}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad30f653249b2454697cf3ed5999f9df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2007657852
 GameObject:
   m_ObjectHideFlags: 0
@@ -52333,3 +52405,4 @@ SceneRoots:
   - {fileID: 252083909}
   - {fileID: 1803765988}
   - {fileID: 668569421}
+  - {fileID: 1994701579}
