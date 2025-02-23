@@ -24926,7 +24926,7 @@ MonoBehaviour:
   fade: {fileID: 974037217}
   clockss: {fileID: 1313422034}
   quadRenderer: {fileID: 1270908866}
-  displayTime: 2
+  displayTime: 1
   Post: {fileID: 402040622}
   quad: {fileID: 1270908863}
   efKey: {fileID: 620596288}

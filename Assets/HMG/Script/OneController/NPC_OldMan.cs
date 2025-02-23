@@ -20,12 +20,13 @@ public class NPC_OldMan : NPCFSM
     private void OnEnable()
     {
         EventManager.Subscribe(GameEventType.TellerTalk, OldmanMove);
-        EventManager.Subscribe(GameEventType.RichHide, OldmanOut);
+        EventManager.Subscribe(GameEventType.RichKill, OldmanOut);
+       
     }
     private void OnDisable()
     {
         EventManager.Unsubscribe(GameEventType.TellerTalk, OldmanMove);
-        EventManager.Unsubscribe(GameEventType.RichHide, OldmanOut);
+        EventManager.Unsubscribe(GameEventType.RichKill, OldmanOut);
     }
     private void OldmanOut()
     {
@@ -73,18 +74,20 @@ public class NPC_OldMan : NPCFSM
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 chat.LoadNPCDialogue(npc, 3);
+                ScreenshotManager.Instance.CaptureScreenshot();
                 EventManager.Trigger(GameEventType.OldManHelp);
                 returnManager.StartCoroutine(returnManager.SaveAllNPCData(3f));
-                ScreenshotManager.Instance.CaptureScreenshot();
+                
                 Invoke("StopNpc", 2f);
                 Invoke("ReturnOldMan", 2f);
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 chat.LoadNPCDialogue(npc, 7);
+                ScreenshotManager.Instance.CaptureScreenshot();
                 EventManager.Trigger(GameEventType.OldManoutside);
                 returnManager.StartCoroutine(returnManager.SaveAllNPCData(3f));
-                ScreenshotManager.Instance.CaptureScreenshot();
+                
                 Invoke("StopNpc", 2f);
                 Invoke("ReturnOldMan", 2f);
             }
