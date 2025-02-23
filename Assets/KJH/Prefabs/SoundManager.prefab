@@ -56,16 +56,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 50ac4c9ce77e55540adf6ee040d4e0db, type: 3}
   sfxList:
   - {fileID: 8300000, guid: ea46a7b132a99a94bb3234286b5f7f68, type: 3}
-  - {fileID: 8300000, guid: ef510d23b426249408c7b981c70c7877, type: 3}
   - {fileID: 8300000, guid: c63130b4d241b5e42926b82ed46d37c6, type: 3}
-  - {fileID: 8300000, guid: 85266555241dfe24b91529ca33d4d1e7, type: 3}
   - {fileID: 8300000, guid: 1483902cbd0bca1459a451c7c5b7a5c1, type: 3}
   - {fileID: 8300000, guid: 982fd8ff8a7975b4cadc68149b1da6e1, type: 3}
-  - {fileID: 8300000, guid: f5bc97cce2ce33b44826370dd7817632, type: 3}
-  - {fileID: 8300000, guid: bffe202c729b3b342aef3356ccc8be6e, type: 3}
-  - {fileID: 8300000, guid: 372caf96e44e3d948a0ed71ac84226a3, type: 3}
-  - {fileID: 8300000, guid: 99bfea24b7d670a489a62503c3f021c3, type: 3}
-  - {fileID: 8300000, guid: f197634d6d56f85449e106ee3e542f6a, type: 3}
+  - {fileID: 8300000, guid: bd433523ff4114247bb17fd2c80d821b, type: 3}
+  - {fileID: 8300000, guid: 92208ffae07b7714ebdd29971a1cfcbe, type: 3}
+  - {fileID: 8300000, guid: f94de97c836e55646a1a4df9c2af7206, type: 3}
 --- !u!82 &3098865650154900733
 AudioSource:
   m_ObjectHideFlags: 0
