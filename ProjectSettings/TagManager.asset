@@ -19,6 +19,7 @@ TagManager:
   - Map
   - NPCTeller
   - NPCEND
+  - EndCutScene
   layers:
   - Default
   - TransparentFX

@@ -37,6 +37,9 @@ public class SoundManager : MonoBehaviour
         if (name0.name == bgmList[0].name)
             BGMPlay(bgmList[0]);
 
+        else if (name0.name == "LobbyScene")
+            BGMPlay(bgmList[0]);
+
         //MainScene ¿ë
         else if (name0.name == bgmList[1].name)
             BGMPlay(bgmList[1]);
