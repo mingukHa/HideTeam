@@ -7523,6 +7523,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b73bd3065bfd8984f8167f78891d834d, type: 2}
   - {fileID: 11400000, guid: e672c0f10921a8e49ba7a2ab41401491, type: 2}
   - {fileID: 11400000, guid: f34704e9238dda441885b648f7783a60, type: 2}
+  - {fileID: 11400000, guid: 6bc78f0d9407c2149b782b639c23e72b, type: 2}
   curRoutineIdx: 0
 --- !u!114 &232194063
 MonoBehaviour:
