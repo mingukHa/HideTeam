@@ -209,7 +209,7 @@ public class EndingFunctionTemp : MonoBehaviour
             
             ShowDialogue(dialogue);
             
-            yield return new WaitForSeconds(2.0f);
+            yield return new WaitForSeconds(3.0f);
             if(dialogue.Contains("/B"))
             {
                 EventManager.Trigger(EndingEnvList[0]);
