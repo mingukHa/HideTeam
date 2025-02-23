@@ -366,12 +366,14 @@ public class Moutline : MonoBehaviour
         float blinkDuration = 1f;
         float elapsedTime = 0f;
         this.OutlineColor = Color.yellow;
+
         while (elapsedTime <= duration)
         {
             elapsedTime += Time.deltaTime;
             float t = (elapsedTime / blinkDuration) * Mathf.PI * 2;
 
-            float value = (Mathf.Sin(t) + 1) * 4.5f + 1;
+            float value = (Mathf.Sin(t) + 1) * 2.5f + 1;  
+
             this.OutlineWidth = value;
 
             Debug.Log($"현재 OutlineWidth 값: {value}");
@@ -382,4 +384,5 @@ public class Moutline : MonoBehaviour
         this.OutlineColor = Color.white;
         this.OutlineWidth = 0;
     }
+
 }
