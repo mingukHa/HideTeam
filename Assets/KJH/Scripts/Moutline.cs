@@ -11,7 +11,7 @@ using UnityEngine.UI;
 public class Moutline : MonoBehaviour
 {
     private static HashSet<Mesh> registeredMeshes = new HashSet<Mesh>();
-
+    
     public enum Mode
     {
         OutlineAll,
@@ -362,7 +362,7 @@ public class Moutline : MonoBehaviour
     }
     public IEnumerator EventOutLine()
     {
-        float duration = 5f;
+        float duration = 7f;
         float blinkDuration = 1f;
         float elapsedTime = 0f;
         this.OutlineColor = Color.yellow;
