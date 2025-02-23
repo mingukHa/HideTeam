@@ -12,6 +12,7 @@ public class EndingFunctionTemp : MonoBehaviour
     private DatabaseReference dbRef = null;
     public string npcID = "Ending";
 
+    public PlayerController player;
     public MatDetChange MDC_Collider;
     public MatDetChange MDC_2Collider;
 
@@ -70,6 +71,7 @@ public class EndingFunctionTemp : MonoBehaviour
 
         if (isFlowClear && isDisguse && isDet && Input.GetKeyDown(KeyCode.E) && !alreadyStarted)
         {
+            player.LockMoving();
             tellerCon.talkCollider.radius = 0f;
             tellerCon.stateMachine.ChangeState(new TalkState(tellerCon));
             alreadyStarted = true;
@@ -86,8 +88,9 @@ public class EndingFunctionTemp : MonoBehaviour
     {
         dialogueText.alpha = 255f;
         LastEndingDialogue(npcID);
-        yield return new WaitForSeconds(8.0f);
-        Debug.Log("8초 경과");
+        yield return new WaitForSeconds(9.0f);
+        Debug.Log("9초 경과");
+        StopAllCoroutines();
         isDefault = false;
         LastEndingDialogue(npcID);
     }
@@ -216,6 +219,7 @@ public class EndingFunctionTemp : MonoBehaviour
             }
             if(dialogue.Contains("/G"))
             {
+                player.UnlockMoving();
                 EventManager.Trigger(EndingEnvList[1]);
             }
         }

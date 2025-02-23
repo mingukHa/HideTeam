@@ -24,5 +24,7 @@ public enum RoutineActionType
     Wait,
     Run,
     Talk,
-    Taking
+    Taking,
+    Smoking,
+    Tell
 }

@@ -14,6 +14,11 @@ public class StartCutScene : MonoBehaviour
 
     private static bool hasPlayed = false; //씬이 리로드되도 유지됨.
 
+    public void cutSceneCamReset()
+    {
+        hasPlayed = false;
+    }
+
     public void SetStarted()
     {
         hasPlayed = false;

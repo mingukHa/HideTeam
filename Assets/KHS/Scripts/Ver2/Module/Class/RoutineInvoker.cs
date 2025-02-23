@@ -41,6 +41,12 @@ public class RoutineInvoker : MonoBehaviour
                 case RoutineActionType.Taking:
                     routineCommands.Add(new TakingCommand(GetComponent<NPCController>(), action.gameEvent));
                     break;
+                case RoutineActionType.Smoking:
+                    routineCommands.Add(new SmokingCommand(GetComponent<NPCController>(), action.waitTime));
+                    break;
+                case RoutineActionType.Tell:
+                    routineCommands.Add(new TellCommand(GetComponent<NPCController>(), action.gameEvent, action.waitTime));
+                    break;
             }
         }
         currentCommandIndex = 0;
