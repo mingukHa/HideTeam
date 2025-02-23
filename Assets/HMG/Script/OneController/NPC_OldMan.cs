@@ -20,12 +20,12 @@ public class NPC_OldMan : NPCFSM
     private void OnEnable()
     {
         EventManager.Subscribe(GameEventType.TellerTalk, OldmanMove);
-        EventManager.Subscribe(GameEventType.OldManOut, OldmanOut);
+        EventManager.Subscribe(GameEventType.RichHide, OldmanOut);
     }
     private void OnDisable()
     {
         EventManager.Unsubscribe(GameEventType.TellerTalk, OldmanMove);
-        EventManager.Unsubscribe(GameEventType.OldManOut, OldmanOut);
+        EventManager.Unsubscribe(GameEventType.RichHide, OldmanOut);
     }
     private void OldmanOut()
     {
