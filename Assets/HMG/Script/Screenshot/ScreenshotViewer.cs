@@ -62,8 +62,30 @@ public class ScreenshotViewer : MonoBehaviour
         yield return null;
         EventManager.Trigger(GameEventType.GameOver);
     }
+ 
+    public void DisableAllMoutline()
+    {
+        Scene currentScene = SceneManager.GetActiveScene();
+        GameObject[] rootObjects = currentScene.GetRootGameObjects();
 
-    public void StartSlideshow()
+        int count = 0;
+
+        foreach (GameObject rootObject in rootObjects)
+        {
+            Moutline[] outlines = rootObject.GetComponentsInChildren<Moutline>(true);
+
+            foreach (Moutline outline in outlines)
+            {
+                outline.enabled = false;
+                count++;
+            }
+        }
+
+        Debug.Log($"현재 씬에서 {count}개의 Moutline을 비활성화했습니다.");
+    }
+
+
+public void StartSlideshow()
     {
         if (ScreenshotManager.Instance.screenshots.Count > 0)
         {
@@ -80,6 +102,7 @@ public class ScreenshotViewer : MonoBehaviour
     }
     private IEnumerator ShowScreenshots()
     {
+        DisableAllMoutline();
         EventManager.Trigger(GameEventType.TellerTalk);
         List<Texture2D> tempScreenshots = new List<Texture2D>(ScreenshotManager.Instance.screenshots);
         for (int i = tempScreenshots.Count - 1; i >= 0; i--)
