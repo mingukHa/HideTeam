@@ -63,9 +63,9 @@ ModelImporter:
         intParameter: 0
         messageOptions: 0
       - time: 0.92031884
-        functionName: NewEvent
+        functionName: Walk
         data: 
-        objectReferenceParameter: {instanceID: 0}
+        objectReferenceParameter: {fileID: 11500000, guid: d8c4118d5fd94ed409e3334a5a855d74, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
