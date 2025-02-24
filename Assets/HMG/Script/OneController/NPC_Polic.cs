@@ -137,6 +137,7 @@ public class NPC_Polic : NPCFSM
     {
         //플레이어 정지 기능 추가해야함
         EventManager.Trigger(GameEventType.EndingStop);
+        EventManager.Trigger(GameEventType.TellerTalk);
         StartCoroutine(TalkView());        
         chat.LoadNPCDialogue(npc, 0);
         ChangeState(State.Talk);

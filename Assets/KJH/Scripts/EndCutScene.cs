@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static EventManager;
 
 public class EndCutScene : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public class EndCutScene : MonoBehaviour
         Debug.Log("¿£µù¾À ¹ßµ¿");
         if (other.CompareTag("EndCutScene"))
         {
+            EventManager.Trigger(GameEventType.TellerTalk);
             StartCoroutine(EndSequence());
             EventManager.Trigger(EventManager.GameEventType.Ending);
             Debug.Log("¿£µù¾À ¹ßµ¿");
