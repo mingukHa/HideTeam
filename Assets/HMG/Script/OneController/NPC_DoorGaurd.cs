@@ -14,17 +14,17 @@ public class NPC_DoorGaurd : NPCFSM
     public GameObject npcchatbox; //NPC의 메인 채팅 최상위
     private string npc = "NPC1";
     public SphereCollider sphereCollider;
-    private void OnEnable()
-    {
-        EventManager.Subscribe(GameEventType.NPCKill, StartNPCKill);
-    }
     private void OnDisable()
     {
         EventManager.Unsubscribe(GameEventType.NPCKill, StartNPCKill);
     }
+    private void OnEnable()
+    {
+        EventManager.Subscribe(GameEventType.NPCKill, StartNPCKill);
+    }
     private void StartNPCKill()
     {
-        Debug.Log("호출되서 달려감");
+        Debug.Log("NPCKill호출 달려감");
         StartCoroutine(moutline.EventOutLine());
         ChangeState(State.Run);
         agent.SetDestination(player.position);

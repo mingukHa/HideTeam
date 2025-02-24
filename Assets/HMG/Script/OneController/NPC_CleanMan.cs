@@ -62,7 +62,6 @@ public class NPC_CleanMan : NPCFSM
             {
                 chat.LoadNPCDialogue(npc, 2);
                 StopCoroutine(TalkView());
-                ScreenshotManager.Instance.CaptureScreenshot();
                 EventManager.Trigger(GameEventType.CleanManTalk);
                 Invoke("StopNpc", 2f);
             }
@@ -71,7 +70,6 @@ public class NPC_CleanMan : NPCFSM
             {
                 EventManager.Trigger(GameEventType.CleanManDie);
                 agent.enabled = false;
-                ScreenshotManager.Instance.CaptureScreenshot();
                 isDead = true;
             }
             if (Input.GetKeyDown(KeyCode.E))
@@ -97,7 +95,6 @@ public class NPC_CleanMan : NPCFSM
     private void StartGarbage()
     {
         StartCoroutine(moutline.EventOutLine());
-        ScreenshotManager.Instance.CaptureScreenshot();
         ChangeState(State.Run);
         GarbageTrue = true;
         NPCCollider.enabled = true;

@@ -8,8 +8,8 @@ public class EventManager : MonoBehaviour
     {
         //공통 상시 동작 이벤트
         NULL,     // 초기화용 NULL 이벤트
-        PlayerEnterBank,        // 플레이어 은행 진입
-        PlayerTalkTeller,         // 텔러 상호작용
+        PlayerEnterBank,        // Player 은행 진입
+        PlayerTalkTeller,         // Teller 상호작용
 
         //공통 루트 부분
         Carkick,//자동차 발차기
@@ -80,7 +80,7 @@ public class EventManager : MonoBehaviour
 
     private static Dictionary<GameEventType, Action> eventDictionary = new Dictionary<GameEventType, Action>();
 
-    public static void Subscribe(GameEventType eventType, Action listener)
+    public static void Subscribe(GameEventType eventType, Action listener) //이벤트 구독하는 함수 : Eunm방식의 이벤트, 실행 함수 이름 넣고 실행
     {
         if (!eventDictionary.ContainsKey(eventType))
         {
@@ -94,7 +94,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public static void Unsubscribe(GameEventType eventType, Action listener)
+    public static void Unsubscribe(GameEventType eventType, Action listener) //이벤트 구독 해제하는 함수 : Eunm방식의 이벤트, 실행 함수 이름 넣고 실행
     {
         if (eventDictionary.ContainsKey(eventType))
         {
@@ -109,7 +109,7 @@ public class EventManager : MonoBehaviour
         }
     }
 
-    public static void Trigger(GameEventType eventType)
+    public static void Trigger(GameEventType eventType) //이벤트 발생 트리거 함수 : Enum방식으로 실행
     {
         if (eventDictionary.ContainsKey(eventType))
         {
