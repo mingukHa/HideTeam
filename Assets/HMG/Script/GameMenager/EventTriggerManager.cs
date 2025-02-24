@@ -29,7 +29,8 @@ public class EventTriggerManager : MonoBehaviour
         GameEventType.CleanManDie,
         GameEventType.GameClear,
         GameEventType.PlayerToiletOut,
-        GameEventType.Ending
+        GameEventType.Ending,
+        GameEventType.EndingStop
 
 
     };

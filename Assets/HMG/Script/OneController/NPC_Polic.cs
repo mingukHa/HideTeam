@@ -42,7 +42,7 @@ public class NPC_Polic : NPCFSM
         // NPC가 도착했을 때 처리
         agent.isStopped = true;
         ChangeState(State.Idle);
-
+        StopNpc();
         NPCCollider.enabled = false;        
     }
 
@@ -108,7 +108,7 @@ public class NPC_Polic : NPCFSM
     {
         if (!isDead && other.CompareTag("Player"))
         {
-            chat.LoadNPCDialogue(npc, 0);
+            StartCoroutine(StartEndingStop());
             //이 부분 형수씨꺼 추가
         }
 
@@ -132,6 +132,16 @@ public class NPC_Polic : NPCFSM
             chat.LoadNPCDialogue("NULL", 0);
         }
 
+    }
+    private IEnumerator StartEndingStop()
+    {
+        //플레이어 정지 기능 추가해야함
+        EventManager.Trigger(GameEventType.EndingStop);
+        StartCoroutine(TalkView());        
+        chat.LoadNPCDialogue(npc, 0);
+        ChangeState(State.Talk);
+        yield return new WaitForSeconds(5f);
+        EventManager.Trigger(GameEventType.GameOver);
     }
 }
 

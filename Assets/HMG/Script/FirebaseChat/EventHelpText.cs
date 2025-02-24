@@ -18,7 +18,8 @@ public class EventHelpText : MonoBehaviour
         EventManager.Subscribe(GameEventType.CleanManTalk, StartCleanManTalk);
         EventManager.Subscribe(GameEventType.OldManTalkTeller, OldTalkTeller);
         EventManager.Subscribe(GameEventType.CleanManDie, CleanManDie);
-        EventManager.Subscribe(EventManager.GameEventType.RichmanToliet, StartTolietRichman);
+        EventManager.Subscribe(GameEventType.RichmanToliet, StartTolietRichman);
+        EventManager.Subscribe(GameEventType.EndingStop, EndingStop);
     }
     private void OnDisable()
     {
@@ -30,7 +31,13 @@ public class EventHelpText : MonoBehaviour
         EventManager.Unsubscribe(GameEventType.PlayerEnterBank, StartPlayerEnterBank);
         EventManager.Unsubscribe(GameEventType.OldManTalkTeller, OldTalkTeller);
         EventManager.Unsubscribe(GameEventType.CleanManDie, CleanManDie);
-        EventManager.Unsubscribe(EventManager.GameEventType.RichmanToliet, StartTolietRichman);
+        EventManager.Unsubscribe(GameEventType.RichmanToliet, StartTolietRichman);
+        EventManager.Unsubscribe(GameEventType.EndingStop, EndingStop);
+    }
+    private void EndingStop()
+    {
+        ScreenshotManager.Instance.CaptureScreenshot();
+        StartCoroutine(textNull("이런.. 경비원을 밖으로 보내는 방법을 찾아보자"));
     }
     private void CleanManDie()
     {
@@ -85,7 +92,7 @@ public class EventHelpText : MonoBehaviour
     private IEnumerator textNull(string texts)
     {
         text.text = texts;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4f);
         text.text = "";
     }
 

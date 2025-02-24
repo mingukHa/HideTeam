@@ -32,6 +32,7 @@ public class NPCFinalCutscene : MonoBehaviour
     private IEnumerator StartCutscene()
     {
         // 1️ NPC 이동 시작
+        yield return new WaitForSeconds(1.5f);
         npcAnimator.SetTrigger("Walk"); // 달리는 애니메이션 실행
         agent.SetDestination(destination.position);
 
