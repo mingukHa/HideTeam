@@ -13,23 +13,23 @@ MonoBehaviour:
   m_Name: RichManCallRoutine
   m_EditorClassIdentifier: 
   actions:
-  - actionType: 1
+  - actionType: 6
     targetPosition: {x: 0, y: 0, z: 0}
     waitTime: 4
     gameEvent: 0
-  - actionType: 3
+  - actionType: 6
     targetPosition: {x: 0, y: 0, z: 0}
     waitTime: 0
     gameEvent: 27
-  - actionType: 3
+  - actionType: 6
     targetPosition: {x: 0, y: 0, z: 0}
     waitTime: 8
     gameEvent: 28
-  - actionType: 3
+  - actionType: 6
     targetPosition: {x: 0, y: 0, z: 0}
     waitTime: 0
     gameEvent: 28
-  - actionType: 3
+  - actionType: 6
     targetPosition: {x: 0, y: 0, z: 0}
     waitTime: 4
     gameEvent: 0

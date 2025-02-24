@@ -34,7 +34,7 @@ public class MoveToCommand : ICommand
         npcController.agent.isStopped = true;  // NavMeshAgent 멈춤
         npcController.agent.speed = 1f;
         npcController.agent.velocity = Vector3.zero;  // 이동 속도 초기화
-        //Debug.Log($"{npcController.npcName}이 {targetPosition}으로 단일 이동 완료");
+        Debug.Log($"{npcController.npcName}이 {targetPosition}으로 단일 이동 완료");
     }
 
 }

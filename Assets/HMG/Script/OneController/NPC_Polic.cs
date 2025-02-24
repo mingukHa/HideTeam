@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using static EventManager;
 using UnityEngine.AI;
+using TMPro;
 
 
 public class NPC_Polic : NPCFSM
@@ -10,17 +11,42 @@ public class NPC_Polic : NPCFSM
 
     public GameObject npcchatbox; //NPC의 메인 채팅 최상위
     private string npc = "NPC5";
-    public Transform PolicPos; //이동 할 위치    
-    private bool isPolicTlak = false;
+    public GameObject PolicPos; //이동 할 위치    
     private void OnEnable()
     {
-        EventManager.Subscribe(GameEventType.OldManHelp, StartPolicTlak);
+        EventManager.Subscribe(GameEventType.Carkick, StartPolicTlak);
     }
+    private void OnDisable()
+    {
+        EventManager.Unsubscribe(GameEventType.Carkick, StartPolicTlak);
+    }
+
     private void StartPolicTlak()
     {
-        isPolicTlak = true;       
+        StartCoroutine(moutline.EventOutLine());
+        agent.SetDestination(PolicPos.gameObject.transform.position);
+        ChangeState(State.Run);
+
+        // 목표 지점 도착 확인을 위한 코루틴 실행
+        StartCoroutine(CheckArrival());
     }
- 
+
+    private IEnumerator CheckArrival()
+    {
+        // NPC가 이동하는 동안 반복 체크
+        while (agent.pathPending || agent.remainingDistance > 0.1f)
+        {
+            yield return null;
+        }
+
+        // NPC가 도착했을 때 처리
+        agent.isStopped = true;
+        ChangeState(State.Idle);
+
+        NPCCollider.enabled = false;        
+    }
+
+
     private void StopNpc()
     {
         StopCoroutine(TalkView());
@@ -43,10 +69,7 @@ public class NPC_Polic : NPCFSM
     protected override void Update()
     {
         base.Update();
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            isDead = true;
-        }
+        
     }
 
     protected override void IdleBehavior()
@@ -86,26 +109,19 @@ public class NPC_Polic : NPCFSM
         if (!isDead && other.CompareTag("Player"))
         {
             chat.LoadNPCDialogue(npc, 0);
+            //이 부분 형수씨꺼 추가
         }
 
     }
     protected override void OnTriggerStay(Collider other)
     {
-        if (!isDead && other.CompareTag("Player"))
-        {           
-            if (Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                chat.LoadNPCDialogue(npc, 1);
-                EventManager.Trigger(GameEventType.policeTalk);
-                StopCoroutine(TalkView());
-                returnManager.StartCoroutine(returnManager.SaveAllNPCData(4f));
-                Invoke("StopNpc", 2f);
-            }
-        }
-        if (Input.GetKey(KeyCode.F))
+        if (other.CompareTag("Player"))
         {
-            isDead = true;
-            EventManager.Trigger(GameEventType.NPCKill);
+            if (Input.GetKey(KeyCode.F))
+            {
+                EventManager.Trigger(GameEventType.NPCKill);
+                isDead = true;
+            }
         }
     }
 

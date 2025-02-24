@@ -5,7 +5,6 @@ using System.Text.RegularExpressions;
 using Firebase.Database;
 using Firebase.Extensions;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class TellerController : NPCController
@@ -15,6 +14,9 @@ public class TellerController : NPCController
 
     public MatDetChange MDC_collider;
     public MatDetChange MDC_VisualTalk;
+
+    public SphereCollider talkCollider;
+    private float initalRad = 3f;
 
     public bool isVIP = false;
     public bool isPlayer = false;
@@ -34,6 +36,7 @@ public class TellerController : NPCController
     public int convEnvIdx = 0;
 
     public EventManager.GameEventType convEnv;
+    public EventManager.GameEventType convEndEnv;
 
     public override void Start()
     {
@@ -44,6 +47,8 @@ public class TellerController : NPCController
 
         MDC_collider.OnTriggerEnterCallback += OnTiggerIn;
         MDC_collider.OnTriggerExitCallback += OnTiggerOut;
+
+        initalRad = 3f;
     }
 
     private void FixedUpdate()
@@ -168,8 +173,14 @@ public class TellerController : NPCController
             EventManager.Trigger(convEnv);
             StartCoroutine(EventCallCoroutine());
         }
+        if (text.Contains("/C"))
+        {
+            Debug.Log($"[대화종료 이벤트 {convEndEnv} 호출");
+            TellerReset();
+        }
         text = Regex.Replace(text, @"/F[A-Z]", "");
         text = text.Replace("/T", "");
+        text = text.Replace("/C", "");
         dialogueText.text = text.Replace("/E", ""); // /E 제거 후 출력
         Debug.Log($"[Teller] 대사 출력: {text}");
     }
@@ -228,6 +239,8 @@ public class TellerController : NPCController
 
     public void TellerGone()
     {
+        TellerTalkDisable();
+        StartCoroutine(moutline.EventOutLine());
         isInterPlayer = true;
         isInterDisPlayer = true;
         gameObject.tag = "NPCEND";
@@ -235,8 +248,30 @@ public class TellerController : NPCController
     }
     public void TellerInteract()
     {
+        TellerTalkDisable();
+        stateMachine.ChangeState(new TalkState(this));
+        StartCoroutine(moutline.EventOutLine());
         Debug.Log("플레이어가 Teller에게 상호작용!");
         isInterPlayer = true;
+    }
+    public void TellerInteractOldMan()
+    {
+        TellerTalkDisable();
+        stateMachine.ChangeState(new TalkState(this));
+        StartCoroutine(moutline.EventOutLine());
+    }
+    public void TellerReset()
+    {
+        EventManager.Trigger(convEndEnv);
+    }
+    public void TellerTalkDisable()
+    {
+        talkCollider.radius = 0f;
+    }
+    public void TellerTalkAble()
+    {
+        EventManager.Trigger(convEndEnv);
+        talkCollider.radius = initalRad;
     }
     public void ChangeConv(string _target)
     {

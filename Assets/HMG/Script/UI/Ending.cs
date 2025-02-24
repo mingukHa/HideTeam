@@ -1,50 +1,60 @@
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
+using UnityEngine.AI;
 using System.Collections;
-using UnityEngine.SceneManagement;
-using TMPro;
-public class Ending : MonoBehaviour
+
+public class NPCFinalCutscene : MonoBehaviour
 {
-    [SerializeField] private Image fadeImage; // ������ UI �̹���
-    public float FadeInTime = 2f;
-    public TextMeshProUGUI text;
-
-    private void OnTriggerEnter(Collider other)
+    public Transform destination; // NPC가 이동할 목표 위치 (게임 오브젝트 위치)
+    public float sceneDuration = 3f; // 엔딩 컷씬 지속 시간 (설정 가능)
+    public Animator npcAnimator; // NPC 애니메이터
+    public DoorController doorController; // 문 컨트롤러 참조
+    private NavMeshAgent agent;
+    private void OnEnable()
     {
-        if (other.CompareTag("Player"))
-        {
-            fadeImage.gameObject.SetActive(true);
-            StartCoroutine(FadeIn(FadeInTime));
-        }
-        if(other.CompareTag("NPCEND"))
-        {
-            StartCoroutine(GameOverCoroutine());
-        }
+        EventManager.Subscribe(EventManager.GameEventType.Ending, ending);
     }
-    
-    
-
-    public IEnumerator FadeIn(float duration)
+    private void OnDisable()
     {
-        fadeImage.gameObject.SetActive(true);
-        float elapsedTime = 0f;
-        Color color = fadeImage.color;
-        while (elapsedTime < duration)
+        EventManager.Unsubscribe(EventManager.GameEventType.Ending, ending);
+    }
+
+    private void ending()
+    {
+        StartCoroutine(StartCutscene());
+    }
+    private void Start()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        
+    }
+
+    private IEnumerator StartCutscene()
+    {
+        // 1️⃣ NPC 이동 시작
+        npcAnimator.SetTrigger("Walk"); // 달리는 애니메이션 실행
+        agent.SetDestination(destination.position);
+
+        // 2️⃣ 목표 지점 도착까지 대기
+        while (agent.pathPending || agent.remainingDistance > 0.1f)
         {
-            elapsedTime += Time.deltaTime;
-            color.a = Mathf.Lerp(1f, 0f, elapsedTime / duration);
-            fadeImage.color = color;
             yield return null;
         }
-        FindAnyObjectByType<ESCMenu>().Lobbygame();
-    }
-    public IEnumerator GameOverCoroutine()
-    {
-        text.text = "�ƹ����� �ֿ��ι��� Ÿ�ٰ� �����Ѱ� ����. �̼� ���о� �ٽ� ������.";
-        yield return new WaitForSeconds(4.0f);
-        EventManager.Trigger(EventManager.GameEventType.GameOver);
-    }
 
+      
+        agent.isStopped = true;
+        agent.velocity = Vector3.zero;
+        npcAnimator.SetTrigger("Talk"); // Idle 애니메이션 전환
 
+        
+        yield return new WaitForSeconds(1.5f);
+        npcAnimator.SetTrigger("Walk"); // 버튼 누르는 애니메이션 실행
+
+        
+        yield return new WaitForSeconds(sceneDuration);
+
+        
+        doorController.OpenDoorBasedOnView(this.transform);
+
+        Debug.Log("엔딩 컷씬 완료!");
+    }
 }
-

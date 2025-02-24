@@ -44,7 +44,7 @@ public class NPCRichMan : MonoBehaviour
     {
         isDead = true;
         animator.SetTrigger("Dead");
-        ScreenshotManager.Instance.CaptureScreenshot();
+        
         script1.enabled = false;
         script2.enabled = false;
         script3.enabled = false;

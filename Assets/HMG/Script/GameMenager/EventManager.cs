@@ -69,7 +69,11 @@ public class EventManager : MonoBehaviour
         CleanManDie,
 
         GameClear,
-        PlayerToiletOut //플레이어가 리치맨 잡고 화장실을 나올 때
+        PlayerToiletOut, //플레이어가 리치맨 잡고 화장실을 나올 때
+        
+        ConvEnd,
+        RichmanToliet,
+        Ending
 
     }
 

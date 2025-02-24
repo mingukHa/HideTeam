@@ -37,10 +37,12 @@ public class RichmanCallTemp : MonoBehaviour
     {
         EventManager.Unsubscribe(EventManager.GameEventType.Conversation4, RichmanCall);
         EventManager.Subscribe(EventManager.GameEventType.Conversation4, RichmanCall);
+        EventManager.Subscribe(EventManager.GameEventType.RichKill, RichmanCallStop);
     }
     private void OnDisable()
     {
         EventManager.Unsubscribe(EventManager.GameEventType.Conversation4, RichmanCall);
+        EventManager.Unsubscribe(EventManager.GameEventType.RichKill, RichmanCallStop);
     }
 
     private void FixedUpdate()
@@ -59,6 +61,11 @@ public class RichmanCallTemp : MonoBehaviour
             alreadyStarted = true;
             StartCoroutine(LastEndingDialogue(npcID));
         }
+    }
+    private void RichmanCallStop()
+    {
+        StopAllCoroutines();
+        ShowDialogue("");
     }
 
     private IEnumerator LastEndingDialogue(string npcID)
