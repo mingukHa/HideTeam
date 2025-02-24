@@ -490,7 +490,6 @@ GameObject:
   - component: {fileID: 2414379444273055635}
   - component: {fileID: 5184424786759716223}
   - component: {fileID: 4498354164527238918}
-  - component: {fileID: 6025706835996345224}
   - component: {fileID: 5505477560664471449}
   - component: {fileID: 4438681939738468685}
   m_Layer: 0
@@ -551,7 +550,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isDead: 0
-  BoxCollider: {fileID: 0}
+  isRagdollActivated: 0
+  NPCCollider: {fileID: 0}
+  select: {fileID: 0}
+  isPlayerNearby: 0
+  returnManager: {fileID: 0}
 --- !u!114 &5184424786759716223
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -580,22 +583,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nPCAvatar: {fileID: 9000000, guid: e507de1815e08164780bc4bec73d386b, type: 3}
   nPCName: PChar_RichMan
---- !u!114 &6025706835996345224
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2044786978598276932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77410754a063ede4ba85a4c0d8ad3ecc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isDead: 0
-  BoxCollider: {fileID: 4438681939738468685}
-  select: {fileID: 0}
-  npcchatbox: {fileID: 0}
 --- !u!114 &5505477560664471449
 MonoBehaviour:
   m_ObjectHideFlags: 0
