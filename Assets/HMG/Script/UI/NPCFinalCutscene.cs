@@ -33,7 +33,7 @@ public class NPCFinalCutscene : MonoBehaviour
     {
         // 1️ NPC 이동 시작
         yield return new WaitForSeconds(1.5f);
-        npcAnimator.SetTrigger("Walk"); // 달리는 애니메이션 실행
+        npcAnimator.SetTrigger("Walk"); 
         agent.SetDestination(destination.position);
 
         // 2️ 목표 지점 도착까지 대기
@@ -45,12 +45,12 @@ public class NPCFinalCutscene : MonoBehaviour
       
         agent.isStopped = true;
         agent.velocity = Vector3.zero;
-        npcAnimator.SetTrigger("Talk"); // Idle 애니메이션 전환
+        npcAnimator.SetTrigger("Talk"); 
 
         
         yield return new WaitForSeconds(1.5f);
         agent.SetDestination(destination2.position);
-        npcAnimator.SetTrigger("Walk"); // 버튼 누르는 애니메이션 실행
+        npcAnimator.SetTrigger("Walk"); 
 
         
         yield return new WaitForSeconds(sceneDuration);

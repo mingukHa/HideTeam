@@ -12,7 +12,7 @@ PlayerSettings:
   targetDevice: 2
   useOnDemandResources: 0
   accelerometerFrequency: 60
-  companyName: Hidr
+  companyName: Hide
   productName: HideTeam
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
@@ -922,11 +922,11 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: 67f6e6d3-ef57-4bf2-9fc4-1a2d69daf676
+  cloudProjectId: 92009186-1806-45ae-b0a4-3919278aafdc
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: My project (1)
-  organizationId: kunissac
+  projectName: HideTeam (1)
+  organizationId: minguck
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
