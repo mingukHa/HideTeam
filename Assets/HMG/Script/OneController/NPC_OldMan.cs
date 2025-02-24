@@ -74,7 +74,6 @@ public class NPC_OldMan : NPCFSM
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 chat.LoadNPCDialogue(npc, 3);
-                ScreenshotManager.Instance.CaptureScreenshot();
                 EventManager.Trigger(GameEventType.OldManHelp);
                 returnManager.StartCoroutine(returnManager.SaveAllNPCData(3f));
                 
@@ -84,7 +83,6 @@ public class NPC_OldMan : NPCFSM
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
                 chat.LoadNPCDialogue(npc, 7);
-                ScreenshotManager.Instance.CaptureScreenshot();
                 EventManager.Trigger(GameEventType.OldManoutside);
                 returnManager.StartCoroutine(returnManager.SaveAllNPCData(3f));
                 
