@@ -31,12 +31,12 @@ public class EndCutScene : MonoBehaviour
         Cam5.SetActive(true);
         Door.SetActive(true);
 
-        yield return new WaitForSeconds(8f);
+        yield return new WaitForSeconds(5f);
         Fadeimage2.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(1f);
+        Door.SetActive(false);
         Cam5.SetActive(false);
-        Fadeimage2.gameObject.SetActive(false);
         SceneManager.LoadScene("LobbyScene");
     }
 }
