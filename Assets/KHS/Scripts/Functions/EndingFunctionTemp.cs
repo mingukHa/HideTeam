@@ -44,12 +44,12 @@ public class EndingFunctionTemp : MonoBehaviour
 
     private void OnEnable()
     {
-        EventManager.Unsubscribe(EventManager.GameEventType.RichHide, FlowEnd);
-        EventManager.Subscribe(EventManager.GameEventType.RichHide, FlowEnd);
+        EventManager.Unsubscribe(EventManager.GameEventType.RichKill, FlowEnd);
+        EventManager.Subscribe(EventManager.GameEventType.RichKill, FlowEnd);
     }
     private void OnDisable()
     {
-        EventManager.Unsubscribe(EventManager.GameEventType.RichHide, FlowEnd);
+        EventManager.Unsubscribe(EventManager.GameEventType.RichKill, FlowEnd);
     }
 
     private void Start()
