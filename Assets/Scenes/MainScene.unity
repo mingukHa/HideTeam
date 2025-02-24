@@ -22490,6 +22490,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 100154, guid: bdd7a03fd93bf2d4cb6babd63ceabee8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 668569431}
+    - targetCorrespondingSourceObject: {fileID: 100154, guid: bdd7a03fd93bf2d4cb6babd63ceabee8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 668569433}
   m_SourcePrefab: {fileID: 100100000, guid: bdd7a03fd93bf2d4cb6babd63ceabee8, type: 3}
 --- !u!1 &668569422 stripped
 GameObject:
@@ -22614,6 +22617,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueText: {fileID: 983030528}
   npcID: NPC5
+--- !u!114 &668569433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 668569422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 040f636092628804a97c543a964b248b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &669232149
 GameObject:
   m_ObjectHideFlags: 0
@@ -44490,16 +44505,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1578c84e770ac74c94c84c195bfac37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  destination: {fileID: 397375921}
-  destination2: {fileID: 449643891}
+  destination: {fileID: 0}
+  destination2: {fileID: 0}
   sceneDuration: 3
-  npcAnimator: {fileID: 1803765994}
-  doorController: {fileID: 1994701580}
---- !u!95 &1803765994 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 3202963939660662547, guid: 904086f9fc866e748a79dd67b933a3e9, type: 3}
-  m_PrefabInstance: {fileID: 1803765988}
-  m_PrefabAsset: {fileID: 0}
+  npcAnimator: {fileID: 0}
+  doorController: {fileID: 0}
 --- !u!195 &1803765996
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -49197,17 +49207,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1994701585}
   m_SourcePrefab: {fileID: 100100000, guid: 3c57fbcb1f2632646a2c57b01d6dc0d6, type: 3}
---- !u!114 &1994701580 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8475084853979415601, guid: 3c57fbcb1f2632646a2c57b01d6dc0d6, type: 3}
-  m_PrefabInstance: {fileID: 1994701579}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1994701581}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ad30f653249b2454697cf3ed5999f9df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1994701581 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7735057462551233904, guid: 3c57fbcb1f2632646a2c57b01d6dc0d6, type: 3}
