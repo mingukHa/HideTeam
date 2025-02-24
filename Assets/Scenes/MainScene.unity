@@ -12206,7 +12206,7 @@ MonoBehaviour:
   targetVec: []
   agent: {fileID: 0}
   animator: {fileID: 0}
-  eventFlags: 05000000070000000b0000001100000029000000
+  eventFlags: 05000000070000000b0000001300000029000000
   actionNames:
   - TellerInteract
   - TellerGone
