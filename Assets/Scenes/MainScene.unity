@@ -43295,6 +43295,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 9ac97d24c73b5c844a1c101e54d714cd, type: 2}
+    - target: {fileID: 3202963939660662547, guid: 904086f9fc866e748a79dd67b933a3e9, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3238084544579950965, guid: 904086f9fc866e748a79dd67b933a3e9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.028745549
@@ -44447,6 +44451,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 397375921}
+  destination2: {fileID: 0}
   sceneDuration: 3
   npcAnimator: {fileID: 1803765994}
   doorController: {fileID: 1994701580}
@@ -49136,6 +49141,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: mesh_vault_door_B_01
       objectReference: {fileID: 0}
+    - target: {fileID: 8475084853979415601, guid: 3c57fbcb1f2632646a2c57b01d6dc0d6, type: 3}
+      propertyPath: DoorOpenUI
+      value: 
+      objectReference: {fileID: 2045449557}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -5,6 +5,7 @@ using System.Collections;
 public class NPCFinalCutscene : MonoBehaviour
 {
     public Transform destination; // NPC가 이동할 목표 위치 (게임 오브젝트 위치)
+    public Transform destination2;
     public float sceneDuration = 3f; // 엔딩 컷씬 지속 시간 (설정 가능)
     public Animator npcAnimator; // NPC 애니메이터
     public DoorController doorController; // 문 컨트롤러 참조
@@ -30,11 +31,11 @@ public class NPCFinalCutscene : MonoBehaviour
 
     private IEnumerator StartCutscene()
     {
-        // 1️⃣ NPC 이동 시작
+        // 1️ NPC 이동 시작
         npcAnimator.SetTrigger("Walk"); // 달리는 애니메이션 실행
         agent.SetDestination(destination.position);
 
-        // 2️⃣ 목표 지점 도착까지 대기
+        // 2️ 목표 지점 도착까지 대기
         while (agent.pathPending || agent.remainingDistance > 0.1f)
         {
             yield return null;
@@ -47,6 +48,7 @@ public class NPCFinalCutscene : MonoBehaviour
 
         
         yield return new WaitForSeconds(1.5f);
+        agent.SetDestination(destination2.position);
         npcAnimator.SetTrigger("Walk"); // 버튼 누르는 애니메이션 실행
 
         
