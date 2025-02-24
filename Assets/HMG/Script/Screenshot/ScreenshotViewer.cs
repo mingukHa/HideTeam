@@ -54,7 +54,7 @@ public class ScreenshotViewer : MonoBehaviour
         StartSlideshow();
         Light.SetActive(false);
         Text.SetActive(false);
-        StartCoroutine(GameRestart());
+       
     }
 
     public IEnumerator GameRestart()
@@ -80,6 +80,7 @@ public class ScreenshotViewer : MonoBehaviour
     }
     private IEnumerator ShowScreenshots()
     {
+        EventManager.Trigger(GameEventType.TellerTalk);
         List<Texture2D> tempScreenshots = new List<Texture2D>(ScreenshotManager.Instance.screenshots);
         for (int i = tempScreenshots.Count - 1; i >= 0; i--)
         {
