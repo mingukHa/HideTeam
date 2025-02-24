@@ -17,6 +17,7 @@ public class EndCutScene : MonoBehaviour
         if (other.CompareTag("EndCutScene"))
         {
             StartCoroutine(EndSequence());
+            EventManager.Trigger(EventManager.GameEventType.Ending);
             Debug.Log("¿£µù¾À ¹ßµ¿");
         }
     }

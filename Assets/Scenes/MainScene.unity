@@ -47400,104 +47400,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1982357013
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1982357016}
-  - component: {fileID: 1982357015}
-  - component: {fileID: 1982357014}
-  - component: {fileID: 1982357017}
-  m_Layer: 0
-  m_Name: GameEnd
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1982357014
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982357013}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1578c84e770ac74c94c84c195bfac37, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  destination: {fileID: 0}
-  sceneDuration: 3
-  npcAnimator: {fileID: 0}
-  doorController: {fileID: 0}
---- !u!65 &1982357015
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982357013}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 4, y: 1, z: 1}
-  m_Center: {x: 0.4739399, y: 0, z: 0}
---- !u!4 &1982357016
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982357013}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -47.28, y: 0.563, z: 7.5187}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!54 &1982357017
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982357013}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &1985762056 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6190958204399553358, guid: 3c852deeacfc0534a90f03087ab1c4d1, type: 3}
@@ -49244,12 +49146,17 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8475084853979415601, guid: 3c57fbcb1f2632646a2c57b01d6dc0d6, type: 3}
   m_PrefabInstance: {fileID: 1994701579}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1994701581}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad30f653249b2454697cf3ed5999f9df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1994701581 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7735057462551233904, guid: 3c57fbcb1f2632646a2c57b01d6dc0d6, type: 3}
+  m_PrefabInstance: {fileID: 1994701579}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2007657852
 GameObject:
   m_ObjectHideFlags: 0
@@ -52339,7 +52246,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cam5: {fileID: 2097902491}
-  Door: {fileID: 0}
+  Door: {fileID: 1994701581}
   Fadeimage2: {fileID: 998228671}
   cutscene2: {fileID: 2097902492}
 --- !u!4 &8634041400660064131 stripped
@@ -52400,7 +52307,6 @@ SceneRoots:
   - {fileID: 1832014387}
   - {fileID: 554650530}
   - {fileID: 564314126}
-  - {fileID: 1982357016}
   - {fileID: 27252557}
   - {fileID: 252083909}
   - {fileID: 1803765988}
