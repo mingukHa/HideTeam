@@ -24024,6 +24024,7 @@ GameObject:
   m_Component:
   - component: {fileID: 787021826}
   - component: {fileID: 787021827}
+  - component: {fileID: 787021828}
   m_Layer: 0
   m_Name: Talkbox
   m_TagString: Untagged
@@ -24101,6 +24102,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &787021828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 787021825}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb118947827dd954b80c699289559017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 5
 --- !u!1 &790959995 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6794904924158587144, guid: 087c8fe64ca912446974ba5b4b3aad5b, type: 3}
@@ -25388,6 +25402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fade: {fileID: 974037217}
+  pc: {fileID: 2619245077405212297}
   clockss: {fileID: 1313422034}
   quadRenderer: {fileID: 1270908866}
   displayTime: 2
@@ -26292,6 +26307,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1009439006}
   - component: {fileID: 1009439007}
+  - component: {fileID: 1009439008}
   m_Layer: 0
   m_Name: Talkbox (1)
   m_TagString: Untagged
@@ -26369,6 +26385,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1009439008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1009439005}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb118947827dd954b80c699289559017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 5
 --- !u!1 &1013260227
 GameObject:
   m_ObjectHideFlags: 0
@@ -29882,6 +29911,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1056712589393388556, guid: 827e65d93efb54f438bc8b3613723df9, type: 3}
   m_PrefabInstance: {fileID: 7364974273530960264}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1239063191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1239063190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb118947827dd954b80c699289559017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 5
 --- !u!1 &1240342927
 GameObject:
   m_ObjectHideFlags: 0
@@ -29892,6 +29934,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1240342928}
   - component: {fileID: 1240342929}
+  - component: {fileID: 1240342930}
   m_Layer: 0
   m_Name: Talkbox
   m_TagString: Untagged
@@ -29969,6 +30012,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1240342930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1240342927}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb118947827dd954b80c699289559017, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationSpeed: 5
 --- !u!1001 &1255594032
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -52796,6 +52852,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 4907801160128756598, guid: 827e65d93efb54f438bc8b3613723df9, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7803856485902085924}
+    - targetCorrespondingSourceObject: {fileID: 1056712589393388556, guid: 827e65d93efb54f438bc8b3613723df9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1239063191}
   m_SourcePrefab: {fileID: 100100000, guid: 827e65d93efb54f438bc8b3613723df9, type: 3}
 --- !u!1 &7364974273530960265 stripped
 GameObject:

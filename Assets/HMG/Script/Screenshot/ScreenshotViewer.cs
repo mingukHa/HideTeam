@@ -10,7 +10,7 @@ using UnityEngine.AI;
 public class ScreenshotViewer : MonoBehaviour
 {
     public FadeOut fade;
-
+    public PlayerController pc;
     public Clockss clockss;
     public Renderer quadRenderer; // QuadÀÇ Mesh Renderer
     private Material quadMaterial; // QuadÀÇ Material
@@ -24,6 +24,7 @@ public class ScreenshotViewer : MonoBehaviour
     public GameObject Light;
     public GameObject Fadeimg;
     public GameObject Text;
+    
     private void OnEnable()
     {
         EventManager.Subscribe(GameEventType.GameOver, gameover);
@@ -44,7 +45,6 @@ public class ScreenshotViewer : MonoBehaviour
     private void gameover()
     {
         clockss.isReturning = true;
-        
         chat.SetActive(false);
         quad.SetActive(true);
         Post.SetActive(true);
@@ -89,6 +89,7 @@ public void StartSlideshow()
     {
         if (ScreenshotManager.Instance.screenshots.Count > 0)
         {
+            
             StartCoroutine(ShowScreenshots());
         }
         else

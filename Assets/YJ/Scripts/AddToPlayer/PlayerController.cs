@@ -627,7 +627,7 @@ public class PlayerController : MonoBehaviour
         carAlarm.ActivateAlarm(); // 도난방지 알람 실행
     }
 
-    private IEnumerator SuicideCoroutine()
+    public IEnumerator SuicideCoroutine()
     {
         isSuiciding = true; // 코루틴 실행 중 중복 입력 방지
 
