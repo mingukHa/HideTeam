@@ -53,7 +53,7 @@ public class NPC_CleanMan : NPCFSM
             {
                 chat.LoadNPCDialogue(npc, 1);
                 StopCoroutine(TalkView());
-                ScreenshotManager.Instance.CaptureScreenshot();
+                
                 EventManager.Trigger(GameEventType.CleanManTalk);
                 Invoke("StopNpc", 2f);
 
