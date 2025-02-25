@@ -631,6 +631,8 @@ public class PlayerController : MonoBehaviour
     {
         isSuiciding = true; // 코루틴 실행 중 중복 입력 방지
 
+        disguiser.ResetToDefaultCharacter(); // 기본 복장으로 돌아감
+
         anim.SetTrigger("Suicide");
 
         // Upper Layer에서 'Suicide' 애니메이션 상태가 될 때까지 대기
@@ -639,8 +641,6 @@ public class PlayerController : MonoBehaviour
         // Forward, Right 값을 고정
         anim.SetFloat("Forward", 0f);
         anim.SetFloat("Right", 0f);
-
-        disguiser.ResetToDefaultCharacter(); // 기본 복장으로 돌아감
 
         if (gun != null)
         {
