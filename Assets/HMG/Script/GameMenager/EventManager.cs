@@ -79,7 +79,8 @@ public class EventManager : MonoBehaviour
     }
 
     private static Dictionary<GameEventType, Action> eventDictionary = new Dictionary<GameEventType, Action>();
-
+    //이벤트 시스템 전역관리 Static
+    //Static을 사용하면 인스턴스를 생성하지 않고 전역에서 사용가능
     public static void Subscribe(GameEventType eventType, Action listener) //이벤트 구독하는 함수 : Eunm방식의 이벤트, 실행 함수 이름 넣고 실행
     {
         if (!eventDictionary.ContainsKey(eventType))

@@ -7,7 +7,6 @@ public class CarAlarm : MonoBehaviour
     public Light frontRightHeadLamp; // 전방 오른쪽 헤드 램프
     public Light rearLeftHeadLamp; // 후방 왼쪽 헤드 램프
     public Light rearRightHeadLamp; // 후방 오른쪽 헤드 램프
-    public ReturnManager returnManager;
     [SerializeField] GameObject SoundPos = null;
     private bool isAlarmActive = false;
     
@@ -18,7 +17,6 @@ public class CarAlarm : MonoBehaviour
             SoundManager.instance.SFXPlay("CarKickSound", this.gameObject);
             SoundManager.instance.SFXPlay("CarKickFootSound", SoundPos);
             ScreenshotManager.Instance.CaptureScreenshot();
-            returnManager.StartCoroutine(returnManager.SaveAllNPCData(4f));
             StartCoroutine(BlinkHeadLamps());
         }
     }

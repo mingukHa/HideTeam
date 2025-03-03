@@ -1,15 +1,15 @@
 using UnityEngine;
 
-public class IdleState : NPCState
+public class IdelState : NPCState
 {
-    public IdleState(NPCController npc) : base(npc)
+    public IdelState(NPCController npc) : base(npc)
     {
 
     }
 
     public override void Enter()
     {
-        _npcController.animator.SetTrigger("Idle");
+        _npcController.animator.SetTrigger("Idel");
     }
 
     public override void Update()

@@ -8,7 +8,6 @@ public class TrashBin : MonoBehaviour
     private float rotationDuration = 1.5f; // 회전이 완료되는 시간
     public BoxCollider boxCollider;
     private bool isMessUpTriggered = false; // 중복 실행 방지
-    public ReturnManager returnManager;
     // PlayerController에서 E키 누르면 작동
     //public ScreenshotManager screenshotManager;
     public void MessUpTrashBin()
@@ -20,7 +19,6 @@ public class TrashBin : MonoBehaviour
             Invoke("AddRigidbodyToTrash", 2f);
             boxCollider.size = new Vector3(0.1f, 0.1f, 0.1f);
             // 청소부 호출 이벤트
-            returnManager.StartCoroutine(returnManager.SaveAllNPCData(2f));
             ScreenshotManager.Instance.CaptureScreenshot();
             EventManager.Trigger(EventManager.GameEventType.Garbage);
         }

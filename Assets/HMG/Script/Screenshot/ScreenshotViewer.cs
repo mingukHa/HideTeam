@@ -9,16 +9,16 @@ using UnityEngine.AI;
 
 public class ScreenshotViewer : MonoBehaviour
 {
-    public FadeOut fade;
-    public PlayerController pc;
-    public Clockss clockss;
-    public Renderer quadRenderer; // Quad의 Mesh Renderer
-    private Material quadMaterial; // Quad의 Material
-    public float displayTime = 1.0f;
+    public FadeOut Fade;
+    public PlayerController Pc;
+    public Clockss Clockss;
+    public Renderer QuadRenderer; // Quad의 Mesh Renderer
+    private Material QuadMaterial; // Quad의 Material
+    public float DisplayTime = 1.0f;
     public GameObject Post;
-    public GameObject quad;
-    public GameObject efKey;
-    public GameObject chat;
+    public GameObject Quad;
+    public GameObject EfKey;
+    public GameObject Chat;
     public GameObject Clock;
     public GameObject Nav;
     public GameObject Light;
@@ -37,18 +37,18 @@ public class ScreenshotViewer : MonoBehaviour
     private void Start()
     {
         // Quad의 Material 가져오기
-        if (quadRenderer != null)
+        if (QuadRenderer != null)
         {
-            quadMaterial = quadRenderer.material;
+            QuadMaterial = QuadRenderer.material;
         }
     }
     private void gameover()
     {
-        clockss.isReturning = true;
-        chat.SetActive(false);
-        quad.SetActive(true);
+        Clockss.isReturning = true;
+        Chat.SetActive(false);
+        Quad.SetActive(true);
         Post.SetActive(true);
-        efKey.SetActive(false);
+        EfKey.SetActive(false);
         Nav.SetActive(false);
         Clock.SetActive(true);
         StartSlideshow();
@@ -108,15 +108,15 @@ public void StartSlideshow()
         List<Texture2D> tempScreenshots = new List<Texture2D>(ScreenshotManager.Instance.screenshots);
         for (int i = tempScreenshots.Count - 1; i >= 0; i--)
         {
-            if (quadMaterial != null)
+            if (QuadMaterial != null)
             {
-                quadMaterial.mainTexture = tempScreenshots[i];
+                QuadMaterial.mainTexture = tempScreenshots[i];
             }
 
-            yield return new WaitForSecondsRealtime(displayTime);
+            yield return new WaitForSecondsRealtime(DisplayTime);
         }
         Fadeimg.SetActive(true);
-        yield return new WaitForSecondsRealtime(displayTime);
+        yield return new WaitForSecondsRealtime(DisplayTime);
         //StopAllCoroutines();
         
         SceneManager.LoadScene("MainScene");

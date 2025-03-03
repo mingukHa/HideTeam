@@ -3,11 +3,11 @@ This list is in case you purchased this animation set to use in another engine o
 
 Animation List:
 
-IdleBreathe: 10-130
+IdelBreathe: 10-130
 Draw1HandedMelee: 140-185
 PutBack1HandedMelee: 200-245
-IdleLookAround1HandedMelee: 255-470
-Idle1HandedMelee: 480-600
+IdelLookAround1HandedMelee: 255-470
+Idel1HandedMelee: 480-600
 
 WalkForwardHold1HandedMelee: 610-650
 WalkForwardHold1HandedMelee_RM: 660-700
@@ -22,7 +22,7 @@ LandingLight1HandedMelee: 895-905
 LandingMedium1HandedMelee: 915-949
 LandingHeavy1HandedMelee: 960-1003
 
-IdleCombat1HandedMelee: 1015-1045
+IdelCombat1HandedMelee: 1015-1045
 
 WalkForward1HandedMelee: 1055-1095
 WalkBackwards1HandedMelee: 1105-1145
@@ -41,7 +41,7 @@ WalkBackwardsRight1HandedMelee_RM: 1705-1745
 WalkLeft1HandedMelee_RM: 1755-1795
 WalkRight1HandedMelee_RM: 1805-1845
 
-CrouchIdle1HandedMelee: 1855-1925
+CrouchIdel1HandedMelee: 1855-1925
 
 CrouchForward1HandedMelee: 1940-1990
 CrouchBackwards1HandedMelee: 2000-2050

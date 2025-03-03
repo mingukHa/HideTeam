@@ -9,6 +9,7 @@ public class DoorController : MonoBehaviour
     public float openAngle = 90f; // 문이 열릴 각도
     public float animationTime = 1f; // 문 열림/닫힘 애니메이션 시간
     public GameObject DoorOpenUI;
+
     private GameObject Player;
     private Animator PlayerAnimator;
     private Quaternion closedRotation; // 닫힌 상태의 회전값
@@ -19,10 +20,8 @@ public class DoorController : MonoBehaviour
         Player = GameObject.FindWithTag("Player");
        // Debug.Log($"{Player}문이 받아 옴");
         PlayerAnimator = Player.GetComponent<Animator>();
-            
-
     }
-    void Start()
+    private void Start()
     {
         closedRotation = transform.rotation;
     }
@@ -48,29 +47,9 @@ public class DoorController : MonoBehaviour
         }
         
     }
-
     public void OpenDoorBasedOnView(Transform entity)
     {
         if (entity == null) return;
-
-        //// 플레이어(NPC)의 바라보는 방향
-        //Vector3 entityForward = entity.forward;
-
-        //// 문의 정면 방향 (문이 바라보는 방향)
-        //Vector3 doorForward = transform.forward;
-
-        //// 바라보는 방향과 문의 방향의 각도 계산
-        //float angle = Vector3.Angle(entityForward, doorForward);
-
-
-        //if (angle < 90) // 플레이어가 문을 정면에서 바라볼 때
-        //{
-        //    openRotation = Quaternion.Euler(0, openAngle, 0) * closedRotation;
-        //}
-        //else // 플레이어가 문을 뒤쪽에서 바라볼 때 (반대 방향에서 접근)
-        //{
-        //    openRotation = Quaternion.Euler(0, -openAngle, 0) * closedRotation;
-        //}
 
         // 플레이어(NPC)의 위치
         Vector3 entityPos = entity.transform.position;

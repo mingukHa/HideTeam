@@ -26,7 +26,7 @@ namespace Synty.AnimationBaseLocomotion.Samples
 
         private enum GaitState
         {
-            Idle,
+            Idel,
             Walk,
             Run,
             Sprint
@@ -813,7 +813,7 @@ namespace Synty.AnimationBaseLocomotion.Samples
         ///         Calculate what the current locomotion gait is (Walk, Run, Sprint)
         ///         (for use in jumps, landings etc when deciding which animation to use)
         ///         Gait values will be:
-        ///         Idle = 0, Walk = 1, Run = 2, Sprint = 3
+        ///         Idel = 0, Walk = 1, Run = 2, Sprint = 3
         ///     </pre>
         /// </summary>
         private void CalculateGait()
@@ -823,7 +823,7 @@ namespace Synty.AnimationBaseLocomotion.Samples
 
             if (_speed2D < 0.01)
             {
-                _currentGait = GaitState.Idle;
+                _currentGait = GaitState.Idel;
             }
             else if (_speed2D < runThreshold)
             {

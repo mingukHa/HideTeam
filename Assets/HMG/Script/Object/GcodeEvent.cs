@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class GcodeEvent : MonoBehaviour
 {
+    public SphereCollider coll;
+    public BoxCollider box;
+    public NPC_DoorGaurd doorman;
+    public NPCFSM npcFSM;
+    public NPCChatTest chat;
     private void OnEnable()
     {
         EventManager.Subscribe(EventManager.GameEventType.GameClear, StartGcode);
@@ -18,11 +23,7 @@ public class GcodeEvent : MonoBehaviour
         chat.enabled = false;
         coll.enabled = false;
     }
-    public SphereCollider coll;
-    public BoxCollider box;
-    public NPC_DoorGaurd doorman;
-    public NPCFSM npcFSM;
-    public NPCChatTest chat;
+    
 
 
 }

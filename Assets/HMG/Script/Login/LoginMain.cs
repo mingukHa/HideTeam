@@ -9,36 +9,38 @@ using UnityEngine.SceneManagement;
 public class LoginMain : MonoBehaviour
 {
     [SerializeField]
-    private TMP_InputField ID;
+    private TMP_InputField ID; //ID입력 칸
     [SerializeField]
-    private TMP_InputField PW;
+    private TMP_InputField PW; //PW입력 칸
     [SerializeField]
-    private GameObject AcountUI;
+    private GameObject AcountUI; //회원가입 UI
     [SerializeField]
-    private Button LoginButton;
+    private Button LoginButton; //로그인 버튼
     [SerializeField]
-    private Button Acount;
+    private Button Acount; //회원가입 버튼
     [SerializeField]
-    private Button Exit;
+    private Button Exit; //나가기 버튼
     [SerializeField]
-    private TextMeshProUGUI logintext;
+    private TextMeshProUGUI logintext; //로그인 안내 텍스트
     [SerializeField]
-    private Button Sound;
+    private Button Sound; //사운드 버튼
     [SerializeField]
-    private GameObject SoundBar;
-    private bool SoundbarOnOff = false;
-    private DatabaseReference database;
+    private GameObject SoundBar; //사운드 바
+
+    private bool SoundbarOnOff = false; //사운드바 활성화 여부
+
+    private DatabaseReference database; 
 
     private void Start()
     {
         database = FirebaseDatabase.DefaultInstance.RootReference;
-        StartCoroutine(InitializeFirebase());
-        LoginButton.onClick.AddListener(() =>  Login(ID.text, PW.text));
+        StartCoroutine(InitializeFirebase()); //파이어 베이스 초기화 시작
+        LoginButton.onClick.AddListener(() =>  Login(ID.text, PW.text)); //버튼 이벤트 등록
         Acount.onClick.AddListener(() => OnAcountUI(true));
         Sound.onClick.AddListener(OnSoindUI);
         Exit.onClick.AddListener(GameOff);
     }
-    private IEnumerator InitializeFirebase()
+    private IEnumerator InitializeFirebase() //파이어 베이스 초기화 코루틴 (초기화를 꼭 해줘야 합니다)
     {
         Debug.Log("Firebase 초기화 중...");
         var dependencyTask = FirebaseApp.CheckAndFixDependenciesAsync();
@@ -60,7 +62,7 @@ public class LoginMain : MonoBehaviour
             yield break;
         }
     }
-    private void Login(string username, string password)
+    private void Login(string username, string password) //회원 정보 조회
     {
         if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
         {
@@ -126,15 +128,15 @@ public class LoginMain : MonoBehaviour
             SoundBar.SetActive(false);
         }
     }
-    private void GameOff()
+    private void GameOff() //게임 종료 버튼
     {
         Application.Quit();
 
 #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
+        UnityEditor.EditorApplication.isPlaying = false; //유니티 플레이 모드면 종료하기
 #endif
     }
-    private void OnAcountUI(bool Acount)
+    private void OnAcountUI(bool Acount) //회원가입 UI 켜기
     {
         AcountUI.SetActive(Acount);
     }
