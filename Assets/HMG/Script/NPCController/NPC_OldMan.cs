@@ -95,7 +95,23 @@ public class NPC_OldMan : NPCFSM
             agent.isStopped = false;
             agent.SetDestination(OldPos.position);
             StartCoroutine(CheckArrival());
+            StartCoroutine(OldManarrive());
+
         }
+    }
+    private IEnumerator OldManarrive()
+    {
+        // NPC가 목적지에 도착할 때까지 대기
+        while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance || agent.velocity.magnitude > 0.1f)
+        {//  경로 계산을 하고 있는지,남은 거리가 stoppingDistance보다 큰지, 속도가 완전히 멈추지 않았는지 확인
+            yield return null;
+        }
+        agent.isStopped = true;   // 네비게이션 정지
+        agent.ResetPath();        // 경로 초기화
+        agent.velocity = Vector3.zero; // 강제로 속도 0 설정
+        isWalk = false;
+        animator.ResetTrigger("Walk");
+        ChangeState(State.Talk);
     }
     private void OldmanOut()
     {
