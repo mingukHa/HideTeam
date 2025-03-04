@@ -45,9 +45,9 @@ public class NPC_CleanMan : NPCFSM
         NPCCollider = GetComponent<SphereCollider>();
 
     }
-    protected override void FixedUpdate()
+    protected override void Update()
     {
-        base.FixedUpdate();
+        base.Update();
         if (!isDead && isPlayerNearby)
         {
             // 키 입력을 지속적으로 체크

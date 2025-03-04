@@ -35,9 +35,9 @@ public class NPC_OldMan : NPCFSM
         agent.avoidancePriority = 50;
     }
 
-    protected override void FixedUpdate()
+    protected override void Update()
     {
-        base.FixedUpdate();
+        base.Update();
         if (isWalk)
         {
             animator.SetTrigger("Walk");

@@ -44,7 +44,7 @@ public class NPCFSM : MonoBehaviour
         initrotation = transform.rotation; //각 NPC의 회전 초기 값      
     }
     
-    protected virtual void FixedUpdate()
+    protected virtual void Update()
     {
         HandleState();
         DeadState();
@@ -245,7 +245,6 @@ public class NPCFSM : MonoBehaviour
             // 도착 후 멈추는 코드
             agent.isStopped = true; // 네비게이션 멈춤
             agent.ResetPath(); // 경로 초기화
-            ChangeState(State.Talk);
             chat.LoadNPCDialogue("Null", 0);
             Debug.Log("NPC가 목적지에 도착하여 멈췄습니다.");
         }
