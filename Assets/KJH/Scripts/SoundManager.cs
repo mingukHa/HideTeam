@@ -18,7 +18,10 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
-        if(instance == null)
+        transform.SetParent(null); // 부모에서 분리
+        DontDestroyOnLoad(gameObject); // DontDestroyOnLoad 적용
+
+        if (instance == null)
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
