@@ -39,6 +39,15 @@ public class Progress : MonoBehaviour
         EventManager.Subscribe(GameEventType.RichToiletKill, () => RichManProgress(GameEventType.RichToiletKill));
         EventManager.Subscribe(GameEventType.RichHide, () => RichManProgress(GameEventType.RichHide));
         EventManager.Subscribe(GameEventType.GameOver, () => RichManProgress(GameEventType.GameOver));
+
+        // CleanMan 이벤트
+        EventManager.Subscribe(GameEventType.Garbage, () => CleanManProgress(GameEventType.Garbage));
+        EventManager.Subscribe(GameEventType.CleanManDie, () => CleanManProgress(GameEventType.CleanManDie));
+        EventManager.Subscribe(GameEventType.CleanManTalk, () => CleanManProgress(GameEventType.CleanManTalk));
+        EventManager.Subscribe(GameEventType.RichKill, () => CleanManProgress(GameEventType.RichKill));
+        EventManager.Subscribe(GameEventType.PlayerToiletOut, () => CleanManProgress(GameEventType.RichHide));
+        EventManager.Subscribe(GameEventType.OldManOut, () => CleanManProgress(GameEventType.OldManOut));
+        EventManager.Subscribe(GameEventType.GameOver, () => CleanManProgress(GameEventType.GameOver));
     }
     //람다식으로 넣어줘야 이벤트 타입을 switch문에 넣기 가능
     private void OnDisable()
@@ -63,6 +72,15 @@ public class Progress : MonoBehaviour
         EventManager.Unsubscribe(GameEventType.RichToiletKill, () => RichManProgress(GameEventType.RichToiletKill));
         EventManager.Unsubscribe(GameEventType.RichHide, () => RichManProgress(GameEventType.RichHide));
         EventManager.Unsubscribe(GameEventType.GameOver, () => RichManProgress(GameEventType.GameOver));
+
+        // CleanMan 이벤트
+        EventManager.Unsubscribe(GameEventType.Garbage, () => CleanManProgress(GameEventType.Garbage));
+        EventManager.Unsubscribe(GameEventType.CleanManDie, () => CleanManProgress(GameEventType.CleanManDie));
+        EventManager.Unsubscribe(GameEventType.CleanManTalk, () => CleanManProgress(GameEventType.CleanManTalk));
+        EventManager.Unsubscribe(GameEventType.RichKill, () => CleanManProgress(GameEventType.RichKill));
+        EventManager.Unsubscribe(GameEventType.PlayerToiletOut, () => CleanManProgress(GameEventType.RichHide));
+        EventManager.Unsubscribe(GameEventType.OldManOut, () => CleanManProgress(GameEventType.OldManOut));
+        EventManager.Unsubscribe(GameEventType.GameOver, () => CleanManProgress(GameEventType.GameOver));
     }
     private void Update()
     {
@@ -77,7 +95,7 @@ public class Progress : MonoBehaviour
         else if (Input.GetKeyUp(KeyCode.Tab))
         {
             ProgressUI.SetActive(false);
-        }    
+        }
     }
     private void OldManProgress(GameEventType eventType)
     {
@@ -130,6 +148,33 @@ public class Progress : MonoBehaviour
                 break;
             case GameEventType.GameOver:
                 OldManText.text = "To Reset...";
+                break;
+        }
+    }
+    private void CleanManProgress(GameEventType eventType)
+    {
+        switch (eventType)
+        {
+            case GameEventType.Garbage:
+                CleanManText.text = "Chase State";
+                break;
+            case GameEventType.CleanManDie:
+                CleanManText.text = "Dead State";
+                break;
+            case GameEventType.CleanManTalk:
+                CleanManText.text = "Mop State";
+                break;
+            case GameEventType.RichKill:
+                CleanManText.text = "Chase Sound State";
+                break;
+            case GameEventType.PlayerToiletOut:
+                CleanManText.text = "Check State";
+                break;
+            case GameEventType.OldManOut:
+                CleanManText.text = "Mop State";
+                break;
+            case GameEventType.GameOver:
+                CleanManText.text = "To Reset...";
                 break;
         }
     }
