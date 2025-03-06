@@ -5293,13 +5293,41 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 901501369967284229, guid: e2fcb3f18e635dc4bac04d3330590708, type: 3}
+      propertyPath: m_text
+      value: Idle
+      objectReference: {fileID: 0}
+    - target: {fileID: 962789176399190811, guid: e2fcb3f18e635dc4bac04d3330590708, type: 3}
+      propertyPath: m_text
+      value: Idle
+      objectReference: {fileID: 0}
     - target: {fileID: 1997543351096587073, guid: e2fcb3f18e635dc4bac04d3330590708, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2210160088224717038, guid: e2fcb3f18e635dc4bac04d3330590708, type: 3}
+      propertyPath: m_text
+      value: Idle
       objectReference: {fileID: 0}
     - target: {fileID: 2604508258737608423, guid: e2fcb3f18e635dc4bac04d3330590708, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3024568942671454791, guid: e2fcb3f18e635dc4bac04d3330590708, type: 3}
+      propertyPath: m_text
+      value: InActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 4010387619967920038, guid: e2fcb3f18e635dc4bac04d3330590708, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5640926110362129119, guid: e2fcb3f18e635dc4bac04d3330590708, type: 3}
+      propertyPath: m_text
+      value: Idle
+      objectReference: {fileID: 0}
+    - target: {fileID: 5861757117446161123, guid: e2fcb3f18e635dc4bac04d3330590708, type: 3}
+      propertyPath: m_text
+      value: Idle
       objectReference: {fileID: 0}
     - target: {fileID: 7272879419079647033, guid: e2fcb3f18e635dc4bac04d3330590708, type: 3}
       propertyPath: m_Pivot.x
@@ -5380,6 +5408,22 @@ PrefabInstance:
     - target: {fileID: 7272879419079647033, guid: e2fcb3f18e635dc4bac04d3330590708, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8234250724864707924, guid: e2fcb3f18e635dc4bac04d3330590708, type: 3}
+      propertyPath: m_text
+      value: Idle
+      objectReference: {fileID: 0}
+    - target: {fileID: 8874661982292654788, guid: e2fcb3f18e635dc4bac04d3330590708, type: 3}
+      propertyPath: m_text
+      value: InActive
+      objectReference: {fileID: 0}
+    - target: {fileID: 8895258244558721940, guid: e2fcb3f18e635dc4bac04d3330590708, type: 3}
+      propertyPath: m_text
+      value: Idle
+      objectReference: {fileID: 0}
+    - target: {fileID: 9185793046633025435, guid: e2fcb3f18e635dc4bac04d3330590708, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
