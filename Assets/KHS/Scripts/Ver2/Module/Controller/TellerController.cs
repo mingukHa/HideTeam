@@ -97,7 +97,10 @@ public class TellerController : NPCController
         else if (_interType == MatDetChange.interType.RichMan)
             isVIP = false;
         else if (_interType == MatDetChange.interType.OldMan)
+        {
             isOldMan = false;
+            EventManager.Trigger(EventManager.GameEventType.OldManOut);
+        }
     }
     private void UpdateDialogueVisibility()
     {

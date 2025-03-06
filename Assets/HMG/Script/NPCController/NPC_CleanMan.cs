@@ -19,6 +19,7 @@ public class NPC_CleanMan : NPCFSM
     private string npc = "Cleaner";
     private bool GarbageTrue = false;
     private bool isHide = false;
+    private bool checkOneDead = false;
   
     private void OnEnable()
     {
@@ -66,6 +67,14 @@ public class NPC_CleanMan : NPCFSM
                 EventManager.Trigger(GameEventType.CleanManTalk);
                 Invoke("StopNpc", 2f);
                 StartCoroutine(CleanManIdel());
+            }
+        }
+        if (!checkOneDead)
+        {
+            if (isDead)
+            {
+                checkOneDead = true;
+                EventManager.Trigger(GameEventType.CleanManDie);
             }
         }
     }

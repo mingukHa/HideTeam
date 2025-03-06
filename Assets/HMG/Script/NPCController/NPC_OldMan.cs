@@ -14,6 +14,8 @@ public class NPC_OldMan : NPCFSM
     private Transform OldPos;
     private bool isWalk = false;
 
+    private bool isHelped = false;
+
 
     private void OnEnable()
     {
@@ -48,7 +50,14 @@ public class NPC_OldMan : NPCFSM
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 chat.LoadNPCDialogue(npc, 3);
-                EventManager.Trigger(GameEventType.OldManHelp);
+                if (isHelped)
+                {
+                    EventManager.Trigger(GameEventType.OldManMovingCounter);
+                }
+                else
+                {
+                    EventManager.Trigger(GameEventType.OldManHelp);
+                }
                 
                 Invoke("StopNpc", 2f);
                 Invoke("ReturnOldMan", 2f);
@@ -116,12 +125,14 @@ public class NPC_OldMan : NPCFSM
     private void OldmanOut()
     {
         ChangeState(State.Walk);
+        EventManager.Trigger(GameEventType.OldManOut);
         StartCoroutine(moutline.EventOutLine());
         agent.SetDestination(OldManPos.position);
     }
     private void OldmanMove()
     {
         EventManager.Trigger(GameEventType.OldManGotoTeller);
+        isHelped = true;
         StartCoroutine(moutline.EventOutLine());
         OldPos = NewManPos;
         TextChange.text = "1.카운터로 안내한다";
