@@ -12,6 +12,7 @@ public class RagdollDisposer : MonoBehaviour
     private Animator playerAnim;
     private bool isPlayerNearby = false;
     private bool isRagdollNearby = false;
+    private bool isRichHide = false;
     private Quaternion lidClosedRotation;// 닫혀있는 뚜껑 각도
     [SerializeField]
     private Quaternion lidOpenRotation; // 열린 뚜껑 각도
@@ -81,7 +82,7 @@ public class RagdollDisposer : MonoBehaviour
             grabber.ReleaseRagdoll();
 
             // Ragdoll 삭제
-            EventManager.Trigger(EventManager.GameEventType.RichHide);
+            RichHide();
             Destroy(ragdollRoot.gameObject);
         }
 
@@ -91,11 +92,19 @@ public class RagdollDisposer : MonoBehaviour
         {
             playerAnim.SetTrigger("isDisposer");
         }
-
+        RichHide();
         // Ragdoll을 Disposal Point로 이동
         StartCoroutine(MoveToDisposal());
     }
+    private void RichHide() //한번만 이벤트 호출
+    {
+        if (isRichHide == false)
+        {
+            EventManager.Trigger(EventManager.GameEventType.RichHide);
+        }
+        isRichHide = true;
 
+    }
     private IEnumerator MoveToDisposal()
     {
         // 1초 대기 후 이동 시작
