@@ -101,8 +101,9 @@ public class RagdollDisposer : MonoBehaviour
         if (isRichHide == false)
         {
             EventManager.Trigger(EventManager.GameEventType.RichHide);
+            isRichHide = true;
         }
-        isRichHide = true;
+        
 
     }
     private IEnumerator MoveToDisposal()
