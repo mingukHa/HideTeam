@@ -82,7 +82,7 @@ public class RagdollDisposer : MonoBehaviour
             grabber.ReleaseRagdoll();
 
             // Ragdoll ªË¡¶
-            RichHide();
+            //RichHide();
             Destroy(ragdollRoot.gameObject);
         }
 

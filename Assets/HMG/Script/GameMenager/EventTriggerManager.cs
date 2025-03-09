@@ -30,7 +30,8 @@ public class EventTriggerManager : MonoBehaviour
         GameEventType.GameClear,
         GameEventType.PlayerToiletOut,
         GameEventType.Ending,
-        GameEventType.EndingStop
+        GameEventType.EndingStop,
+        GameEventType.CleanManHide
             
 
     };

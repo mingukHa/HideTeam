@@ -76,7 +76,8 @@ public class EventManager : MonoBehaviour
         EndingStop, //엔딩 가는데 카킥 안 하면 터지는거
         Ending,
 
-        OldManMovingCounter
+        OldManMovingCounter,
+        CleanManHide
 
     }
 
