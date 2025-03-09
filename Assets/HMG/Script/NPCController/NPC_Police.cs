@@ -56,8 +56,22 @@ public class NPC_Polic : NPCFSM
     {
         StartCoroutine(moutline.EventOutLine());
         agent.SetDestination(PolicPos.gameObject.transform.position);
+        NPCCollider.radius = 0.01f;
         ChangeState(State.Run);
-        StartCoroutine(CheckArrival());
+        StartCoroutine(CheckArrivals()); 
+    }
+    protected IEnumerator CheckArrivals() //NPC가 도착 했는지 판단하는 함수
+    {
+        // NPC가 목적지에 도착할 때까지 대기
+        while (agent.pathPending || agent.remainingDistance > agent.stoppingDistance || agent.velocity.magnitude > 0.1f)
+        {//  경로 계산을 하고 있는지,남은 거리가 stoppingDistance보다 큰지, 속도가 완전히 멈추지 않았는지 확인
+            yield return null;
+        }
+        // 도착 후 멈추는 코드
+        agent.isStopped = true; // 네비게이션 멈춤
+        agent.ResetPath(); // 경로 초기화
+        chat.LoadNPCDialogue("Null", 0);
+        ChangeState(State.Idle);
     }
 }
 

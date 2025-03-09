@@ -247,7 +247,7 @@ public class NPCFSM : MonoBehaviour
             agent.ResetPath(); // 경로 초기화
             chat.LoadNPCDialogue("Null", 0);
             Debug.Log("NPC가 목적지에 도착하여 멈췄습니다.");
-        }
+    }
     protected void StopNpc()
     {
         StopCoroutine(TalkView());
