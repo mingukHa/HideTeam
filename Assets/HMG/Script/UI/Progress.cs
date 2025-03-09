@@ -1,5 +1,5 @@
+using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using static EventManager;
 
@@ -17,6 +17,23 @@ public class Progress : MonoBehaviour
     [SerializeField] private TextMeshProUGUI TrashBinText;
     [SerializeField] private TextMeshProUGUI CarText;
 
+    private bool isCleanDie = false;
+
+    private List<TextMeshProUGUI> TextList = new List<TextMeshProUGUI>();
+
+    private void Start()
+    {
+        TextList.Clear();
+        TextList.Add(RichmanText);
+        TextList.Add(OldManText);
+        TextList.Add(CleanManText);
+        TextList.Add(DoorGaurdText);
+        TextList.Add(RightRoomGaurdText);
+        TextList.Add(LobbyGaurdText);
+        TextList.Add(TellerText);
+        TextList.Add(TrashBinText);
+        TextList.Add(CarText);
+    }
     private void OnEnable()
     {
         // OldMan이벤트
@@ -28,7 +45,6 @@ public class Progress : MonoBehaviour
         EventManager.Subscribe(GameEventType.RichKill, () => OldManProgress(GameEventType.RichKill));
         EventManager.Subscribe(GameEventType.OldManOut, () => OldManProgress(GameEventType.OldManOut));
         EventManager.Subscribe(GameEventType.OldManMovingCounter, () => OldManProgress(GameEventType.OldManMovingCounter));
-        EventManager.Subscribe(GameEventType.GameOver, () => OldManProgress(GameEventType.GameOver));
 
         // RichMan 이벤트
         EventManager.Subscribe(GameEventType.PlayerEnterBank, () => RichManProgress(GameEventType.PlayerEnterBank));
@@ -38,7 +54,6 @@ public class Progress : MonoBehaviour
         EventManager.Subscribe(GameEventType.RichKill, () => RichManProgress(GameEventType.RichKill));
         EventManager.Subscribe(GameEventType.RichToiletKill, () => RichManProgress(GameEventType.RichToiletKill));
         EventManager.Subscribe(GameEventType.RichHide, () => RichManProgress(GameEventType.RichHide));
-        EventManager.Subscribe(GameEventType.GameOver, () => RichManProgress(GameEventType.GameOver));
 
         // CleanMan 이벤트
         EventManager.Subscribe(GameEventType.Garbage, () => CleanManProgress(GameEventType.Garbage));
@@ -47,7 +62,36 @@ public class Progress : MonoBehaviour
         EventManager.Subscribe(GameEventType.RichKill, () => CleanManProgress(GameEventType.RichKill));
         EventManager.Subscribe(GameEventType.PlayerToiletOut, () => CleanManProgress(GameEventType.RichHide));
         EventManager.Subscribe(GameEventType.OldManOut, () => CleanManProgress(GameEventType.OldManOut));
-        EventManager.Subscribe(GameEventType.GameOver, () => CleanManProgress(GameEventType.GameOver));
+        EventManager.Subscribe(GameEventType.CleanManHide, () => CleanManProgress(GameEventType.CleanManHide));
+
+        // DoorGuard 이벤트
+        EventManager.Subscribe(GameEventType.PlayerEnterBank, () => DoorGuardProgress(GameEventType.PlayerEnterBank));
+        EventManager.Subscribe(GameEventType.GameClear, () => DoorGuardProgress(GameEventType.GameClear));
+
+        // RightRoomGaurd 이벤트
+        EventManager.Subscribe(GameEventType.PlayerEnterBank, () => RightRoomGaurdProgress(GameEventType.PlayerEnterBank));
+        EventManager.Subscribe(GameEventType.Carkick, () => RightRoomGaurdProgress(GameEventType.Carkick));
+
+        // LobbyGaurd 이벤트
+        EventManager.Subscribe(GameEventType.PlayerEnterBank, () => LobbyGaurdProgress(GameEventType.PlayerEnterBank));
+        EventManager.Subscribe(GameEventType.Carkick, () => LobbyGaurdProgress(GameEventType.Carkick));
+
+        // RichMan 이벤트
+        EventManager.Subscribe(GameEventType.PlayerEnterBank, () => TellerProgress(GameEventType.PlayerEnterBank));
+        EventManager.Subscribe(GameEventType.TellerTalk, () => TellerProgress(GameEventType.TellerTalk));
+        EventManager.Subscribe(GameEventType.RichmanTalkTeller, () => TellerProgress(GameEventType.RichmanTalkTeller));
+        EventManager.Subscribe(GameEventType.OldManTalkTeller, () => TellerProgress(GameEventType.OldManTalkTeller));
+        EventManager.Subscribe(GameEventType.RichToiletKill, () => TellerProgress(GameEventType.RichToiletKill));
+        EventManager.Subscribe(GameEventType.GameClear, () => TellerProgress(GameEventType.GameClear));
+
+        // TrashBin 이벤트
+        EventManager.Subscribe(GameEventType.Garbage, () => TrashBinProgress(GameEventType.Garbage));
+
+        // Car 이벤트
+        EventManager.Subscribe(GameEventType.Carkick, () => CarProgress(GameEventType.Carkick));
+
+        // GameOver 이벤트
+        EventManager.Subscribe(GameEventType.GameOver, () => GameOverProgress(GameEventType.GameOver));
     }
     //람다식으로 넣어줘야 이벤트 타입을 switch문에 넣기 가능
     private void OnDisable()
@@ -61,7 +105,6 @@ public class Progress : MonoBehaviour
         EventManager.Unsubscribe(GameEventType.RichKill, () => OldManProgress(GameEventType.RichKill));
         EventManager.Unsubscribe(GameEventType.OldManOut, () => OldManProgress(GameEventType.OldManOut));
         EventManager.Unsubscribe(GameEventType.OldManMovingCounter, () => OldManProgress(GameEventType.OldManMovingCounter));
-        EventManager.Unsubscribe(GameEventType.GameOver, () => OldManProgress(GameEventType.GameOver));
 
         // RichMan 이벤트
         EventManager.Unsubscribe(GameEventType.PlayerEnterBank, () => RichManProgress(GameEventType.PlayerEnterBank));
@@ -71,7 +114,6 @@ public class Progress : MonoBehaviour
         EventManager.Unsubscribe(GameEventType.RichKill, () => RichManProgress(GameEventType.RichKill));
         EventManager.Unsubscribe(GameEventType.RichToiletKill, () => RichManProgress(GameEventType.RichToiletKill));
         EventManager.Unsubscribe(GameEventType.RichHide, () => RichManProgress(GameEventType.RichHide));
-        EventManager.Unsubscribe(GameEventType.GameOver, () => RichManProgress(GameEventType.GameOver));
 
         // CleanMan 이벤트
         EventManager.Unsubscribe(GameEventType.Garbage, () => CleanManProgress(GameEventType.Garbage));
@@ -80,7 +122,36 @@ public class Progress : MonoBehaviour
         EventManager.Unsubscribe(GameEventType.RichKill, () => CleanManProgress(GameEventType.RichKill));
         EventManager.Unsubscribe(GameEventType.PlayerToiletOut, () => CleanManProgress(GameEventType.RichHide));
         EventManager.Unsubscribe(GameEventType.OldManOut, () => CleanManProgress(GameEventType.OldManOut));
-        EventManager.Unsubscribe(GameEventType.GameOver, () => CleanManProgress(GameEventType.GameOver));
+        EventManager.Unsubscribe(GameEventType.CleanManHide, () => CleanManProgress(GameEventType.CleanManHide));
+
+        // DoorGuard 이벤트
+        EventManager.Unsubscribe(GameEventType.PlayerEnterBank, () => DoorGuardProgress(GameEventType.PlayerEnterBank));
+        EventManager.Unsubscribe(GameEventType.GameClear, () => DoorGuardProgress(GameEventType.GameClear));
+
+        // RightRoomGaurd 이벤트
+        EventManager.Unsubscribe(GameEventType.PlayerEnterBank, () => RightRoomGaurdProgress(GameEventType.PlayerEnterBank));
+        EventManager.Unsubscribe(GameEventType.Carkick, () => RightRoomGaurdProgress(GameEventType.Carkick));
+
+        // LobbyGaurd 이벤트
+        EventManager.Unsubscribe(GameEventType.PlayerEnterBank, () => LobbyGaurdProgress(GameEventType.PlayerEnterBank));
+        EventManager.Unsubscribe(GameEventType.Carkick, () => LobbyGaurdProgress(GameEventType.Carkick));
+
+        // Teller 이벤트
+        EventManager.Unsubscribe(GameEventType.PlayerEnterBank, () => TellerProgress(GameEventType.PlayerEnterBank));
+        EventManager.Unsubscribe(GameEventType.TellerTalk, () => TellerProgress(GameEventType.TellerTalk));
+        EventManager.Unsubscribe(GameEventType.RichmanTalkTeller, () => TellerProgress(GameEventType.RichmanTalkTeller));
+        EventManager.Unsubscribe(GameEventType.OldManTalkTeller, () => TellerProgress(GameEventType.OldManTalkTeller));
+        EventManager.Unsubscribe(GameEventType.RichToiletKill, () => TellerProgress(GameEventType.RichToiletKill));
+        EventManager.Unsubscribe(GameEventType.GameClear, () => TellerProgress(GameEventType.GameClear));
+
+        // TrashBin 이벤트
+        EventManager.Unsubscribe(GameEventType.Garbage, () => TrashBinProgress(GameEventType.Garbage));
+
+        // Car 이벤트
+        EventManager.Unsubscribe(GameEventType.Carkick, () => CarProgress(GameEventType.Carkick));
+
+        // GameOver 이벤트
+        EventManager.Unsubscribe(GameEventType.GameOver, () => GameOverProgress(GameEventType.GameOver));
     }
     private void Update()
     {
@@ -117,9 +188,7 @@ public class Progress : MonoBehaviour
             case GameEventType.OldManMovingCounter:
                 OldManText.text = "Go to Counter State";
                 break;
-            case GameEventType.GameOver:
-                OldManText.text = "To Reset...";
-                break;
+
 
         }
     }
@@ -146,9 +215,7 @@ public class Progress : MonoBehaviour
             case GameEventType.RichHide:
                 RichmanText.text = "NONE";
                 break;
-            case GameEventType.GameOver:
-                OldManText.text = "To Reset...";
-                break;
+
         }
     }
     private void CleanManProgress(GameEventType eventType)
@@ -160,22 +227,115 @@ public class Progress : MonoBehaviour
                 break;
             case GameEventType.CleanManDie:
                 CleanManText.text = "Dead State";
+                isCleanDie = true;
                 break;
             case GameEventType.CleanManTalk:
-                CleanManText.text = "Mop State";
+                if (!isCleanDie)
+                    CleanManText.text = "Mop State";
                 break;
             case GameEventType.RichKill:
-                CleanManText.text = "Chase Sound State";
+                if (!isCleanDie)
+                    CleanManText.text = "Chase Sound State";
                 break;
             case GameEventType.PlayerToiletOut:
-                CleanManText.text = "Check State";
+                if (!isCleanDie)
+                    CleanManText.text = "Check State";
                 break;
             case GameEventType.OldManOut:
-                CleanManText.text = "Mop State";
+                if (!isCleanDie)
+                    CleanManText.text = "Mop State";
                 break;
-            case GameEventType.GameOver:
-                CleanManText.text = "To Reset...";
+            case GameEventType.CleanManHide:
+                CleanManText.text = "NONE";
                 break;
+
+        }
+    }
+
+    private void DoorGuardProgress(GameEventType eventType)
+    {
+        switch (eventType)
+        {
+            case GameEventType.PlayerEnterBank:
+                DoorGaurdText.text = "Block State";
+                break;
+            case GameEventType.GameClear:
+                DoorGaurdText.text = "No Block State";
+                break;
+        }
+    }
+    private void RightRoomGaurdProgress(GameEventType eventType)
+    {
+        switch (eventType)
+        {
+            case GameEventType.PlayerEnterBank:
+                RightRoomGaurdText.text = "Block State";
+                break;
+            case GameEventType.Carkick:
+                RightRoomGaurdText.text = "Patrol State";
+                break;
+        }
+    }
+
+    private void LobbyGaurdProgress(GameEventType eventType)
+    {
+        switch (eventType)
+        {
+            case GameEventType.PlayerEnterBank:
+                LobbyGaurdText.text = "Patrol State";
+                break;
+            case GameEventType.Carkick:
+                LobbyGaurdText.text = "Chase Patrol State";
+                break;
+        }
+    }
+    private void TellerProgress(GameEventType eventType)
+    {
+        switch (eventType)
+        {
+            case GameEventType.PlayerEnterBank:
+                TellerText.text = "Waiting State";
+                break;
+            case GameEventType.TellerTalk:
+                TellerText.text = "Player Interact State";
+                break;
+            case GameEventType.RichmanTalkTeller:
+                TellerText.text = "Gone State";
+                break;
+            case GameEventType.OldManTalkTeller:
+                TellerText.text = "DeadLock State";
+                break;
+            case GameEventType.RichToiletKill:
+                TellerText.text = "Waiting State";
+                break;
+            case GameEventType.GameClear:
+                TellerText.text = "Clear State";
+                break;
+        }
+    }
+    private void TrashBinProgress(GameEventType eventType)
+    {
+        switch (eventType)
+        {
+            case GameEventType.Garbage:
+                TrashBinText.text = "Active";
+                break;
+        }
+    }
+    private void CarProgress(GameEventType eventType)
+    {
+        switch (eventType)
+        {
+            case GameEventType.Carkick:
+                CarText.text = "Active";
+                break;
+        }
+    }
+    private void GameOverProgress(GameEventType eventType)
+    {
+        foreach(TextMeshProUGUI textmesh in TextList)
+        {
+            textmesh.text = "To Reset ...";
         }
     }
 }
