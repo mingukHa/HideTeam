@@ -42,7 +42,7 @@ public class FighterAnimationDemo : MonoBehaviour {
 			defaultCamTransform.position = resetPos;
 			defaultCamTransform.rotation = resetRot;
 			fighter.transform.position = new Vector3(0,0,0);
-			animator.Play("Idel");
+			animator.Play("Idle");
 		}
 
 		if(!dead)

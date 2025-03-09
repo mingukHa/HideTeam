@@ -14,8 +14,8 @@ public class NPCFSM : MonoBehaviour
     public SphereCollider NPCCollider; //NPC 상호작용 콜라이더
     public GameObject select; //캐릭터 말풍선    
     
-    protected enum State { Idel, Look, Walk, Run, Talk, Dead } //상태 열거형
-    protected State currentState = State.Idel; //기본값은 Idel
+    protected enum State { Idle, Look, Walk, Run, Talk, Dead } //상태 열거형
+    protected State currentState = State.Idle; //기본값은 Idle
     protected Transform player; //플레이어 위치
     protected Animator animator; //애니메이터
     protected Quaternion initrotation; //기본 위치
@@ -40,7 +40,7 @@ public class NPCFSM : MonoBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player").transform; //태그로 플레이어 받아오기
         SetRagdollState(false); //레그돌 off
-        ChangeState(State.Idel); //기본상태 Idel
+        ChangeState(State.Idle); //기본상태 Idle
         initrotation = transform.rotation; //각 NPC의 회전 초기 값      
     }
     
@@ -55,8 +55,8 @@ public class NPCFSM : MonoBehaviour
     {
         switch (currentState)
         {
-            case State.Idel:
-                IdelBehavior();
+            case State.Idle:
+                IdleBehavior();
                 break;
             case State.Look:
                 LookBehavior();
@@ -120,7 +120,7 @@ public class NPCFSM : MonoBehaviour
         if (newState == State.Dead) //죽었을 때 상태를 dead로 초기화
         {
             isRagdollActivated = false; // Dead 상태 초기화
-            animator.ResetTrigger("Idel");
+            animator.ResetTrigger("Idle");
             animator.ResetTrigger("Look");
             animator.ResetTrigger("Walk");
             animator.ResetTrigger("Run");
@@ -130,7 +130,7 @@ public class NPCFSM : MonoBehaviour
             return;
         }
         //기존에 남아있는 상태를 초기화 하고
-        animator.ResetTrigger("Idel");
+        animator.ResetTrigger("Idle");
         animator.ResetTrigger("Look");
         animator.ResetTrigger("Walk");
         animator.ResetTrigger("Run");
@@ -139,8 +139,8 @@ public class NPCFSM : MonoBehaviour
         //새로운 상태로 갱신
         switch (newState)
         {
-            case State.Idel:
-                animator.SetTrigger("Idel");
+            case State.Idle:
+                animator.SetTrigger("Idle");
                 break;
             case State.Look:
                 animator.SetTrigger("Look");
@@ -187,7 +187,7 @@ public class NPCFSM : MonoBehaviour
 
 
     // 각 상태의 기본 행동
-    protected virtual void IdelBehavior() { }
+    protected virtual void IdleBehavior() { }
     protected virtual void LookBehavior() { }
     protected virtual void WalkBehavior() { }
     protected virtual void RunBehavior() { }
@@ -210,7 +210,7 @@ public class NPCFSM : MonoBehaviour
         if (!isDead && other.CompareTag("Player"))
         {
             StopCoroutine(TalkView()); //다시 원래 보고 있던 위치로 회전
-            ChangeState(State.Idel); //idel상태로 변경
+            ChangeState(State.Idle); //Idle상태로 변경
             isPlayerNearby = false; // 대화상태 off
             isTalking = false; // 대화 종료
             transform.rotation = initrotation; // 원래 방향으로 복귀
@@ -254,7 +254,7 @@ public class NPCFSM : MonoBehaviour
         chat.LoadNPCDialogue("NULL", 0);
         transform.rotation = initrotation;
         NPCCollider.radius = 0.01f;
-        animator.SetTrigger("Idel");
+        animator.SetTrigger("Idle");
         select.SetActive(false);
     }
 }

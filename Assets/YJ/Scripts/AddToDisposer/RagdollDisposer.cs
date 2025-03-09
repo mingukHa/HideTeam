@@ -92,20 +92,18 @@ public class RagdollDisposer : MonoBehaviour
         {
             playerAnim.SetTrigger("isDisposer");
         }
-        RichHide();
+        //RichHide();
         // Ragdoll을 Disposal Point로 이동
         StartCoroutine(MoveToDisposal());
     }
-    private void RichHide() //한번만 이벤트 호출
-    {
-        if (isRichHide == false)
-        {
-            EventManager.Trigger(EventManager.GameEventType.RichHide);
-            isRichHide = true;
-        }
-        
-
-    }
+    //private void RichHide() //한번만 이벤트 호출
+    //{
+    //    if (isRichHide == false)
+    //    {
+    //        EventManager.Trigger(EventManager.GameEventType.RichHide);
+    //        isRichHide = true;
+    //    }
+    //}
     private IEnumerator MoveToDisposal()
     {
         // 1초 대기 후 이동 시작

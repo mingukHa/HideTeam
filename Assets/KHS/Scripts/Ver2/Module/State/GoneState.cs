@@ -21,7 +21,7 @@ public class GoneState : NPCState
         else
         {
             _npcController.animator.ResetTrigger("Walk");
-            _npcController.stateMachine.ChangeState(new IdelState(_npcController));
+            _npcController.stateMachine.ChangeState(new IdleState(_npcController));
         }
     }
 

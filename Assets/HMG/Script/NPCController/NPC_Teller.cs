@@ -30,7 +30,7 @@ public class NPC_Teller : NPCFSM
     {
         if (!isDead)
         {
-            animator.SetTrigger("Idel");
+            animator.SetTrigger("Idle");
         }
     }
     

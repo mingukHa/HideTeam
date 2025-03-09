@@ -58,7 +58,7 @@ public class NPC_CleanMan : NPCFSM
                 StopCoroutine(TalkView());
                 EventManager.Trigger(GameEventType.CleanManTalk);
                 Invoke("StopNpc", 2f);
-                StartCoroutine(CleanManIdel());
+                StartCoroutine(CleanManIdle());
             }
             if (Input.GetKeyDown(KeyCode.Alpha2))
             {
@@ -66,7 +66,7 @@ public class NPC_CleanMan : NPCFSM
                 StopCoroutine(TalkView());
                 EventManager.Trigger(GameEventType.CleanManTalk);
                 Invoke("StopNpc", 2f);
-                StartCoroutine(CleanManIdel());
+                StartCoroutine(CleanManIdle());
             }
         }
         if (!checkOneDead)
@@ -153,15 +153,15 @@ public class NPC_CleanMan : NPCFSM
                 chat.LoadNPCDialogue(npc, 5);
                 yield return new WaitForSeconds(3f);
                 npcclean.text = "";
-                ChangeState(State.Idel);
+                ChangeState(State.Idle);
                 EventManager.Trigger(GameEventType.OldManOut);
             }
         }
     }
-    private IEnumerator CleanManIdel()
+    private IEnumerator CleanManIdle()
     {
         yield return new WaitForSeconds(2f);
-        ChangeState (State.Idel);
+        ChangeState (State.Idle);
     }
 }
 

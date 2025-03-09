@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class NPCMiniMaps                                                                                                                                                                                                                                                                               : MonoBehaviour
 {
-    public enum NPCState { Idel, Talk, Run, Walk } //NPC의 상태에 맞게 색상 변경
+    public enum NPCState { Idle, Talk, Run, Walk } //NPC의 상태에 맞게 색상 변경
 
     [SerializeField] private Image minimapIcon; // 미니맵 아이콘
 
@@ -11,7 +11,7 @@ public class NPCMiniMaps                                                        
 
     private void Start()
     {
-        ChangeState(NPCState.Idel); //Idel로 시작
+        ChangeState(NPCState.Idle); //Idle로 시작
     }
 
     public void ChangeState(NPCState newState) 
@@ -26,7 +26,7 @@ public class NPCMiniMaps                                                        
     {
         switch (currentState)
         {
-            case NPCState.Idel:
+            case NPCState.Idle:
                 minimapIcon.color = Color.white;
                 break;
             case NPCState.Talk:

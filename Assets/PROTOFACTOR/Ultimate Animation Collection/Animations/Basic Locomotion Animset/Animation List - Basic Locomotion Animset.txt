@@ -3,9 +3,9 @@ This list is in case you purchased this animation set to use in another engine o
 
 Animation List:
 
-IdelLookAround: 10-225
-IdelBreathe: 235-355
-IdelLookAroundYawnScratchHead: 365-925
+IdleLookAround: 10-225
+IdleBreathe: 235-355
+IdleLookAroundYawnScratchHead: 365-925
 
 WalkForward: 935-975
 WalkForward_RM: 985-1025
@@ -71,10 +71,10 @@ Pass1MeterObstacleRight: 3265-3309
 Pass1MeterObstacleLeft_RM: 3320-3366
 Pass1MeterObstacleRight_RM: 3380-3424
 
-CrouchIdelLookAround1: 3435-3610
-CrouchIdel1: 3620-3690
-CrouchIdelLookAround2: 3700-3875
-CrouchIdel2: 3885-3955
+CrouchIdleLookAround1: 3435-3610
+CrouchIdle1: 3620-3690
+CrouchIdleLookAround2: 3700-3875
+CrouchIdle2: 3885-3955
 CrouchTurn90Left: 3965-4022
 CrouchTurn90Right: 4035-4095
 CrouchTurn180Left: 4105-4190

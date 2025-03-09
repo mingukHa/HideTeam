@@ -19,7 +19,7 @@ public class TalkState : NPCState
         }
         else
         {
-            _npcController.stateMachine.ChangeState(new IdelState(_npcController));
+            _npcController.stateMachine.ChangeState(new IdleState(_npcController));
         }
     }
 }
