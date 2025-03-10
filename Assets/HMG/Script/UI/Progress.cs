@@ -33,6 +33,17 @@ public class Progress : MonoBehaviour
         TextList.Add(TellerText);
         TextList.Add(TrashBinText);
         TextList.Add(CarText);
+        for(int i = 0; i < TextList.Count; ++i)
+        {
+            if(i == TextList.Count - 1 || i == TextList.Count - 2)
+            {
+                TextList[i].text = "InActive";
+            }
+            else
+            {
+                TextList[i].text = "Idle";
+            }
+        }
     }
     private void OnEnable()
     {
@@ -76,12 +87,12 @@ public class Progress : MonoBehaviour
         EventManager.Subscribe(GameEventType.PlayerEnterBank, () => LobbyGaurdProgress(GameEventType.PlayerEnterBank));
         EventManager.Subscribe(GameEventType.Carkick, () => LobbyGaurdProgress(GameEventType.Carkick));
 
-        // RichMan 이벤트
+        // Teller 이벤트
         EventManager.Subscribe(GameEventType.PlayerEnterBank, () => TellerProgress(GameEventType.PlayerEnterBank));
         EventManager.Subscribe(GameEventType.TellerTalk, () => TellerProgress(GameEventType.TellerTalk));
         EventManager.Subscribe(GameEventType.RichmanTalkTeller, () => TellerProgress(GameEventType.RichmanTalkTeller));
         EventManager.Subscribe(GameEventType.OldManTalkTeller, () => TellerProgress(GameEventType.OldManTalkTeller));
-        EventManager.Subscribe(GameEventType.RichToiletKill, () => TellerProgress(GameEventType.RichToiletKill));
+        EventManager.Subscribe(GameEventType.RichKill, () => TellerProgress(GameEventType.RichKill));
         EventManager.Subscribe(GameEventType.GameClear, () => TellerProgress(GameEventType.GameClear));
 
         // TrashBin 이벤트
@@ -141,7 +152,7 @@ public class Progress : MonoBehaviour
         EventManager.Unsubscribe(GameEventType.TellerTalk, () => TellerProgress(GameEventType.TellerTalk));
         EventManager.Unsubscribe(GameEventType.RichmanTalkTeller, () => TellerProgress(GameEventType.RichmanTalkTeller));
         EventManager.Unsubscribe(GameEventType.OldManTalkTeller, () => TellerProgress(GameEventType.OldManTalkTeller));
-        EventManager.Unsubscribe(GameEventType.RichToiletKill, () => TellerProgress(GameEventType.RichToiletKill));
+        EventManager.Unsubscribe(GameEventType.RichKill, () => TellerProgress(GameEventType.RichKill));
         EventManager.Unsubscribe(GameEventType.GameClear, () => TellerProgress(GameEventType.GameClear));
 
         // TrashBin 이벤트
@@ -170,6 +181,7 @@ public class Progress : MonoBehaviour
     }
     private void OldManProgress(GameEventType eventType)
     {
+        Debug.Log($"OldManProgress Triggered: {eventType}");
         switch (eventType)
         {
             case GameEventType.OldManGotoTeller:
@@ -194,6 +206,7 @@ public class Progress : MonoBehaviour
     }
     private void RichManProgress(GameEventType eventType)
     {
+        Debug.Log($"RichManProgress Triggered: {eventType}");
         switch (eventType)
         {
             case GameEventType.PlayerEnterBank:
@@ -291,6 +304,7 @@ public class Progress : MonoBehaviour
     }
     private void TellerProgress(GameEventType eventType)
     {
+        Debug.Log($"TellerProgress Triggered: {eventType}");
         switch (eventType)
         {
             case GameEventType.PlayerEnterBank:
@@ -305,7 +319,7 @@ public class Progress : MonoBehaviour
             case GameEventType.OldManTalkTeller:
                 TellerText.text = "DeadLock State";
                 break;
-            case GameEventType.RichToiletKill:
+            case GameEventType.RichKill:
                 TellerText.text = "Waiting State";
                 break;
             case GameEventType.GameClear:
@@ -333,7 +347,8 @@ public class Progress : MonoBehaviour
     }
     private void GameOverProgress(GameEventType eventType)
     {
-        foreach(TextMeshProUGUI textmesh in TextList)
+        Debug.Log("GameOver Event Triggered - Resetting UI");
+        foreach (TextMeshProUGUI textmesh in TextList)
         {
             textmesh.text = "To Reset ...";
         }
