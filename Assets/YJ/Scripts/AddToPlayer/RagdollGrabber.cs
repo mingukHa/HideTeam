@@ -241,6 +241,7 @@ public class RagdollGrabber : MonoBehaviour
         rootTransform = null;
     }
 
+    // 손의 위치와 회전값을 IKTarget으로 이동(손을 움직임)
     private void OnAnimatorIK(int layerIndex)
     {
         if (anim)
