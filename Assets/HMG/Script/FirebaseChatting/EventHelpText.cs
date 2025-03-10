@@ -35,52 +35,52 @@ public class EventHelpText : MonoBehaviour
     private void EndingStop()
     {
         ScreenshotManager.Instance.CaptureScreenshot();
-        StartCoroutine(textNull("이런.. 경비원을 밖으로 보내는 방법을 찾아보자"));
+        StartCoroutine(textNull("이런... 경비원을 밖으로 보내는 방법을 찾아보자"));
     }
     private void CleanManDie()
     {
         ScreenshotManager.Instance.CaptureScreenshot();
-        StartCoroutine(textNull("이런 거기서 사람을 죽이면 어떡해? 얼른 시체를 숨겨"));
+        StartCoroutine(textNull("이런, 거기서 사람을 죽이면 어떡해? 얼른 시체를 숨겨."));
     }
     private void OldTalkTeller()
     {
         ScreenshotManager.Instance.CaptureScreenshot();
-        StartCoroutine(textNull("할아버지가 난동을 부리고 있다"));
+        StartCoroutine(textNull("할아버지가 난동을 부리고 있다."));
     }
     private void StartCleanManTalk()
     {
         ScreenshotManager.Instance.CaptureScreenshot();
-        StartCoroutine(textNull("청소부를 성공적으로 유인했어"));
+        StartCoroutine(textNull("청소부를 성공적으로 유인했어."));
     }
     private void StartPlayerEnterBank()
     {
         ScreenshotManager.Instance.CaptureScreenshot();
-        StartCoroutine(textNull("오른쪽 방 금고가 있다. VIP보다 먼저 물품을 탈취해라"));
+        StartCoroutine(textNull("오른쪽 방에 금고가 있다. 의뢰받은 물품을 탈취해라."));
     }
     private void StartNPCKill()
     {
         ScreenshotManager.Instance.CaptureScreenshot();
-        StartCoroutine(textNull("이런...시체를 숨기지 못해서 발각되었어"));
+        StartCoroutine(textNull("이런... 시체를 숨기지 못했군..."));
     }
     private void StartGarbage()
     {
         ScreenshotManager.Instance.CaptureScreenshot();
-        StartCoroutine(textNull("누군가가 다가오고 있어"));
+        StartCoroutine(textNull("누군가 다가오고 있어."));
     }
     private void StartRichKill()
     {
         ScreenshotManager.Instance.CaptureScreenshot();
-        StartCoroutine(textNull("이런 누군가 소리를 듣고 오고있어 얼른 시체를 숨겨"));
+        StartCoroutine(textNull("이런 누군가 소리를 듣고 오고있어. 얼른 시체를 숨겨."));
     }
     private void StartCarKick()
     {
         ScreenshotManager.Instance.CaptureScreenshot();
-        StartCoroutine(textNull("이런 차를 발로 차면 어떻해? 누가 오기전에 얼른 숨어"));        
+        StartCoroutine(textNull("이런, 차를 발로 차면 어떡해? 누가 오기전에 얼른 숨어."));        
     }
     private void StartTolietRichman()
     {
         ScreenshotManager.Instance.CaptureScreenshot();
-        StartCoroutine(textNull("화장실을 향하는군요. 왠지 따라가면 좋은 정보를 얻을 수 있을거 같아요."));
+        StartCoroutine(textNull("화장실로 향하는군. 따라가면 좋은 정보를 얻을 수 있을거야."));
     }
     private IEnumerator textNull(string texts)
     {
