@@ -104,7 +104,6 @@ public void StartSlideshow()
     private IEnumerator ShowScreenshots()
     {
         DisableAllMoutline();
-        EventManager.Trigger(GameEventType.TellerTalk);
         List<Texture2D> tempScreenshots = new List<Texture2D>(ScreenshotManager.Instance.screenshots);
         for (int i = tempScreenshots.Count - 1; i >= 0; i--)
         {
