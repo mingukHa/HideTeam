@@ -18,6 +18,7 @@ public class Progress : MonoBehaviour
     [SerializeField] private TextMeshProUGUI CarText;
 
     private bool isCleanDie = false;
+    private bool isUIopen = false;
 
     private List<TextMeshProUGUI> TextList = new List<TextMeshProUGUI>();
 
@@ -159,13 +160,18 @@ public class Progress : MonoBehaviour
     }
     private void ProgressUIOnOff()
     {
-        if (Input.GetKey(KeyCode.Tab))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
-            ProgressUI.SetActive(true);
-        }
-        else if (Input.GetKeyUp(KeyCode.Tab))
-        {
-            ProgressUI.SetActive(false);
+            if(isUIopen == false)
+            {
+                ProgressUI.SetActive(true);
+                isUIopen = false;
+            }
+            else
+            {
+                 ProgressUI.SetActive(false);
+                isUIopen = true;
+            }
         }
     }
     private void OldManProgress(GameEventType eventType)
