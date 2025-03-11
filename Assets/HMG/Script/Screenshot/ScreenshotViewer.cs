@@ -24,7 +24,7 @@ public class ScreenshotViewer : MonoBehaviour
     public GameObject Light;
     public GameObject Fadeimg;
     public GameObject Text;
-    
+    public GameObject Progress;
     private void OnEnable()
     {
         EventManager.Subscribe(GameEventType.GameOver, gameover);
@@ -54,7 +54,7 @@ public class ScreenshotViewer : MonoBehaviour
         StartSlideshow();
         Light.SetActive(false);
         Text.SetActive(false);
-       
+        Progress.SetActive(false);
     }
 
     public IEnumerator GameRestart()

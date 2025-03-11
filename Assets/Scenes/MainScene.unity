@@ -5303,7 +5303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1997543351096587073, guid: e2fcb3f18e635dc4bac04d3330590708, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2210160088224717038, guid: e2fcb3f18e635dc4bac04d3330590708, type: 3}
       propertyPath: m_text
@@ -25733,6 +25733,7 @@ MonoBehaviour:
   Light: {fileID: 504631056}
   Fadeimg: {fileID: 553677939}
   Text: {fileID: 983030530}
+  Progress: {fileID: 0}
 --- !u!114 &974037215
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -173,16 +173,8 @@ public class Progress : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            if(isUIopen == false)
-            {
-                ProgressUI.SetActive(true);
-                isUIopen = false;
-            }
-            else
-            {
-                 ProgressUI.SetActive(false);
-                isUIopen = true;
-            }
+            isUIopen = !isUIopen; // °ª ¹ÝÀü
+            ProgressUI.SetActive(isUIopen);
         }
     }
     private void OldManProgress(GameEventType eventType)
