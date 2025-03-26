@@ -9,14 +9,14 @@ public class Ending : MonoBehaviour
     public float FadeInTime = 2f;
     public TextMeshProUGUI text;
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other) 
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player")) //플레이어가 닿았는가
         {
             fadeImage.gameObject.SetActive(true);
             StartCoroutine(FadeIn(FadeInTime));
         }
-        if (other.CompareTag("NPCEND"))
+        if (other.CompareTag("NPCEND")) //NPC가 닿았는가
         {
             StartCoroutine(GameOverCoroutine());
         }
@@ -38,7 +38,7 @@ public class Ending : MonoBehaviour
         }
         FindAnyObjectByType<ESCMenu>().Lobbygame();
     }
-    public IEnumerator GameOverCoroutine()
+    public IEnumerator GameOverCoroutine() //NPC가 닿았을 경우
     {
         text.text = "아무래도 주요인물이 타겟과 접촉한거 같군. 미션 실패야 다시 시작해.";
         yield return new WaitForSeconds(4.0f);

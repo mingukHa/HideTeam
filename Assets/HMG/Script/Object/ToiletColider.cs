@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ToiletColider : MonoBehaviour
+public class ToiletColider : MonoBehaviour //NPC가 화장실에 있는가?
 {
     public NPCRichMan nPCRichMan;
 

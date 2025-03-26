@@ -77,7 +77,7 @@ public class NPC_OldMan : NPCFSM
             }
         }
     }
-    protected override void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other) //대화 시작
     {
         if (!isDead && other.CompareTag("Player"))
         {
@@ -85,7 +85,7 @@ public class NPC_OldMan : NPCFSM
             chat.LoadNPCDialogue(npc, 1);
         }
     }
-    protected override void OnTriggerExit(Collider other)
+    protected override void OnTriggerExit(Collider other) //대화 끝
     {
         base.OnTriggerExit(other);
         if (other.CompareTag("Player"))
@@ -95,7 +95,7 @@ public class NPC_OldMan : NPCFSM
         }
     }
 
-    private void ReturnOldMan()
+    private void ReturnOldMan() //올드맨 돌아가는 함수
     {
         if (!isDead)
         {

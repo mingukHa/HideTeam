@@ -42,7 +42,7 @@ public class ScreenshotViewer : MonoBehaviour
             QuadMaterial = QuadRenderer.material;
         }
     }
-    private void gameover()
+    private void gameover() //게임 오버가 되면 실행되는 함수들
     {
         Clockss.isReturning = true;
         Chat.SetActive(false);
@@ -57,13 +57,13 @@ public class ScreenshotViewer : MonoBehaviour
         Progress.SetActive(false);
     }
 
-    public IEnumerator GameRestart()
+    public IEnumerator GameRestart() //게임 다시 시작시키는 함수
     {
         yield return null;
         EventManager.Trigger(GameEventType.GameOver);
     }
  
-    public void DisableAllMoutline()
+    public void DisableAllMoutline() //아웃라인 해제
     {
         Scene currentScene = SceneManager.GetActiveScene();
         GameObject[] rootObjects = currentScene.GetRootGameObjects();
@@ -97,11 +97,8 @@ public void StartSlideshow()
             SceneManager.LoadScene("MainScene");
         }
     }
-    private IEnumerable Returnroding ()
-    {
-        yield return null;
-    }
-    private IEnumerator ShowScreenshots()
+    
+    private IEnumerator ShowScreenshots() //스크린 샷 재생
     {
         DisableAllMoutline();
         List<Texture2D> tempScreenshots = new List<Texture2D>(ScreenshotManager.Instance.screenshots);

@@ -41,7 +41,7 @@ public class NPC_Polic : NPCFSM
         }
 
     }
-    private IEnumerator StartEndingStop()
+    private IEnumerator StartEndingStop() //게임 오버 부분의 함수
     {
         //플레이어 정지 기능 추가해야함
         EventManager.Trigger(GameEventType.EndingStop);
@@ -52,7 +52,7 @@ public class NPC_Polic : NPCFSM
         yield return new WaitForSeconds(5f);
         EventManager.Trigger(GameEventType.GameOver);
     }
-    private void StartPolicTlak()
+    private void StartPolicTlak() //플레이어가 자동차를 발로 차면 달려 가는 함수
     {
         StartCoroutine(moutline.EventOutLine());
         agent.SetDestination(PolicPos.gameObject.transform.position);

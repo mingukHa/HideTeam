@@ -5,21 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class ScreenshotManager : MonoBehaviour
 {
-    public static ScreenshotManager Instance;
+    public static ScreenshotManager Instance; //싱글톤 방식의 매니저
     public List<Texture2D> screenshots = new List<Texture2D>();
     
     private void Awake()
     {
         if (Instance == null)
         {
-            Instance = this;
+            Instance = this; //단 하나만 존재해야 함
         }
         
     }
   
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.O))
+        if(Input.GetKeyDown(KeyCode.O)) //스크린샷 테스트 버튼
         {
             CaptureScreenshot();
         }
@@ -30,7 +30,7 @@ public class ScreenshotManager : MonoBehaviour
         StartCoroutine(TakeScreenshot());
     }
 
-    private IEnumerator TakeScreenshot()
+    private IEnumerator TakeScreenshot() //스크린샷 저장
     {
         yield return new WaitForEndOfFrame();
 

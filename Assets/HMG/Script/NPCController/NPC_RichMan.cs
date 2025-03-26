@@ -40,7 +40,7 @@ public class NPCRichMan : MonoBehaviour
         }
     }
 
-    private void KillNPC()
+    private void KillNPC() //죽었을 경우 모든 스크립트를 종료한다
     {
         isDead = true;
         animator.SetTrigger("Dead");
@@ -53,18 +53,18 @@ public class NPCRichMan : MonoBehaviour
         script6.enabled = false;
         if (moutline != null) moutline.enabled = false;
 
-        if (isToilet == false)
+        if (isToilet == false) //화장실이 아닌 경우
         {
             EventManager.Trigger(EventManager.GameEventType.NPCKill);
         }
-        else if (isToilet == true)
+        else if (isToilet == true) //화장실인 경우
         {
             EventManager.Trigger(EventManager.GameEventType.RichKill);
         }
         
         StartCoroutine(ActivateRagdollAfterDeath());
     }
-    private IEnumerator ActivateRagdollAfterDeath()
+    private IEnumerator ActivateRagdollAfterDeath() //레그돌 발동 코루틴
     {
         yield return new WaitForSeconds(1f); 
 
@@ -73,7 +73,7 @@ public class NPCRichMan : MonoBehaviour
             ActivateRagdoll();
         }
     }
-    private void ActivateRagdoll()
+    private void ActivateRagdoll() //레그돌이 되면 실행되는 함수
     {
         isRagdollActivated = true;
         animator.enabled = false; 
@@ -85,7 +85,7 @@ public class NPCRichMan : MonoBehaviour
             child.gameObject.layer = 15;
        }
     }
-    private void SetRagdollState(bool state)
+    private void SetRagdollState(bool state) //레그돌이 되었을 때 키네메틱 해제
     {
         foreach (var rb in rigidbodies)
         {
